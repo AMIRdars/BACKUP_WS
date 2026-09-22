@@ -1,0 +1,23 @@
+rover_twist_relay:
+  ros__parameters:
+
+    # default (fallback)
+    rover: mecanum3
+    wheel_radius: 0.07
+    wheel_separation_width: 0.24
+    wheel_separation_length: 0.175
+
+    # mecanum3 dimensions (wheels converted to cylinder r=0.076 matching mecanum outer radius)
+    mecanum3.wheel_radius: 0.076
+    mecanum3.wheel_separation_width: 0.24
+    mecanum3.wheel_separation_length: 0.175
+
+    # g120a dimensions
+    g120a.wheel_radius: 0.085
+    g120a.wheel_separation_width: 0.30
+    g120a.wheel_separation_length: 0.22
+
+    # g40a_lb dimensions
+    g40a_lb.wheel_radius: 0.0762
+    g40a_lb.wheel_separation_width: 0.2358
+    g40a_lb.wheel_separation_length: 0.040

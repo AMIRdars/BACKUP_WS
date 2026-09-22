@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<robot name="amir_mecanum3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="material_gazebo_black">
+    <visual>
+      <material>
+        <ambient>0.2 0.2 0.2 1</ambient>
+        <diffuse>0.0 0.0 0.0 1</diffuse>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro name="material_gazebo_white">
+    <visual>
+      <material>
+        <ambient>0.95 0.95 0.95 1</ambient>
+        <diffuse>0.95 0.95 0.95 1</diffuse>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro name="material_gazebo_red">
+    <visual>
+      <material>
+        <ambient>1.0 0.3 0.3 1</ambient>
+        <diffuse>1.0 0.0 0.0 1</diffuse>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro name="material_gazebo_red">
+    <visual>
+      <material>
+        <ambient>1.0 0.3 0.3 1</ambient>
+        <diffuse>1.0 0.0 0.0 1</diffuse>
+      </material>
+    </visual>
+  </xacro:macro>
+
+  <xacro:macro name="gazebo_robot_settings">
+        <!-- <gazebo>
+            <plugin filename="libign_ros2_control-system.so" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+              <parameters>$(find ${config_package})/${config_file_path}</parameters>
+            </plugin>
+        </gazebo> -->
+        <!-- <gazebo>
+          <plugin filename="gz_ros2_control-system"
+                  name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find gz_ros2_control_demos)/config/cart_controller.yaml</parameters>
+          </plugin>
+        </gazebo> -->
+        <gazebo>
+          <plugin filename="ign_ros2_control-system"
+                  name="ign_ros2_control::IgnitionROS2ControlPlugin">
+            <parameters>$(find amir_bringup)/config/controllers.yaml</parameters>
+          </plugin>
+        </gazebo>
+
+        <gazebo reference="link0_1">
+            <xacro:material_gazebo_red/>
+        </gazebo>
+        <gazebo reference="link1_1">
+            <xacro:material_gazebo_red/>
+        </gazebo>
+        <gazebo reference="link2_1">
+            <xacro:material_gazebo_red/>
+        </gazebo>
+        <gazebo reference="link3_1">
+            <xacro:material_gazebo_red/>
+        </gazebo>
+        <gazebo reference="link4_1">
+            <xacro:material_gazebo_red/>
+        </gazebo>
+
+  </xacro:macro>
+</robot>

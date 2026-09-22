@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <world name="cooperative_transport_friction">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="2ms_contact" type="ignored">
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>500</real_time_update_rate>
+    </physics>
+
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics"/>
+    <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands"/>
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster"/>
+    <plugin filename="ignition-gazebo-contact-system" name="ignition::gazebo::systems::Contact"/>
+    <plugin filename="ignition-gazebo-forcetorque-system" name="ignition::gazebo::systems::ForceTorque"/>
+    <plugin filename="libcooperative_friction_grip-system.so"
+            name="cooperative_transport::FrictionGripSystem">
+      <linear_stiffness>12500</linear_stiffness>
+      <linear_damping>250</linear_damping>
+      <maximum_force>250</maximum_force>
+      <maximum_force_rate>600</maximum_force_rate>
+      <vertical_stiffness>8000</vertical_stiffness>
+      <vertical_damping>120</vertical_damping>
+      <maximum_vertical_force>40</maximum_vertical_force>
+      <maximum_vertical_force_rate>250</maximum_vertical_force_rate>
+      <yaw_stiffness>20</yaw_stiffness>
+      <yaw_damping>3</yaw_damping>
+      <maximum_torque>8</maximum_torque>
+      <activation_height>0.472</activation_height>
+    </plugin>
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>20 20</size></plane>
+          </geometry>
+          <surface>
+            <friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane><normal>0 0 1</normal><size>20 20</size></plane>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+
+    <!-- This is the only temporary object in the open field. It is removed
+         after both friction grasps reach HOLDING and before transport. -->
+    <model name="grasp_support">
+      <static>true</static>
+      <pose>0 0 0.2015 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.22 0.16 0.403</size></box></geometry>
+          <surface>
+            <friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.22 0.16 0.403</size></box></geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.4 0.4 0.4 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

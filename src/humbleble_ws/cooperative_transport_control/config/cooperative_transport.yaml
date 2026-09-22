@@ -1,0 +1,46 @@
+/**/cooperative_coordinator:
+  ros__parameters:
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    control_rate: 50.0
+    position_kp: 0.5
+    yaw_kp: 0.8
+    heading_kp: 0.3
+    max_linear_speed: 0.08
+    max_angular_speed: 0.10
+    max_linear_acceleration: 0.10
+    max_angular_acceleration: 0.20
+    odometry_timeout: 0.30
+    position_tolerance: 0.02
+    # A 0.5 deg lower-level tolerance lets the rotation planner satisfy its
+    # 1.0 deg completion tolerance without target-angle feed-forward bias.
+    yaw_tolerance: 0.00872665
+    require_attached: true
+    lateral_command_sign: 1.0
+    angular_command_sign: 1.0
+
+/**/attach_manager:
+  ros__parameters:
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    second_command_delay: 0.5
+    auto_attach: true
+    auto_attach_delay: 1.0
+
+/**/safety_monitor:
+  ros__parameters:
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    monitor_rate: 50.0
+    odometry_timeout: 0.30
+    minimum_robot_separation: 2.30
+    maximum_robot_separation: 3.10
+    maximum_base_speed: 0.20
+    # The existing AMIR zero pose has Joint_2 and Joint_3 exactly on their URDF
+    # boundaries. Keep hard-limit checking enabled but add a margin only after a
+    # non-boundary transport pose has been configured.
+    joint_limit_margin: 0.0
+    # Both arms start exactly on Joint_2/Joint_3 boundaries. Fixed-joint attach
+    # can displace an unloaded boundary joint by a few milliradians.
+    joint_hard_limit_tolerance: 0.005
+    require_attached: true

@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="amir_mecanum3_gazebo_ros2_control_settings">
+   
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>ign_ros2_control/IgnitionSystem</plugin>
+      </hardware>
+
+      <joint name="${Joint_1}">
+        <command_interface name="position">
+          <param name="min">${radians(-157)}</param>
+          <param name="max">${radians(157)}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_2}">
+        <command_interface name="position">
+          <param name="min">${joint_2_lower_limit}</param>
+          <param name="max">${joint_2_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_3}">
+        <command_interface name="position">
+          <param name="min">${joint_3_lower_limit}</param>
+          <param name="max">${joint_3_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_4}">
+        <command_interface name="position">
+          <param name="min">${joint_4_lower_limit}</param>
+          <param name="max">${joint_4_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_5}">
+        <command_interface name="position">
+          <param name="min">${joint_5_lower_limit}</param>
+          <param name="max">${joint_5_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_6}">
+        <command_interface name="position">
+          <param name="min">${joint_6_lower_limit}</param>
+          <param name="max">${joint_6_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_7}">
+        <command_interface name="position">
+          <param name="min">${joint_7_lower_limit}</param>
+          <param name="max">${joint_7_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+
+      <joint name="${name_joint_gripper_finger_a}">
+        <command_interface name="position">
+          <param name="min">${joint_hand_lower_limit}</param>
+          <param name="max">${joint_hand_upper_limit}</param>
+        </command_interface>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+        <state_interface name="effort"/>
+      </joint>
+    <joint name="${name_joint_gripper_finger_b}">
+      <param name="mimic">${name_joint_gripper_finger_a}</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    </ros2_control>
+  </xacro:macro>
+</robot>

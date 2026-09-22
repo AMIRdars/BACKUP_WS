@@ -1,0 +1,15 @@
+# MoveArm.action
+
+# Goal
+#float64 x   # 移動先の目標位置 (x座標)
+#float64 y   # 移動先の目標位置 (y座標)
+#float64 z   # 移動先の目標位置 (z座標)
+geometry_msgs/PoseStamped pose_obj
+---
+# Result
+string error_string  # 実行結果のエラーメッセージ（"success" またはエラー内容）
+bool success          # 実行結果（成功: true, 失敗: false）
+
+---
+# Feedback
+string feedback_message  # 実行中のステータスメッセージ（任意で詳細なフィードバックを送信可能）

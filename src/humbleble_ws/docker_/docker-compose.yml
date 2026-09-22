@@ -1,0 +1,64 @@
+# GUI(RViz等)とROS2通信のために host ネットワークと X11 を使う想定。
+# NVIDIA GPUを使う場合は runtime や device 設定を追加してください（下に例）。
+version: "3.9"
+services:
+  ros:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UID: ${UID-1000}
+        GID: ${GID-1000}
+        USERNAME: dev
+    container_name: ros2-humble
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+      - ROS_DOMAIN_ID=1   # 必要なら有効化
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw   # X11
+      - ./ws:/home/dev/ws                  # ワークスペース共有
+      - ./humble_ws:/home/dev/humble_ws          
+      - ./makino_ws:/home/dev/makino_ws   
+      - ./basic_ros_ws:/home/dev/basic_ros_ws   
+      - ./amir_ws:/home/dev/amir_ws
+      - ./hasegawa_ws:/home/dev/hasegawa_ws
+      - ~/something:/something
+      - ~/share_logs:/share_logs       
+    user: "${UID-1000}:${GID-1000}"        # ホストと同じUID/GIDで実行
+    devices:
+      - /dev/dri:/dev/dri                  # OpenGL (Intel/AMD)
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    command: ["bash", "-lc", "sleep infinity"]
+
+# NVIDIA GPU を使う場合の例（必要な人だけコメント解除）
+# deploy:
+# resources:
+# reservations:
+# devices:
+# - capabilities: [gpu]
+
+
+# ─────────────────────────────────────────────────────────────
+# 使い方（メモ）
+# 1) このファイル群を空ディレクトリに保存し、同じ階層に ./ws/ を作る
+# $ mkdir -p ws/src
+# 2) X11許可（必要な場合）
+# $ xhost +local:root
+# 3) ビルド＆起動
+# $ docker compose build
+# $ docker compose run --rm ros # 1回だけ入る
+# または常駐
+# $ docker compose up -d && docker exec -it ros2-humble bash
+# 4) コンテナ内で
+# $ source /opt/ros/humble/setup.bash
+# $ cd ~/ws && colcon build
+# $ ros2 run <pkg> <node>
+# 5) UID/GIDをホストに合わせたい場合、同じディレクトリに .env を置く
+# UID=1000
+# GID=1000
+# （自分の値は `id -u`, `id -g` で確認）

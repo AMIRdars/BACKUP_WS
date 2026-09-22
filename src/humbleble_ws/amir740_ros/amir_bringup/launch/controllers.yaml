@@ -1,0 +1,50 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+    use_sim_time: true
+
+    # ジョイントの状態を配信する必須コントローラ
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # アーム用の軌道コントローラ (位置制御)
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    # メカナムホイール用のコントローラ (車輪が複数ある場合は速度制御用などを用意)
+    # ※ROS 2標準のdiff_drive_controllerはメカナム非対応のため、
+    # 簡易的に各車輪の速度を直接指定する velocity_controllers を使うか、専用のコントローラが必要です。
+    wheel_controller:
+      type: velocity_controllers/JointGroupVelocityController
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+gripper_controller:
+  ros__parameters:
+    joints:
+      - Gripper
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+wheel_controller:
+  ros__parameters:
+    joints:
+      - front_left_wheel_joint
+      - front_right_wheel_joint
+      - back_left_wheel_joint
+      - back_right_wheel_joint

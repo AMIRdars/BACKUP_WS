@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<robot name="amir_mecanum3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ <!-- Include mecanum3 rover URDF -->
+<xacro:include filename="$(find mecanumrover_description)/urdf/mecanum3.xacro"/>
+ <!-- Include AMIR URDF -->
+<xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro"/>
+
+<joint name="base_fixed" type="fixed">
+  <origin xyz="0.0 0.0 0.413" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link0_1"/>
+</joint>
+
+<!-- <xacro:include filename="$(find amir_description)/urdf/amir_mecanum3.gazebo.xacro"/>
+<xacro:include filename="$(find amir_description)/urdf/amir_mecanum3.gazebo_ros2_control.xacro"/>
+
+<xacro:gazebo_robot_settings />
+<xacro:amir_mecanum3_gazebo_ros2_control_settings name="AmirArmSystem" /> -->
+<ros2_control name="AmirRealHardware" type="system">
+    <hardware>
+      <plugin>amir_driver/AmirHardwareInterfaces</plugin>
+    </hardware>
+
+    <joint name="Joint_1">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_2">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_3">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_4">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_5">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Gripper">
+      <command_interface name="position"/>
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+</robot>

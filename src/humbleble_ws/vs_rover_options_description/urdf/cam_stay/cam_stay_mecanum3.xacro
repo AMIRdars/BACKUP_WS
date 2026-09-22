@@ -1,0 +1,71 @@
+<robot name="cam_stay_mega3" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!--　depth camera height (m), value: 0.06 ~ 0.25 -->
+  <xacro:property name="cam_frame_height" value="0.12" /> 
+  <!--　depth camera pitch angle (rad), value: 0.0 ~ 0.78 -->
+  <xacro:property name="cam_pitch_angle" value="0.0" />
+
+  <!--　camera stay mounting position (relative to rover) x+:front, z+:up-->
+  <xacro:property name="cam_mount_frame_x_pos" value="0.0" />
+  <xacro:property name="cam_mount_frame_y_pos" value="0.0" />
+  <xacro:property name="cam_mount_frame_z_pos" value="0.0" />
+
+<!--
+  Vstone camera stay option
+  https://www.vstone.co.jp/robotshop/index.php?main_page=product_info&cPath=156_923&products_id=5315 
+-->
+  <joint name="cam_stay_frame_joint" type="fixed">
+    <origin xyz="${0.0+cam_mount_frame_y_pos} ${0.144+cam_mount_frame_x_pos} ${0.170+cam_mount_frame_z_pos}" rpy="0 0 1.5708" />
+    <parent link="base_link" />
+    <child link="cam_mount_frame" />
+  </joint>
+
+  <link name="cam_mount_frame">
+    <inertial>
+      <origin xyz="-0.003 0.00027262444441578104 0.12730447451826274" rpy="0 0 -1.5708" />
+      <mass value="0.5741535425284527" />
+      <inertia ixx="0.003675" iyy="0.00363" izz="0.000109" ixy="-0.0" iyz="2e-05" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.143 0 -0.155" rpy="0 0 -1.5708" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/cam_stay/cam_mount_frame.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.143 0 -0.155" rpy="0 0 -1.5708" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/cam_stay/cam_mount_frame.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="cam_stay_link_joint" type="fixed">
+    <origin xyz="0.0 0.0 ${cam_frame_height}" rpy="0 ${cam_pitch_angle} 0" />
+    <parent link="cam_mount_frame" />
+    <child link="cam_mount_link" />
+  </joint>
+
+  <link name="cam_mount_link">
+    <inertial>
+      <origin xyz="0.01 0.00027262444441578104 0" rpy="0 0 -1.5708" />
+      <mass value="0.015" />
+      <inertia ixx="0.0000055" iyy="0.00000329" izz="0.000005256" ixy="-0.0" iyz="0.0" ixz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.143 0 -0.403" rpy="0 0 -1.5708" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/cam_stay/cam_mount_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <origin xyz="-0.143 0 -0.403" rpy="0 0 -1.5708" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/cam_stay/cam_mount_link.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+</robot>

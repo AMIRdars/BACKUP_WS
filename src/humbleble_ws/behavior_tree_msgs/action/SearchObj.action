@@ -1,0 +1,13 @@
+# SearchObj.action
+
+# Goal 定義
+string object_id  # 探索対象のオブジェクトID
+
+---
+# Result 定義
+string error_string  # 実行結果のエラーメッセージ（"success" またはエラー内容）
+bool success      # 探索成功フラグ
+
+---
+# Feedback 定義 (必要なら追加)
+string status     # 現在の状態や進捗情報

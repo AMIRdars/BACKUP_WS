@@ -1,0 +1,379 @@
+<?xml version="1.0" ?>
+<robot name="g40a_lb" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find mecanumrover_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find mecanumrover_description)/urdf/g40a_lb.gazebo" />
+  <xacro:include filename="$(find mecanumrover_description)/urdf/g40a_lb_ros2_control.xacro" />
+  
+  <!-- OPTION LRF TG30 -->
+  <!--<xacro:include filename="$(find vs_rover_options_description)/urdf/lrf/tg30_g40a_lb.xacro" />-->
+
+
+
+  <!-- Inertial macros -->
+  <xacro:macro name="cylinder_inertial" params="mass radius length">
+    <mass value="${mass}"/>
+    <inertia
+      ixx="${((radius*radius)/4 + (length*length)/12)*mass}"
+      ixy="0" ixz="0"
+      iyy="${((radius*radius)/4 + (length*length)/12)*mass}"
+      iyz="0"
+      izz="${(mass*radius*radius)/2}" />
+  </xacro:macro>
+
+
+  <!-- Barrel (roller) macros  -->
+  <xacro:macro name="barrel_rl" params="prefix parent dir rot">
+    <joint name="${prefix}_joint" type="continuous">
+      <parent link="${parent}"/>
+      <child  link="${prefix}_link"/>
+      <origin
+        xyz="${0.0666389*cos(radians(dir))} ${0.0666389*sin(radians(dir))} 0"
+        rpy="${pi/4*rot} 0 ${radians(dir)}"/>
+      <axis xyz="0 0 1"/>
+      <dynamics damping="0.001" friction="0.0"/>
+    </joint>
+    <link name="${prefix}_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_barrel.stl"/>
+        </geometry>
+        <material name="dark_grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_barrel.stl"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <xacro:cylinder_inertial
+          mass="0.01225"
+          radius="0.00956"
+          length="0.0381"/>
+      </inertial>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="barrels_rl" params="prefix parent rot">
+    <xacro:barrel_rl prefix="${prefix}_0"  parent="${parent}" dir="0"   rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_1"  parent="${parent}" dir="24"  rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_2"  parent="${parent}" dir="48"  rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_3"  parent="${parent}" dir="72"  rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_4"  parent="${parent}" dir="96"  rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_5"  parent="${parent}" dir="120" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_6"  parent="${parent}" dir="144" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_7"  parent="${parent}" dir="168" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_8"  parent="${parent}" dir="192" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_9"  parent="${parent}" dir="216" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_10" parent="${parent}" dir="240" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_11" parent="${parent}" dir="264" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_12" parent="${parent}" dir="288" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_13" parent="${parent}" dir="312" rot="${rot}"/>
+    <xacro:barrel_rl prefix="${prefix}_14" parent="${parent}" dir="336" rot="${rot}"/>
+  </xacro:macro>
+
+  <xacro:macro name="attach_mecanum_rollers" params="wheel_prefix wheel_link rot">
+    <xacro:barrels_rl
+      prefix="${wheel_prefix}_barrel"
+      parent="${wheel_link}"
+      rot="${rot}"/>
+  </xacro:macro>
+
+
+  <!-- Base -->
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.00 -0.00 0.13"/>
+      <mass value="20.75"/>
+      <inertia
+        ixx="3.024773e-01" iyy="1.757975e-01" izz="2.820812e-01"
+        ixy="2.259609e-03" iyz="2.509410e-03" ixz="-6.536919e-04"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://mecanumrover_description/meshes/g40a_lb/base_link.stl"
+              scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://mecanumrover_description/meshes/g40a_lb/base_link.stl"
+              scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+ 
+
+  <xacro:macro name="mecanum_lrf_mount" params="name">
+    <link name="${name}">
+      <inertial>
+        <origin xyz="0.00 0.22 0.06"/>
+        <mass value="0.07"/>
+        <inertia
+          ixx="4.651365e-05" iyy="6.571400e-05" izz="1.121197e-04"
+          ixy="-4.239657e-09" iyz="1.985164e-18" ixz="-8.506636e-20"/>
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/lrf_mount.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/lrf_mount.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+  
+  <xacro:mecanum_lrf_mount name="front_lrf_mount"/>
+  <xacro:mecanum_lrf_mount name="back_lrf_mount"/>
+  
+  <!-- lrf_mount macro -->
+  <xacro:macro name="mecanum_lrf_mount"
+               params="name parent child xyz rpy">
+    <joint name="${name}" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+  </xacro:macro>
+
+  
+  <!-- lrf_mount -->
+  <xacro:mecanum_lrf_mount
+    name="front_lrf_mount"
+    parent="base_link"
+    child="front_lrf_mount"
+    xyz="0.0 0.0 0.0" rpy="0 0 ${radians(0)}"/>
+    
+    <xacro:mecanum_lrf_mount
+    name="back_lrf_mount"
+    parent="base_link"
+    child="back_lrf_mount"
+    xyz="0.0 0.0 0.0" rpy="0 0 ${radians(180)}"/>
+  
+  
+  
+  
+  <!-- Arm link macro -->
+  <xacro:macro name="mecanum_arm_link" params="name">
+    <link name="${name}">
+      <inertial>
+        <origin xyz="0.00 -0.04 0.02"/>
+        <mass value="0.10"/>
+        <inertia
+          ixx="1.457780e-04" iyy="5.476613e-05" izz="9.142851e-05"
+          ixy="-8.155314e-22" iyz="-1.792452e-05" ixz="1.612654e-22"/>
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/arms.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/arms.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+
+  <!-- Suspension joint macro -->
+  <xacro:macro name="mecanum_suspension_joint"
+               params="name parent child xyz rpy">
+    <joint name="${name}" type="revolute">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="-1 0 0"/>
+      <limit lower="-0.36651914291881" upper="0.10471975511966" effort="10000" velocity="1.0"/>
+      <dynamics damping="630.0" friction="0.0"/>
+    </joint>
+  </xacro:macro>
+
+
+  <!-- Wheel link macros -->
+  <xacro:macro name="mecanum_wheel_link" params="name">
+    <link name="${name}">
+    <inertial>
+      <origin xyz="0.00 0.00 0.01"/>
+      <mass value="0.88"/>
+      <inertia
+        ixx="7.666816e-04" iyy="7.666974e-04" izz="8.946765e-04"
+        ixy="2.614197e-11" iyz="-2.439097e-09" ixz="1.015151e-09"/>
+    </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_wheel.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_wheel.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="mecanum_wheel_rev_link" params="name">
+    <link name="${name}">
+      <inertial>
+        <origin xyz="0.00 -0.00 0.01"/>
+        <mass value="0.88"/>
+        <inertia
+          ixx="7.655818e-04" iyy="7.655769e-04" izz="8.900386e-04"
+          ixy="-6.106217e-09" iyz="-2.991811e-09" ixz="1.064093e-09"/>
+      </inertial>
+      <visual>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_wheel_rev.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://mecanumrover_description/meshes/g40a_lb/mecanum_wheel_rev.stl"
+                scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+
+  <!-- Wheel joint macro -->
+  <xacro:macro name="mecanum_wheel_joint"
+               params="name parent child xyz rpy axis_z">
+    <joint name="${name}" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${child}"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+      <axis xyz="0 0 ${axis_z}"/>
+      <limit effort="500" velocity="50000"/>
+      <dynamics damping="0.02"/>
+    </joint>
+  </xacro:macro>
+
+
+  <!-- Arms -->
+  <xacro:mecanum_arm_link name="front_left_arm"/>
+  <xacro:mecanum_arm_link name="front_right_arm"/>
+  <xacro:mecanum_arm_link name="back_left_arm"/>
+  <xacro:mecanum_arm_link name="back_right_arm"/>
+
+
+  <!-- Suspension joints -->
+  <xacro:mecanum_suspension_joint
+    name="front_left_suspension_joint"
+    parent="base_link"
+    child="front_left_arm"
+    xyz="-0.1179 0.020 0.076"
+    rpy="0 0 ${radians(180)}"/>
+
+  <xacro:mecanum_suspension_joint
+    name="front_right_suspension_joint"
+    parent="base_link"
+    child="front_right_arm"
+    xyz="0.1179 0.020 0.076"
+    rpy="0 0 ${radians(180)}"/>
+
+  <xacro:mecanum_suspension_joint
+    name="back_left_suspension_joint"
+    parent="base_link"
+    child="back_left_arm"
+    xyz="-0.1179 -0.020 0.076"
+    rpy="0 0 0"/>
+
+  <xacro:mecanum_suspension_joint
+    name="back_right_suspension_joint"
+    parent="base_link"
+    child="back_right_arm"
+    xyz="0.1179 -0.020 0.076"
+    rpy="0 0 0"/>
+
+
+  <!-- Wheels -->
+  <xacro:mecanum_wheel_rev_link name="front_left_wheel_1"/>
+  <xacro:mecanum_wheel_link     name="front_right_wheel_1"/>
+  <xacro:mecanum_wheel_link     name="back_left_wheel_1"/>
+  <xacro:mecanum_wheel_rev_link name="back_right_wheel_1"/>
+
+
+  <!-- Wheel joints -->
+  <xacro:mecanum_wheel_joint
+    name="front_left_joint"
+    parent="front_left_arm"
+    child="front_left_wheel_1"
+    xyz="0.04 -0.100 0"
+    rpy="0 ${radians(-270)} 0"
+    axis_z="-1"/>
+
+  <xacro:mecanum_wheel_joint
+    name="front_right_joint"
+    parent="front_right_arm"
+    child="front_right_wheel_1"
+    xyz="-0.04 -0.100 0"
+    rpy="0 ${radians(-90)} 0"
+    axis_z="1"/>
+
+  <xacro:mecanum_wheel_joint
+    name="back_left_joint"
+    parent="back_left_arm"
+    child="back_left_wheel_1"
+    xyz="-0.04 -0.100 0"
+    rpy="0 ${radians(270)} 0"
+    axis_z="-1"/>
+
+  <xacro:mecanum_wheel_joint
+    name="back_right_joint"
+    parent="back_right_arm"
+    child="back_right_wheel_1"
+    xyz="0.04 -0.100 0"
+    rpy="0 ${radians(90)} 0"
+    axis_z="1"/>
+
+
+  <!-- Attach mecanum rollers -->
+  <xacro:attach_mecanum_rollers
+    wheel_prefix="front_left"
+    wheel_link="front_left_wheel_1"
+    rot="-1"/>
+
+  <xacro:attach_mecanum_rollers
+    wheel_prefix="back_left"
+    wheel_link="back_left_wheel_1"
+    rot="1"/>
+
+  <xacro:attach_mecanum_rollers
+    wheel_prefix="front_right"
+    wheel_link="front_right_wheel_1"
+    rot="1"/>
+
+  <xacro:attach_mecanum_rollers
+    wheel_prefix="back_right"
+    wheel_link="back_right_wheel_1"
+    rot="-1"/>
+
+</robot>
+

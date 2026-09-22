@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<robot name="lrf_tg30_mecanum3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="front_laser_visual" default="false" />
+  <xacro:arg name="back_laser_visual" default="false" />
+
+  <!-- マルチロボット用 namespace (空なら従来どおり無 prefix) -->
+  <xacro:arg name="namespace" default=""/>
+  <xacro:property name="robot_ns" value="$(arg namespace)"/>
+  <xacro:property name="ns_prefix" value="${robot_ns + '/' if robot_ns else ''}"/>
+
+  <xacro:property name="DEG_TO_RAD" value="0.01745329251994329577" />
+  <!-- ±90° = 180° FOV: front/back LRF each covers only its own hemisphere -->
+  <xacro:property name="LRF_ANGLE" value="90" />
+
+  <gazebo reference="front_lrf_link">
+    <selfCollide>true</selfCollide>
+    <sensor name="tg30_lidar_front" type="gpu_lidar">
+      <always_on>true</always_on>
+      <visualize>$(arg front_laser_visual)</visualize>
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>8</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>180</samples>
+            <resolution>1.0</resolution>
+            <min_angle>${-LRF_ANGLE*DEG_TO_RAD}</min_angle>
+            <max_angle>${ LRF_ANGLE*DEG_TO_RAD}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.05</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <topic>/${ns_prefix}scan</topic>
+      <ignition_frame_id>front_lrf_link</ignition_frame_id>
+    </sensor>
+  </gazebo>
+
+  <!-- 後部 LRF センサー: use_back_lrf と連動 -->
+  <xacro:if value="$(arg use_back_lrf)">
+  <gazebo reference="back_lrf_link">
+    <selfCollide>true</selfCollide>
+    <sensor name="tg30_lidar_back" type="gpu_lidar">
+      <always_on>true</always_on>
+      <visualize>$(arg back_laser_visual)</visualize>
+      <pose>0 0 0 0 0 0</pose>
+      <update_rate>8</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>180</samples>
+            <resolution>1.0</resolution>
+            <min_angle>${-LRF_ANGLE*DEG_TO_RAD}</min_angle>
+            <max_angle>${ LRF_ANGLE*DEG_TO_RAD}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.05</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <topic>/${ns_prefix}back_scan</topic>
+      <ignition_frame_id>back_lrf_link</ignition_frame_id>
+    </sensor>
+  </gazebo>
+  </xacro:if>
+
+</robot>

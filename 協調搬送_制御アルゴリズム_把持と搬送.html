@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>AMIR協調搬送 制御アルゴリズム ― 把持制御と搬送制御</title>
+<style>
+  @page { size: A4; margin: 16mm 17mm 17mm 17mm; }
+  body {
+    font-family: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+    color: #1f2933; font-size: 10.2pt; line-height: 1.58;
+    max-width: 178mm; margin: 0 auto;
+  }
+  h1 { color: #17365d; font-size: 23pt; line-height: 1.35; margin: 0 0 7mm; }
+  h2 {
+    color: #17365d; font-size: 16pt; margin: 8mm 0 3mm;
+    padding-bottom: 1.5mm; border-bottom: 2px solid #5b9bd5;
+  }
+  h3 { color: #244a73; font-size: 12.5pt; margin: 5mm 0 2mm; }
+  h4 { color: #365f91; font-size: 10.8pt; margin: 4mm 0 1.5mm; }
+  p { margin: 1.8mm 0; }
+  ul, ol { margin: 1.5mm 0 2.5mm 6mm; padding-left: 5mm; }
+  li { margin: 0.8mm 0; }
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; }
+  th { background: #1f4e78; color: white; font-weight: 600; }
+  th, td { border: 1px solid #9fb3c8; padding: 1.8mm 2.2mm; vertical-align: top; }
+  tr:nth-child(even) td { background: #f4f8fb; }
+  code { font-family: "Noto Sans Mono CJK JP", monospace; font-size: 9pt; }
+  .cover { page-break-after: always; padding-top: 34mm; }
+  .subtitle { font-size: 15pt; color: #486581; margin-bottom: 20mm; }
+  .meta { border-left: 5px solid #5b9bd5; background: #eef5fb; padding: 5mm; }
+  .toc { page-break-after: always; }
+  .part { page-break-before: always; }
+  .part-title {
+    padding: 8mm; color: white; background: #17365d;
+    font-size: 20pt; margin-bottom: 8mm;
+  }
+  .equation {
+    background: #f5f7fa; border-left: 4px solid #5b9bd5;
+    padding: 3mm 4mm; margin: 3mm 0; font-family: "Noto Sans Mono CJK JP", monospace;
+  }
+  .flow {
+    background: #f7fafc; border: 1px solid #9fb3c8;
+    padding: 4mm; margin: 3mm 0 5mm; text-align: center; font-weight: 600;
+  }
+  .flow span {
+    display: inline-block; padding: 1.5mm 2.5mm; margin: 1mm;
+    border-radius: 3px; background: #d9eaf7; border: 1px solid #6c8ebf;
+  }
+  .flow .arrow { border: none; background: transparent; color: #486581; }
+  .note { background: #fff4ce; border-left: 4px solid #d6a700; padding: 3mm 4mm; margin: 4mm 0; }
+  .important { background: #fde9e7; border-left: 4px solid #c00000; padding: 3mm 4mm; margin: 4mm 0; }
+  .ok { background: #e2f0d9; border-left: 4px solid #548235; padding: 3mm 4mm; margin: 4mm 0; }
+  .small { font-size: 8.8pt; color: #52606d; }
+  .page-break { page-break-before: always; }
+  .no-break { page-break-inside: avoid; }
+  .footer-note { margin-top: 10mm; font-size: 8.5pt; color: #697987; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <h1>AMIR協調搬送<br>制御アルゴリズム</h1>
+  <div class="subtitle">把持制御と搬送制御</div>
+  <div class="meta">
+    <p><b>対象システム：</b>2台のAMIRによる物理接触把持・協調搬送</p>
+    <p><b>対象起動：</b><code>friction_rotation_simulation.launch.py</code></p>
+    <p><b>動作列：</b>把持 → 直進 → その場回転 → Y方向直進</p>
+    <p><b>基準日：</b>2026年9月22日時点のワークスペース実装</p>
+  </div>
+  <p class="footer-note">
+    本資料は実装コードと現在の設定値を根拠にした設計説明である。
+    固定ジョイントによる把持ではなく、指と物体の接触・摩擦による把持を対象とする。
+  </p>
+</section>
+
+<section class="toc">
+  <h2>目次</h2>
+  <ol>
+    <li>全体構成</li>
+    <li>第I部：把持制御
+      <ol>
+        <li>入力・出力と制御対象</li>
+        <li>法線力の計測と前処理</li>
+        <li>状態遷移</li>
+        <li>接触探索と力制御</li>
+        <li>把持成立・支持台撤去</li>
+        <li>搬送中の把持維持</li>
+      </ol>
+    </li>
+    <li>第II部：搬送制御
+      <ol>
+        <li>座標系と物体姿勢</li>
+        <li>搬送シーケンス</li>
+        <li>加速度制限軌道</li>
+        <li>剛体協調運動学</li>
+        <li>距離一定制御</li>
+        <li>追従遅れ対策と終端補正</li>
+        <li>完了判定と安全停止</li>
+      </ol>
+    </li>
+    <li>現在の主要パラメータ</li>
+    <li>実装上の限界と今後の調整点</li>
+    <li>実装ファイル対応表</li>
+  </ol>
+</section>
+
+<h2>1. 全体構成</h2>
+
+<p>
+  制御は「物体レベルの軌道生成」「2台のベースへの速度分配」「各グリッパーの接触力制御」
+  の3層で構成される。上位層は搬送物体の目標位置・姿勢を生成し、中央制御器がその目標を
+  AMIR1とAMIR2の速度指令へ変換する。把持制御器は搬送制御とは独立した周期で、4本の指の
+  接触と法線力を監視し続ける。
+</p>
+
+<div class="flow">
+  <span>物体軌道生成<br>100 Hz</span><span class="arrow">→</span>
+  <span>協調ベース制御<br>50 Hz</span><span class="arrow">→</span>
+  <span>AMIR1・AMIR2<br>速度指令</span>
+  <br>
+  <span>指接触・反力</span><span class="arrow">→</span>
+  <span>把持力制御<br>10 Hz</span><span class="arrow">→</span>
+  <span>グリッパー位置・努力上限</span>
+</div>
+
+<table>
+  <tr><th>層</th><th>役割</th><th>主な出力</th></tr>
+  <tr><td>把持制御</td><td>接触探索、法線力調整、把持成立判定、搬送中の接触回復</td><td>各AMIRのグリッパー位置指令</td></tr>
+  <tr><td>軌道生成</td><td>直進・回転・直進の物体目標を時間に沿って生成</td><td>物体目標姿勢、各TCP目標姿勢</td></tr>
+  <tr><td>協調搬送制御</td><td>物体目標から2台の剛体運動を計算し、隊形を維持</td><td>各AMIRの平面速度指令</td></tr>
+  <tr><td>安全監視</td><td>把持喪失、すべり、速度、間隔、オドメトリ、関節範囲を監視</td><td>ラッチ式非常停止</td></tr>
+</table>
+
+<div class="ok">
+  <b>現在の把持方式：</b>回転搬送の起動では <code>contact_only:=true</code> が設定される。
+  物体を指へ固定するジョイントや、物体へ直接加える補助把持力は使わず、Gazeboの接触反力と
+  クーロン摩擦だけで0.5 kgの物体を保持する。
+</div>
+
+<section class="part">
+  <div class="part-title">第I部　把持制御</div>
+
+  <h2>2. 入力・出力と制御対象</h2>
+
+  <p>
+    把持制御器は、各AMIRに対して左右2本、合計4本の指を監視する。1台のAMIRでは左右指が
+    1つの駆動関節に連動するため、左右の力を独立に指定することはできない。したがって、
+    左右力の平均と最大値を使って、共通のグリッパー角度を補正する。
+  </p>
+
+  <table>
+    <tr><th>種別</th><th>信号</th><th>用途</th></tr>
+    <tr><td>入力</td><td>左右指の接触情報</td><td>指と搬送物体が実際に接触しているか確認</td></tr>
+    <tr><td>入力</td><td>左右指の6軸反力</td><td>指法線方向X成分から法線力を算出</td></tr>
+    <tr><td>入力</td><td>グリッパー関節角度</td><td>現在位置、左右AMIR間の整合性を確認</td></tr>
+    <tr><td>出力</td><td><code>GripperCommand</code></td><td>グリッパー位置と最大努力を指定</td></tr>
+    <tr><td>出力</td><td>把持状態</td><td>搬送開始許可と安全監視に使用</td></tr>
+  </table>
+
+  <h2>3. 法線力の計測と前処理</h2>
+
+  <h3>3.1 法線力</h3>
+  <p>指センサー座標系のX軸を接触面法線とし、次式で正の法線力へ変換する。</p>
+  <div class="equation">F<sub>n</sub>[k] = |F<sub>x</sub>[k]|</div>
+  <p>
+    この値は指先ロードセルの純粋な接触力ではなく、関節を通過する反力である。そのため、
+    搬送加速度、物体慣性、摩擦方向の荷重、複数接触点の切替も含まれる。
+  </p>
+
+  <h3>3.2 指数移動平均</h3>
+  <p>接触ソルバによる高周波変動を抑えるため、生値に指数移動平均を適用する。</p>
+  <div class="equation">
+    F̄<sub>n</sub>[k] = α F<sub>n</sub>[k] + (1 − α) F̄<sub>n</sub>[k−1]<br>
+    α = 0.25
+  </div>
+  <p>
+    通常の目標力制御は平滑値を用いる。一方、過大力判定では検出が遅れないよう、
+    <code>max(生値, 平滑値)</code> を使用する。
+  </p>
+
+  <h3>3.3 把持直後のバイアス</h3>
+  <p>
+    <code>HOLDING</code>へ入る直前の0.5秒間の6軸反力平均をバイアスとして保存する。
+    補正反力は計測・Excel表示用であり、把持制御そのものは生法線力と平滑法線力を使用する。
+  </p>
+  <div class="equation">W<sub>cal</sub>(t) = W<sub>raw</sub>(t) − mean(W<sub>raw</sub>)<sub>把持直後0.5 s</sub></div>
+
+  <h2>4. 把持の状態遷移</h2>
+
+  <div class="flow">
+    <span>コントローラ待機</span><span class="arrow">→</span>
+    <span>指を開く</span><span class="arrow">→</span>
+    <span>把持待機</span><span class="arrow">→</span>
+    <span>接触探索・力制御</span><span class="arrow">→</span>
+    <span>持上げ</span><span class="arrow">→</span>
+    <span>把持維持</span>
+  </div>
+
+  <table>
+    <tr><th>状態</th><th>処理</th><th>次状態への条件</th></tr>
+    <tr><td><code>WAITING_FOR_CONTROLLERS</code></td><td>両グリッパーのAction Serverを待つ</td><td>両方利用可能</td></tr>
+    <tr><td><code>OPENING_GRIPPERS</code></td><td>開位置 −1.0 radへ指令</td><td>2.0秒経過</td></tr>
+    <tr><td><code>READY_TO_GRASP</code></td><td>物体生成と自動開始を待つ</td><td>自動遅延またはサービス要求</td></tr>
+    <tr><td><code>CLOSING_GRIPPERS</code></td><td>接触探索後、位置補正型力制御</td><td>両側接触と目標力が0.30秒安定</td></tr>
+    <tr><td><code>LIFTING</code></td><td>アームJoint 2/3を動かし支持を指へ移す</td><td>持上げ後も接触が妥当</td></tr>
+    <tr><td><code>HOLDING</code></td><td>成立位置を保持し、弱い接触だけ回復</td><td>解除要求、または接触喪失エラー</td></tr>
+  </table>
+
+  <h2>5. 接触探索と目標力制御</h2>
+
+  <h3>5.1 接触前</h3>
+  <p>
+    両指接触が成立するまでは、1制御周期ごとにグリッパーを閉方向へ進める。
+    最初の接触前は0.002 rad、いったん接触を検出した後の再探索は0.0002 radとする。
+    再探索を細かくすることで、接触のON/OFF付近における大きな反力ジャンプを抑える。
+  </p>
+  <div class="equation">q<sub>cmd</sub>[k+1] = clamp(q[k] + Δq<sub>search</sub>, q<sub>open</sub>, q<sub>close</sub>)</div>
+
+  <h3>5.2 両指接触後</h3>
+  <p>左右指の平均法線力を目標14 N/指へ近づける位置補正型P制御を行う。</p>
+  <div class="equation">
+    e<sub>F</sub> = F<sub>target</sub> − (F̄<sub>L</sub> + F̄<sub>R</sub>)/2<br>
+    Δq = clamp(K<sub>F</sub> e<sub>F</sub>, −Δq<sub>max</sub>, +Δq<sub>max</sub>)<br>
+    q<sub>cmd</sub>[k+1] = clamp(q<sub>base</sub> + Δq, q<sub>open</sub>, q<sub>close</sub>)
+  </div>
+  <p>
+    力誤差が許容帯内なら位置を保持する。どちらか一方の力が
+    <code>目標値 + 許容差</code>を超えた場合は、平均値ではなく大きい側を基準に開方向へ補正し、
+    片側だけの過圧縮を防ぐ。
+  </p>
+
+  <h3>5.3 把持成立条件</h3>
+  <p>現在の回転搬送では、次の条件をすべて満たして初めて把持成立とする。</p>
+  <ul>
+    <li>AMIR1とAMIR2の左右指、合計4指で物体接触が確認される。</li>
+    <li>4指の平滑法線力が目標14 Nの許容帯に入る。</li>
+    <li>グリッパー角度が許容範囲内で、2台間の角度差が0.05 rad以下である。</li>
+    <li>上記状態が0.30秒連続する。</li>
+  </ul>
+
+  <h2>6. 支持台撤去と搬送開始インターロック</h2>
+
+  <p>
+    物体は把持成立前に落下しないよう、一時支持台上に生成される。支持台は次のAND条件が
+    成立してから1.0秒待ち、Gazeboのモデル削除サービスで撤去される。
+  </p>
+  <div class="equation">
+    AMIR1把持 = true<br>
+    AND AMIR2把持 = true<br>
+    AND 把持制御状態 = HOLDING<br>
+    AND 物理接触 = CONTACT_OK
+  </div>
+  <p>
+    搬送制御器側も、両把持状態、支持台撤去、コントローラ稼働、姿勢情報の鮮度を確認する。
+    したがって、支持台が先に消えることや、把持未成立のままベースが動き出すことを防ぐ。
+  </p>
+  <p>
+    さらに搬送開始前の2.0秒間について、各指が8 N以上、各指の変動幅が2 N以下、4指の
+    最新値平均が14 ±5 N以内、センサー更新停止が0.25秒未満であることを確認する。
+  </p>
+
+  <h2>7. 搬送中の把持維持</h2>
+
+  <p>
+    <code>HOLDING</code>に入ると、把持成立時の関節位置を保持位置として記録する。
+    現在は <code>prioritize_grasp_retention=true</code> であり、搬送中の短い反力ピークを理由に
+    指を開かない。これは、開動作によって接触が失われ、物体が落下する問題への対策である。
+  </p>
+
+  <h3>7.1 弱い指の回復</h3>
+  <p>左右どちらかが最低保持力8 N未満になった場合だけ、閉方向へ回復する。</p>
+  <div class="equation">
+    Δq = clamp(K<sub>F</sub>(F<sub>target</sub> − min(F<sub>L</sub>,F<sub>R</sub>)), 0, Δq<sub>max</sub>)
+  </div>
+
+  <h3>7.2 20 N上限の意味</h3>
+  <div class="important">
+    <b>重要：</b>現在の20 Nは「超過検出し、警告する基準」であり、搬送中の力を必ず20 N以下に
+    飽和させる保証値ではない。把持維持優先モードでは、20 Nを超えても短時間のピークなら
+    指を開かず、成立位置を保持する。したがってExcelに20 N超過が記録される場合がある。
+    厳密な20 N制約と落下防止を同時に保証するには、各指独立駆動、力センサーの分離、または
+    搬送加速度のさらなる制限が必要になる。
+  </div>
+
+  <p>
+    物理接触と最低力条件が2.0秒以上失われた場合は把持喪失エラーとなり、把持状態をfalseにする。
+    協調搬送制御器は把持状態falseを受けると両ベースを停止する。
+  </p>
+</section>
+
+<section class="part">
+  <div class="part-title">第II部　搬送制御</div>
+
+  <h2>8. 座標系と物体姿勢</h2>
+
+  <table>
+    <tr><th>座標系</th><th>定義</th></tr>
+    <tr><td><code>world</code></td><td>Gazebo世界固定座標系</td></tr>
+    <tr><td><code>cooperative_transport_frame</code></td><td>物体重心を原点とし、物体と一体で回転する搬送座標系</td></tr>
+    <tr><td>物体 +X</td><td>長手方向。最初の直進は初期姿勢の+X方向</td></tr>
+    <tr><td>物体 +Y</td><td>幅方向</td></tr>
+    <tr><td>world +Y</td><td>回転後の2回目の直進方向</td></tr>
+  </table>
+
+  <p>
+    物体姿勢はGazeboのモデル姿勢から取得し、
+    <code>/cooperative_transport/measured_payload_pose</code>として配信する。回転制御器はこの実測姿勢を
+    優先し、取得できない場合のみ2台のベース中央から物体姿勢を推定する。
+  </p>
+
+  <h3>8.1 物体とTCPの相対関係</h3>
+  <p>搬送区間の開始時に、物体から各グリッパーTCPへの相対変換を保存する。</p>
+  <div class="equation">
+    T<sup>O</sup><sub>Gᵢ</sub> = (T<sup>W</sup><sub>O</sub>)⁻¹ T<sup>W</sup><sub>Gᵢ</sub><br>
+    T<sup>W</sup><sub>Gᵢ,target</sub> = T<sup>W</sup><sub>O,target</sub> T<sup>O</sup><sub>Gᵢ</sub>
+  </div>
+  <p>
+    これにより物体目標を1つ生成すれば、両TCPの目標が一意に得られる。直進終了時と回転終了時に
+    相対変換を再取得するため、前区間で生じた微小な接触ずれを次区間へ累積させにくい。
+  </p>
+
+  <h2>9. 搬送シーケンス</h2>
+
+  <div class="flow">
+    <span>WAITING</span><span class="arrow">→</span>
+    <span>GRASP_CHECK</span><span class="arrow">→</span>
+    <span>INITIALIZE</span><span class="arrow">→</span>
+    <span>TRANSLATING</span><span class="arrow">→</span>
+    <span>直進整定</span><span class="arrow">→</span>
+    <span>ROTATING</span><span class="arrow">→</span>
+    <span>回転整定</span><span class="arrow">→</span>
+    <span>Y直進</span><span class="arrow">→</span>
+    <span>FINISHED</span>
+  </div>
+
+  <ol>
+    <li><b>開始前：</b>把持、支持台撤去、4指力の安定、姿勢・TF・コントローラを確認する。</li>
+    <li><b>第1直進：</b>物体初期座標系+X方向へ既定距離（標準1 m）移動する。</li>
+    <li><b>その場回転：</b>物体重心を通るworld-Z軸周りに指定角度（例：90°）回転する。</li>
+    <li><b>第2直進：</b>回転終了位置からworld +Y方向へ既定距離（標準1 m）移動する。</li>
+    <li><b>整定：</b>各区間の終端で目標を保持し、誤差が一定時間許容範囲内に入ったことを確認する。</li>
+  </ol>
+
+  <h2>10. 加速度制限軌道</h2>
+
+  <p>
+    直進距離と回転角はいずれも同じ台形速度プロファイルで生成する。距離が短く最高速度へ
+    到達できない場合は三角速度プロファイルとなる。急な速度変化を避け、接触力の衝撃を抑える。
+  </p>
+  <div class="equation">
+    加速区間：s(t) = 0.5 a t²<br>
+    等速区間：s(t) = s<sub>ramp</sub> + v<sub>max</sub>(t − t<sub>ramp</sub>)<br>
+    減速区間：s(t) = s<sub>target</sub> − 0.5 a (T − t)²
+  </div>
+  <p>
+    標準値は直進速度0.05 m/s、直進加速度0.025 m/s²、回転速度1°/s、回転加速度0.25°/s²である。
+    制御周期は0.01秒で、軌道時間はGazeboのROS時間を使う。
+  </p>
+
+  <h2>11. 2台の剛体協調運動学</h2>
+
+  <h3>11.1 隊形から求める物体姿勢</h3>
+  <p>AMIR1、AMIR2の平面位置をp₁、p₂とすると、隊形中心とヨー角を次で推定する。</p>
+  <div class="equation">
+    p<sub>c</sub> = (p₁ + p₂)/2<br>
+    ψ<sub>c</sub> = atan2(y₂ − y₁, x₂ − x₁)
+  </div>
+  <p>
+    現在の設定では並進位置フィードバックに実測物体位置を使用し、ヨー角制御には隊形角を使用する。
+    これは、対向する摩擦把持による実測物体ヨーの符号・遅れがベース制御を不安定化するのを避けるためである。
+  </p>
+
+  <h3>11.2 物体中心のP制御</h3>
+  <div class="equation">
+    v<sub>c</sub> = K<sub>p</sub>(p<sub>goal</sub> − p<sub>feedback</sub>)<br>
+    ω = clamp(K<sub>ψ</sub> wrap(ψ<sub>goal</sub> − ψ<sub>formation</sub>), ω<sub>max</sub>)
+  </div>
+  <p>中心速度は最大線速度で飽和し、回転角誤差は−π～πへ正規化する。</p>
+
+  <h3>11.3 各AMIRへの速度分配</h3>
+  <p>隊形中心から各AMIRまでのベクトルをrᵢとすると、剛体運動の速度は次式になる。</p>
+  <div class="equation">
+    vᵢ = v<sub>c</sub> + ω × rᵢ<br>
+    vᵢx = v<sub>cx</sub> − ω rᵢy<br>
+    vᵢy = v<sub>cy</sub> + ω rᵢx
+  </div>
+  <p>
+    世界座標速度を各AMIRのローカル座標へ回転変換し、メカナムベースへ
+    <code>linear.x</code>、<code>linear.y</code>として出力する。AMIR2は物体を挟んで反対向きなので、
+    目標機首角にπを加える。各AMIRの角速度には機首角補正も加える。
+  </p>
+  <div class="equation">
+    ωᵢ = ω<sub>feedback</sub> + K<sub>heading</sub> wrap(ψ<sub>desired,i</sub> − ψᵢ)
+  </div>
+
+  <h3>11.4 指令の加速度制限</h3>
+  <p>
+    算出した速度指令は、前周期の指令から許容加速度以内で変化させる。線速度はベクトルの向きを
+    保ったまま増分を制限し、角速度も同様に制限する。これにより直進開始時の把持力衝撃を抑える。
+  </p>
+
+  <h2>12. 距離一定制御</h2>
+
+  <p>
+    搬送開始時の2台間距離d*を保存し、搬送中の距離dとの差を閉ループ補正する。
+    2台へ等量・逆方向の速度を加えるため、理想的には物体中心を移動させず、開き過ぎ・押し込み過ぎだけを補正する。
+  </p>
+  <div class="equation">
+    e<sub>d</sub> = d − d*<br>
+    v<sub>d</sub> = clamp(0.5 K<sub>d</sub> e<sub>d</sub>, v<sub>d,max</sub>)<br>
+    v₁ ← v₁ + v<sub>d</sub> n,　v₂ ← v₂ − v<sub>d</sub> n
+  </div>
+  <p>
+    nはAMIR1からAMIR2へ向かう単位ベクトルである。現在値は
+    <code>Kd=0.8</code>、補正速度上限<code>0.012 m/s</code>、距離許容差<code>0.005 m</code>である。
+  </p>
+
+  <h2>13. 追従遅れ対策</h2>
+
+  <h3>13.1 参照進行ガバナ</h3>
+  <p>
+    物体が指令へ追従できないまま目標だけが先へ進むと、指に引張り・ねじり荷重が集中する。
+    そこで追従誤差が上限へ達すると軌道時間の進行を一時停止し、物体が追いついてから再開する。
+  </p>
+  <table>
+    <tr><th>対象</th><th>停止しきい値</th><th>再開しきい値</th></tr>
+    <tr><td>直進位置誤差</td><td>0.04 m</td><td>0.02 m</td></tr>
+    <tr><td>回転姿勢誤差</td><td>2°</td><td>1°</td></tr>
+  </table>
+  <p>停止値と再開値を分けたヒステリシスにより、しきい値付近の高速な停止・再開切替を防ぐ。</p>
+
+  <h3>13.2 回転終端の補正</h3>
+  <p>
+    摩擦把持にはねじりのコンプライアンスがあるため、隊形が90°へ到達しても物体がわずかに遅れる。
+    整定中だけ、物体角度誤差に比例した有限のオーバードライブを搬送目標へ加える。
+  </p>
+  <div class="equation">
+    θ<sub>transport</sub> = θ<sub>target</sub> + clamp(K<sub>s</sub>(θ<sub>target</sub> − θ<sub>actual</sub>), ±4°)<br>
+    K<sub>s</sub> = 2.0
+  </div>
+  <p>
+    完了判定は補正後の隊形目標ではなく、本来の物体目標に対して行う。このため補正量だけ回り過ぎて
+    完了と判定されることはない。
+  </p>
+
+  <h2>14. 完了判定と安全停止</h2>
+
+  <h3>14.1 区間完了</h3>
+  <ul>
+    <li>直進：物体位置誤差が0.02 m以内で1.0秒継続。</li>
+    <li>回転：位置誤差0.02 m以内かつ姿勢誤差1°以内で2.0秒継続。</li>
+    <li>Y直進：物体位置誤差が0.02 m以内で1.0秒継続。</li>
+  </ul>
+  <p>許容範囲から外れた場合は継続時間をリセットする。整定タイムアウト時はエラー停止する。</p>
+
+  <h3>14.2 直ちに停止する条件</h3>
+  <ul>
+    <li>いずれかのAMIRの把持状態がfalse。</li>
+    <li>オドメトリまたは物体姿勢がタイムアウト。</li>
+    <li>位置追従誤差が0.10 m、または姿勢追従誤差が15°を超過。</li>
+    <li>2台間距離が2.30～3.10 mの範囲外。</li>
+    <li>ベース速度、関節範囲、物体すべりの監視条件に違反。</li>
+    <li>非常停止がラッチされている。</li>
+  </ul>
+  <p>
+    安全監視は片方だけでなく両ベースを同時に停止する。ラッチ後は原因が解消され、明示的に
+    リセットされるまで再開しない。
+  </p>
+
+  <h3>14.3 アドミッタンス制御</h3>
+  <p>
+    内力を逃がす1軸アドミッタンス
+    <code>Mẍ + Dẋ + Kx = F</code>も実装されているが、通常の回転搬送では無効である。
+    有効化した場合のみAMIR2のローカルY速度へ最大0.004 m/sの補正を加える。
+  </p>
+</section>
+
+<section class="part">
+  <div class="part-title">主要値・制約・実装対応</div>
+
+  <h2>15. 現在の主要パラメータ</h2>
+
+  <table>
+    <tr><th>分類</th><th>パラメータ</th><th>現在値</th></tr>
+    <tr><td>物体</td><td>質量／形状</td><td>0.5 kg／1.20 × 0.03 × 0.08 m</td></tr>
+    <tr><td>把持</td><td>目標法線力</td><td>14 N/指</td></tr>
+    <tr><td>把持</td><td>把持成立の力許容帯</td><td>8～20 N/指（14 ±6 N）</td></tr>
+    <tr><td>把持</td><td>最低保持力</td><td>8 N/指</td></tr>
+    <tr><td>把持</td><td>最大力検出基準</td><td>20 N/指</td></tr>
+    <tr><td>把持</td><td>グリッパー最大努力</td><td>0.8 N·m</td></tr>
+    <tr><td>把持</td><td>力制御周期／フィルタ係数</td><td>0.10 s／α=0.25</td></tr>
+    <tr><td>搬送</td><td>協調制御周期</td><td>50 Hz</td></tr>
+    <tr><td>搬送</td><td>位置・ヨー・機首角ゲイン</td><td>0.35／0.50／0.20</td></tr>
+    <tr><td>搬送</td><td>最大線速度</td><td>回転搬送起動時 0.060 m/s</td></tr>
+    <tr><td>搬送</td><td>最大線加速度</td><td>回転搬送起動時 0.025 m/s²</td></tr>
+    <tr><td>搬送</td><td>最大角速度／角加速度</td><td>0.040 rad/s／0.060 rad/s²</td></tr>
+    <tr><td>距離制御</td><td>ゲイン／補正速度上限</td><td>0.8／0.012 m/s</td></tr>
+    <tr><td>軌道</td><td>標準直進</td><td>1 m、0.05 m/s、0.025 m/s²</td></tr>
+    <tr><td>軌道</td><td>標準回転</td><td>1°/s、0.25°/s²（角度は指定値）</td></tr>
+  </table>
+
+  <h2>16. 実装上の限界と調整時の注意</h2>
+
+  <ol>
+    <li><b>1台の左右指は独立制御できない。</b>片側の力だけが高い場合、共通関節を開く以外に直接的な均等化手段がない。</li>
+    <li><b>指反力は純粋な法線力ではない。</b>搬送加減速による動的反力も含むため、20 N超過が直ちに静的な締付け過大を意味するとは限らない。</li>
+    <li><b>把持維持と厳密な力上限は競合する。</b>現在は落下防止を優先するため、搬送中ピークに対する開動作を抑制している。</li>
+    <li><b>剛体隊形モデルは接触の弾性・すべりを直接表さない。</b>それらは実測物体姿勢、追従停止、距離制御、安全監視によって外側から補う。</li>
+    <li><b>実機化にはセンサー再定義が必要。</b>Gazeboモデル姿勢の代わりに外部計測または物体姿勢推定を使用し、指法線力の軸・符号・バイアスを再校正する必要がある。</li>
+  </ol>
+
+  <div class="note">
+    把持力変動をさらに減らす場合は、目標力だけを上げるより、直進加速度、2台間距離補正速度、
+    指接触剛性、左右独立力計測の順に原因を切り分ける方が安全である。
+  </div>
+
+  <h2>17. 実装ファイル対応表</h2>
+
+  <table>
+    <tr><th>内容</th><th>実装ファイル</th></tr>
+    <tr><td>把持状態機械・接触判定・力制御</td><td><code>cooperative_transport_control/cooperative_transport_control/friction_grasp_manager.py</code></td></tr>
+    <tr><td>把持位置補正の純粋関数</td><td><code>cooperative_transport_control/cooperative_transport_control/grip_force_control.py</code></td></tr>
+    <tr><td>支持台撤去インターロック</td><td><code>cooperative_transport_control/cooperative_transport_control/grasp_support_remover.py</code></td></tr>
+    <tr><td>物体軌道・搬送状態機械</td><td><code>cooperative_rotation/cooperative_rotation/rotation_controller.py</code></td></tr>
+    <tr><td>加速度制限軌道・追従ガバナ</td><td><code>cooperative_rotation/cooperative_rotation/trajectory.py</code></td></tr>
+    <tr><td>中央協調制御</td><td><code>cooperative_transport_control/cooperative_transport_control/coordinator.py</code></td></tr>
+    <tr><td>剛体速度分配・距離一定制御</td><td><code>cooperative_transport_control/cooperative_transport_control/kinematics.py</code></td></tr>
+    <tr><td>安全・すべり監視</td><td><code>safety_monitor.py</code>、<code>slip_monitor.py</code></td></tr>
+    <tr><td>現在の把持・搬送設定</td><td><code>cooperative_transport_control/config/friction_transport.yaml</code></td></tr>
+    <tr><td>現在の軌道設定</td><td><code>cooperative_rotation/config/rotation_params.yaml</code></td></tr>
+  </table>
+
+  <p class="footer-note">
+    文書生成元：<code>/home/dars5070/ros2_humble_ws</code><br>
+    記載値は起動引数で変更可能であり、実行時にはlaunch引数がYAML既定値を上書きする。
+  </p>
+</section>
+
+</body>
+</html>

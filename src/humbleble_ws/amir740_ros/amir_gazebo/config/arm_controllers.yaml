@@ -1,0 +1,66 @@
+# AMIR アーム コントローラー設定 (Gazebo シミュレーション用)
+# spawner -t <type> -p <this_file> で controller_manager に登録する
+# ノード名キーは /** ワイルドカードにして root (単体) でも namespace 付き
+# (/amir1/arm_controller 等, マルチロボット) でもマッチさせる。
+
+/**/arm_controller:
+  ros__parameters:
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: true
+    # open_loop_control: true eliminates PID feedback on the arm trajectory.
+    # Feedback correction causes abrupt torque spikes → reaction forces → base moves.
+    # TurtleBot3 uses open_loop_control: true for the same reason.
+    open_loop_control: true
+    allow_integration_in_goal_trajectories: true
+    constraints:
+      stopped_velocity_tolerance: 0.05
+      goal_time: 0.0
+    # Reduced P gains prevent aggressive acceleration that creates reaction forces
+    # large enough to slide/tip the mobile base. D gains increased to dampen overshoot.
+    gains:
+      Joint_1: {p: 20.0, i: 2.0, d: 5.0, i_clamp: 10.0}
+      Joint_2: {p: 20.0, i: 2.0, d: 5.0, i_clamp: 10.0}
+      Joint_3: {p: 20.0, i: 2.0, d: 5.0, i_clamp: 10.0}
+      Joint_4: {p: 15.0, i: 1.5, d: 3.0, i_clamp: 5.0}
+      Joint_5: {p: 8.0,  i: 0.8, d: 1.5, i_clamp: 2.0}
+
+# VR/MR テレオペ用ストリーミングコントローラ (MoveIt Servo の出力先)
+# arm_controller(JTC) と同じ position command interface を奪い合うため
+# 同時に active にはできない。spawner で --inactive 起動し、
+# Servo 運用時に switch_controllers で arm_controller と切り替える。
+#   有効化: ros2 control switch_controllers --deactivate arm_controller --activate forward_position_controller
+#   復帰:   ros2 control switch_controllers --deactivate forward_position_controller --activate arm_controller
+/**/forward_position_controller:
+  ros__parameters:
+    joints:
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+    interface_name: position
+
+/**/gripper_controller:
+  ros__parameters:
+    joint: Gripper
+    allow_stalling: true
+    # Force regulation uses 0.0002 rad contact corrections.  The former
+    # 0.01 rad goal tolerance classified those commands as already reached,
+    # leaving the pads at their initial >20 N contact load.
+    stall_velocity_threshold: 0.00001
+    stall_timeout: 1.0
+    goal_tolerance: 0.0001
+    # Hard cap matching the force-limited grasp manager command.
+    max_effort: 0.8

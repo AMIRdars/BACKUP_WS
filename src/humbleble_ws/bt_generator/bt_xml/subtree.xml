@@ -1,0 +1,137 @@
+<root main_tree_to_execute="MainTree">
+  <!-- <BehaviorTree ID="Approach">
+    <SequenceStar>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{action_name}" command="add"/>
+      <Approach action_name="{action_name}" goal="{goal}" server_timeout="{server_timeout}" ros2_node="{node}"/>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{action_name}" command="remove"/>
+    </SequenceStar>
+  </BehaviorTree> -->
+
+  <BehaviorTree ID="Approach">
+    <Sequence>
+      <SetParam node_name="planner_server" param_name="GridBased.tolerance" double_value="{position_tolerance}"/>
+      <SetParam node_name="controller_server" param_name="goal_checker.xy_goal_tolerance" double_value="{position_tolerance}"/>
+      <SetParam node_name="planner_server" param_name="GridBased.use_final_approach_orientation" bool_value="{position_only}"/>
+      <PipelineSequence name="NavigateWithReplanning">
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="1" name="RecoveryComputePathToPose">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <ReactiveFallback name="ComputePathToPoseRecoveryFallback">
+              <GoalUpdated/>
+              <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
+            </ReactiveFallback>
+          </RecoveryNode>
+        </RateController>
+        <RecoveryNode number_of_retries="1" name="FollowPath">
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+          <ReactiveFallback name="FollowPathRecoveryFallback">
+            <GoalUpdated/>
+            <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
+          </ReactiveFallback>
+        </RecoveryNode>
+      </PipelineSequence>
+      <SetParam node_name="planner_server" param_name="GridBased.use_final_approach_orientation" bool_value="false"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Navigation">
+    <RecoveryNode number_of_retries="1" name="NavigateRecovery">
+      <PipelineSequence name="NavigateWithReplanning">
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="1" name="RecoveryComputePathToPose">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <ReactiveFallback name="ComputePathToPoseRecoveryFallback">
+              <GoalUpdated/>
+              <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
+            </ReactiveFallback>
+          </RecoveryNode>
+        </RateController>
+        <RecoveryNode number_of_retries="1" name="FollowPath">
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+          <ReactiveFallback name="FollowPathRecoveryFallback">
+            <GoalUpdated/>
+            <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
+          </ReactiveFallback>
+        </RecoveryNode>
+      </PipelineSequence>
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <!-- <Message msg="HELP!"/>
+        <Wait wait_duration="5"/> -->
+        <RoundRobin name="RecoveryActions">
+          <Sequence name="ClearingActions">
+            <ClearEntireCostmap name="ClearLocalCostmap-Subtree" service_name="local_costmap/clear_entirely_local_costmap"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Subtree" service_name="global_costmap/clear_entirely_global_costmap"/>
+          </Sequence>
+          <Spin spin_dist="1.57"/>
+          <Wait wait_duration="5"/>
+          <BackUp backup_dist="0.15" backup_speed="0.025"/>
+        </RoundRobin>
+      </ReactiveFallback>
+    </RecoveryNode>
+  </BehaviorTree>
+
+
+  <!-- <input= obj_pose   output=error_string> -->
+  <BehaviorTree ID="Pick">
+    <Sequence>
+      <SetBlackboard output_key="block_grasp_check" value="true" />
+      <Sequence>
+        <BeforePick service_name="before_pick" obj_pose="{obj_pose}" obj_id="{obj_id}"/>
+        <ForceSuccess>
+          <Pick action_name="bt_pick" server_timeout="{server_timeout}" obj_id="{obj_id}" obj_pose="{obj_pose}" grasped_object="{grasped_object}" pick_error_string="{error_string}"/>
+        </ForceSuccess>
+        <SetBlackboard output_key="block_grasp_check" value="false" />
+        <Message msg="{error_string}"/>
+      </Sequence>
+      <AfterPick service_name="after_pick" subtree_name="{subtree_name}" pick_error_string="{error_string}" grasped_object="{grasped_object}" pick_result="{pickResult}"/>
+      
+    </Sequence>
+  </BehaviorTree>
+
+  <!-- <input= pickResult   output=error_string; pickResult> -->
+  <BehaviorTree ID="Place">
+    <Sequence>
+      <SetBlackboard output_key="block_grasp_check" value="true" />
+      <Place action_name="bt_place" server_timeout="{server_timeout}" grasped_object="{grasped_object}" obj_id="{obj_id}" location_id="{location_id}" location_pose="{location_pose}"/>
+      <SetBlackboard output_key="block_grasp_check" value="false" />
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="TakeoffBebop">
+    <Sequence>
+      <!-- <Low/> -->
+      <TakeoffBebop action_name="bt_takeoff" server_timeout="{server_timeout}"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="LandBebop">
+    <Sequence>
+      <LandBebop action_name="bt_land" server_timeout="{server_timeout}"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="PathMoveBebop">
+    <Sequence>
+      <!-- <DronePath/> -->
+      <PathMoveBebop action_name="bt_pathmove" server_timeout="{server_timeout}"/>
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="PIDBebop">
+    <Sequence>
+      <!-- <High/>
+      <TaskFree/> -->
+      <PIDBebop action_name="bt_pid" server_timeout="{server_timeout}"/> 
+    </Sequence>
+  </BehaviorTree>
+
+  <BehaviorTree ID="RoundBebop">
+    <Sequence>
+      <!-- <DronePath/> -->
+      <RoundBebop action_name="bt_round" server_timeout="{server_timeout}"/>
+    </Sequence>
+  </BehaviorTree>
+
+
+</root>

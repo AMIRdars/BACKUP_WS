@@ -1,0 +1,10 @@
+geometry_msgs/Pose from_camera
+geometry_msgs/Pose from_base
+geometry_msgs/Pose from_odom
+string label
+string id
+Pixel pixel_bottom_right
+Pixel pixel_top_left
+Pixel pixel_center
+bool stand
+float64 probability 

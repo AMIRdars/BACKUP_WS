@@ -1,0 +1,84 @@
+<root main_tree_to_execute="MainTree">
+
+
+  <!-- <BehaviorTree ID="ComputeMultiPath">
+    <Sequence>
+      <GetObject service_name="get_objects" command="ALL_COLLISION" collisions="{collisions}"/>
+      <SetObjCost service_name="set_obj_cost" objects="{collisions}" command="REMOVE"/>
+      <ForceSuccess>
+        <Repeat num_cycles="-1">
+          <Sequence>
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+            <Inverter>
+              <Sequence>
+                <CheckPath path="{path}" collisions="{collisions}" collisions_on_path="{collisions_on_path}"/>
+                <SetMultiPath path="{path}" collisions="{collisions_on_path}" output_multi_path="{multi_path}"/>
+              </Sequence>
+            </Inverter>
+            <SetMultiPath input_multi_path="{multi_path}" path="{path}" collisions="{collisions_on_path}" output_multi_path="{output_multi_path}"/>
+            <SetObjCost service_name="set_obj_cost" objects="{collisions_on_path}" command="ADD"/>
+          </Sequence>
+        </Repeat>
+      </ForceSuccess>
+      <SetObjCost service_name="set_obj_cost" objects="{collisions}" command="ADD"/>
+    </Sequence>
+  </BehaviorTree> -->
+
+  <BehaviorTree ID="Approach">
+    <SequenceStar>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{bt_name}" command="add"/>
+      <Approach action_name="gen_approach_bt_test" goal="{goal}" server_timeout="{server_timeout}" ros2_node="{node}"/>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{bt_name}" command="remove"/>
+    </SequenceStar>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Approach">
+    <SequenceStar>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{bt_name}" command="add"/>
+      <Approach action_name="gen_approach_bt_test" goal="{goal}" server_timeout="{server_timeout}" ros2_node="{node}"/>
+      <CreateBTGen service_name="create_nav_gen" bt_name="{bt_name}" command="remove"/>
+    </SequenceStar>
+  </BehaviorTree>
+
+  <BehaviorTree ID="Pick">
+    <Sequence>
+      <Sequence>
+        <BeforePick service_name="before_pick" obj_pose="{target_pose}"/>
+        <ForceSuccess>
+          <Pick action_name="bt_pick" server_timeout="{server_timeout}" obj_id="test_obj" obj_pose="{target_pose}" grasped_object="{pickResult}" pick_error_string="{error_string}"/>
+        </ForceSuccess>
+        <Message msg="{error_string}"/>
+      </Sequence>BT::NodeStatus tick() override
+      <AfterPick service_name="after_pick" pick_error_string="{error_string}"/>
+    </Sequence>
+  </BehaviorTree>
+
+
+    
+  <BehaviorTree ID="MainTree">
+    <SequenceStar name="root">
+      <Sequence>
+        <DronePath/>
+        <!-- <PIDBebop action_name="bt_pid" server_timeout="{server_timeout}"/> -->
+        <!-- <Sequence>
+          <Sequence>
+            <Sequence>
+              <Sequence>
+                <TakeoffBebop action_name="bt_takeoff" server_timeout="{server_timeout}"/>
+              </Sequence>
+              <High/>
+              <RoundBebop action_name="bt_round" server_timeout="{server_timeout}"/> 
+            </Sequence>
+            <DronePath/>
+            <PathMoveBebop action_name="bt_pathmove" server_timeout="{server_timeout}"/>
+          </Sequence>
+          <TaskFree/>
+          <PIDBebop action_name="bt_pid" server_timeout="{server_timeout}"/> 
+        </Sequence>
+        <LandPositionIsFree/>
+        <LandBebop action_name="bt_land" server_timeout="{server_timeout}"/> -->
+      </Sequence>
+      <LandPositionIsFree/>
+    </SequenceStar>
+  </BehaviorTree>
+</root>

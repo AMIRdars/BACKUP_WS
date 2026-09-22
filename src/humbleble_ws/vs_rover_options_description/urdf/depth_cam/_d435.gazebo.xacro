@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!--
+License: Apache 2.0. See LICENSE file in root directory.
+Copyright(c) 2017 PAL Robotics, S.L. All Rights Reserved
+
+Ignition Gazebo (gz-sim 6 / Fortress) version.
+librealsense_gazebo_plugin / libgazebo_ros_camera は Classic 専用のため使用不可。
+ignition-gazebo-sensors-system (world SDF に登録済み) が rgbd_camera を処理し、
+ros_gz_bridge で ROS2 トピックへ変換する。
+-->
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- マルチロボット用 namespace (空なら従来どおり無 prefix) -->
+  <xacro:arg name="namespace" default=""/>
+  <xacro:property name="robot_ns" value="$(arg namespace)"/>
+  <xacro:property name="ns_prefix" value="${robot_ns + '/' if robot_ns else ''}"/>
+
+  <xacro:macro name="gazebo_d435" params="camera_name reference_link topics_ns depth_optical_frame color_optical_frame infrared1_optical_frame infrared2_optical_frame publish_pointcloud:=true">
+
+    <gazebo reference="${reference_link}">
+      <sensor name="${camera_name}" type="rgbd_camera">
+        <camera>
+          <horizontal_fov>1.57</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>RGB_INT8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100.0</far>
+          </clip>
+          <depth_camera>
+            <clip>
+              <near>0.3</near>
+              <far>3.0</far>
+            </clip>
+          </depth_camera>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <always_on>true</always_on>
+        <update_rate>5</update_rate>
+        <visualize>true</visualize>
+        <topic>/${ns_prefix}${topics_ns}</topic>
+        <ignition_frame_id>${depth_optical_frame}</ignition_frame_id>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

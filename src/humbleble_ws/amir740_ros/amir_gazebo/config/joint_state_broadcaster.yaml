@@ -1,0 +1,92 @@
+# gazebo_ros2_control/GazeboSystem はミミックジョイントを ODE で実装するために
+# "<joint>_mimic" という内部ジョイントを生成する。これらは URDF に存在しないため
+# MoveIt2 の robot_model がエラーを出し続ける。joints リストで明示的に除外する。
+
+joint_state_broadcaster:
+  ros__parameters:
+    joints:
+      # メカナムホイール駆動軸
+      - front_left_joint
+      - front_right_joint
+      - back_left_joint
+      - back_right_joint
+      # サスペンション軸
+      - front_left_suspension_joint
+      - front_right_suspension_joint
+      - back_left_suspension_joint
+      - back_right_suspension_joint
+      # バレルジョイント (TF ビジュアライゼーション用, 15本×4ホイール)
+      - front_left_barrel_0_joint
+      - front_left_barrel_1_joint
+      - front_left_barrel_2_joint
+      - front_left_barrel_3_joint
+      - front_left_barrel_4_joint
+      - front_left_barrel_5_joint
+      - front_left_barrel_6_joint
+      - front_left_barrel_7_joint
+      - front_left_barrel_8_joint
+      - front_left_barrel_9_joint
+      - front_left_barrel_10_joint
+      - front_left_barrel_11_joint
+      - front_left_barrel_12_joint
+      - front_left_barrel_13_joint
+      - front_left_barrel_14_joint
+      - front_right_barrel_0_joint
+      - front_right_barrel_1_joint
+      - front_right_barrel_2_joint
+      - front_right_barrel_3_joint
+      - front_right_barrel_4_joint
+      - front_right_barrel_5_joint
+      - front_right_barrel_6_joint
+      - front_right_barrel_7_joint
+      - front_right_barrel_8_joint
+      - front_right_barrel_9_joint
+      - front_right_barrel_10_joint
+      - front_right_barrel_11_joint
+      - front_right_barrel_12_joint
+      - front_right_barrel_13_joint
+      - front_right_barrel_14_joint
+      - back_left_barrel_0_joint
+      - back_left_barrel_1_joint
+      - back_left_barrel_2_joint
+      - back_left_barrel_3_joint
+      - back_left_barrel_4_joint
+      - back_left_barrel_5_joint
+      - back_left_barrel_6_joint
+      - back_left_barrel_7_joint
+      - back_left_barrel_8_joint
+      - back_left_barrel_9_joint
+      - back_left_barrel_10_joint
+      - back_left_barrel_11_joint
+      - back_left_barrel_12_joint
+      - back_left_barrel_13_joint
+      - back_left_barrel_14_joint
+      - back_right_barrel_0_joint
+      - back_right_barrel_1_joint
+      - back_right_barrel_2_joint
+      - back_right_barrel_3_joint
+      - back_right_barrel_4_joint
+      - back_right_barrel_5_joint
+      - back_right_barrel_6_joint
+      - back_right_barrel_7_joint
+      - back_right_barrel_8_joint
+      - back_right_barrel_9_joint
+      - back_right_barrel_10_joint
+      - back_right_barrel_11_joint
+      - back_right_barrel_12_joint
+      - back_right_barrel_13_joint
+      - back_right_barrel_14_joint
+      # アーム・グリッパー制御軸
+      - Joint_1
+      - Joint_2
+      - Joint_3
+      - Joint_4
+      - Joint_5
+      - Gripper
+      # グリッパーミミック軸 (URDF に存在する実ジョイント)
+      # "*_mimic" サフィックス付きの ODE 内部ジョイントはここに含めない
+      - left_inner_back_joint
+      - right_outer_back_joint
+      - left_outer_back_joint
+      - right_inner_front_joint
+      - left_inner_front_joint

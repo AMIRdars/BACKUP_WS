@@ -1,0 +1,310 @@
+<?xml version="1.0" ?>
+<robot name="amir_mecanum3" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- マルチロボット用 namespace 引数 (空なら従来どおり単体・無 prefix)
+       include 先 (mecanum3.gazebo / tg30_mecanum3.gazebo / _d435.gazebo.xacro)
+       が Ignition 側の topicを ${namespace}/ でprefixする。
+       TF frame ID は共通名のまま、launch 側でTF topicをnamespace分離する。 -->
+  <xacro:arg name="namespace" default=""/>
+
+  <!-- メカナムローバー URDF
+       mecanum3.gazebo (gz_ros2_control-system) と
+       mecanum3_ros2_control.xacro (MecanumSystem) を含む -->
+  <xacro:include filename="$(find mecanumrover_description)/urdf/mecanum3.xacro"/>
+
+  <!-- AMIR アーム リンク/ジョイント -->
+  <xacro:include filename="$(find amir_description)/urdf/amir_for_rover.xacro"/>
+
+  <!-- One contact sensor is required for each primitive collision because an
+       SDF contact sensor accepts exactly one collision name. -->
+  <xacro:macro name="finger_segment_contact"
+               params="side suffix collision_suffix">
+    <sensor name="finger_${side}_contact_sensor${suffix}" type="contact">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <topic>/$(arg namespace)/finger_${side}_contact${suffix}</topic>
+      <contact>
+        <collision>finger_${side}_1_collision${collision_suffix}</collision>
+      </contact>
+    </sensor>
+  </xacro:macro>
+
+  <!-- ローバーとアームの固定接続 -->
+  <joint name="base_fixed" type="fixed">
+    <origin xyz="0.0 0.0 0.413" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link0_1"/>
+  </joint>
+
+  <!-- AMIR アーム Ignition Gazebo 用 ros2_control
+       gz_ros2_control-system プラグインが URDF 内の全 <ros2_control> タグを
+       読み込み GazeboSimSystem としてシミュレーションする -->
+  <ros2_control name="AmirGazeboSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+    <joint name="Joint_1">
+      <command_interface name="position">
+        <param name="min">-2.96706</param>
+        <param name="max">2.96706</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_2">
+      <command_interface name="position">
+        <param name="min">0.0</param>
+        <param name="max">2.356194</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_3">
+      <command_interface name="position">
+        <param name="min">-2.792527</param>
+        <param name="max">0.0</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_4">
+      <command_interface name="position">
+        <param name="min">-2.094395</param>
+        <param name="max">1.308997</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Joint_5">
+      <command_interface name="position">
+        <param name="min">-2.75762</param>
+        <param name="max">2.75762</param>
+      </command_interface>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="Gripper">
+      <command_interface name="position">
+        <param name="min">-1.047198</param>
+        <param name="max">0.261799</param>
+      </command_interface>
+      <state_interface name="position">
+        <!-- Start physically open before controller activation.  The payload
+             may be spawned while ROS 2 controllers are still loading; a zero
+             angle starts partly closed and can create a false impact load. -->
+        <param name="initial_value">-1.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="left_inner_back_joint">
+      <param name="mimic">Gripper</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="right_outer_back_joint">
+      <param name="mimic">Gripper</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="left_outer_back_joint">
+      <param name="mimic">Gripper</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="right_inner_front_joint">
+      <param name="mimic">Gripper</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="left_inner_front_joint">
+      <param name="mimic">Gripper</param>
+      <param name="multiplier">1</param>
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+  <!-- AMIR アームリンクの Ignition Gazebo 摩擦設定
+       Classic Gazebo: <mu1>/<mu2>/<kp>/<kd> を <gazebo reference> 直下に記述
+       Ignition Gazebo: <collision><surface><friction><ode> 階層が必要 -->
+
+  <gazebo reference="link0_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="link1_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="link2_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="link3_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="link4_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="gripper_base_1"><collision><surface><friction><ode>
+    <mu>1.4</mu><mu2>1.4</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <!-- Joint_5 is the wrist joint directly upstream of the gripper.  Gazebo
+       publishes its transmitted six-axis wrench in the gripper frame. -->
+  <gazebo reference="Joint_5">
+    <sensor name="wrist_ft_sensor" type="force_torque">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <topic>/$(arg namespace)/ft_sensor</topic>
+      <force_torque>
+        <frame>child</frame>
+        <measure_direction>child_to_parent</measure_direction>
+      </force_torque>
+    </sensor>
+  </gazebo>
+
+  <!-- Gazebo Fortress's contact message identifies the colliding bodies but
+       does not expose the solver wrench.  These joint sensors provide the
+       actual reaction load at each finger.  The sensor-frame X axis is the
+       closing normal direction for this gripper geometry. -->
+  <gazebo reference="left_inner_front_joint">
+    <sensor name="finger_left_force_sensor" type="force_torque">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <topic>/$(arg namespace)/finger_left_wrench</topic>
+      <force_torque>
+        <frame>child</frame>
+        <measure_direction>child_to_parent</measure_direction>
+      </force_torque>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="right_inner_front_joint">
+    <sensor name="finger_right_force_sensor" type="force_torque">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <topic>/$(arg namespace)/finger_right_wrench</topic>
+      <force_torque>
+        <frame>child</frame>
+        <measure_direction>child_to_parent</measure_direction>
+      </force_torque>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="inner_link_left_1"><collision><surface><friction><ode>
+    <mu>2.0</mu><mu2>2.0</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="inner_link_right_1"><collision><surface><friction><ode>
+    <mu>2.0</mu><mu2>2.0</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="outer_link_left_1"><collision><surface><friction><ode>
+    <mu>2.0</mu><mu2>2.0</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <gazebo reference="outer_link_right_1"><collision><surface><friction><ode>
+    <mu>2.0</mu><mu2>2.0</mu2>
+  </ode></friction></surface></collision></gazebo>
+
+  <!-- グリッパー指: 高摩擦 + 接触剛性 (把持面) -->
+  <gazebo reference="finger_left_1">
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <!-- A compliant pad is required for force control.  At 1e5 N/m
+                 one 0.002 rad gripper update jumped directly from no contact
+                 to more than 20 N, leaving no controllable 14 N equilibrium. -->
+            <kp>2e4</kp>
+            <kd>2e1</kd>
+            <max_vel>0.01</max_vel>
+            <min_depth>0.0001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
+    <sensor name="finger_left_contact_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <topic>/$(arg namespace)/finger_left_contact</topic>
+      <contact>
+        <collision>finger_left_1_collision</collision>
+      </contact>
+    </sensor>
+    <xacro:finger_segment_contact side="left" suffix="_1" collision_suffix="_1"/>
+    <xacro:finger_segment_contact side="left" suffix="_2" collision_suffix="_2"/>
+    <xacro:finger_segment_contact side="left" suffix="_3" collision_suffix="_3"/>
+    <xacro:finger_segment_contact side="left" suffix="_4" collision_suffix="_4"/>
+    <xacro:finger_segment_contact side="left" suffix="_5" collision_suffix="_5"/>
+    <xacro:finger_segment_contact side="left" suffix="_6" collision_suffix="_6"/>
+    <xacro:finger_segment_contact side="left" suffix="_7" collision_suffix="_7"/>
+    <xacro:finger_segment_contact side="left" suffix="_8" collision_suffix="_8"/>
+  </gazebo>
+
+  <gazebo reference="finger_right_1">
+    <collision>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10.0</mu>
+            <mu2>10.0</mu2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <kp>2e4</kp>
+            <kd>2e1</kd>
+            <max_vel>0.01</max_vel>
+            <min_depth>0.0001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
+    <sensor name="finger_right_contact_sensor" type="contact">
+      <always_on>true</always_on>
+      <update_rate>30</update_rate>
+      <topic>/$(arg namespace)/finger_right_contact</topic>
+      <contact>
+        <collision>finger_right_1_collision</collision>
+      </contact>
+    </sensor>
+    <xacro:finger_segment_contact side="right" suffix="_1" collision_suffix="_1"/>
+    <xacro:finger_segment_contact side="right" suffix="_2" collision_suffix="_2"/>
+    <xacro:finger_segment_contact side="right" suffix="_3" collision_suffix="_3"/>
+    <xacro:finger_segment_contact side="right" suffix="_4" collision_suffix="_4"/>
+    <xacro:finger_segment_contact side="right" suffix="_5" collision_suffix="_5"/>
+    <xacro:finger_segment_contact side="right" suffix="_6" collision_suffix="_6"/>
+    <xacro:finger_segment_contact side="right" suffix="_7" collision_suffix="_7"/>
+    <xacro:finger_segment_contact side="right" suffix="_8" collision_suffix="_8"/>
+  </gazebo>
+
+</robot>

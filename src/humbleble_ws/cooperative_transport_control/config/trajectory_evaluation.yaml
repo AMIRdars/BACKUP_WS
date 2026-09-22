@@ -1,0 +1,22 @@
+/**:
+  ros__parameters:
+    scenario: turn_30
+    auto_start: true
+    auto_start_delay: 2.0
+    sample_rate: 20.0
+    goal_settle_time: 0.5
+    waypoint_timeout: 40.0
+    position_tolerance: 0.025
+    # Friction grasp evaluation acceptance; the independent safety limit is 8 deg.
+    yaw_tolerance: 0.0872665
+    pass_through_waypoints: false
+    pass_through_position_tolerance: 0.035
+    pass_through_yaw_tolerance: 0.0698132
+    pass_through_slip_tolerance: 0.015
+    results_directory: /tmp/cooperative_transport_results
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    obstacle_data: [2.5, 1.0, 0.18, 4.0, -1.0, 0.18]
+    payload_length: 1.20
+    payload_width: 0.03
+    robot_footprint_radius: 0.24

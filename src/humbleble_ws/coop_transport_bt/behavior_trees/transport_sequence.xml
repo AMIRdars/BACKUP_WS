@@ -1,0 +1,29 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="CooperativeTransportSequence">
+      <!-- Parameters can be remapped from a higher-level node with {key}. -->
+      <!-- Move both arms while compensating each base so the grasp points stay
+           at their current world positions.  Angles are radians. -->
+      <CooperativeMotion motion_type="5" angle_mode="0"
+          joint_1_target="0.0" joint_2_target="1.2"
+          joint_3_target="-1.5" joint_4_target="0.3"
+          joint_5_target="1.5" joint_tolerance="0.03"
+          arm_motion_duration="8.0"
+          position_tolerance="0.025" angle_tolerance="0.10"
+          linear_velocity="0.03" angular_velocity="0.05" />
+      <CooperativeMotion motion_type="0" angle_mode="0"
+          target_x="0.30" target_y="0.00" target_yaw="0.0"
+          linear_velocity="0.03" angular_velocity="0.05"
+          position_tolerance="0.02" angle_tolerance="0.035" />
+      <CooperativeMotion motion_type="3" angle_mode="1"
+          pivot_x="0.30" pivot_y="1.00" rotation_angle="1.5708"
+          linear_velocity="0.03" angular_velocity="0.05"
+          position_tolerance="0.02" angle_tolerance="0.035" />
+      <CooperativeMotion motion_type="0" angle_mode="0"
+          target_x="0.30" target_y="0.50" target_yaw="1.5708"
+          linear_velocity="0.03" angular_velocity="0.05"
+          position_tolerance="0.02" angle_tolerance="0.035" />
+      <EmergencyStop />
+    </Sequence>
+  </BehaviorTree>
+</root>

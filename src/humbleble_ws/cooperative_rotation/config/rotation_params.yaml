@@ -1,0 +1,63 @@
+/**:
+  ros__parameters:
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    world_frame: world
+    base_frame: base_footprint
+    gripper_frame: tcp_link
+    required_controllers: [arm_controller, mecanum_drive_controller]
+
+    # Set axis_point_at_object_center=false to use this world-frame point.
+    axis_point_at_object_center: true
+    axis_point: [0.0, 0.0, 0.443]
+    axis_direction: [0.0, 0.0, 1.0]
+    target_angle_deg: 10.0
+    angular_velocity_deg_s: 2.0
+    # Ramp to 2 deg/s over eight seconds to avoid a grasp-force impulse.
+    angular_acceleration_deg_s2: 0.25
+    # Translate the payload centre along its initial transport-frame +X axis
+    # before the in-place specified-axis rotation starts.
+    pre_rotation_translation_distance_m: 1.0
+    # After the rotation, translate the payload centre along world +Y.
+    # Set to 0.0 to end immediately after the in-place rotation.
+    post_rotation_translation_y_distance_m: 1.0
+    translation_velocity_m_s: 0.05
+    translation_acceleration_m_s2: 0.025
+    translation_settling_time: 1.0
+    translation_settling_timeout: 20.0
+    control_period: 0.01
+
+    position_tolerance: 0.02
+    orientation_tolerance_deg: 1.0
+    maximum_tracking_position_error: 0.10
+    maximum_tracking_orientation_error_deg: 15.0
+    # Pause early when the payload falls behind, avoiding a catch-up pull at
+    # the fingers. The separate resume threshold provides hysteresis.
+    tracking_pause_orientation_error_deg: 2.0
+    tracking_resume_orientation_error_deg: 1.0
+    # The formation may reach its target while the friction-held payload still
+    # has a small torsional offset. Apply bounded formation overdrive only
+    # during settling; completion still checks the uncompensated object goal.
+    settling_goal_correction_gain: 2.0
+    settling_goal_max_correction_deg: 4.0
+    pose_timeout: 0.50
+    settling_time: 2.0
+    settling_timeout: 12.0
+    payload_height: 0.443
+
+    auto_start: true
+    auto_start_delay: 2.0
+    require_grasp: true
+    # Before transport starts, begin only after all four transmitted finger
+    # loads have remained stable for this duration.  During the preceding
+    # straight stage their transient variation is expected; grasp-state and
+    # contact safety remain active, but this startup gate is not reapplied.
+    pre_rotation_force_stability_duration: 2.0
+    pre_rotation_minimum_normal_force: 8.0
+    pre_rotation_target_normal_force: 14.0
+    # Joint reaction sensors include preload offsets; use this only as a
+    # broad plausibility range, while the per-finger stability test is strict.
+    pre_rotation_target_tolerance: 5.0
+    pre_rotation_force_variation_limit: 2.0
+    pre_rotation_force_timeout: 0.25
+    publish_markers: true

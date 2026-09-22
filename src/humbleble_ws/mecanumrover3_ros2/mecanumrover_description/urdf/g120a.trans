@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="g120a_transmission" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Front Left Wheel -->
+  <transmission name="front_left_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_joint">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+    </joint>
+    <actuator name="fl_motor">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Front Right Wheel -->
+  <transmission name="front_right_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_joint">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+    </joint>
+    <actuator name="fr_motor">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Back Left Wheel -->
+  <transmission name="back_left_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="back_left_joint">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+    </joint>
+    <actuator name="bl_motor">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- Back Right Wheel -->
+  <transmission name="back_right_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="back_right_joint">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+    </joint>
+    <actuator name="br_motor">
+      <hardwareInterface>hardware_interface/VelocityCommandInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+</robot>
+

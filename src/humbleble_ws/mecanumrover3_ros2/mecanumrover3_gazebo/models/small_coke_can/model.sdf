@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+    <model name="small_coke_can">
+        <link name="link">
+            <inertial>
+                <pose>0 0 0.02 0 0 0</pose>
+                <mass>0.150</mass>
+                <inertia>
+                    <ixx>0.000147</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.000147</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000054</izz>
+                </inertia>
+            </inertial>
+
+            <!-- コリジョン: やや小さめの円柱 (半径 0.030, 高さ 0.12) -->
+            <collision name="collision">
+                <pose>0 0 0.06 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.030</radius>
+                        <length>0.12</length>
+                    </cylinder>
+                </geometry>
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>3.0</mu>
+                            <mu2>3.0</mu2>
+                        </ode>
+                    </friction>
+                    <contact>
+                        <ode>
+                            <kp>10000.0</kp>
+                            <kd>100.0</kd>
+                            <min_depth>0.003</min_depth>
+                            <max_vel>0.01</max_vel>
+                        </ode>
+                    </contact>
+                </surface>
+            </collision>
+
+            <!-- Y_UP DAEメッシュはIgnition GazeboでZ方向16cm地中に埋まるためcylinderに置換 -->
+            <visual name="visual">
+                <pose>0 0 0.06 0 0 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.030</radius>
+                        <length>0.12</length>
+                    </cylinder>
+                </geometry>
+                <material>
+                    <ambient>0.8 0.1 0.1 1</ambient>
+                    <diffuse>0.8 0.1 0.1 1</diffuse>
+                    <specular>0.3 0.3 0.3 1</specular>
+                </material>
+            </visual>
+        </link>
+    </model>
+</sdf>

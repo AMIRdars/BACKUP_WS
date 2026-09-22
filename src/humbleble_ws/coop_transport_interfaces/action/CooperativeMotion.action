@@ -1,0 +1,57 @@
+# All distances are metres, angles are radians, and velocities are SI units.
+
+# Motion kinds.
+uint8 MOVE_STRAIGHT=0
+uint8 MOVE_BACKWARD=1
+uint8 ROTATE_IN_PLACE=2
+uint8 ROTATE_AROUND_PIVOT=3
+uint8 FOLLOW_PATH=4
+uint8 REPOSITION_ARMS=5
+
+# How to interpret the requested rotation.
+uint8 ANGLE_ABSOLUTE=0
+uint8 ANGLE_RELATIVE=1
+
+uint8 motion_type
+uint8 angle_mode
+
+float64 target_x
+float64 target_y
+float64 target_yaw
+
+float64 pivot_x
+float64 pivot_y
+float64 rotation_angle
+
+float64 linear_velocity
+float64 angular_velocity
+
+float64 position_tolerance
+float64 angle_tolerance
+
+# REPOSITION_ARMS only.  These are the desired arm joint angles in radians.
+float64 joint_1_target
+float64 joint_2_target
+float64 joint_3_target
+float64 joint_4_target
+float64 joint_5_target
+float64 joint_tolerance
+float64 arm_motion_duration
+---
+bool success
+string message
+
+float64 final_x
+float64 final_y
+float64 final_yaw
+---
+float64 current_x
+float64 current_y
+float64 current_yaw
+
+float64 position_error
+float64 angle_error
+
+float64 command_vx
+float64 command_vy
+float64 command_wz

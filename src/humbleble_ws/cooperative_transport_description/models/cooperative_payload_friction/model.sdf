@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<sdf version="1.8">
+  <model name="cooperative_payload">
+    <static>false</static>
+    <self_collide>false</self_collide>
+    <allow_auto_disable>false</allow_auto_disable>
+    <link name="payload_link">
+      <inertial>
+        <mass>0.5</mass>
+        <!-- Solid box: 1.20 x 0.03 x 0.08 m, mass 0.5 kg.
+             Geometry is intentionally unchanged; only its inertia is scaled
+             for the lighter payload. -->
+        <inertia>
+          <ixx>0.000304</ixx>
+          <iyy>0.060267</iyy>
+          <izz>0.060038</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="payload_visual">
+        <geometry><box><size>1.20 0.03 0.08</size></box></geometry>
+        <material>
+          <ambient>0.16 0.42 0.68 1</ambient>
+          <diffuse>0.20 0.52 0.82 1</diffuse>
+        </material>
+      </visual>
+      <!-- Unlike stage A, the collision reaches both ends and there are no
+           DetachableJoint plugins. The AMIR finger collisions provide every
+           force that supports and moves this body. -->
+      <collision name="payload_collision">
+        <geometry><box><size>1.20 0.03 0.08</size></box></geometry>
+        <surface>
+          <friction>
+            <ode><mu>10.0</mu><mu2>10.0</mu2></ode>
+          </friction>
+          <contact>
+            <ode>
+              <kp>100000</kp><kd>50</kd>
+              <max_vel>0.01</max_vel><min_depth>0.0001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+  </model>
+</sdf>

@@ -1,0 +1,79 @@
+<robot name="lrf_tg30_x120a" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find vs_rover_options_description)/urdf/lrf/tg30_x120a.gazebo" />
+
+  <!-- placement of TG30 on Megarover Ver.3.0 -->
+  <!-- the mesh origin is at centerline of laser, x-axis facing forward -->
+  <xacro:property name="tg30_lrf_front_x_offset" value="0.2831" />
+  <xacro:property name="tg30_lrf_front_y_offset" value="0.0" />
+  <xacro:property name="tg30_lrf_front_z_offset" value="0.272" />
+  <xacro:property name="tg30_lrf_back_x_offset" value="-0.2769" />
+  <xacro:property name="tg30_lrf_back_y_offset" value="0.0" />
+  <xacro:property name="tg30_lrf_back_z_offset" value="0.272" />
+  <xacro:property name="tg30_center_of_mass_x" value="-0.004299" />
+  <xacro:property name="tg30_center_of_mass_y" value="-0.000337" />
+  <xacro:property name="tg30_center_of_mass_z" value="-0.018037" />
+
+
+  <!-- front LRF sensor joints and links -->
+  <joint name="front_lrf_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="front_lrf_link" />
+    <origin xyz="${tg30_lrf_front_x_offset} ${tg30_lrf_front_y_offset} ${tg30_lrf_front_z_offset}" rpy="0 0 0" />
+  </joint>
+
+  <link name="front_lrf_link">
+    <inertial>
+      <origin xyz="${tg30_center_of_mass_x} ${tg30_center_of_mass_y} ${tg30_center_of_mass_z}" rpy="0 0 0" />
+      <mass value="0.200" />
+      <inertia ixx="0.0001205" iyy="0.0001561" izz="0.0001977"
+        ixy="0.00" iyz="0.00"
+        ixz="0.00" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/lrf/tg30.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/lrf/tg30.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- back LRF sensor joints and links -->
+  <joint name="back_lrf_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="back_lrf_link" />
+    <origin xyz="${tg30_lrf_back_x_offset} ${tg30_lrf_back_y_offset} ${tg30_lrf_back_z_offset}" rpy="0 0 ${pi}" />
+  </joint>
+
+  <link name="back_lrf_link">
+    <inertial>
+      <origin xyz="${tg30_center_of_mass_x} ${tg30_center_of_mass_y} ${tg30_center_of_mass_z}" rpy="0 0 0" />
+      <mass value="0.200" />
+      <inertia ixx="0.0001205" iyy="0.0001561" izz="0.0001977"
+        ixy="0.00" iyz="0.00"
+        ixz="0.00" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/lrf/tg30.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://vs_rover_options_description/meshes/lrf/tg30.stl" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  
+  
+
+</robot>

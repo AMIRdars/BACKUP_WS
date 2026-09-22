@@ -1,0 +1,23 @@
+/**:
+  ros__parameters:
+    action_name: /cooperative_motion
+    world_frame: world
+    control_rate: 25.0
+    pose_timeout: 0.50
+    action_timeout: 180.0
+    require_grasp: true
+    position_kp: 1.0
+    yaw_kp: 1.0
+    # Conservative defaults; the coordinator applies its own limits as well.
+    default_linear_velocity: 0.03
+    default_angular_velocity: 0.05
+    max_linear_velocity: 0.03
+    max_angular_velocity: 0.05
+    robot1_namespace: amir1
+    robot2_namespace: amir2
+    # During REPOSITION_ARMS, each base tracks its gripper_base grasp point.
+    reposition_base_kp: 1.5
+    reposition_heading_kp: 1.0
+    reposition_linear_acceleration: 0.04
+    reposition_angular_acceleration: 0.10
+    reposition_vertical_warning: 0.03

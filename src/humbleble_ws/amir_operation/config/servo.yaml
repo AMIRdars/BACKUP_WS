@@ -1,0 +1,75 @@
+###############################################################################
+# AMIR アーム MoveIt Servo 設定 (VR/MR テレオペ用)
+#
+# 入力: 手先 Twist (geometry_msgs/TwistStamped) を ~/delta_twist_cmds へ
+# 出力: 関節角配列 (std_msgs/Float64MultiArray) を
+#       /forward_position_controller/commands へストリーム
+#
+# servo_node_main にこの YAML を {"moveit_servo": <内容>} として渡す
+# (vr_servo_launch.py 参照)。
+###############################################################################
+
+use_gazebo: false  # ros2_control の publish_period 補正は不要
+
+## 入力コマンドの性質
+# "speed_units": Twist の値をそのまま m/s, rad/s として解釈 (VR テレオペ向き)
+# "unitless"   : [-1:1] のジョイスティック値として scale を掛ける
+command_in_type: "speed_units"
+scale:
+  # command_in_type=="unitless" のときのみ使用
+  linear: 0.3       # 最大並進速度 [m/s]
+  rotational: 0.6   # 最大角速度 [rad/s]
+  joint: 0.5        # joint コマンド用
+
+## 出力コマンドの性質
+publish_period: 0.01          # 100 Hz 出力 (VR 追従向けに高め)
+low_latency_mode: false
+
+# forward_position_controller (JointGroupPositionController) は
+# std_msgs/Float64MultiArray の関節角を受ける
+command_out_type: std_msgs/Float64MultiArray
+publish_joint_positions: true
+publish_joint_velocities: false
+publish_joint_accelerations: false
+
+## 出力平滑化プラグイン
+smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
+
+# このノードが PlanningScene の一次提供者か。
+# move_group を同時起動する場合は false にすること。
+# (VR servo 単独起動なら true)
+is_primary_planning_scene_monitor: true
+
+## MoveIt 設定
+move_group_name: arm
+planning_frame: base_footprint
+
+## フレーム
+ee_frame_name: tcp_link
+# コマンドを与える基準フレーム。base_footprint=ベース基準で安定。
+# 手先基準にしたい場合は tcp_link に変更。
+robot_link_command_frame: base_footprint
+
+## 停止挙動
+incoming_command_timeout: 0.2     # この秒数コマンドが来なければ停止
+num_outgoing_halt_msgs_to_publish: 4
+
+## 特異点・関節限界の扱い
+lower_singularity_threshold: 17.0
+hard_stop_singularity_threshold: 30.0
+joint_limit_margin: 0.15
+leaving_singularity_threshold_multiplier: 2.0
+
+## トピック名
+cartesian_command_in_topic: ~/delta_twist_cmds
+joint_command_in_topic: ~/delta_joint_cmds
+# gz_ros2_control が生成する *_mimic を除いた filtered を購読する
+joint_topic: /joint_states_filtered
+status_topic: ~/status
+command_out_topic: /forward_position_controller/commands
+
+## 衝突チェック (ロボット全身)
+check_collisions: true
+collision_check_rate: 10.0
+self_collision_proximity_threshold: 0.01
+scene_collision_proximity_threshold: 0.02

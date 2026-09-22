@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot name="lrf_tg30_f120a" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- set to "true" to visualize the LRF laser on Gazebo -->
+  <xacro:arg name="front_laser_visual" default="false" />
+  <xacro:arg name="back_laser_visual" default="false" />
+
+  <xacro:property name="lrf_color" value="Gazebo/FlatBlack" />
+  <xacro:property name="DEG_TO_RAD" value="0.01745329251994329577" />
+  <xacro:property name="LRF_ANGLE" value="172" />
+
+  <!-- LRF TG30 -->
+  <gazebo reference="front_lrf_link">
+    <material>${lrf_color}</material>
+    <selfCollide>true</selfCollide>
+    <sensor name="tg30_lidar_front" type="ray">
+        <always_on>true</always_on>
+        <visualize>$(arg front_laser_visual)</visualize>
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>12</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1.0</resolution>
+              <min_angle>${-LRF_ANGLE*DEG_TO_RAD}</min_angle>
+              <max_angle>${ LRF_ANGLE*DEG_TO_RAD}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.05</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="f120a_front_laserscan" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>~/out:=scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>front_lrf_link</frame_name>
+        </plugin>
+      </sensor>
+  </gazebo>
+
+  <gazebo reference="back_lrf_link">
+    <material>${lrf_color}</material>
+    <selfCollide>true</selfCollide>
+    <sensor name="tg30_lidar_back" type="ray">
+        <always_on>true</always_on>
+        <visualize>$(arg back_laser_visual)</visualize>
+        <pose>0 0 0 0 0 0</pose>
+        <update_rate>12</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1.0</resolution>
+              <min_angle>${-LRF_ANGLE*DEG_TO_RAD}</min_angle>
+              <max_angle>${ LRF_ANGLE*DEG_TO_RAD}</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.05</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </ray>
+        <plugin name="f120a_back_laserscan" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>~/out:=back_scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>back_lrf_link</frame_name>
+        </plugin>
+      </sensor>
+  </gazebo>
+</robot>

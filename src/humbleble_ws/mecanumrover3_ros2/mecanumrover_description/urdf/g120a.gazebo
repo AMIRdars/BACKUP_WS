@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<robot name="g120a" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="body_color"   value="Gazebo/Silver"/>
+  <xacro:property name="wheel_color"  value="Gazebo/DarkGrey"/>
+  <xacro:property name="barrel_color" value="Gazebo/Yellow"/>
+
+
+  <!-- Gazebo ros2_control plugin      -->
+  <gazebo>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+      <parameters>
+        $(find mecanumrover_description)/params/controllers.yaml
+      </parameters>
+    </plugin>
+  </gazebo>
+
+
+  <!-- Gazebo reference macros : material                     -->
+  <xacro:macro name="gazebo_material" params="ref material">
+    <gazebo reference="${ref}">
+      <material>${material}</material>
+    </gazebo>
+  </xacro:macro>
+
+
+  <!-- Gazebo reference macro : suspension spring / damper    -->
+  <xacro:macro name="gazebo_suspension_spring" params="joint">
+    <gazebo reference="${joint}">
+      <springReference>0.0</springReference>
+      <springStiffness>1134.375</springStiffness>
+      <damping>10</damping>
+    </gazebo>
+  </xacro:macro>
+
+
+  <!-- Mecanum Roller Friction Macros (FIXED VERSION)         -->
+  <xacro:macro name="mecanum_barrel_friction" params="linkname dir">
+    <gazebo reference="${linkname}">
+      <material>${barrel_color}</material>
+      <mu1>1.0</mu1>
+      <mu2>0.6</mu2>
+      <slip1>0.1</slip1>
+      <slip2>0.1</slip2>
+      <kp>1e6</kp>
+      <kd>100.0</kd>
+      <minDepth>0.0001</minDepth>
+      <maxVel>0.1</maxVel>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="mecanum_barrel_group_friction" params="prefix">
+    <xacro:mecanum_barrel_friction linkname="${prefix}_0_link"  dir="0" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_1_link"  dir="30" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_2_link"  dir="60" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_3_link"  dir="90" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_4_link"  dir="120" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_5_link"  dir="150" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_6_link"  dir="180" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_7_link"  dir="210" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_8_link"  dir="240" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_9_link"  dir="270" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_10_link" dir="300" />
+    <xacro:mecanum_barrel_friction linkname="${prefix}_11_link" dir="330" />
+  </xacro:macro>
+
+
+  <!-- Materials (Base / Arms / Wheels) -->
+  <xacro:gazebo_material ref="base_link" material="${body_color}"/>
+  <xacro:gazebo_material ref="front_left_arm"  material="${wheel_color}"/>
+  <xacro:gazebo_material ref="front_right_arm" material="${wheel_color}"/>
+  <xacro:gazebo_material ref="back_left_arm"   material="${wheel_color}"/>
+  <xacro:gazebo_material ref="back_right_arm"  material="${wheel_color}"/>
+  <xacro:gazebo_material ref="front_left_wheel_1"  material="${body_color}"/>
+  <xacro:gazebo_material ref="front_right_wheel_1" material="${body_color}"/>
+  <xacro:gazebo_material ref="back_left_wheel_1"   material="${body_color}"/>
+  <xacro:gazebo_material ref="back_right_wheel_1"  material="${body_color}"/>
+
+
+  <!-- Gazebo suspension spring/damper (common) -->
+  <xacro:gazebo_suspension_spring joint="front_left_suspension_joint"/>
+  <xacro:gazebo_suspension_spring joint="front_right_suspension_joint"/>
+  <xacro:gazebo_suspension_spring joint="back_left_suspension_joint"/>
+  <xacro:gazebo_suspension_spring joint="back_right_suspension_joint"/>
+
+
+  <!-- Apply roller friction to all 4 mecanum wheels          -->
+  <xacro:mecanum_barrel_group_friction prefix="front_left_barrel" />
+  <xacro:mecanum_barrel_group_friction prefix="back_left_barrel" />
+  <xacro:mecanum_barrel_group_friction prefix="front_right_barrel" />
+  <xacro:mecanum_barrel_group_friction prefix="back_right_barrel" />
+
+</robot>
+
