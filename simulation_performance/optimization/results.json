@@ -2,6 +2,10 @@
   {
     "condition": "A_baseline",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.002
+    },
+    "finger_collision_count": 9,
     "rtf": 0.27329662809874083,
     "update_ms": 6.925096054054054,
     "cpu": {
@@ -110,6 +114,10 @@
   {
     "condition": "A_baseline",
     "phase": "supported_grasp",
+    "settings": {
+      "max_step_size": 0.002
+    },
+    "finger_collision_count": 9,
     "rtf": 0.245448357267957,
     "update_ms": 7.73444131498471,
     "cpu": {
@@ -218,6 +226,10 @@
   {
     "condition": "A_baseline",
     "phase": "transport",
+    "settings": {
+      "max_step_size": 0.002
+    },
+    "finger_collision_count": 9,
     "rtf": 0.3184909554000632,
     "update_ms": 5.835146051084518,
     "cpu": {
@@ -326,6 +338,10 @@
   {
     "condition": "B2_collision_3box",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.002
+    },
+    "finger_collision_count": 3,
     "rtf": 0.4848314573931825,
     "update_ms": 3.7616962154172566,
     "cpu": {
@@ -417,6 +433,10 @@
   {
     "condition": "B_collision_3box",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.002
+    },
+    "finger_collision_count": 3,
     "rtf": 0.905340649772795,
     "update_ms": 1.5148097666813964,
     "cpu": {
@@ -509,6 +529,10 @@
   {
     "condition": "D_physics_3ms",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.003
+    },
+    "finger_collision_count": 9,
     "rtf": 0.5251338518025089,
     "update_ms": 4.932377925956569,
     "cpu": {
@@ -628,6 +652,10 @@
   {
     "condition": "D_physics_3ms",
     "phase": "supported_grasp",
+    "settings": {
+      "max_step_size": 0.003
+    },
+    "finger_collision_count": 9,
     "rtf": 0.4488636280981958,
     "update_ms": 6.218072346756153,
     "cpu": {
@@ -747,6 +775,10 @@
   {
     "condition": "D_physics_3ms",
     "phase": "transport",
+    "settings": {
+      "max_step_size": 0.003
+    },
+    "finger_collision_count": 9,
     "rtf": 0.3726298688804577,
     "update_ms": 7.570420127740455,
     "cpu": {
@@ -866,6 +898,11 @@
   {
     "condition": "E_physics_4ms",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
     "rtf": 0.48238507637492234,
     "update_ms": 7.54355263119216,
     "cpu": {
@@ -985,6 +1022,11 @@
   {
     "condition": "E_physics_4ms",
     "phase": "supported_grasp",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
     "rtf": 0.4760741979697866,
     "update_ms": 8.044338456090651,
     "cpu": {
@@ -1104,6 +1146,11 @@
   {
     "condition": "E_physics_4ms",
     "phase": "transport",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
     "rtf": 0.4490975747228503,
     "update_ms": 8.401594799296408,
     "cpu": {
@@ -1223,6 +1270,13 @@
   {
     "condition": "F_pose_filter",
     "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": [
+        "filtered_poses:=true"
+      ]
+    },
+    "finger_collision_count": 9,
     "rtf": 0.5429921645276156,
     "update_ms": 6.614286611186165,
     "cpu": {
@@ -1343,6 +1397,13 @@
   {
     "condition": "F_pose_filter",
     "phase": "supported_grasp",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": [
+        "filtered_poses:=true"
+      ]
+    },
+    "finger_collision_count": 9,
     "rtf": 0.46682313115576046,
     "update_ms": 7.993139864978904,
     "cpu": {
@@ -1463,6 +1524,13 @@
   {
     "condition": "F_pose_filter",
     "phase": "transport",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": [
+        "filtered_poses:=true"
+      ]
+    },
+    "finger_collision_count": 9,
     "rtf": 0.488681617402771,
     "update_ms": 7.635811871878396,
     "cpu": {
@@ -1579,5 +1647,670 @@
     },
     "last_wall": 180.77407998499984,
     "last_sim": 119.712
+  },
+  {
+    "condition": "G2_contact_aggregation",
+    "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": [
+        "aggregate_contacts:=true"
+      ]
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.9653828159421731,
+    "update_ms": 2.140098772700297,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 10.029940815069383,
+      "transport_pose_filter": 1.6945092945430125,
+      "finger_contact_aggregator": 4.559522268359181,
+      "/amir1/robot_state_publisher": 6.055554855360672,
+      "/amir1/odom_bridge": 6.0610003021254295,
+      "/amir1/finger_ft_bridge": 7.098820627695765,
+      "/amir1/finger_contact_bridge": 4.886833629079927,
+      "/amir1/rover_twist_relay_ign": 20.447244662404636,
+      "/amir2/robot_state_publisher": 5.996836472823316,
+      "/amir2/odom_bridge": 5.993483109747164,
+      "/amir2/finger_ft_bridge": 7.30129082546871,
+      "/amir2/finger_contact_bridge": 4.689281934502454,
+      "/amir2/rover_twist_relay_ign": 20.32642576726725,
+      "friction_grasp_manager": 72.49731629977984,
+      "arm_home_positioner": 3.906158688146284,
+      "rotation_controller": 72.70537291788838,
+      "grasp_support_remover": 21.372737048442602,
+      "coordinator": 49.63849540048252,
+      "safety_monitor": 59.79887166726053,
+      "slip_monitor": 41.695737288893895,
+      "dual_base_approach": 3.8412767379839057,
+      "pivot_rotation_controller": 33.87335292614491,
+      "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0,
+      "ign gazebo server": 112.30447114023305,
+      "ign gazebo gui": 229.55536699403285
+    },
+    "quality": {
+      "grasp": {
+        "amir1": false,
+        "amir2": false
+      },
+      "ever_grasp": false,
+      "support_removed": false,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.0,
+      "max_slip_vertical": 0.0,
+      "max_slip_yaw": 0.0,
+      "min_payload_z_after_support": null,
+      "poses": {
+        "amir1": [
+          -1.0674052925895345,
+          2.7697593130250453e-05,
+          0.0,
+          -8.248162695586404e-11,
+          2.168415461735981e-08,
+          4.0369482958441786e-05,
+          0.9999999991851521
+        ],
+        "amir2": [
+          1.0673942271701515,
+          -2.9173434163191615e-05,
+          0.0,
+          -2.1683221556817934e-08,
+          -8.249333590229254e-11,
+          0.9999999991637744,
+          -4.089560800711608e-05
+        ],
+        "payload": [
+          1.0288484059323497e-21,
+          -5.291451199295546e-21,
+          0.6499999985354401,
+          0.7071067811865475,
+          2.7847999025068273e-20,
+          -2.4546973566106987e-20,
+          0.7071067811865476
+        ]
+      },
+      "force": {
+        "amir1/left": 0.22462938000309593,
+        "amir1/right": 0.2246293800030961,
+        "amir2/left": 0.22462938000310764,
+        "amir2/right": 0.2246293800031077
+      },
+      "force_range": {},
+      "statuses": {
+        "friction_grasp_status": "READY_TO_GRASP; held=False; contacts=not_verified; grippers: amir1=-1.000, amir2=-1.000; commands: amir1=-1.000, amir2=-1.000; hold_floors: amir1=nan, amir2=nan; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=0.2N, amir2/left=0.2N, amir2/right=0.2N",
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "rotation": "GRASP_CHECK: waiting for both grasp states; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "state": "WAITING_FOR_GRASP",
+        "slip_status": "OK"
+      },
+      "faults": []
+    },
+    "last_wall": 96.43700607000028,
+    "last_sim": 88.924
+  },
+  {
+    "condition": "G_contact_aggregation",
+    "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": [
+        "aggregate_contacts:=true"
+      ]
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.9783495605843189,
+    "update_ms": 2.053548354857475,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 10.232078169178367,
+      "transport_pose_filter": 1.7589426742552747,
+      "finger_contact_aggregator": 4.424594947990595,
+      "/amir1/robot_state_publisher": 6.055718989525378,
+      "/amir1/odom_bridge": 6.365316366099959,
+      "/amir1/finger_ft_bridge": 7.181869483860539,
+      "/amir1/finger_contact_bridge": 4.739214090387229,
+      "/amir1/rover_twist_relay_ign": 21.449718105151277,
+      "/amir2/robot_state_publisher": 6.052088928891601,
+      "/amir2/odom_bridge": 6.184564017769733,
+      "/amir2/finger_ft_bridge": 6.99474895113303,
+      "/amir2/finger_contact_bridge": 4.61892085925842,
+      "/amir2/rover_twist_relay_ign": 21.215532730841847,
+      "/amir2/spawner": 16.3476428902101,
+      "friction_grasp_manager": 72.79037267516829,
+      "arm_home_positioner": 57.19192180285395,
+      "rotation_controller": 79.60592854576839,
+      "grasp_support_remover": 21.038608587369737,
+      "coordinator": 51.3839140741584,
+      "safety_monitor": 60.9352412595021,
+      "slip_monitor": 44.018433779632424,
+      "dual_base_approach": 61.257142056087226,
+      "pivot_rotation_controller": 36.451753109762336,
+      "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0,
+      "ign gazebo server": 101.66175088551121,
+      "ign gazebo gui": 213.48743438551418
+    },
+    "quality": {
+      "grasp": {
+        "amir1": false,
+        "amir2": false
+      },
+      "ever_grasp": false,
+      "support_removed": false,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.0,
+      "max_slip_vertical": 0.0,
+      "max_slip_yaw": 0.0,
+      "min_payload_z_after_support": null,
+      "poses": {
+        "amir1": [
+          -1.174999192872685,
+          2.6170762563550753e-08,
+          0.0,
+          8.543588042934426e-11,
+          8.673775046923142e-08,
+          2.478402563070956e-07,
+          0.9999999999999655
+        ],
+        "amir2": [
+          1.1749991928726853,
+          -2.6170762554067918e-08,
+          0.0,
+          -8.673778186375378e-08,
+          8.544470886022117e-11,
+          0.9999999999999654,
+          -2.478400689733272e-07
+        ],
+        "payload": [
+          1.0288484059323497e-21,
+          -5.291451199295546e-21,
+          0.6499999985354401,
+          0.7071067811865475,
+          2.7847999025068273e-20,
+          -2.4546973566106987e-20,
+          0.7071067811865476
+        ]
+      },
+      "force": {
+        "amir1/left": 0.22462217293868816,
+        "amir1/right": 0.22462217293869682,
+        "amir2/left": 0.22462217264594342,
+        "amir2/right": 0.22462217264593523
+      },
+      "force_range": {},
+      "statuses": {
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "friction_grasp_status": "WAITING_FOR_CONTROLLERS; held=False; contacts=not_verified; grippers: amir1=-1.000, amir2=-1.000; commands: amir1=nan, amir2=nan; hold_floors: amir1=nan, amir2=nan; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=0.2N, amir2/left=0.2N, amir2/right=0.2N",
+        "rotation": "GRASP_CHECK: waiting for amir2 controllers to become active; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "state": "WAITING_FOR_GRASP",
+        "slip_status": "OK"
+      },
+      "faults": []
+    },
+    "last_wall": 180.86613801600015,
+    "last_sim": 173.444
+  },
+  {
+    "condition": "H2_headless_approach_timeout",
+    "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.6849118529593476,
+    "update_ms": 4.954867228634849,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 5.691458403428527,
+      "transport_pose_filter": 1.1954807718019824,
+      "/amir1/robot_state_publisher": 3.209588383444148,
+      "/amir1/odom_bridge": 3.9475623100843134,
+      "/amir1/finger_ft_bridge": 4.496768883092705,
+      "/amir1/finger_contact_bridge": 7.027530225047392,
+      "/amir1/rover_twist_relay_ign": 10.318451511756443,
+      "/amir2/robot_state_publisher": 3.210109400643177,
+      "/amir2/odom_bridge": 3.948000179891857,
+      "/amir2/finger_ft_bridge": 4.3585376879665185,
+      "/amir2/finger_contact_bridge": 6.938146700824238,
+      "/amir2/rover_twist_relay_ign": 10.272664691784072,
+      "friction_grasp_manager": 62.2979530781618,
+      "arm_home_positioner": 2.47865229428645,
+      "rotation_controller": 40.274450864868825,
+      "grasp_support_remover": 10.045017822490156,
+      "coordinator": 24.86374540442932,
+      "safety_monitor": 27.324563614867458,
+      "slip_monitor": 19.902638811002156,
+      "dual_base_approach": 30.70914016659965,
+      "pivot_rotation_controller": 15.911541506268549,
+      "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 123.37655399823161
+    },
+    "quality": {
+      "grasp": {
+        "amir1": true,
+        "amir2": true
+      },
+      "ever_grasp": true,
+      "support_removed": true,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.000603553979924078,
+      "max_slip_vertical": 0.0001527583146030409,
+      "max_slip_yaw": 7.318085745775161e-05,
+      "min_payload_z_after_support": 0.6565664103921849,
+      "poses": {
+        "amir1": [
+          -0.656773313665064,
+          -0.00021120350758391707,
+          0.0,
+          -4.608138843920838e-10,
+          2.6170676428964354e-07,
+          0.00016574141361407096,
+          0.999999986264858
+        ],
+        "amir2": [
+          1.4770997592636488,
+          0.0004767747491765274,
+          0.0,
+          -7.735614422792344e-08,
+          -4.384425715723974e-10,
+          0.9999999868282816,
+          -0.00016230659454817304
+        ],
+        "payload": [
+          0.4107012367967405,
+          -4.290606415143443e-05,
+          0.6567173455343394,
+          0.7071068259701213,
+          0.00026516926188175754,
+          0.0002616515850122148,
+          0.7071066382733026
+        ],
+        "target": [
+          0.43239472885467223,
+          -3.656448274342116e-05,
+          0.6567193794547255,
+          0.7071067926874761,
+          0.00011399065445513054,
+          0.00011398485140422398,
+          0.7071067513104475
+        ]
+      },
+      "force": {
+        "amir1/left": 18.75085369867988,
+        "amir1/right": 21.977094409516145,
+        "amir2/left": 0.2246208268241072,
+        "amir2/right": 2.3526723317353544
+      },
+      "force_range": {
+        "amir1/left": [
+          0.013563985426309521,
+          27.62298482202289
+        ],
+        "amir1/right": [
+          1.2423167502384014,
+          31.50959592143803
+        ],
+        "amir2/left": [
+          0.0198695399985069,
+          27.813708210032484
+        ],
+        "amir2/right": [
+          0.3845821188345615,
+          30.237113893511623
+        ]
+      },
+      "statuses": {
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "friction_grasp_status": "HOLDING; held=True; contacts=not_verified; grippers: amir1=-0.665, amir2=-0.665; commands: amir1=-0.663, amir2=-0.665; hold_floors: amir1=-0.665, amir2=-0.665; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=2.6N, amir2/left=19.6N, amir2/right=22.6N",
+        "rotation": "TRANSLATING: straight reference paused while tracking catches up; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "slip_status": "OK",
+        "state": "TRANSPORT"
+      },
+      "faults": [],
+      "position_error": 0.02169349308018501,
+      "orientation_error": 0.00042266038141713745
+    },
+    "last_wall": 180.92844689499998,
+    "last_sim": 128.692
+  },
+  {
+    "condition": "H2_headless_approach_timeout",
+    "phase": "supported_grasp",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.5662853946769901,
+    "update_ms": 6.556913327731092,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 4.863124424454054,
+      "transport_pose_filter": 1.2973337284490212,
+      "/amir1/robot_state_publisher": 2.754574812206517,
+      "/amir1/odom_bridge": 3.5657190244824943,
+      "/amir1/finger_ft_bridge": 3.8897128809100594,
+      "/amir1/finger_contact_bridge": 6.808657040442392,
+      "/amir1/rover_twist_relay_ign": 8.265039794024185,
+      "/amir2/robot_state_publisher": 2.7558961168617766,
+      "/amir2/odom_bridge": 3.5686079120492344,
+      "/amir2/finger_ft_bridge": 3.5655078497982973,
+      "/amir2/finger_contact_bridge": 6.805727527764516,
+      "/amir2/rover_twist_relay_ign": 8.104880638920369,
+      "friction_grasp_manager": 56.57425675219384,
+      "arm_home_positioner": 2.2677430341089853,
+      "rotation_controller": 29.01691051555216,
+      "grasp_support_remover": 7.944083066196929,
+      "coordinator": 19.129042544551258,
+      "safety_monitor": 20.74840250568748,
+      "slip_monitor": 15.401442806625079,
+      "dual_base_approach": 21.883534839996145,
+      "pivot_rotation_controller": 12.320016296835686,
+      "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 126.27839243342376
+    },
+    "quality": {
+      "grasp": {
+        "amir1": true,
+        "amir2": true
+      },
+      "ever_grasp": true,
+      "support_removed": true,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.000603553979924078,
+      "max_slip_vertical": 0.0001527583146030409,
+      "max_slip_yaw": 7.318085745775161e-05,
+      "min_payload_z_after_support": 0.6565664103921849,
+      "poses": {
+        "amir1": [
+          -0.656773313665064,
+          -0.00021120350758391707,
+          0.0,
+          -4.608138843920838e-10,
+          2.6170676428964354e-07,
+          0.00016574141361407096,
+          0.999999986264858
+        ],
+        "amir2": [
+          1.4770997592636488,
+          0.0004767747491765274,
+          0.0,
+          -7.735614422792344e-08,
+          -4.384425715723974e-10,
+          0.9999999868282816,
+          -0.00016230659454817304
+        ],
+        "payload": [
+          0.4107012367967405,
+          -4.290606415143443e-05,
+          0.6567173455343394,
+          0.7071068259701213,
+          0.00026516926188175754,
+          0.0002616515850122148,
+          0.7071066382733026
+        ],
+        "target": [
+          0.43239472885467223,
+          -3.656448274342116e-05,
+          0.6567193794547255,
+          0.7071067926874761,
+          0.00011399065445513054,
+          0.00011398485140422398,
+          0.7071067513104475
+        ]
+      },
+      "force": {
+        "amir1/left": 18.75085369867988,
+        "amir1/right": 21.977094409516145,
+        "amir2/left": 0.2246208268241072,
+        "amir2/right": 2.3526723317353544
+      },
+      "force_range": {
+        "amir1/left": [
+          0.013563985426309521,
+          27.62298482202289
+        ],
+        "amir1/right": [
+          1.2423167502384014,
+          31.50959592143803
+        ],
+        "amir2/left": [
+          0.0198695399985069,
+          27.813708210032484
+        ],
+        "amir2/right": [
+          0.3845821188345615,
+          30.237113893511623
+        ]
+      },
+      "statuses": {
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "friction_grasp_status": "HOLDING; held=True; contacts=not_verified; grippers: amir1=-0.665, amir2=-0.665; commands: amir1=-0.663, amir2=-0.665; hold_floors: amir1=-0.665, amir2=-0.665; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=2.6N, amir2/left=19.6N, amir2/right=22.6N",
+        "rotation": "TRANSLATING: straight reference paused while tracking catches up; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "slip_status": "OK",
+        "state": "TRANSPORT"
+      },
+      "faults": [],
+      "position_error": 0.02169349308018501,
+      "orientation_error": 0.00042266038141713745
+    },
+    "last_wall": 180.92844689499998,
+    "last_sim": 128.692
+  },
+  {
+    "condition": "H2_headless_approach_timeout",
+    "phase": "transport",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.5539726260508984,
+    "update_ms": 6.7297970845189585,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 4.871964478953746,
+      "transport_pose_filter": 1.1072465748620046,
+      "/amir1/robot_state_publisher": 2.5513128143433943,
+      "/amir1/odom_bridge": 3.3740504548324544,
+      "/amir1/finger_ft_bridge": 3.8066995980954186,
+      "/amir1/finger_contact_bridge": 6.505484892874822,
+      "/amir1/rover_twist_relay_ign": 7.86511847923077,
+      "/amir2/robot_state_publisher": 2.5407368291056636,
+      "/amir2/odom_bridge": 3.4370586500906017,
+      "/amir2/finger_ft_bridge": 3.827262831485866,
+      "/amir2/finger_contact_bridge": 6.600544293778974,
+      "/amir2/rover_twist_relay_ign": 7.854054017448627,
+      "friction_grasp_manager": 54.434701204710464,
+      "arm_home_positioner": 2.1086569146665846,
+      "rotation_controller": 35.96191466668301,
+      "grasp_support_remover": 7.6757766559297345,
+      "coordinator": 22.22419491894576,
+      "safety_monitor": 19.85267064474211,
+      "slip_monitor": 15.308347202725239,
+      "dual_base_approach": 23.164422281429985,
+      "pivot_rotation_controller": 11.913873589693244,
+      "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 124.6511986946287
+    },
+    "quality": {
+      "grasp": {
+        "amir1": true,
+        "amir2": true
+      },
+      "ever_grasp": true,
+      "support_removed": true,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.000603553979924078,
+      "max_slip_vertical": 0.0001527583146030409,
+      "max_slip_yaw": 7.318085745775161e-05,
+      "min_payload_z_after_support": 0.6565664103921849,
+      "poses": {
+        "amir1": [
+          -0.656773313665064,
+          -0.00021120350758391707,
+          0.0,
+          -4.608138843920838e-10,
+          2.6170676428964354e-07,
+          0.00016574141361407096,
+          0.999999986264858
+        ],
+        "amir2": [
+          1.4770997592636488,
+          0.0004767747491765274,
+          0.0,
+          -7.735614422792344e-08,
+          -4.384425715723974e-10,
+          0.9999999868282816,
+          -0.00016230659454817304
+        ],
+        "payload": [
+          0.4107012367967405,
+          -4.290606415143443e-05,
+          0.6567173455343394,
+          0.7071068259701213,
+          0.00026516926188175754,
+          0.0002616515850122148,
+          0.7071066382733026
+        ],
+        "target": [
+          0.43239472885467223,
+          -3.656448274342116e-05,
+          0.6567193794547255,
+          0.7071067926874761,
+          0.00011399065445513054,
+          0.00011398485140422398,
+          0.7071067513104475
+        ]
+      },
+      "force": {
+        "amir1/left": 18.75085369867988,
+        "amir1/right": 21.977094409516145,
+        "amir2/left": 0.2246208268241072,
+        "amir2/right": 2.3526723317353544
+      },
+      "force_range": {
+        "amir1/left": [
+          0.013563985426309521,
+          27.62298482202289
+        ],
+        "amir1/right": [
+          1.2423167502384014,
+          31.50959592143803
+        ],
+        "amir2/left": [
+          0.0198695399985069,
+          27.813708210032484
+        ],
+        "amir2/right": [
+          0.3845821188345615,
+          30.237113893511623
+        ]
+      },
+      "statuses": {
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "friction_grasp_status": "HOLDING; held=True; contacts=not_verified; grippers: amir1=-0.665, amir2=-0.665; commands: amir1=-0.663, amir2=-0.665; hold_floors: amir1=-0.665, amir2=-0.665; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=2.6N, amir2/left=19.6N, amir2/right=22.6N",
+        "rotation": "TRANSLATING: straight reference paused while tracking catches up; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "slip_status": "OK",
+        "state": "TRANSPORT"
+      },
+      "faults": [],
+      "position_error": 0.02169349308018501,
+      "orientation_error": 0.00042266038141713745
+    },
+    "last_wall": 180.92844689499998,
+    "last_sim": 128.692
+  },
+  {
+    "condition": "H_headless_safe_open",
+    "phase": "sim_65_80",
+    "settings": {
+      "max_step_size": 0.004,
+      "arguments": []
+    },
+    "finger_collision_count": 9,
+    "rtf": 0.9679756703318113,
+    "update_ms": 2.0694168692267776,
+    "cpu": {
+      "sh": 0.0,
+      "cooperative_transport_friction_bridge": 9.825871427371519,
+      "transport_pose_filter": 1.7445972664968388,
+      "/amir1/robot_state_publisher": 6.399350346343761,
+      "/amir1/odom_bridge": 6.346770709912815,
+      "/amir1/finger_ft_bridge": 7.523538305955529,
+      "/amir1/finger_contact_bridge": 4.857640245882092,
+      "/amir1/rover_twist_relay_ign": 18.90342417390031,
+      "/amir2/robot_state_publisher": 6.409053396231089,
+      "/amir2/odom_bridge": 6.220642037381327,
+      "/amir2/finger_ft_bridge": 7.211496969803808,
+      "/amir2/finger_contact_bridge": 4.665688323135741,
+      "/amir2/rover_twist_relay_ign": 18.777326211492053,
+      "friction_grasp_manager": 71.57272016558815,
+      "arm_home_positioner": 4.417624092367059,
+      "rotation_controller": 75.36333554530597,
+      "grasp_support_remover": 19.905962260976573,
+      "coordinator": 50.43055839570207,
+      "safety_monitor": 63.31870291724025,
+      "slip_monitor": 42.35092469936676,
+      "dual_base_approach": 4.367767530186548,
+      "pivot_rotation_controller": 35.64232133675834,
+      "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 113.15622497858782
+    },
+    "quality": {
+      "grasp": {
+        "amir1": false,
+        "amir2": false
+      },
+      "ever_grasp": false,
+      "support_removed": false,
+      "rotation_complete": false,
+      "max_slip_horizontal": 0.0,
+      "max_slip_vertical": 0.0,
+      "max_slip_yaw": 0.0,
+      "min_payload_z_after_support": null,
+      "poses": {
+        "amir1": [
+          -1.0671293054906725,
+          2.6249728239038356e-05,
+          0.0,
+          -8.243147381571247e-11,
+          2.1692962717545895e-08,
+          3.715220537304077e-05,
+          0.9999999993098566
+        ],
+        "amir2": [
+          1.0674473202813666,
+          -2.708186243296486e-05,
+          0.0,
+          -2.1673342284961714e-08,
+          -8.245449147994538e-11,
+          0.9999999991769809,
+          -4.0571388706422784e-05
+        ],
+        "payload": [
+          1.0288484059323497e-21,
+          -5.291451199295546e-21,
+          0.6499999985354401,
+          0.7071067811865475,
+          2.7847999025068273e-20,
+          -2.4546973566106987e-20,
+          0.7071067811865476
+        ]
+      },
+      "force": {
+        "amir1/left": 0.22462937999896326,
+        "amir1/right": 0.22462937999896332,
+        "amir2/left": 0.22462937999688284,
+        "amir2/right": 0.224629379996883
+      },
+      "force_range": {},
+      "statuses": {
+        "contact_status": "CONTACT_NOT_VERIFIED",
+        "friction_grasp_status": "READY_TO_GRASP; held=False; contacts=not_verified; grippers: amir1=-1.000, amir2=-1.000; commands: amir1=-1.000, amir2=-1.000; hold_floors: amir1=nan, amir2=nan; target_force=20.0N; normal_forces: amir1/left=0.2N, amir1/right=0.2N, amir2/left=0.2N, amir2/right=0.2N",
+        "rotation": "GRASP_CHECK: waiting for both grasp states; theta_des=0.00 deg; theta_actual=0.00 deg",
+        "slip_status": "OK",
+        "state": "WAITING_FOR_GRASP"
+      },
+      "faults": []
+    },
+    "last_wall": 114.9155278950002,
+    "last_sim": 107.736
   }
 ]

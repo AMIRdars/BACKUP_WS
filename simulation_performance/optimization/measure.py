@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Measure the requested launch; CPU 100% = one logical core, elapsed = monotonic."""
-import os, sys, time, json, signal, subprocess, threading
+import os, sys, time, json, signal, subprocess, threading, re, hashlib
 from pathlib import Path
 import psutil
 import rclpy
@@ -11,7 +11,11 @@ import xml.etree.ElementTree as ET
 world_path=Path('src/humbleble_ws/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf')
 if world_path.exists():
     world_xml=world_path.read_text();(out/'world.sdf').write_text(world_xml)
-    (out/'condition.json').write_text(json.dumps({'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:]},indent=2))
+    launch_source=Path('src/humbleble_ws/cooperative_transport_bringup/launch/integrated_transport_simulation.launch.py').read_text()
+    selected={k:v for k,v in re.findall(r"DeclareLaunchArgument\('([^']+)', default_value='([^']+)'",launch_source)}
+    selected.update(dict(arg.split(':=',1) for arg in sys.argv[4:] if ':=' in arg))
+    selected['headless']=sys.argv[3]
+    (out/'condition.json').write_text(json.dumps({'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:],'effective_launch_arguments':selected,'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'world_sha256':hashlib.sha256(world_xml.encode()).hexdigest()},indent=2))
 duration = float(sys.argv[2]); headless = sys.argv[3]
 rclpy.init(args=[]); node = rclpy.create_node('performance_observer')
 clock = {'sim': None, 'received': None}
@@ -20,12 +24,13 @@ def receive(msg):
 sub = node.create_subscription(Clock, '/clock', receive, qos_profile_sensor_data)
 from geometry_msgs.msg import PoseStamped, WrenchStamped
 from nav_msgs.msg import Odometry
-from std_msgs.msg import Bool, String, Float64MultiArray
+from std_msgs.msg import Bool, String, Float64MultiArray, Float64
 from rclpy.qos import QoSProfile, DurabilityPolicy
 import math, copy
 quality = {'grasp':{}, 'ever_grasp':False, 'support_removed':False, 'rotation_complete':False,
            'max_slip_horizontal':0.0, 'max_slip_vertical':0.0, 'max_slip_yaw':0.0,
-           'min_payload_z_after_support':None, 'poses':{}, 'force':{}, 'force_range':{}, 'statuses':{}, 'faults':[]}
+           'pivot_complete':False, 'max_contact_depth':None, 'contact_segments':[], 'contact_states':{},
+           'max_position_error':0.0, 'max_orientation_error':0.0, 'angles':{}, 'min_payload_z_after_support':None, 'poses':{}, 'force':{}, 'force_range':{}, 'statuses':{}, 'faults':[]}
 subscriptions=[]
 def subscribe(topic, cls, callback, durable=False):
     qos=QoSProfile(depth=10)
@@ -43,6 +48,8 @@ def pose(msg):
         quality['position_error']=math.sqrt(sum((actual[i]-desired[i])**2 for i in range(3)))
         dot=abs(sum(actual[i]*desired[i] for i in range(3,7)))
         quality['orientation_error']=2*math.acos(min(1.0,max(0.0,dot)))
+        if not quality.get('pivot_started',False):
+            for key in ['position_error','orientation_error']:quality['max_'+key]=max(quality['max_'+key],quality[key])
     if quality['support_removed']:
         old=quality['min_payload_z_after_support'];quality['min_payload_z_after_support']=p.z if old is None else min(old,p.z)
 def odom(name,msg):
@@ -70,6 +77,22 @@ subscribe('/cooperative_transport/slip_error',Float64MultiArray,slip)
 for topic in ['contact_status','friction_grasp_status','slip_status','state']:
     subscribe('/cooperative_transport/'+topic,String,lambda m,k=topic:status(k,m))
 subscribe('/cooperative_rotation/status',String,lambda m:status('rotation',m))
+def fault(key,msg):
+    if msg.data and key not in quality['faults']:quality['faults'].append(key)
+for key in ['slip_fault','emergency_stop']:
+    subscribe('/cooperative_transport/'+key,Bool,lambda m,k=key:fault(k,m))
+for key in ['angle_deg','desired_angle_deg']:
+    subscribe('/cooperative_rotation/'+key,Float64,lambda m,k=key:quality['angles'].update({k:m.data}))
+def contact_metrics(msg):
+    quality['contact_segments']=list(msg.data[::2])
+    if len(msg.data)>1:
+        value=max(msg.data[1::2]);old=quality['max_contact_depth']
+        quality['max_contact_depth']=value if old is None else max(old,value)
+subscribe('/cooperative_transport/contact_metrics',Float64MultiArray,contact_metrics)
+for name in ['amir1','amir2']:
+    for side in ['left','right']:
+        subscribe(f'/{name}/finger_{side}_contact_detected',Bool,
+                  lambda m,k=f'{name}/{side}':quality['contact_states'].update({k:m.data}))
 def spin_observer():
     try:rclpy.spin(node)
     except (KeyboardInterrupt,rclpy.executors.ExternalShutdownException,rclpy._rclpy_pybind11.RCLError):pass
@@ -83,10 +106,17 @@ stats = subprocess.Popen(['ign','topic','-e','-t','/world/cooperative_transport_
 gpu_log = (out/'gpu.csv').open('w')
 gpu = subprocess.Popen(['nvidia-smi','--query-gpu=timestamp,utilization.gpu,utilization.memory,memory.used,power.draw','--format=csv','-l','1'], stdout=gpu_log, stderr=subprocess.STDOUT, start_new_session=True)
 native_added=False
+complete_sim=None
 try:
     with (out/'samples.jsonl').open('w') as output:
         while time.monotonic()-t0 < duration and launch.poll() is None:
             time.sleep(1); now = time.monotonic(); processes = []
+            if os.environ.get('STOP_ON_COMPLETE') == '1':
+                current_log=(out/'launch.log').read_text(errors='replace')
+                quality['pivot_started']='Pivot rotation started' in current_log
+                quality['pivot_complete']='Pivot rotation complete; both robots stopped' in current_log
+                if quality['pivot_complete'] and complete_sim is None:complete_sim=clock['sim']
+                if complete_sim is not None and clock['sim']-complete_sim>=5.0:break
             if not native_added and now-t0 > 40:
                 plugin=Path('simulation_performance/20260928/profiling_support/build/libphase_meter.so').resolve()
                 if plugin.exists():

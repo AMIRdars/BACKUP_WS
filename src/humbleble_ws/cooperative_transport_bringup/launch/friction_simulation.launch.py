@@ -245,7 +245,7 @@ def _launch_setup(context, *args, **kwargs):
             # Contact reaction leaves approximately 1.1 mm residual base
             # error; 2 mm still realizes the requested 0.11 m approach.
             'position_tolerance': 0.002,
-            'motion_timeout': 20.0,
+            'motion_timeout': 30.0,
         }],
     )
     support_remover = Node(
