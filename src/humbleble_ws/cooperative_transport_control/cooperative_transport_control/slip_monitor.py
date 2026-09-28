@@ -30,6 +30,7 @@ class SlipMonitor(Node):
         self.declare_parameter('world_name', 'cooperative_transport_friction')
         self.declare_parameter('payload_name', 'cooperative_payload')
         self.declare_parameter('world_frame', 'world')
+        self.declare_parameter('monitor_rate', 50.0)
         self.declare_parameter(
             'transport_frame', 'cooperative_transport_frame')
         self.declare_parameter('horizontal_slip_limit', 0.030)
@@ -81,7 +82,10 @@ class SlipMonitor(Node):
         self._transport_tf_broadcaster = TransformBroadcaster(self)
         self.create_service(
             Trigger, '/cooperative_transport/reset_slip', self._on_reset)
-        self.create_timer(0.02, self._tick)
+        rate = float(self.get_parameter('monitor_rate').value)
+        if rate <= 0.0:
+            raise ValueError('monitor_rate must be positive')
+        self.create_timer(1.0 / rate, self._tick)
         self.get_logger().info('Payload slip monitor ready.')
 
     def _on_odometry(self, robot: str, message: Odometry) -> None:

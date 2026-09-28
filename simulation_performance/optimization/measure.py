@@ -187,5 +187,7 @@ finally:
             if p.is_running(): p.kill()
         except psutil.Error: pass
     stats.wait(timeout=5); gpu.wait(timeout=5)
-    log.close(); stats_log.close(); gpu_log.close(); (out/'quality.json').write_text(json.dumps(quality,indent=2)); rclpy.try_shutdown()
+    log.close(); stats_log.close(); gpu_log.close()
+    rclpy.try_shutdown(); thread.join(timeout=5); node.destroy_node()
+    (out/'quality.json').write_text(json.dumps(quality,indent=2))
     (out/'metadata.json').write_text(json.dumps({'command':cmd,'start_monotonic':t0,'duration':time.monotonic()-t0,'exitcode':launch.returncode,'processes':known},indent=2))

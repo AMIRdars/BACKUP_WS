@@ -24,6 +24,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(friction_launch),
         launch_arguments={
             'headless': LaunchConfiguration('headless'),
+            'slip_monitor_rate': LaunchConfiguration('slip_monitor_rate'),
             'aggregate_contacts': LaunchConfiguration('aggregate_contacts'),
             'filtered_poses': LaunchConfiguration('filtered_poses'),
             'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
@@ -99,6 +100,7 @@ def generate_launch_description():
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
+        DeclareLaunchArgument('slip_monitor_rate', default_value='50.0'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('forward_distance_m', default_value='0.5'),
         DeclareLaunchArgument('rotation_angle_deg', default_value='30.0'),

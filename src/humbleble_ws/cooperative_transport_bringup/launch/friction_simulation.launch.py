@@ -293,6 +293,7 @@ def _launch_setup(context, *args, **kwargs):
         package='cooperative_transport_control', executable='slip_monitor',
         output='screen',
         parameters=common + [pose_parameters, {
+            'monitor_rate': float(LaunchConfiguration('slip_monitor_rate').perform(context)),
             'horizontal_slip_limit': horizontal_slip_limit,
             'vertical_slip_limit': vertical_slip_limit,
         }])
@@ -353,6 +354,7 @@ def generate_launch_description():
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
+        DeclareLaunchArgument('slip_monitor_rate', default_value='50.0'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('auto_grasp', default_value='true'),
         DeclareLaunchArgument('auto_grasp_delay', default_value='4.0'),
