@@ -11,8 +11,12 @@ from launch.actions import (
     OpaqueFunction,
     SetEnvironmentVariable,
     TimerAction,
+    RegisterEventHandler,
+    EmitEvent,
 )
 from launch.conditions import IfCondition
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -20,6 +24,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def _launch_setup(context, *args, **kwargs):
+    event_startup = LaunchConfiguration('event_startup').perform(context).lower() in ('true', '1', 'yes')
     headless = LaunchConfiguration('headless').perform(context).lower() in (
         '1', 'true', 'yes')
     aggregate_contacts = LaunchConfiguration('aggregate_contacts').perform(context).lower() in ('true', '1', 'yes')
@@ -157,6 +162,7 @@ def _launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'namespace': namespace,
                 'aggregate_contacts': str(aggregate_contacts).lower(),
+                'event_startup': str(event_startup).lower(),
                 'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
                 'x': x, 'y': '0.0', 'z': '0.03', 'yaw': yaw,
                 'world_name': 'cooperative_transport_friction',
@@ -304,7 +310,7 @@ def _launch_setup(context, *args, **kwargs):
             'enable_threshold_stop': enable_wrench_safety,
         }])
 
-    return [
+    initial = [
         SetEnvironmentVariable(
             '__EGL_VENDOR_LIBRARY_FILENAMES',
             '/usr/share/glvnd/egl_vendor.d/10_nvidia.json'),
@@ -322,35 +328,71 @@ def _launch_setup(context, *args, **kwargs):
         bridge,
         pose_filter,
         contact_aggregator,
-        # Start 0.11 m outside the verified grasp positions. Both bases move
-        # inward only after the board has spawned and both grippers are open.
-        TimerAction(
-            period=2.0,
-            actions=[robot('amir1', '-1.174987', '0.0')]),
-        TimerAction(
-            period=9.0,
-            actions=[robot('amir2', '1.174987', '3.141592653589793')]),
-        # Open the fingers before placing the full-length collision between
-        # them.  Robot 2 is spawned later and its controllers can take several
-        # seconds to activate, so keep a deterministic margin; spawning the
-        # payload while the fingers are still opening creates a false impact
-        # load instead of a controlled grasp.
-        TimerAction(period=15.0, actions=[grasp_manager]),
-        TimerAction(period=15.5, actions=[arm_home_positioner]),
-        TimerAction(period=28.0, actions=[spawn_payload]),
-        TimerAction(
-            period=29.0,
-            actions=[
-                support_remover, coordinator, safety_monitor, slip_monitor,
-                wrench_monitor]),
-        TimerAction(
-            period=29.0,
-            actions=[base_approach] if auto_grasp else []),
     ]
+    if not event_startup:
+        return initial + [
+            # Start 0.11 m outside the verified grasp positions. Both bases move
+            # inward only after the board has spawned and both grippers are open.
+            TimerAction(
+                period=2.0,
+                actions=[robot('amir1', '-1.174987', '0.0')]),
+            TimerAction(
+                period=9.0,
+                actions=[robot('amir2', '1.174987', '3.141592653589793')]),
+            # Open the fingers before placing the full-length collision between
+            # them.  Robot 2 is spawned later and its controllers can take several
+            # seconds to activate, so keep a deterministic margin; spawning the
+            # payload while the fingers are still opening creates a false impact
+            # load instead of a controlled grasp.
+            TimerAction(period=15.0, actions=[grasp_manager]),
+            TimerAction(period=15.5, actions=[arm_home_positioner]),
+            TimerAction(period=28.0, actions=[spawn_payload]),
+            TimerAction(
+                period=29.0,
+                actions=[
+                    support_remover, coordinator, safety_monitor, slip_monitor,
+                    wrench_monitor]),
+            TimerAction(
+                period=29.0,
+                actions=[base_approach] if auto_grasp else []),
+        ]
+
+    def gate(mode, stage, robots):
+        return Node(
+            package='cooperative_transport_control', executable='simulation_startup_gate',
+            name='startup_' + stage, output='screen',
+            parameters=[{'use_sim_time': False, 'mode': mode, 'stage': stage,
+                         'robot_namespaces': robots, 'timeout': 180.0}])
+
+    world_ready = gate('world', 'world_ready', ['amir1'])
+    robot1_ready = gate('controllers', 'amir1_controllers_ready', ['amir1'])
+    robot2_ready = gate('controllers', 'robots_ready', ['amir2'])
+    open_ready = gate('open_home', 'grippers_and_home_ready', ['amir1', 'amir2'])
+
+    def after_success(target, actions):
+        def transition(event, _context):
+            if event.returncode == 0:
+                return actions
+            return [EmitEvent(event=Shutdown(reason='Simulation preparation failed'))]
+        return RegisterEventHandler(OnProcessExit(target_action=target, on_exit=transition))
+
+    consumers = [support_remover, coordinator, safety_monitor, slip_monitor, wrench_monitor]
+    if auto_grasp:
+        consumers.append(base_approach)
+    return initial + [
+        after_success(world_ready, [robot('amir1', '-1.174987', '0.0'), robot1_ready]),
+        after_success(robot1_ready, [robot('amir2', '1.174987', '3.141592653589793'), robot2_ready]),
+        after_success(robot2_ready, [grasp_manager, arm_home_positioner, open_ready]),
+        after_success(open_ready, [spawn_payload]),
+        after_success(spawn_payload, consumers),
+        world_ready,
+    ]
+
 
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument('event_startup', default_value='false'),
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),

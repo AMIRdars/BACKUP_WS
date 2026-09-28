@@ -21,6 +21,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'simulation_startup_gate = cooperative_transport_control.simulation_startup_gate:main',
             'coordinator = cooperative_transport_control.coordinator:main',
             'dual_base_approach = '
             'cooperative_transport_control.dual_base_approach:main',

@@ -4,7 +4,8 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
+from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription, TimerAction
+from launch.conditions import IfCondition, UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -24,6 +25,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(friction_launch),
         launch_arguments={
             'headless': LaunchConfiguration('headless'),
+            'event_startup': LaunchConfiguration('event_startup'),
             'slip_monitor_rate': LaunchConfiguration('slip_monitor_rate'),
             'aggregate_contacts': LaunchConfiguration('aggregate_contacts'),
             'filtered_poses': LaunchConfiguration('filtered_poses'),
@@ -91,12 +93,17 @@ def generate_launch_description():
             'angular_acceleration_deg_s2': ParameterValue(
                 LaunchConfiguration('angular_acceleration_deg_s2'),
                 value_type=float),
+            'use_sim_time': True,
             'wait_for_rotation_complete': True,
             'take_over_coordinator': True,
         }],
     )
 
+    rotation_controller_if_ready = GroupAction([rotation_controller], condition=IfCondition(LaunchConfiguration('event_startup')))
+    pivot_controller_if_ready = GroupAction([pivot_controller], condition=IfCondition(LaunchConfiguration('event_startup')))
+
     return LaunchDescription([
+        DeclareLaunchArgument('event_startup', default_value='false'),
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
@@ -115,6 +122,8 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'angular_acceleration_deg_s2', default_value='0.25'),
         simulation,
-        TimerAction(period=21.5, actions=[rotation_controller]),
-        TimerAction(period=30.0, actions=[pivot_controller]),
+        TimerAction(period=21.5, actions=[rotation_controller], condition=UnlessCondition(LaunchConfiguration('event_startup'))),
+        TimerAction(period=30.0, actions=[pivot_controller], condition=UnlessCondition(LaunchConfiguration('event_startup'))),
+        rotation_controller_if_ready,
+        pivot_controller_if_ready,
     ])

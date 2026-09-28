@@ -15,7 +15,7 @@ if world_path.exists():
     selected={k:v for k,v in re.findall(r"DeclareLaunchArgument\('([^']+)', default_value='([^']+)'",launch_source)}
     selected.update(dict(arg.split(':=',1) for arg in sys.argv[4:] if ':=' in arg))
     selected['headless']=sys.argv[3]
-    (out/'condition.json').write_text(json.dumps({'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:],'effective_launch_arguments':selected,'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'world_sha256':hashlib.sha256(world_xml.encode()).hexdigest()},indent=2))
+    (out/'condition.json').write_text(json.dumps({'real_time_factor':float(ET.fromstring(world_xml).findtext('world/physics/real_time_factor')),'real_time_update_rate':float(ET.fromstring(world_xml).findtext('world/physics/real_time_update_rate')),'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:],'effective_launch_arguments':selected,'git_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'world_sha256':hashlib.sha256(world_xml.encode()).hexdigest()},indent=2))
 duration = float(sys.argv[2]); headless = sys.argv[3]
 rclpy.init(args=[]); node = rclpy.create_node('performance_observer')
 clock = {'sim': None, 'received': None}
@@ -68,7 +68,13 @@ for name in ['amir1','amir2']:
     subscribe(f'/{name}/odom',Odometry,lambda m,n=name:odom(n,m))
     for side in ['left','right']:subscribe(f'/{name}/finger_{side}_wrench',WrenchStamped,lambda m,k=f'{name}/{side}':force(k,m))
 subscribe('/cooperative_transport/support_removed',Bool,lambda m:quality.update(support_removed=m.data),True)
-subscribe('/cooperative_rotation/complete',Bool,lambda m:quality.update(rotation_complete=m.data),True)
+def rotation_complete(msg):
+    if msg.data and not quality['rotation_complete']:
+        quality['rotation_completion']={'sim':clock['sim'], 'poses':copy.deepcopy(quality['poses']),
+            'angles':copy.deepcopy(quality['angles']), 'position_error':quality.get('position_error'),
+            'orientation_error':quality.get('orientation_error')}
+    quality['rotation_complete']=msg.data
+subscribe('/cooperative_rotation/complete',Bool,rotation_complete,True)
 subscribe('/cooperative_transport/measured_payload_pose',PoseStamped,pose)
 def target(msg):
     p=msg.pose.position;q=msg.pose.orientation;quality['poses']['target']=[p.x,p.y,p.z,q.x,q.y,q.z,q.w]
@@ -109,10 +115,14 @@ gpu_log = (out/'gpu.csv').open('w')
 gpu = subprocess.Popen(['nvidia-smi','--query-gpu=timestamp,utilization.gpu,utilization.memory,memory.used,power.draw','--format=csv','-l','1'], stdout=gpu_log, stderr=subprocess.STDOUT, start_new_session=True)
 native_added=False
 complete_sim=None
+support_sim=None
 try:
     with (out/'samples.jsonl').open('w') as output:
         while time.monotonic()-t0 < duration and launch.poll() is None:
             time.sleep(1); now = time.monotonic(); processes = []
+            if os.environ.get('STOP_ON_SUPPORT') == '1':
+                if quality['support_removed'] and support_sim is None:support_sim=clock['sim']
+                if support_sim is not None and clock['sim']-support_sim>=5.0:break
             if os.environ.get('STOP_ON_COMPLETE') == '1':
                 current_log=(out/'launch.log').read_text(errors='replace')
                 quality['pivot_started']='Pivot rotation started' in current_log

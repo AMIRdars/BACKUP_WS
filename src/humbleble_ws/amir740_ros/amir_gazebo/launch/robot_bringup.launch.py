@@ -31,9 +31,11 @@ from launch.actions import (
     OpaqueFunction,
     RegisterEventHandler,
     TimerAction,
+    EmitEvent,
 )
 from launch.actions import SetEnvironmentVariable
 from launch.conditions import IfCondition
+from launch.events import Shutdown
 from launch.event_handlers import OnProcessExit, OnShutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
@@ -76,6 +78,7 @@ def _robot_sdf(urdf_xml):
 
 
 def launch_setup(context, *args, **kwargs):
+    event_startup = LaunchConfiguration("event_startup").perform(context).lower() in ("true", "1", "yes")
     ns = LaunchConfiguration("namespace").perform(context)
     x = LaunchConfiguration("x").perform(context)
     y = LaunchConfiguration("y").perform(context)
@@ -302,6 +305,21 @@ def launch_setup(context, *args, **kwargs):
             f"[{model_name}] mecanum_drive_controller could not be started "
             "after three attempts; transport motion remains blocked."))]
 
+    manager_ready = Node(
+        package='cooperative_transport_control', executable='simulation_startup_gate',
+        namespace=ns, name='manager_ready', output='screen',
+        parameters=[{'use_sim_time': False, 'mode': 'manager',
+                     'stage': (ns or 'robot') + '_manager_ready',
+                     'robot_namespaces': [ns] if ns else [''], 'timeout': 180.0}])
+    def start_controller_loading(event, _context):
+        if event.returncode != 0:
+            return [EmitEvent(event=Shutdown(reason='Robot creation or controller manager failed'))]
+        return [manager_ready] if event_startup else [TimerAction(period=2.0, actions=[jsb])]
+    def start_jsb(event, _context):
+        if event.returncode == 0:
+            return [jsb]
+        return [EmitEvent(event=Shutdown(reason='Controller manager readiness failed'))]
+
     actions = [SetParameter(name="use_sim_time", value=True)]
 
     # ── sim 本体 (先頭ロボットのみ) ──
@@ -363,7 +381,8 @@ def launch_setup(context, *args, **kwargs):
         # first load failure (most often the second robot's JS broadcaster).
         RegisterEventHandler(OnProcessExit(
             target_action=spawn_robot,
-            on_exit=[TimerAction(period=2.0, actions=[jsb])])),
+            on_exit=start_controller_loading)),
+        RegisterEventHandler(OnProcessExit(target_action=manager_ready, on_exit=start_jsb)),
         RegisterEventHandler(OnProcessExit(target_action=jsb, on_exit=[arm])),
         RegisterEventHandler(OnProcessExit(target_action=arm, on_exit=[mecanum])),
         RegisterEventHandler(OnProcessExit(
@@ -381,6 +400,7 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument("event_startup", default_value="false"),
         DeclareLaunchArgument("aggregate_contacts", default_value="false"),
         DeclareLaunchArgument("finger_collision_boxes", default_value="9"),
         DeclareLaunchArgument("namespace", default_value=""),
