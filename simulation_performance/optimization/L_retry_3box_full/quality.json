@@ -1,0 +1,78 @@
+{
+  "grasp": {
+    "amir1": false,
+    "amir2": false
+  },
+  "ever_grasp": false,
+  "support_removed": false,
+  "rotation_complete": false,
+  "max_slip_horizontal": 0.0,
+  "max_slip_vertical": 0.0,
+  "max_slip_yaw": 0.0,
+  "pivot_complete": false,
+  "max_contact_depth": null,
+  "contact_segments": [
+    2.0,
+    2.0,
+    2.0,
+    2.0
+  ],
+  "contact_states": {
+    "amir1/left": true,
+    "amir1/right": true,
+    "amir2/left": true,
+    "amir2/right": true
+  },
+  "max_position_error": 0.0,
+  "max_orientation_error": 0.0,
+  "angles": {
+    "angle_deg": 0.0,
+    "desired_angle_deg": 0.0
+  },
+  "min_payload_z_after_support": null,
+  "poses": {
+    "amir1": [
+      -1.0668969423268557,
+      2.77554715828719e-05,
+      0.0,
+      -1.5795728755562358e-10,
+      1.6945260234805072e-07,
+      4.0635542728679855e-05,
+      0.999999999174362
+    ],
+    "amir2": [
+      1.0670085727567133,
+      -2.8822842993191087e-05,
+      0.0,
+      -2.398249578201577e-07,
+      -7.57308628060329e-11,
+      0.9999999991599104,
+      -4.098928198139268e-05
+    ],
+    "payload": [
+      3.721354227352427e-05,
+      6.312001916109949e-06,
+      0.6567181040367778,
+      0.7071067717395935,
+      5.353136384722976e-05,
+      5.361490365932767e-05,
+      0.707106786574592
+    ]
+  },
+  "force": {
+    "amir1/left": 17.840767802544626,
+    "amir1/right": 20.741749574653184,
+    "amir2/left": 21.543094517128868,
+    "amir2/right": 24.445630264922098
+  },
+  "force_range": {},
+  "statuses": {
+    "rotation": "GRASP_CHECK: waiting for both grasp states; theta_des=0.00 deg; theta_actual=0.00 deg",
+    "contact_status": "CONTACT_OK",
+    "friction_grasp_status": "ERROR_NO_PHYSICAL_CONTACT; held=False; contacts=verified; grippers: amir1=-0.665, amir2=-0.665; commands: amir1=-0.665, amir2=-0.664; hold_floors: amir1=nan, amir2=nan; target_force=20.0N; normal_forces: amir1/left=17.8N, amir1/right=20.7N, amir2/left=21.5N, amir2/right=24.4N",
+    "state": "WAITING_FOR_GRASP",
+    "slip_status": "OK"
+  },
+  "faults": [],
+  "pivot_started": false
+}

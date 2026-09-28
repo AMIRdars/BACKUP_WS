@@ -1,6 +1,6 @@
 [0.228s] WARNING:colcon.colcon_core.package_selection:Some selected packages are already built in one or more underlay workspaces:
-	'amir_description' is in: /home/dars5070/ros2_humble_ws/install/amir_description, /home/dars5070/ros2_ws/install/amir_description
 	'amir_gazebo' is in: /home/dars5070/ros2_humble_ws/install/amir_gazebo
+	'amir_description' is in: /home/dars5070/ros2_humble_ws/install/amir_description, /home/dars5070/ros2_ws/install/amir_description
 If a package in a merged underlay workspace is overridden and it installs headers, then all packages in the overlay must sort their include directories by workspace order. Failure to do so may result in build failures or undefined behavior at run time.
 If the overridden package is used by another package in any underlay, then the overriding package in the overlay must be API and ABI compatible or undefined behavior at run time may occur.
 
@@ -9,14 +9,8 @@ If you understand the risks and want to override a package anyways, add the foll
 
 This may be promoted to an error in a future release of colcon-override-check.
 Starting >>> amir_description
-Starting >>> cooperative_transport_control
-Starting >>> cooperative_transport_gazebo
-Finished <<< cooperative_transport_gazebo [0.25s]
-Finished <<< amir_description [0.28s]
-Finished <<< cooperative_transport_control [0.60s]
+Finished <<< amir_description [0.32s]
 Starting >>> amir_gazebo
 Finished <<< amir_gazebo [0.12s]
-Starting >>> cooperative_transport_bringup
-Finished <<< cooperative_transport_bringup [0.21s]
 
-Summary: 5 packages finished [1.13s]
+Summary: 2 packages finished [0.63s]
