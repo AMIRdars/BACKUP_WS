@@ -6,6 +6,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/create_timer.hpp>
 #include <stdexcept>
+#include <limits>
 #include <std_msgs/msg/bool.hpp>
 #include <std_msgs/msg/float64_multi_array.hpp>
 #include <ros_gz_interfaces/msg/contacts.hpp>
@@ -13,7 +14,7 @@
 // Keep per-segment states separate: an empty segment must not clear contact
 // on another segment of the same finger. Force feedback remains untouched.
 class FingerContactAggregator : public rclcpp::Node {
- struct Segment {bool touching=false;double seen=0;double depth=0;bool received=false;};
+ struct Segment {bool touching=false;double seen=0;double depth=0;bool received=false;bool has_depth=false;};
  struct Finger {
    std::string robot,side;std::vector<Segment> segments;
    rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr publisher;
@@ -37,7 +38,7 @@ class FingerContactAggregator : public rclcpp::Node {
         "/"+finger.robot+"/finger_"+finger.side+"_contact_segments/segment_"+std::to_string(s),rclcpp::QoS(1),
         [this,f,s](const ros_gz_interfaces::msg::Contacts::SharedPtr message) {
           auto &finger=fingers_[f];auto &segment=finger.segments[s];
-          segment.touching=false;segment.depth=0;segment.seen=now().seconds();segment.received=true;
+          segment.touching=false;segment.depth=0;segment.has_depth=false;segment.seen=now().seconds();segment.received=true;
           for(const auto &contact:message->contacts) {
             const std::string token="finger_"+finger.side+"_1";
             const auto is_finger=[&](const std::string &name){return name.find(finger.robot)!=std::string::npos&&name.find(token)!=std::string::npos;};
@@ -45,7 +46,7 @@ class FingerContactAggregator : public rclcpp::Node {
             if((is_finger(contact.collision1.name)&&is_payload(contact.collision2.name))||
                (is_finger(contact.collision2.name)&&is_payload(contact.collision1.name))) {
               segment.touching=true;
-              for(double depth:contact.depths)segment.depth=std::max(segment.depth,depth);
+              for(double depth:contact.depths){segment.has_depth=true;segment.depth=std::max(segment.depth,depth);}
             }
           }
         }));
@@ -57,10 +58,10 @@ class FingerContactAggregator : public rclcpp::Node {
   void publish() {
     const double time=now().seconds();std_msgs::msg::Float64MultiArray metrics;
     for(auto &finger:fingers_) {
-      int count=0;double depth=0;
-      for(const auto &segment:finger.segments)if(segment.received&&time>=segment.seen&&time-segment.seen<=timeout_&&segment.touching){++count;depth=std::max(depth,segment.depth);}
+      int count=0;double depth=0;bool has_depth=false;
+      for(const auto &segment:finger.segments)if(segment.received&&time>=segment.seen&&time-segment.seen<=timeout_&&segment.touching){++count;if(segment.has_depth){has_depth=true;depth=std::max(depth,segment.depth);}}
       std_msgs::msg::Bool message;message.data=count>0;finger.publisher->publish(message);
-      metrics.data.push_back(count);metrics.data.push_back(depth);
+      metrics.data.push_back(count);metrics.data.push_back(count>0&&!has_depth?std::numeric_limits<double>::quiet_NaN():depth);
     }
     diagnostics_->publish(metrics);
   }

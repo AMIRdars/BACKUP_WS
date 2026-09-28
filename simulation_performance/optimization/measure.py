@@ -86,8 +86,10 @@ for key in ['angle_deg','desired_angle_deg']:
 def contact_metrics(msg):
     quality['contact_segments']=list(msg.data[::2])
     if len(msg.data)>1:
-        value=max(msg.data[1::2]);old=quality['max_contact_depth']
-        quality['max_contact_depth']=value if old is None else max(old,value)
+        values=[v for count,v in zip(msg.data[::2],msg.data[1::2]) if count>0 and math.isfinite(v)]
+        if values:
+            value=max(values);old=quality['max_contact_depth']
+            quality['max_contact_depth']=value if old is None else max(old,value)
 subscribe('/cooperative_transport/contact_metrics',Float64MultiArray,contact_metrics)
 for name in ['amir1','amir2']:
     for side in ['left','right']:

@@ -350,7 +350,7 @@ def _launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
-        DeclareLaunchArgument('aggregate_contacts', default_value='false'),
+        DeclareLaunchArgument('aggregate_contacts', default_value='true'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('headless', default_value='false'),

@@ -1,0 +1,1690 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-09-28-23-11-21-491453-dars5070-Katana-15-HX-B14WGK-40109
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign gazebo-1]: process started with pid [40120]
+[INFO] [parameter_bridge-2]: process started with pid [40122]
+[INFO] [transport_pose_filter-3]: process started with pid [40125]
+[INFO] [finger_contact_aggregator-4]: process started with pid [40127]
+[transport_pose_filter-3] [INFO] [1790604681.738471264] [transport_pose_filter]: Filtering /world/cooperative_transport_friction/pose/info -> /cooperative_transport/model_poses (3 models)
+[parameter_bridge-2] [INFO] [1790604681.758984691] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-2] [INFO] [1790604681.759470377] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/pose/info (gz.msgs.Pose_V) -> /world/cooperative_transport_friction/pose/info (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[INFO] [robot_state_publisher-5]: process started with pid [40229]
+[INFO] [create-6]: process started with pid [40231]
+[INFO] [parameter_bridge-7]: process started with pid [40233]
+[INFO] [parameter_bridge-8]: process started with pid [40235]
+[INFO] [parameter_bridge-9]: process started with pid [40237]
+[INFO] [rover_twist_relay_ign.py-10]: process started with pid [40239]
+[create-6] [INFO] [1790604683.974103373] [amir1.ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-5] [INFO] [1790604683.981714368] [amir1.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-5] [INFO] [1790604683.981812509] [amir1.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-5] [INFO] [1790604683.981817732] [amir1.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-5] [INFO] [1790604683.981820640] [amir1.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-5] [INFO] [1790604683.981823256] [amir1.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-5] [INFO] [1790604683.981825837] [amir1.robot_state_publisher]: got segment base_link
+[robot_state_publisher-5] [INFO] [1790604683.981828436] [amir1.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-5] [INFO] [1790604683.981831133] [amir1.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-5] [INFO] [1790604683.981833676] [amir1.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-5] [INFO] [1790604683.981836087] [amir1.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-5] [INFO] [1790604683.981838604] [amir1.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-5] [INFO] [1790604683.981841221] [amir1.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-5] [INFO] [1790604683.981843670] [amir1.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-5] [INFO] [1790604683.981846205] [amir1.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-5] [INFO] [1790604683.981848606] [amir1.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-5] [INFO] [1790604683.981851118] [amir1.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-5] [INFO] [1790604683.981853542] [amir1.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-5] [INFO] [1790604683.981856005] [amir1.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-5] [INFO] [1790604683.981858326] [amir1.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-5] [INFO] [1790604683.981860676] [amir1.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-5] [INFO] [1790604683.981863094] [amir1.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-5] [INFO] [1790604683.981865420] [amir1.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-5] [INFO] [1790604683.981867914] [amir1.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-5] [INFO] [1790604683.981870400] [amir1.robot_state_publisher]: got segment tcp_link
+[parameter_bridge-8] [INFO] [1790604683.992648070] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_left_wrench (gz.msgs.Wrench) -> /amir1/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-8] [INFO] [1790604683.993796013] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_right_wrench (gz.msgs.Wrench) -> /amir1/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790604683.995255660] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom (gz.msgs.Odometry) -> /amir1/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.995952164] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790604683.996784520] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom/tf (gz.msgs.Pose_V) -> /amir1/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.997737759] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.998095388] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.998523988] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.998829588] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.999094280] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.999439316] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604683.999762305] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.000088871] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.000395536] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.000661171] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.000957311] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.001237626] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.001507101] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.001778278] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.002066791] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.002361681] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-9] [INFO] [1790604684.002634191] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[rover_twist_relay_ign.py-10] [INFO] [1790604684.148513755] [amir1.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[create-6] [INFO] [1790604684.177985377] [amir1.ros_gz_sim]: Requested creation of entity.
+[create-6] [INFO] [1790604684.178035631] [amir1.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790604684.261216262] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790604684.261236781] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[INFO] [create-6]: process has finished cleanly [pid 40231]
+[ign gazebo-1] [INFO] [1790604684.630426308] [amir1.gz_ros2_control]: connected to service!! /amir1/robot_state_publisher asking for robot_description
+[ign gazebo-1] [INFO] [1790604684.632524597] [amir1.gz_ros2_control]: Received URDF from param server
+[ign gazebo-1] [INFO] [1790604684.658093178] [amir1.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790604684.658239251] [amir1.gz_ros2_control]: Loading joint: front_left_joint
+[ign gazebo-1] [INFO] [1790604684.658263473] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.658277290] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.658289470] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658299527] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.658309280] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658367729] [amir1.gz_ros2_control]: Loading joint: front_right_joint
+[ign gazebo-1] [INFO] [1790604684.658383617] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.658398110] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.658412928] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658428437] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.658444057] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658501661] [amir1.gz_ros2_control]: Loading joint: back_left_joint
+[ign gazebo-1] [INFO] [1790604684.658518949] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.658534235] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.658548136] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658557568] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.658566678] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658604645] [amir1.gz_ros2_control]: Loading joint: back_right_joint
+[ign gazebo-1] [INFO] [1790604684.658615750] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.658625125] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.658634699] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658643753] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.658652876] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.658848214] [amir1.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604684.658862407] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604684.658874120] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604684.658886237] [amir1.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604684.658896119] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604684.658905885] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604684.658931534] [resource_manager]: Initialize hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604684.659030975] [resource_manager]: Successful initialization of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604684.659136962] [resource_manager]: 'configure' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604684.659145813] [amir1.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790604684.659165917] [resource_manager]: Successful 'configure' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604684.659186929] [resource_manager]: 'activate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604684.659208147] [resource_manager]: Successful 'activate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604684.659426829] [amir1.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790604684.659488410] [amir1.gz_ros2_control]: Loading joint: Joint_1
+[ign gazebo-1] [INFO] [1790604684.659509619] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.659526527] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659547962] [amir1.gz_ros2_control]: 			 found initial value: 0.000000
+[ign gazebo-1] [INFO] [1790604684.659562765] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.659573032] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.659582606] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659646574] [amir1.gz_ros2_control]: Loading joint: Joint_2
+[ign gazebo-1] [INFO] [1790604684.659662910] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.659673350] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659684276] [amir1.gz_ros2_control]: 			 found initial value: 1.400000
+[ign gazebo-1] [INFO] [1790604684.659745333] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.659760995] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.659770655] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659815125] [amir1.gz_ros2_control]: Loading joint: Joint_3
+[ign gazebo-1] [INFO] [1790604684.659832911] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.659846725] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659857372] [amir1.gz_ros2_control]: 			 found initial value: -1.600000
+[ign gazebo-1] [INFO] [1790604684.659874786] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.659887985] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.659902383] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659954249] [amir1.gz_ros2_control]: Loading joint: Joint_4
+[ign gazebo-1] [INFO] [1790604684.659970595] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.659983075] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.659992967] [amir1.gz_ros2_control]: 			 found initial value: 0.200000
+[ign gazebo-1] [INFO] [1790604684.660005017] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660019763] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660033744] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660091331] [amir1.gz_ros2_control]: Loading joint: Joint_5
+[ign gazebo-1] [INFO] [1790604684.660108049] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660123681] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660151222] [amir1.gz_ros2_control]: 			 found initial value: 1.570796
+[ign gazebo-1] [INFO] [1790604684.660170627] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660186148] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660198112] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660240768] [amir1.gz_ros2_control]: Loading joint: Gripper
+[ign gazebo-1] [INFO] [1790604684.660259256] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660272866] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660282225] [amir1.gz_ros2_control]: 			 found initial value: -1.000000
+[ign gazebo-1] [INFO] [1790604684.660299699] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660316402] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660332226] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660368839] [amir1.gz_ros2_control]: Loading joint: left_inner_back_joint
+[ign gazebo-1] [INFO] [1790604684.660388060] [amir1.gz_ros2_control]: Joint 'left_inner_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604684.660409812] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660426794] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660454213] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660469228] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660479621] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660520749] [amir1.gz_ros2_control]: Loading joint: right_outer_back_joint
+[ign gazebo-1] [INFO] [1790604684.660542450] [amir1.gz_ros2_control]: Joint 'right_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604684.660553893] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660563276] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660572652] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660581874] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660591229] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660623774] [amir1.gz_ros2_control]: Loading joint: left_outer_back_joint
+[ign gazebo-1] [INFO] [1790604684.660637866] [amir1.gz_ros2_control]: Joint 'left_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604684.660647636] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660656746] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660677163] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660686479] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660695735] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660742772] [amir1.gz_ros2_control]: Loading joint: right_inner_front_joint
+[ign gazebo-1] [INFO] [1790604684.660764399] [amir1.gz_ros2_control]: Joint 'right_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604684.660806631] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660828870] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660847565] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660857565] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660866730] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660904190] [amir1.gz_ros2_control]: Loading joint: left_inner_front_joint
+[ign gazebo-1] [INFO] [1790604684.660917293] [amir1.gz_ros2_control]: Joint 'left_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604684.660934172] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604684.660947699] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.660958616] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604684.660974494] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604684.660991612] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604684.661033096] [amir1.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604684.661049009] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604684.661075546] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604684.661090884] [amir1.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604684.661106326] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604684.661123338] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604684.661140712] [resource_manager]: Initialize hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604684.661183819] [resource_manager]: Successful initialization of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604684.661253344] [resource_manager]: 'configure' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604684.661267660] [amir1.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790604684.661288272] [resource_manager]: Successful 'configure' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604684.661315828] [resource_manager]: 'activate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604684.661331270] [resource_manager]: Successful 'activate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604684.661342885] [amir1.gz_ros2_control]: Loading controller_manager
+[INFO] [spawner-11]: process started with pid [40396]
+[ign gazebo-1] [INFO] [1790604686.596096300] [amir1.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-11] [INFO] [1790604686.633820896] [amir1.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ign gazebo-1] [INFO] [1790604686.634687476] [amir1.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604686.634799854] [amir1.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-11] [INFO] [1790604686.650243938] [amir1.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-11]: process has finished cleanly [pid 40396]
+[INFO] [spawner-12]: process started with pid [40435]
+[spawner-12] [INFO] [1790604687.024223023] [amir1.spawner_arm_controller]: [96mSetting controller param "type" to "joint_trajectory_controller/JointTrajectoryController" for [1marm_controller[0m
+[spawner-12] [INFO] [1790604687.028880503] [amir1.spawner_arm_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790604687.034250824] [amir1.controller_manager]: Loading controller 'arm_controller'
+[ign gazebo-1] [WARN] [1790604687.042433282] [amir1.arm_controller]: [Deprecated]: "allow_nonzero_velocity_at_trajectory_end" is set to true. The default behavior will change to false.
+[spawner-12] [INFO] [1790604687.046295723] [amir1.spawner_arm_controller]: [94mLoaded [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790604687.047229549] [amir1.controller_manager]: Configuring controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604687.047334590] [amir1.arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[ign gazebo-1] [INFO] [1790604687.047347627] [amir1.arm_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[ign gazebo-1] [INFO] [1790604687.047362345] [amir1.arm_controller]: Using 'splines' interpolation method.
+[ign gazebo-1] [INFO] [1790604687.047997530] [amir1.arm_controller]: Controller state will be published at 100.00 Hz.
+[ign gazebo-1] [INFO] [1790604687.049177242] [amir1.arm_controller]: Goals with partial set of joints are allowed
+[ign gazebo-1] [INFO] [1790604687.049193965] [amir1.arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[spawner-12] [INFO] [1790604687.061903741] [amir1.spawner_arm_controller]: [92mConfigured and activated [1marm_controller[0m
+[INFO] [spawner-12]: process has finished cleanly [pid 40435]
+[INFO] [spawner-13]: process started with pid [40473]
+[spawner-13] [INFO] [1790604687.416051755] [amir1.spawner_mecanum_drive_controller]: waiting for service /amir1/controller_manager/list_controllers to become available...
+[ign gazebo-1] [INFO] [1790604688.169795688] [amir1.controller_manager]: Loading controller 'mecanum_drive_controller'
+[spawner-13] [INFO] [1790604688.196411484] [amir1.spawner_mecanum_drive_controller]: [94mLoaded [1mmecanum_drive_controller[0m
+[ign gazebo-1] [INFO] [1790604688.198217342] [amir1.controller_manager]: Configuring controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604688.206677993] [amir1.mecanum_drive_controller]: MecanumDriveController configured successfully
+[spawner-13] [INFO] [1790604688.219098861] [amir1.spawner_mecanum_drive_controller]: [92mConfigured and activated [1mmecanum_drive_controller[0m
+[INFO] [spawner-13]: process has finished cleanly [pid 40473]
+[INFO] [spawner-14]: process started with pid [40513]
+[spawner-14] [INFO] [1790604688.613885153] [amir1.spawner_gripper_controller]: waiting for service /amir1/controller_manager/list_controllers to become available...
+[spawner-14] [INFO] [1790604688.871016686] [amir1.spawner_gripper_controller]: [96mSetting controller param "type" to "position_controllers/GripperActionController" for [1mgripper_controller[0m
+[spawner-14] [INFO] [1790604688.882257599] [amir1.spawner_gripper_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790604688.886823692] [amir1.controller_manager]: Loading controller 'gripper_controller'
+[spawner-14] [INFO] [1790604688.895633985] [amir1.spawner_gripper_controller]: [94mLoaded [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790604688.896504584] [amir1.controller_manager]: Configuring controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790604688.896569249] [amir1.gripper_controller]: Action status changes will be monitored at 20.000000 Hz.
+[spawner-14] [INFO] [1790604688.908128987] [amir1.spawner_gripper_controller]: [92mConfigured and activated [1mgripper_controller[0m
+[INFO] [spawner-14]: process has finished cleanly [pid 40513]
+[INFO] [robot_state_publisher-15]: process started with pid [40554]
+[INFO] [create-16]: process started with pid [40556]
+[INFO] [parameter_bridge-17]: process started with pid [40558]
+[INFO] [parameter_bridge-18]: process started with pid [40560]
+[INFO] [parameter_bridge-19]: process started with pid [40562]
+[INFO] [rover_twist_relay_ign.py-20]: process started with pid [40564]
+[create-16] [INFO] [1790604690.992663008] [amir2.ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-15] [INFO] [1790604691.011399428] [amir2.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-15] [INFO] [1790604691.011486094] [amir2.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-15] [INFO] [1790604691.011490615] [amir2.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-15] [INFO] [1790604691.011493193] [amir2.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-15] [INFO] [1790604691.011495340] [amir2.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-15] [INFO] [1790604691.011497580] [amir2.robot_state_publisher]: got segment base_link
+[robot_state_publisher-15] [INFO] [1790604691.011499690] [amir2.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-15] [INFO] [1790604691.011501799] [amir2.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-15] [INFO] [1790604691.011503821] [amir2.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-15] [INFO] [1790604691.011505833] [amir2.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-15] [INFO] [1790604691.011508027] [amir2.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-15] [INFO] [1790604691.011510084] [amir2.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-15] [INFO] [1790604691.011512136] [amir2.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-15] [INFO] [1790604691.011514212] [amir2.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-15] [INFO] [1790604691.011516322] [amir2.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-15] [INFO] [1790604691.011518403] [amir2.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-15] [INFO] [1790604691.011520583] [amir2.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-15] [INFO] [1790604691.011522576] [amir2.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-15] [INFO] [1790604691.011524530] [amir2.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-15] [INFO] [1790604691.011526469] [amir2.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-15] [INFO] [1790604691.011528395] [amir2.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-15] [INFO] [1790604691.011530322] [amir2.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-15] [INFO] [1790604691.011532368] [amir2.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-15] [INFO] [1790604691.011534373] [amir2.robot_state_publisher]: got segment tcp_link
+[create-16] [INFO] [1790604691.198751355] [amir2.ros_gz_sim]: Requested creation of entity.
+[create-16] [INFO] [1790604691.198817576] [amir2.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790604691.284945527] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790604691.284969324] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[INFO] [create-16]: process has finished cleanly [pid 40556]
+[parameter_bridge-19] [INFO] [1790604691.339896408] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-18] [INFO] [1790604691.341185373] [amir2.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir2/finger_left_wrench (gz.msgs.Wrench) -> /amir2/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790604691.341476437] [amir2.odom_bridge]: Creating GZ->ROS Bridge: [/amir2/odom (gz.msgs.Odometry) -> /amir2/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.341717573] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.342096633] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.342578047] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-18] [INFO] [1790604691.342593384] [amir2.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir2/finger_right_wrench (gz.msgs.Wrench) -> /amir2/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.343059367] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790604691.343092744] [amir2.odom_bridge]: Creating GZ->ROS Bridge: [/amir2/odom/tf (gz.msgs.Pose_V) -> /amir2/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.343669220] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.344553277] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.344855990] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.345254710] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.345713569] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.346381893] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.346902581] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.347605475] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.348213165] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.348635021] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.349109822] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.349835132] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-19] [INFO] [1790604691.350244986] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[rover_twist_relay_ign.py-20] [INFO] [1790604691.396322386] [amir2.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[ign gazebo-1] [ERROR] [1790604691.966910807] [amir2.gz_ros2_control]: /amir2/robot_state_publisher service not available, waiting again...
+[ign gazebo-1] [INFO] [1790604692.061834087] [amir2.gz_ros2_control]: connected to service!! /amir2/robot_state_publisher asking for robot_description
+[ign gazebo-1] [INFO] [1790604692.063441723] [amir2.gz_ros2_control]: Received URDF from param server
+[ign gazebo-1] [INFO] [1790604692.071721669] [amir2.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790604692.071802160] [amir2.gz_ros2_control]: Loading joint: front_left_joint
+[ign gazebo-1] [INFO] [1790604692.071815033] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.071823666] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.071832174] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071839174] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.071844104] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071880889] [amir2.gz_ros2_control]: Loading joint: front_right_joint
+[ign gazebo-1] [INFO] [1790604692.071888746] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.071894749] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.071901209] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071907477] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.071914011] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071944972] [amir2.gz_ros2_control]: Loading joint: back_left_joint
+[ign gazebo-1] [INFO] [1790604692.071950575] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.071955030] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.071959582] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071963654] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.071967747] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.071987489] [amir2.gz_ros2_control]: Loading joint: back_right_joint
+[ign gazebo-1] [INFO] [1790604692.071992103] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.071996271] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072000345] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072004474] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072008570] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072022684] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072029138] [amir2.gz_ros2_control]: Topic name: /amir1/finger_right_wrench
+[ign gazebo-1] [INFO] [1790604692.072033465] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072038349] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072044226] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072049082] [amir2.gz_ros2_control]: Topic name: /amir1/finger_left_wrench
+[ign gazebo-1] [INFO] [1790604692.072053356] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072057629] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072068706] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072073724] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072078075] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072082456] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072086855] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072091043] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072097513] [resource_manager]: Initialize hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604692.072113535] [resource_manager]: Successful initialization of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604692.072130184] [resource_manager]: 'configure' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604692.072133880] [amir2.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790604692.072140466] [resource_manager]: Successful 'configure' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604692.072145555] [resource_manager]: 'activate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604692.072150481] [resource_manager]: Successful 'activate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604692.072206837] [amir2.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790604692.072248830] [amir2.gz_ros2_control]: Loading joint: Joint_1
+[ign gazebo-1] [INFO] [1790604692.072254872] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072259295] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072264348] [amir2.gz_ros2_control]: 			 found initial value: 0.000000
+[ign gazebo-1] [INFO] [1790604692.072270417] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072274494] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072278518] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072297740] [amir2.gz_ros2_control]: Loading joint: Joint_2
+[ign gazebo-1] [INFO] [1790604692.072302494] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072306459] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072311464] [amir2.gz_ros2_control]: 			 found initial value: 1.400000
+[ign gazebo-1] [INFO] [1790604692.072316438] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072321297] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072326876] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072352969] [amir2.gz_ros2_control]: Loading joint: Joint_3
+[ign gazebo-1] [INFO] [1790604692.072359195] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072363321] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072367607] [amir2.gz_ros2_control]: 			 found initial value: -1.600000
+[ign gazebo-1] [INFO] [1790604692.072372726] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072376800] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072380612] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072398973] [amir2.gz_ros2_control]: Loading joint: Joint_4
+[ign gazebo-1] [INFO] [1790604692.072403481] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072407338] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072411240] [amir2.gz_ros2_control]: 			 found initial value: 0.200000
+[ign gazebo-1] [INFO] [1790604692.072416459] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072420359] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072424300] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072441135] [amir2.gz_ros2_control]: Loading joint: Joint_5
+[ign gazebo-1] [INFO] [1790604692.072445491] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072449845] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072457955] [amir2.gz_ros2_control]: 			 found initial value: 1.570796
+[ign gazebo-1] [INFO] [1790604692.072462799] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072467694] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072471696] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072488096] [amir2.gz_ros2_control]: Loading joint: Gripper
+[ign gazebo-1] [INFO] [1790604692.072493075] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072497129] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072501096] [amir2.gz_ros2_control]: 			 found initial value: -1.000000
+[ign gazebo-1] [INFO] [1790604692.072505704] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072509558] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072513387] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072528882] [amir2.gz_ros2_control]: Loading joint: left_inner_back_joint
+[ign gazebo-1] [INFO] [1790604692.072536660] [amir2.gz_ros2_control]: Joint 'left_inner_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604692.072542000] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072545989] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072550398] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072554467] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072558506] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072577818] [amir2.gz_ros2_control]: Loading joint: right_outer_back_joint
+[ign gazebo-1] [INFO] [1790604692.072591764] [amir2.gz_ros2_control]: Joint 'right_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604692.072599012] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072604192] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072611941] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072615948] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072619948] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072640235] [amir2.gz_ros2_control]: Loading joint: left_outer_back_joint
+[ign gazebo-1] [INFO] [1790604692.072649937] [amir2.gz_ros2_control]: Joint 'left_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604692.072662525] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072666977] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072671917] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072676356] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072680166] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072697562] [amir2.gz_ros2_control]: Loading joint: right_inner_front_joint
+[ign gazebo-1] [INFO] [1790604692.072703455] [amir2.gz_ros2_control]: Joint 'right_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604692.072707728] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072711908] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072716141] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072719997] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072724026] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072739158] [amir2.gz_ros2_control]: Loading joint: left_inner_front_joint
+[ign gazebo-1] [INFO] [1790604692.072744546] [amir2.gz_ros2_control]: Joint 'left_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790604692.072749323] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790604692.072753312] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072757318] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790604692.072761178] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790604692.072764949] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790604692.072773867] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072778785] [amir2.gz_ros2_control]: Topic name: /amir1/finger_right_wrench
+[ign gazebo-1] [INFO] [1790604692.072784772] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072789049] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072793383] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072797566] [amir2.gz_ros2_control]: Topic name: /amir1/finger_left_wrench
+[ign gazebo-1] [INFO] [1790604692.072801477] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072805456] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072809676] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072813599] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072817570] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072821707] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790604692.072825537] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790604692.072829500] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790604692.072833720] [resource_manager]: Initialize hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604692.072846502] [resource_manager]: Successful initialization of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604692.072867240] [resource_manager]: 'configure' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604692.072870132] [amir2.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790604692.072876092] [resource_manager]: Successful 'configure' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604692.072884402] [resource_manager]: 'activate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604692.072888712] [resource_manager]: Successful 'activate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604692.072892132] [amir2.gz_ros2_control]: Loading controller_manager
+[INFO] [spawner-21]: process started with pid [40714]
+[spawner-21] [INFO] [1790604693.534691251] [amir2.spawner_joint_state_broadcaster]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[ign gazebo-1] [INFO] [1790604694.287946011] [amir2.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-21] [INFO] [1790604694.315561230] [amir2.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ign gazebo-1] [INFO] [1790604694.317633938] [amir2.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604694.317786525] [amir2.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-21] [INFO] [1790604694.336446490] [amir2.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-21]: process has finished cleanly [pid 40714]
+[INFO] [spawner-22]: process started with pid [40762]
+[spawner-22] [INFO] [1790604694.806806628] [amir2.spawner_arm_controller]: [96mSetting controller param "type" to "joint_trajectory_controller/JointTrajectoryController" for [1marm_controller[0m
+[spawner-22] [INFO] [1790604694.811684306] [amir2.spawner_arm_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790604694.815334103] [amir2.controller_manager]: Loading controller 'arm_controller'
+[ign gazebo-1] [WARN] [1790604694.825342325] [amir2.arm_controller]: [Deprecated]: "allow_nonzero_velocity_at_trajectory_end" is set to true. The default behavior will change to false.
+[spawner-22] [INFO] [1790604694.829903952] [amir2.spawner_arm_controller]: [94mLoaded [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790604694.830649017] [amir2.controller_manager]: Configuring controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604694.830749790] [amir2.arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[ign gazebo-1] [INFO] [1790604694.830760470] [amir2.arm_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[ign gazebo-1] [INFO] [1790604694.830767879] [amir2.arm_controller]: Using 'splines' interpolation method.
+[ign gazebo-1] [INFO] [1790604694.831111376] [amir2.arm_controller]: Controller state will be published at 100.00 Hz.
+[ign gazebo-1] [INFO] [1790604694.832276950] [amir2.arm_controller]: Goals with partial set of joints are allowed
+[ign gazebo-1] [INFO] [1790604694.832294988] [amir2.arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[spawner-22] [INFO] [1790604694.844919794] [amir2.spawner_arm_controller]: [92mConfigured and activated [1marm_controller[0m
+[INFO] [spawner-22]: process has finished cleanly [pid 40762]
+[INFO] [spawner-23]: process started with pid [40800]
+[spawner-23] [INFO] [1790604695.542776067] [amir2.spawner_mecanum_drive_controller]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[ign gazebo-1] [INFO] [1790604696.230080720] [amir2.controller_manager]: Loading controller 'mecanum_drive_controller'
+[spawner-23] [INFO] [1790604696.255814593] [amir2.spawner_mecanum_drive_controller]: [94mLoaded [1mmecanum_drive_controller[0m
+[ign gazebo-1] [INFO] [1790604696.256928749] [amir2.controller_manager]: Configuring controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604696.259939075] [amir2.mecanum_drive_controller]: MecanumDriveController configured successfully
+[spawner-23] [INFO] [1790604696.269507843] [amir2.spawner_mecanum_drive_controller]: [92mConfigured and activated [1mmecanum_drive_controller[0m
+[INFO] [spawner-23]: process has finished cleanly [pid 40800]
+[INFO] [spawner-24]: process started with pid [40841]
+[spawner-24] [INFO] [1790604696.683199909] [amir2.spawner_gripper_controller]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[INFO] [friction_grasp_manager-25]: process started with pid [40876]
+[friction_grasp_manager-25] [INFO] [1790604697.072842401] [friction_grasp_manager]: Friction grasp manager ready; no detachable joint will be used.
+[INFO] [arm_home_positioner-26]: process started with pid [40912]
+[spawner-24] [INFO] [1790604697.585299405] [amir2.spawner_gripper_controller]: [96mSetting controller param "type" to "position_controllers/GripperActionController" for [1mgripper_controller[0m
+[arm_home_positioner-26] [INFO] [1790604697.589846769] [arm_home_positioner]: Waiting to move all ('amir1', 'amir2') to Q_HOME=[0.0, 1.4, -1.6, 0.2, 1.570796] rad
+[spawner-24] [INFO] [1790604697.591935506] [amir2.spawner_gripper_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790604697.596464718] [amir2.controller_manager]: Loading controller 'gripper_controller'
+[spawner-24] [INFO] [1790604697.614101379] [amir2.spawner_gripper_controller]: [94mLoaded [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790604697.616509619] [amir2.controller_manager]: Configuring controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790604697.616743592] [amir2.gripper_controller]: Action status changes will be monitored at 20.000000 Hz.
+[spawner-24] [INFO] [1790604697.627703917] [amir2.spawner_gripper_controller]: [92mConfigured and activated [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790604697.712171063] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604697.712242363] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [INFO] [1790604697.712751673] [friction_grasp_manager]: Friction grasp state: OPENING_GRIPPERS
+[INFO] [spawner-24]: process has finished cleanly [pid 40841]
+[ign gazebo-1] [INFO] [1790604698.523124639] [amir1.arm_controller]: Received new action goal
+[ign gazebo-1] [INFO] [1790604698.523208345] [amir1.arm_controller]: Accepted new action goal
+[ign gazebo-1] [INFO] [1790604698.523295360] [amir2.arm_controller]: Received new action goal
+[ign gazebo-1] [INFO] [1790604698.523338554] [amir2.arm_controller]: Accepted new action goal
+[arm_home_positioner-26] [INFO] [1790604698.523655473] [arm_home_positioner]: Sent Q_HOME=[0.0, 1.4, -1.6, 0.2, 1.570796] rad goals to all arm controllers
+[arm_home_positioner-26] [INFO] [1790604698.562696951] [arm_home_positioner]: All AMIR arm controllers accepted Q_HOME
+[friction_grasp_manager-25] [INFO] [1790604699.736770390] [friction_grasp_manager]: Friction grasp state: READY_TO_GRASP
+[INFO] [rotation_controller-27]: process started with pid [40953]
+[rotation_controller-27] [INFO] [1790604703.609785044] [cooperative_rotation_controller]: Rotation controller ready: target=30.0 deg, axis=[0.0, 0.0, 1.0]
+[ign gazebo-1] [INFO] [1790604706.629464379] [amir2.arm_controller]: Goal reached, success!
+[ign gazebo-1] [INFO] [1790604706.629471244] [amir1.arm_controller]: Goal reached, success!
+[arm_home_positioner-26] [INFO] [1790604706.706652341] [arm_home_positioner]: All AMIR arms reached Q_HOME
+[INFO] [create-28]: process started with pid [40995]
+[create-28] [INFO] [1790604710.337815974] [spawn_friction_payload]: Requested creation of entity.
+[create-28] [INFO] [1790604710.338393312] [spawn_friction_payload]: OK creation of entity.
+[INFO] [create-28]: process has finished cleanly [pid 40995]
+[INFO] [grasp_support_remover-29]: process started with pid [41016]
+[INFO] [coordinator-30]: process started with pid [41018]
+[INFO] [safety_monitor-31]: process started with pid [41020]
+[INFO] [slip_monitor-32]: process started with pid [41022]
+[INFO] [dual_base_approach-33]: process started with pid [41024]
+[grasp_support_remover-29] [INFO] [1790604711.103708501] [grasp_support_remover]: Temporary grasp support will be removed after both configured grasp conditions have been satisfied.
+[coordinator-30] [INFO] [1790604711.158558277] [cooperative_coordinator]: Coordinator ready: /amir1/rover_twist and /amir2/rover_twist
+[safety_monitor-31] [INFO] [1790604711.178390504] [safety_monitor]: Safety monitor ready; emergency stop affects both robots.
+[dual_base_approach-33] [INFO] [1790604711.251162416] [dual_base_approach]: Waiting for the payload, opening both grippers to their safe maximum, then moving both AMIR bases 0.110 m toward it
+[slip_monitor-32] [INFO] [1790604711.263517142] [slip_monitor]: Payload slip monitor ready.
+[INFO] [pivot_rotation_controller-34]: process started with pid [41169]
+[pivot_rotation_controller-34] [INFO] [1790604712.005346665] [pivot_rotation_controller]: Waiting for grasp; pivot=amir1, follower=amir2, target=30.0 deg
+[ign gazebo-1] [INFO] [1790604712.217536726] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604712.217599261] [amir2.gripper_controller]: Received & accepted new action goal
+[dual_base_approach-33] [INFO] [1790604712.218059133] [dual_base_approach]: Opening both grippers to the safe maximum (-1.000000 rad) before base approach
+[dual_base_approach-33] [INFO] [1790604712.254531852] [dual_base_approach]: Both grippers are at their safe-open position. Payload detached at base positions: amir1=-1.174999, amir2=1.174999; approaching targets: amir1=-1.064999, amir2=1.064999
+[dual_base_approach-33] [INFO] [1790604734.758338123] [dual_base_approach]: Both AMIR bases completed the 0.110 m payload approach
+[friction_grasp_manager-25] [INFO] [1790604734.794267391] [friction_grasp_manager]: Friction grasp state: CLOSING_GRIPPERS
+[dual_base_approach-33] [INFO] [1790604734.794720191] [dual_base_approach]: Both bases reached the payload; gripper-close sequence requested. Holding both bases stopped during grasp.
+[ign gazebo-1] [INFO] [1790604734.858021950] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604734.858040988] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604734.959627689] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604734.959739532] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.063875445] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.064002578] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.174736092] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.174888669] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.279838141] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.279870243] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.488301212] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.488593209] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.597896586] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.598027347] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.701378136] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.701543123] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.806055966] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604735.806237697] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.020782032] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.021137721] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.128164761] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.128268209] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.239318779] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.239455072] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.345427641] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.346032369] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.554835037] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.554995685] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.656701889] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.656827153] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.766216816] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.766452237] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.864050546] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604736.864097968] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.073793246] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.073974862] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.176229799] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.176500960] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.282339032] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.282387415] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.385120179] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.385285332] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.590998169] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.591078728] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.695372274] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.695524200] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.808254851] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.808341009] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.911613693] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604737.911681374] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.120859975] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.120964827] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.224913579] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.224943474] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.328052417] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.328210046] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.432037579] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.432150979] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.637766546] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.637821564] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.744120795] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.744690269] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.849704751] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.849750999] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.955744960] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604738.955899235] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.166486292] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.166916549] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.269568697] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.269699565] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.375301778] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.375350812] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.478981185] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.479020740] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.687251710] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.687491717] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.790543954] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.790725382] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.895332843] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604739.895528283] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.003136492] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.003639681] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.210384576] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.210391250] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.319571311] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.319788339] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.423601844] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.423667020] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.528500214] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.528701346] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.737276555] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.737414480] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.839217805] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.839319077] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.948094276] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604740.948253327] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.053053110] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.053203177] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.261343427] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.261786152] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.366021509] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.366521926] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.469105424] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.469300687] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.573977783] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.574044506] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.813933288] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.813971527] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.923188692] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604741.923435538] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.054537452] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.054781639] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.175031145] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.175507881] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.412366068] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.412510891] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.516050746] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.516567246] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.622381951] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.622518930] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.726497518] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.726671324] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.959682237] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604742.959730001] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.070190849] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.070726303] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.187291302] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.187589867] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.290609854] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.290744607] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.530649803] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.530720982] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.637364614] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.637382967] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.741837939] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.741918279] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.849028308] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604743.849089420] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.105006924] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.105075675] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.221809232] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.221830687] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.330315040] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.330481179] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.446359491] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.446391253] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.666703789] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.666787546] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.775497165] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.775674859] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.886838667] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.887329643] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.995863321] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604744.995993677] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.225227226] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.225550066] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.339562353] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.339727057] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.443743125] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.443831063] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.573756599] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.574224035] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.689059694] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.689428867] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.913269640] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604745.913389639] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.021687447] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.021836954] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.131532863] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.131773881] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.234992858] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.235093544] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.482303683] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.482944098] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.598880016] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.598917874] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.705138740] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.705340562] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.809543983] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604746.809752958] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.066539252] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.066598977] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.171084485] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.171141223] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.290097351] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.290272457] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.395364425] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.395364973] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.643080652] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.643135228] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.753409960] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.753876210] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.865522235] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.865749963] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.996852350] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604747.996875391] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.201498876] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.201586467] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.316341466] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.316428387] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.437416129] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.437437624] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.555425200] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.555520146] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.779258507] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.779393275] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.894841577] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.894899755] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.996953869] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604748.997068102] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.113547728] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.113896938] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.363562645] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.363612325] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.476475734] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.476631857] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.584372201] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.584469406] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.690684843] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.690843274] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.924539067] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604749.924546858] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.028508134] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.028690488] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.145793756] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.145942898] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.260920553] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.261032087] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.491976601] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.492011810] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.597515553] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.597577289] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.711377409] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.711436337] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.823973612] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604750.824132813] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.032874406] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.032990961] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.158511898] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.158694282] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.270324694] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.270432093] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.380232689] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.380270016] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.609160781] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.609184336] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.712656184] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.712767330] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.814402402] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.814528903] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.920564196] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604751.920949088] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.146716279] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.146884855] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.273641338] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.273796839] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.380550692] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.380554607] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.488860920] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.488963518] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.742095528] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.742318689] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.847832743] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.847912419] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.971158055] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604752.971706680] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.235665057] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.235732175] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.511072836] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.511130263] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.617307103] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.617397506] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.859095380] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604753.859186831] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.066815997] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.066957723] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.171714802] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.171862694] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.382599892] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.382676587] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.603218636] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.603709208] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.721355256] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604754.721603834] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.004926531] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.004947465] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.292102226] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.292630490] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.419670154] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.419949630] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.664358780] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.664443985] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.912600896] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604755.912664438] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.037001645] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.037083901] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.249564257] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.249578680] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.457815390] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.457867933] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.559319202] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.559391941] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.808240576] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604756.808275384] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.069983977] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.069992613] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.193360151] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.193811142] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.421421722] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.421899016] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.685437893] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.685791338] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.791850083] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604757.791887890] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.007413832] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.007499208] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.236201766] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.236318886] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.346028754] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.346219645] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.565573718] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.565656804] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.787301120] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.787405769] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.995994000] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604758.996103911] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.098405306] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.098449997] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.322380169] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.322621154] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.535517665] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.535741574] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.645300172] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.645713334] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.894946393] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604759.894958360] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.112157717] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.112517824] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.221319468] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.221556504] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.482704267] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.482819916] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.768574260] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.768915616] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.871962443] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604760.872035925] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.090567294] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.090571931] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.316391174] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.316606462] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.438212922] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.438229775] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.664330109] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.664347904] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.867375977] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604761.867509633] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [INFO] [1790604762.753111890] [friction_grasp_manager]: Finger wrench bias captured: amir1/left=19.2N, amir1/right=22.1N, amir2/left=19.2N, amir2/right=22.1N
+[friction_grasp_manager-25] [INFO] [1790604762.753332979] [friction_grasp_manager]: Friction grasp state: HOLDING
+[slip_monitor-32] [INFO] [1790604762.792039516] [slip_monitor]: Captured friction-grasp payload baseline: x=-0.000, y=-0.000, z=0.657
+[ign gazebo-1] [INFO] [1790604762.955974440] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604762.956078312] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.328596431] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.328737850] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.693825949] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.693910734] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.880402198] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604763.880653218] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.236406201] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.236451776] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.693875285] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.693933314] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.892827793] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604764.892875388] [amir2.gripper_controller]: Received & accepted new action goal
+[grasp_support_remover-29] [INFO] [1790604764.995010468] [grasp_support_remover]: Removed temporary support model "grasp_support"; transport may start.
+[ign gazebo-1] [INFO] [1790604765.304859484] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604765.304966787] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604765.561527999] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604765.561580213] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604765.759783483] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604765.759978599] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.205736832] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.205924762] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.600887405] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.600914942] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.787146654] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604766.787237192] [amir2.gripper_controller]: Received & accepted new action goal
+[rotation_controller-27] [INFO] [1790604767.038873018] [cooperative_rotation_controller]: シーケンス開始: 搬送（直進） （0.500 m）
+[coordinator-30] [INFO] [1790604767.060788753] [cooperative_coordinator]: Payload goal: x=-0.000, y=-0.000, yaw=0.000
+[coordinator-30] [INFO] [1790604767.061305031] [cooperative_coordinator]: Formation-distance reference captured: 2.1340 m
+[ign gazebo-1] [INFO] [1790604767.155158032] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604767.155193384] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604767.555055306] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604767.555494789] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604767.786293189] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604767.786405292] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.023462551] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.023612748] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604768.078321626] [cooperative_coordinator]: Payload goal: x=0.004, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604768.375712594] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.375714284] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.589251416] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.589261413] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.963314499] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604768.963388346] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604769.096746866] [cooperative_coordinator]: Payload goal: x=0.016, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604769.334355031] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604769.334506646] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604769.547109316] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604769.547251081] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604769.906514511] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604769.906603052] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604770.113690619] [cooperative_coordinator]: Payload goal: x=0.034, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604770.338684718] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604770.338730109] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604770.543562769] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604770.543614973] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604770.760142928] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604770.760210331] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604771.138817592] [cooperative_coordinator]: Payload goal: x=0.044, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604771.182969603] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604771.318956886] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604771.319423284] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604771.624309387] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604771.624412171] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604772.150056720] [cooperative_coordinator]: Payload goal: x=0.044, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604772.156669181] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604772.440911052] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604772.585884120] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604772.585887732] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604772.913723505] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604772.913733619] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604773.191570036] [cooperative_coordinator]: Payload goal: x=0.044, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604773.291037424] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.291159204] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.423358117] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.423420868] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.704116741] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.704208619] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604773.943428025] [amir1.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604774.060148752] [friction_grasp_manager]: amir1 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604774.060431247] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604774.193842446] [cooperative_coordinator]: Payload goal: x=0.052, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604774.287465996] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604774.287467430] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604774.692049366] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604774.910515985] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604774.910703437] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604775.200837534] [cooperative_coordinator]: Payload goal: x=0.069, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604775.261040281] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604775.640561239] [friction_grasp_manager]: amir1 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604775.640783029] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604775.641128232] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604775.796690296] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604775.796698026] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.088647633] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.088812128] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604776.219815659] [cooperative_coordinator]: Payload goal: x=0.069, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604776.474316429] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.474478694] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.658567696] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.658575976] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.993401489] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604776.993634017] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604777.243730832] [cooperative_coordinator]: Payload goal: x=0.069, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604777.450924133] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604777.451094085] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604777.669424670] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604777.669586117] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.017949098] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.018117481] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604778.244867707] [cooperative_coordinator]: Payload goal: x=0.069, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604778.382271918] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.382395234] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.599161720] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.599294425] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.910259088] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604778.910532947] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604779.257625250] [cooperative_coordinator]: Payload goal: x=0.069, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604779.401968276] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604779.402080734] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604779.647140394] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604779.647228647] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.050609506] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.050823473] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604780.262783033] [cooperative_coordinator]: Payload goal: x=0.090, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604780.333916909] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.334035838] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.480716163] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.481200555] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604780.709978638] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604781.092102863] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604781.092155232] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604781.280848862] [cooperative_coordinator]: Payload goal: x=0.093, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604781.328460247] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604781.328516830] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604781.721921158] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604781.721977432] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604782.158377677] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604782.158379286] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604782.281383625] [cooperative_coordinator]: Payload goal: x=0.093, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604782.369786826] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604782.369867647] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604782.743147412] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604782.743265671] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604783.060845702] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604783.060913134] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604783.252229566] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604783.252294328] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604783.285295456] [cooperative_coordinator]: Payload goal: x=0.093, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604783.701699577] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604783.701815655] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604784.097582018] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604784.097650391] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604784.295450060] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604784.295541572] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604784.296874769] [cooperative_coordinator]: Payload goal: x=0.093, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604784.774493824] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604784.774606801] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604785.059782847] [amir1.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604785.060034116] [friction_grasp_manager]: amir2 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604785.060195160] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604785.170837066] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604785.171056068] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604785.303468865] [cooperative_coordinator]: Payload goal: x=0.108, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604785.573713912] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604785.573776451] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.081040406] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.081297978] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.258881990] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.258929026] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604786.319916779] [cooperative_coordinator]: Payload goal: x=0.118, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604786.663492402] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.911446065] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604786.911520849] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604787.131169292] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604787.131176960] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604787.325988665] [cooperative_coordinator]: Payload goal: x=0.118, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604787.540681822] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604787.540814734] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604787.955971838] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604787.956008738] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604788.149961963] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604788.150069629] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604788.326156935] [cooperative_coordinator]: Payload goal: x=0.118, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604788.456619190] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604788.456841855] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604788.826054012] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604788.826056591] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.074829193] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.074842107] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604789.330809745] [cooperative_coordinator]: Payload goal: x=0.118, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604789.470257275] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.470738812] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.805317663] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.805396362] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604789.924964580] [amir1.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604789.926800483] [friction_grasp_manager]: amir2 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604789.927204627] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604790.219133423] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604790.219184312] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604790.330737171] [cooperative_coordinator]: Payload goal: x=0.120, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604790.587641426] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604790.587853511] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604790.835024637] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604790.835140233] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604791.181172437] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604791.181257918] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604791.330701092] [cooperative_coordinator]: Payload goal: x=0.142, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604791.641966597] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604791.642032757] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604791.882877839] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604791.882916518] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604792.161794161] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604792.161909229] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604792.337833391] [cooperative_coordinator]: Payload goal: x=0.142, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604792.555424995] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604792.555512811] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604792.785957109] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604792.786030029] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.104734468] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.104917733] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604793.347192444] [cooperative_coordinator]: Payload goal: x=0.142, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604793.355287928] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.355416987] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.489085947] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.489169681] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604793.779961053] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604794.350457683] [cooperative_coordinator]: Payload goal: x=0.142, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604794.451975283] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604795.373018608] [cooperative_coordinator]: Payload goal: x=0.142, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604795.385427116] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604795.385541136] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604795.568651738] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604795.568677840] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604795.981582394] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604795.981732613] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604796.378287243] [cooperative_coordinator]: Payload goal: x=0.154, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604796.471065858] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604796.471136671] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604796.658152165] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604796.658165781] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.050588702] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.050637604] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.265768463] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.265769147] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604797.386070182] [cooperative_coordinator]: Payload goal: x=0.166, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604797.451925960] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.452012455] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.835934023] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604797.836042542] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604798.289308473] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604798.289444858] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604798.387907847] [cooperative_coordinator]: Payload goal: x=0.166, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604798.493293336] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604798.493504333] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604798.968513635] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604798.968531049] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604799.406742796] [cooperative_coordinator]: Payload goal: x=0.166, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604799.419375270] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604799.419387002] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604799.588155340] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604799.990209954] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604799.990260317] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604800.395504768] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604800.395733952] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604800.414883670] [cooperative_coordinator]: Payload goal: x=0.166, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604800.575594458] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604800.575721393] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604800.993555962] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604800.993651319] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604801.343399884] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604801.343510060] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604801.415883280] [cooperative_coordinator]: Payload goal: x=0.166, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604801.536942441] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604801.537103416] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604801.868862101] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604801.868931684] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604802.300332801] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604802.300376906] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604802.431208914] [cooperative_coordinator]: Payload goal: x=0.190, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604802.477534194] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604802.477583482] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604802.906580719] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604802.906650154] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604803.323832626] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604803.323860911] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604803.436980771] [cooperative_coordinator]: Payload goal: x=0.191, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604803.518246863] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604803.518395862] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604803.918576165] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604803.918686840] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604804.324519114] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604804.324656817] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604804.451074637] [cooperative_coordinator]: Payload goal: x=0.191, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604804.524894560] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604804.524997488] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604804.930996468] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604804.931060020] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604805.222887279] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604805.223170459] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604805.410900656] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604805.410937763] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604805.463009879] [cooperative_coordinator]: Payload goal: x=0.191, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604805.861335324] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604805.861645909] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604806.254284876] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604806.254299095] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604806.446411530] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604806.446526982] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604806.469942013] [cooperative_coordinator]: Payload goal: x=0.191, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604806.806010273] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604806.806089704] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604807.101466822] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604807.101544310] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604807.477993773] [cooperative_coordinator]: Payload goal: x=0.201, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604807.641095815] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604807.641259267] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604808.063110990] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604808.063325258] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604808.218266584] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604808.218456807] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604808.478482940] [cooperative_coordinator]: Payload goal: x=0.216, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604808.631732746] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604808.631861663] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604809.039229455] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604809.039237530] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604809.235166756] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604809.235265710] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604809.514190254] [cooperative_coordinator]: Payload goal: x=0.216, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604809.694664779] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604809.694788858] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604810.115905550] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604810.115931862] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604810.250102572] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604810.250186911] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604810.535242736] [cooperative_coordinator]: Payload goal: x=0.216, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604811.031752462] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.031861590] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.239256917] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.239336831] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604811.544608390] [cooperative_coordinator]: Payload goal: x=0.216, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604811.569723871] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.569750318] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.998605939] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604811.998614548] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604812.222561140] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604812.222565248] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604812.561520824] [cooperative_coordinator]: Payload goal: x=0.216, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604812.611686314] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604812.611836107] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604812.985590885] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604812.985690799] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604813.147416818] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604813.147507337] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604813.562596093] [cooperative_coordinator]: Payload goal: x=0.235, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604813.887941608] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604813.888016927] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604814.101947531] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604814.102015687] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604814.590921522] [cooperative_coordinator]: Payload goal: x=0.240, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604814.606227938] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604814.606271598] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604814.921465240] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604814.921548782] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604815.164471900] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604815.164575921] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604815.581840814] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604815.581965875] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604815.609031177] [cooperative_coordinator]: Payload goal: x=0.240, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604815.974545433] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604815.974668150] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604816.197681560] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604816.198153021] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604816.509783381] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604816.509797130] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604816.620023286] [cooperative_coordinator]: Payload goal: x=0.240, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604816.863297658] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604817.623663739] [cooperative_coordinator]: Payload goal: x=0.240, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604818.077058340] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604818.077147338] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604818.358808957] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604818.358916532] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604818.672499266] [cooperative_coordinator]: Payload goal: x=0.240, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604818.758028576] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604818.758049374] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604819.067080913] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604819.067117552] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604819.265008571] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604819.265219217] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604819.677356956] [cooperative_coordinator]: Payload goal: x=0.257, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604819.738633272] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604819.738776309] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.164728322] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.164781048] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.398085231] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.398128032] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.624436844] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604820.679727844] [cooperative_coordinator]: Payload goal: x=0.264, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604820.962487590] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604820.962591704] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604821.229538443] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604821.229576963] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604821.604005350] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604821.604071604] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604821.686339618] [cooperative_coordinator]: Payload goal: x=0.264, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604822.021144626] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.021229551] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.237986359] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.238108581] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.529376084] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.529446591] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604822.699186996] [cooperative_coordinator]: Payload goal: x=0.264, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604822.919385127] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604822.919385433] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604823.112674893] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604823.112914653] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604823.481913258] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604823.481969760] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604823.699781799] [cooperative_coordinator]: Payload goal: x=0.264, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604823.802307269] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.064192350] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.064192975] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.467086289] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.467113703] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604824.715353995] [cooperative_coordinator]: Payload goal: x=0.268, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604824.840594395] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.840597337] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604824.996020467] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604825.399977236] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604825.400033552] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604825.730712404] [cooperative_coordinator]: Payload goal: x=0.289, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604825.825519209] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604825.825746488] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.007383357] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.007461432] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.399711254] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.399863346] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604826.746642080] [cooperative_coordinator]: Payload goal: x=0.289, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604826.754992323] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.755113531] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.880955052] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604826.881006883] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604827.116148125] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604827.546161110] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604827.763363316] [cooperative_coordinator]: Payload goal: x=0.289, y=-0.000, yaw=0.000
+[coordinator-30] [INFO] [1790604828.763575460] [cooperative_coordinator]: Payload goal: x=0.289, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604828.884022226] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604829.362825996] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604829.362874834] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604829.770460908] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604829.770545340] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604829.771377848] [cooperative_coordinator]: Payload goal: x=0.289, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604829.946834795] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604829.946947432] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604830.421822363] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604830.421855762] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604830.780311008] [cooperative_coordinator]: Payload goal: x=0.297, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604830.855949564] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604830.856049016] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604831.055105727] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604831.055223423] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604831.298416544] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604831.298520498] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604831.799583007] [cooperative_coordinator]: Payload goal: x=0.314, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604831.881050146] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604831.881084202] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604832.275980205] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604832.276005003] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604832.690279937] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604832.690428560] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604832.821247304] [cooperative_coordinator]: Payload goal: x=0.314, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604832.895848111] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604832.895883787] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604833.431363528] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604833.431433910] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604833.814563976] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604833.814824749] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604833.841741152] [cooperative_coordinator]: Payload goal: x=0.314, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604834.009937924] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.009967185] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.433636375] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.433764011] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.670099285] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.670224022] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604834.844011689] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604834.846005177] [cooperative_coordinator]: Payload goal: x=0.314, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604835.308469573] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604835.308621186] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604835.655507115] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604835.788636090] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604835.788957439] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604835.851443500] [cooperative_coordinator]: Payload goal: x=0.314, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604836.044763437] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604836.044992771] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604836.297785115] [friction_grasp_manager]: amir1 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604836.298045221] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604836.298198267] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604836.489125395] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604836.756885710] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604836.756936126] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604836.869167669] [cooperative_coordinator]: Payload goal: x=0.338, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604837.070349988] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604837.070378860] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604837.267389619] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604837.267410720] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604837.656692164] [friction_grasp_manager]: amir1 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604837.656930697] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604837.656998382] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604837.872324836] [cooperative_coordinator]: Payload goal: x=0.338, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604837.922075382] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604837.922153781] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604838.107144667] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604838.579694006] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604838.875275001] [cooperative_coordinator]: Payload goal: x=0.338, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604839.004039704] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.004126808] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.143325654] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.143412416] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.514125680] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.514154864] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604839.895659090] [cooperative_coordinator]: Payload goal: x=0.338, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604839.948459882] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604839.948526203] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604840.159856952] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604840.159857587] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604840.578233272] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604840.578583524] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604840.899507937] [cooperative_coordinator]: Payload goal: x=0.338, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604840.924395564] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604840.924474465] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604841.147742681] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604841.147870734] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604841.472569435] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604841.472620046] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604841.900620111] [cooperative_coordinator]: Payload goal: x=0.359, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604842.846229061] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604842.846535342] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604842.903108147] [cooperative_coordinator]: Payload goal: x=0.362, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604843.261163220] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604843.261395117] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604843.480082122] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604843.480340000] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604843.883845078] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604843.883915585] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604843.905144694] [cooperative_coordinator]: Payload goal: x=0.362, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604844.288896501] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604844.289020420] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604844.448326095] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604844.448339856] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604844.881022397] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604844.881089058] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604844.914493034] [cooperative_coordinator]: Payload goal: x=0.362, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604845.209693025] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604845.209754032] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604845.420025309] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604845.824759646] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604845.824809861] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604845.918729686] [cooperative_coordinator]: Payload goal: x=0.362, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604846.199866605] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604846.200036282] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604846.446627332] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604846.446657880] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604846.832045679] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604846.832170039] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604846.938935063] [cooperative_coordinator]: Payload goal: x=0.365, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604847.224163811] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.224256267] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.391682883] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.391769236] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.687337219] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.687887425] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604847.943580239] [cooperative_coordinator]: Payload goal: x=0.386, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604847.998150490] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604847.998229665] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604848.970563233] [cooperative_coordinator]: Payload goal: x=0.386, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604849.616792409] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604849.916381534] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604849.975401142] [cooperative_coordinator]: Payload goal: x=0.386, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604850.154168866] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604850.154175314] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604850.548372434] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604850.548516629] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604850.949282996] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604850.949335355] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604850.984101365] [cooperative_coordinator]: Payload goal: x=0.386, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604851.096595442] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604851.096747511] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604851.499750906] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604851.499860986] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604851.898020678] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604851.898070276] [amir1.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604852.005279095] [cooperative_coordinator]: Payload goal: x=0.386, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604852.092024885] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.092104063] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.384296073] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.384503651] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.736934774] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.736934354] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.926091411] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604852.926361322] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604853.027097978] [cooperative_coordinator]: Payload goal: x=0.402, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604853.372519990] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604853.372665091] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604853.612825146] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604853.612935496] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604853.760467186] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604853.760645630] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604854.034904410] [cooperative_coordinator]: Payload goal: x=0.410, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604854.078807713] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.078856549] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.372672145] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.372736794] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-25] [WARN] [1790604854.560832229] [friction_grasp_manager]: amir1 finger force above 26.0 N; backing off.
+[ign gazebo-1] [INFO] [1790604854.561428582] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.561722346] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.930380978] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604854.930512610] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604855.044363484] [cooperative_coordinator]: Payload goal: x=0.410, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604855.331986666] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604855.332061556] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604855.550007487] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604855.550148876] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604855.848845330] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604855.848905518] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604856.045419931] [cooperative_coordinator]: Payload goal: x=0.410, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604856.226799725] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604856.226810398] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604856.418898873] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604856.418972730] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604856.782369702] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604856.782511973] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604857.080730748] [cooperative_coordinator]: Payload goal: x=0.410, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604857.172295695] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604857.172371535] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604857.337814399] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604857.338012264] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604857.806718452] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604857.806978749] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604858.118312008] [cooperative_coordinator]: Payload goal: x=0.421, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604858.210925437] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604858.211018054] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604858.408313739] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604858.408434637] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604858.835374761] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604858.835480451] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604859.135722754] [cooperative_coordinator]: Payload goal: x=0.434, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604859.243536493] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604859.243593461] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604859.460214146] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604859.460477136] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604859.881492441] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604859.881626923] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604860.139663896] [cooperative_coordinator]: Payload goal: x=0.434, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604860.178043117] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604860.178052613] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604860.365927059] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604860.806112402] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604860.806118231] [amir2.gripper_controller]: Received & accepted new action goal
+[coordinator-30] [INFO] [1790604861.144848558] [cooperative_coordinator]: Payload goal: x=0.434, y=-0.000, yaw=0.000
+[ign gazebo-1] [INFO] [1790604861.197778073] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604861.197835310] [amir2.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604861.372820915] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604861.755943204] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790604861.755972249] [amir2.gripper_controller]: Received & accepted new action goal
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[parameter_bridge-18] [INFO] [1790604862.073760587] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[finger_contact_aggregator-4] [INFO] [1790604862.073768879] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-8] [INFO] [1790604862.073818157] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-19] [INFO] [1790604862.073821600] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-9] [INFO] [1790604862.073823139] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-5] [INFO] [1790604862.073819867] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_state_publisher-15] [INFO] [1790604862.073840127] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-7] [INFO] [1790604862.073854130] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[transport_pose_filter-3] [INFO] [1790604862.073858892] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790604862.073871382] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-20] Traceback (most recent call last):
+[rover_twist_relay_ign.py-20]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-20]     main()
+[rover_twist_relay_ign.py-20]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-20]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-20]     executor.spin_once()
+[rover_twist_relay_ign.py-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[rover_twist_relay_ign.py-20]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[rover_twist_relay_ign.py-20]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-20]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-20]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-20]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-20] KeyboardInterrupt
+[rover_twist_relay_ign.py-10] Traceback (most recent call last):
+[rover_twist_relay_ign.py-10]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-10]     main()
+[rover_twist_relay_ign.py-10]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-10]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-10]     executor.spin_once()
+[rover_twist_relay_ign.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[rover_twist_relay_ign.py-10]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[rover_twist_relay_ign.py-10]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-10]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-10]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-10]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-10] KeyboardInterrupt
+[parameter_bridge-17] [INFO] [1790604862.074309369] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ign gazebo-1] [INFO] [1790604862.075585341] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ign gazebo-1] [INFO] [1790604862.075651612] [amir2.controller_manager]: Shutdown request received....
+[ign gazebo-1] [INFO] [1790604862.075712652] [amir2.controller_manager]: Shutting down all controllers in the controller manager.
+[ign gazebo-1] [INFO] [1790604862.075743469] [amir2.controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604862.075797403] [amir2.controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604862.075840095] [amir2.controller_manager]: Deactivating controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604862.075882439] [amir2.controller_manager]: Shutting down controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604862.075903041] [amir2.controller_manager]: Deactivating controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790604862.075932058] [amir2.controller_manager]: Shutting down controller 'gripper_controller'
+[INFO] [pivot_rotation_controller-34]: sending signal 'SIGINT' to process[pivot_rotation_controller-34]
+[INFO] [dual_base_approach-33]: sending signal 'SIGINT' to process[dual_base_approach-33]
+[INFO] [slip_monitor-32]: sending signal 'SIGINT' to process[slip_monitor-32]
+[INFO] [safety_monitor-31]: sending signal 'SIGINT' to process[safety_monitor-31]
+[ERROR] [pivot_rotation_controller-34]: process has died [pid 41169, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_jvlzxkr3'].
+[ERROR] [dual_base_approach-33]: process has died [pid 41024, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/dual_base_approach --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_o8cywlo3'].
+[ERROR] [slip_monitor-32]: process has died [pid 41022, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/slip_monitor --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_3kzvi_bs --params-file /tmp/launch_params_6hg1uhc7 --params-file /tmp/launch_params_6knhunmm'].
+[INFO] [coordinator-30]: sending signal 'SIGINT' to process[coordinator-30]
+[ERROR] [rover_twist_relay_ign.py-20]: process has died [pid 40564, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir2 -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_ltvau22b'].
+[ERROR] [safety_monitor-31]: process has died [pid 41020, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/safety_monitor --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_76xqe6xr --params-file /tmp/launch_params_bljlpzps'].
+[INFO] [grasp_support_remover-29]: sending signal 'SIGINT' to process[grasp_support_remover-29]
+[INFO] [rotation_controller-27]: sending signal 'SIGINT' to process[rotation_controller-27]
+[INFO] [arm_home_positioner-26]: sending signal 'SIGINT' to process[arm_home_positioner-26]
+[ERROR] [grasp_support_remover-29]: process has died [pid 41016, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/grasp_support_remover --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_50fzjpid'].
+[ERROR] [coordinator-30]: process has died [pid 41018, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/coordinator --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_hhr_vf2e --params-file /tmp/launch_params_pauecq_z --params-file /tmp/launch_params_lj0g0n1e'].
+[ERROR] [rover_twist_relay_ign.py-10]: process has died [pid 40239, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params__yu90dw0'].
+[INFO] [friction_grasp_manager-25]: sending signal 'SIGINT' to process[friction_grasp_manager-25]
+[ERROR] [rotation_controller-27]: process has died [pid 40953, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_rotation/lib/cooperative_rotation/rotation_controller --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_rotation/share/cooperative_rotation/config/rotation_params.yaml --params-file /tmp/launch_params_aldbix0w'].
+[INFO] [parameter_bridge-19]: sending signal 'SIGINT' to process[parameter_bridge-19]
+[ERROR] [arm_home_positioner-26]: process has died [pid 40912, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/coop_transport_controller/lib/coop_transport_controller/arm_home_positioner --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_n5vm84fe'].
+[ERROR] [friction_grasp_manager-25]: process has died [pid 40876, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/friction_grasp_manager --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_eqmabzmm --params-file /tmp/launch_params_c8dlp4va'].
+[INFO] [parameter_bridge-18]: sending signal 'SIGINT' to process[parameter_bridge-18]
+[INFO] [parameter_bridge-17]: sending signal 'SIGINT' to process[parameter_bridge-17]
+[INFO] [robot_state_publisher-15]: sending signal 'SIGINT' to process[robot_state_publisher-15]
+[INFO] [parameter_bridge-9]: sending signal 'SIGINT' to process[parameter_bridge-9]
+[ERROR] [robot_state_publisher-15]: process has died [pid 40554, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir2 -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_i80cnneq -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [parameter_bridge-8]: sending signal 'SIGINT' to process[parameter_bridge-8]
+[INFO] [parameter_bridge-7]: sending signal 'SIGINT' to process[parameter_bridge-7]
+[INFO] [robot_state_publisher-5]: sending signal 'SIGINT' to process[robot_state_publisher-5]
+[INFO] [finger_contact_aggregator-4]: sending signal 'SIGINT' to process[finger_contact_aggregator-4]
+[INFO] [transport_pose_filter-3]: sending signal 'SIGINT' to process[transport_pose_filter-3]
+[INFO] [parameter_bridge-2]: sending signal 'SIGINT' to process[parameter_bridge-2]
+[ERROR] [robot_state_publisher-5]: process has died [pid 40229, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_3ux8puhj -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [finger_contact_aggregator-4]: process has died [pid 40127, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/finger_contact_aggregator --ros-args --params-file /tmp/launch_params_wcju7be9'].
+[INFO] [ign gazebo-1]: sending signal 'SIGINT' to process[ign gazebo-1]
+[ERROR] [transport_pose_filter-3]: process has died [pid 40125, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/transport_pose_filter --ros-args --params-file /tmp/launch_params_ghwie8qw'].
+[INFO] [parameter_bridge-8]: process has finished cleanly [pid 40235]
+[ign gazebo-1] [INFO] [1790604862.075952617] [amir2.controller_manager]: Deactivating controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604862.077849044] [amir2.controller_manager]: Shutting down controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604862.077899870] [resource_manager]: 'deactivate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604862.077921383] [resource_manager]: Successful 'deactivate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604862.077926636] [resource_manager]: 'shutdown' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604862.077932565] [resource_manager]: Successful 'shutdown' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604862.077938526] [resource_manager]: 'deactivate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604862.077943529] [resource_manager]: Successful 'deactivate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604862.077947320] [resource_manager]: 'shutdown' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604862.078172901] [resource_manager]: Successful 'shutdown' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604862.078178449] [amir2.controller_manager]: Shutting down the controller manager.
+[ign gazebo-1] [INFO] [1790604862.078191090] [amir1.controller_manager]: Shutdown request received....
+[ign gazebo-1] [INFO] [1790604862.078217906] [amir1.controller_manager]: Shutting down all controllers in the controller manager.
+[ign gazebo-1] [INFO] [1790604862.078233070] [amir1.controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604862.078258874] [amir1.controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790604862.078279369] [amir1.controller_manager]: Deactivating controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604862.078307375] [amir1.controller_manager]: Shutting down controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790604862.078325781] [amir1.controller_manager]: Deactivating controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790604862.078346674] [amir1.controller_manager]: Shutting down controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790604862.078388914] [amir1.controller_manager]: Deactivating controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604862.078410960] [amir1.controller_manager]: Shutting down controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790604862.078432082] [resource_manager]: 'deactivate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604862.078438374] [resource_manager]: Successful 'deactivate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604862.078442606] [resource_manager]: 'shutdown' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790604862.078447410] [resource_manager]: Successful 'shutdown' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790604862.078452691] [resource_manager]: 'deactivate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604862.078457569] [resource_manager]: Successful 'deactivate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604862.078461274] [resource_manager]: 'shutdown' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790604862.078466047] [resource_manager]: Successful 'shutdown' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790604862.078470177] [amir1.controller_manager]: Shutting down the controller manager.
+[INFO] [parameter_bridge-17]: process has finished cleanly [pid 40558]
+[INFO] [parameter_bridge-7]: process has finished cleanly [pid 40233]
+[INFO] [parameter_bridge-9]: process has finished cleanly [pid 40237]
+[INFO] [parameter_bridge-18]: process has finished cleanly [pid 40560]
+[INFO] [parameter_bridge-2]: process has finished cleanly [pid 40122]
+[parameter_bridge-19] [INFO] [1790604862.142885079] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-18] [INFO] [1790604862.146548143] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-17] [INFO] [1790604862.160279201] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-19]: process has finished cleanly [pid 40562]
+[parameter_bridge-9] [INFO] [1790604862.170473750] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-8] [INFO] [1790604862.173532057] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-7] [INFO] [1790604862.176388915] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790604862.189896433] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [ign gazebo-1]: process has died [pid 40120, exit code -2, cmd 'ruby /usr/bin/ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf --force-version 6'].
+[INFO] [launch]: process[ign gazebo-1] was required: shutting down launched system
