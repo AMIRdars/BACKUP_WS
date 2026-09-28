@@ -21,3 +21,9 @@ ROS_DOMAIN_ID=116 IGN_PARTITION=contact-native-test-isolated /usr/bin/python3 si
 ```
 
 原則：最終判断まで既定は ros。aggregate_contacts:=false は従来の生 ROS Contacts を維持。物理拘束計算の削減とは扱わない。RTF=1.0 の達成を保証しない。
+
+## 利用するAPIの根拠
+
+Fortress にインストール済みの ignition-transport11 `Node.hh` の Subscribe と ignition-msgs8 `contacts.proto` / `contact.proto` を確認して実装。collision1/2、depth の対応は従来の ROS Contacts と同じ。Transport callback と ROS timer は別スレッドなので共有状態を mutex で保護する。ROS clock を引き続き使用するため期限は sim 時間。
+
+変更箇所：cooperative_transport_gazebo の finger_contact_aggregator.cpp / CMakeLists.txt / package.xml、robot_bringup / friction_simulation / integrated_transport_simulation の launch。単独 robot bringup と集約無効時の生ROS経路は維持する。
