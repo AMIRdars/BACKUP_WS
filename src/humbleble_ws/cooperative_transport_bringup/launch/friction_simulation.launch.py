@@ -22,6 +22,7 @@ from launch_ros.substitutions import FindPackageShare
 def _launch_setup(context, *args, **kwargs):
     headless = LaunchConfiguration('headless').perform(context).lower() in (
         '1', 'true', 'yes')
+    aggregate_contacts = LaunchConfiguration('aggregate_contacts').perform(context).lower() in ('true', '1', 'yes')
     filtered_poses = LaunchConfiguration('filtered_poses').perform(context).lower() in ('1', 'true', 'yes')
     pose_parameters = {'world_pose_topic': '/cooperative_transport/model_poses'} if filtered_poses else {}
     auto_grasp = LaunchConfiguration('auto_grasp').perform(context).lower() in (
@@ -144,11 +145,18 @@ def _launch_setup(context, *args, **kwargs):
         output='screen', condition=IfCondition(str(filtered_poses).lower()),
         parameters=[{'entity_names': ['amir1', 'amir2', 'cooperative_payload']}])
 
+    contact_aggregator = Node(
+        package='cooperative_transport_gazebo', executable='finger_contact_aggregator',
+        output='screen', condition=IfCondition(str(aggregate_contacts).lower()),
+        parameters=[{'use_sim_time': True,
+                     'collision_count': int(LaunchConfiguration('finger_collision_boxes').perform(context))}])
+
     def robot(namespace, x, yaw):
         return IncludeLaunchDescription(
             PythonLaunchDescriptionSource(robot_launch),
             launch_arguments={
                 'namespace': namespace,
+                'aggregate_contacts': str(aggregate_contacts).lower(),
                 'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
                 'x': x, 'y': '0.0', 'z': '0.03', 'yaw': yaw,
                 'world_name': 'cooperative_transport_friction',
@@ -186,6 +194,7 @@ def _launch_setup(context, *args, **kwargs):
             # dual_base_approach requests the close sequence only after both
             # mobile bases have reached the payload.
             'auto_grasp': False,
+            'use_contact_aggregation': aggregate_contacts,
             'auto_grasp_delay': auto_grasp_delay,
             'require_contact': contact_only,
             'target_normal_force': target_normal_force,
@@ -311,6 +320,7 @@ def _launch_setup(context, *args, **kwargs):
         simulation,
         bridge,
         pose_filter,
+        contact_aggregator,
         # Start 0.11 m outside the verified grasp positions. Both bases move
         # inward only after the board has spawned and both grippers are open.
         TimerAction(
@@ -340,6 +350,7 @@ def _launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument('aggregate_contacts', default_value='false'),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('headless', default_value='false'),

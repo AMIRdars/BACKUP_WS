@@ -93,6 +93,7 @@ def launch_setup(context, *args, **kwargs):
     enable_lidar = LaunchConfiguration("enable_lidar").perform(context).lower() in ("true", "1", "yes")
     enable_wrist_ft = LaunchConfiguration("enable_wrist_ft").perform(context).lower() in ("true", "1", "yes")
 
+    aggregate_contacts = LaunchConfiguration("aggregate_contacts").perform(context).lower() in ("true", "1", "yes")
     finger_collision_boxes = int(LaunchConfiguration("finger_collision_boxes").perform(context))
     if finger_collision_boxes not in (1, 3, 9):
         raise ValueError("finger_collision_boxes must be 1, 3, or 9")
@@ -227,7 +228,8 @@ def launch_setup(context, *args, **kwargs):
                 f"{gz_contact}@ros_gz_interfaces/msg/Contacts"
                 "[gz.msgs.Contacts")
             # All segments of one finger form one logical ROS contact stream.
-            contact_remappings.append((gz_contact, ros_contact))
+            contact_remappings.append((gz_contact,
+                f"{ros_contact}_segments/segment_{index}" if aggregate_contacts else ros_contact))
     contact_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
         namespace=ns, name="finger_contact_bridge", output="screen",
@@ -379,6 +381,7 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument("aggregate_contacts", default_value="false"),
         DeclareLaunchArgument("finger_collision_boxes", default_value="9"),
         DeclareLaunchArgument("namespace", default_value=""),
         DeclareLaunchArgument("x", default_value="0.0"),

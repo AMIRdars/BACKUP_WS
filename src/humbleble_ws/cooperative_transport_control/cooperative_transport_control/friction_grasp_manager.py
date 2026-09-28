@@ -65,6 +65,7 @@ class FrictionGraspManager(Node):
         self.declare_parameter('robot1_namespace', 'amir1')
         self.declare_parameter('robot2_namespace', 'amir2')
         self.declare_parameter('auto_grasp', True)
+        self.declare_parameter('use_contact_aggregation', False)
         self.declare_parameter('auto_grasp_delay', 5.0)
         self.declare_parameter('controller_wait_timeout', 12.0)
         self.declare_parameter('open_position', -1.0)
@@ -150,10 +151,16 @@ class FrictionGraspManager(Node):
                 JointState, f'/{name}/joint_states',
                 lambda message, robot=name: self._on_joint_state(robot, message), 10)
             for finger in _FINGERS:
-                self.create_subscription(
-                    Contacts, f'/{name}/finger_{finger}_contact',
-                    lambda message, robot=name, side=finger:
-                    self._on_contact(robot, side, message), 20)
+                if bool(self.get_parameter('use_contact_aggregation').value):
+                    self.create_subscription(
+                        Bool, f'/{name}/finger_{finger}_contact_detected',
+                        lambda message, robot=name, side=finger:
+                        self._on_contact_detected(robot, side, message), 10)
+                else:
+                    self.create_subscription(
+                        Contacts, f'/{name}/finger_{finger}_contact',
+                        lambda message, robot=name, side=finger:
+                        self._on_contact(robot, side, message), 20)
                 self.create_subscription(
                     WrenchStamped, f'/{name}/finger_{finger}_wrench',
                     lambda message, robot=name, side=finger:
@@ -195,6 +202,11 @@ class FrictionGraspManager(Node):
             return
         if index < len(message.position):
             self._joint_positions[robot] = message.position[index]
+
+    def _on_contact_detected(self, robot: str, finger: str, message: Bool) -> None:
+        key = (robot, finger)
+        self._contact_present[key] = bool(message.data)
+        self._contact_times[key] = self._now()
 
     def _on_contact(
             self, robot: str, finger: str, message: Contacts) -> None:
