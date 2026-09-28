@@ -24,6 +24,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(friction_launch),
         launch_arguments={
             'headless': LaunchConfiguration('headless'),
+            'filtered_poses': LaunchConfiguration('filtered_poses'),
             'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
             'auto_grasp': 'true',
             'auto_grasp_delay': '0.0',
@@ -94,6 +95,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('forward_distance_m', default_value='0.5'),

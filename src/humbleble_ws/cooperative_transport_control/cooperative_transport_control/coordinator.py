@@ -133,9 +133,11 @@ class CooperativeCoordinator(Node):
             self.create_subscription(
                 Bool, '/cooperative_transport/external_control',
                 self._on_external_control, 10)
+        self.declare_parameter('world_pose_topic', '')
         world = self.get_parameter('world_name').value
+        pose_topic = str(self.get_parameter('world_pose_topic').value) or f'/world/{world}/pose/info'
         self.create_subscription(
-            TFMessage, f'/world/{world}/pose/info',
+            TFMessage, pose_topic,
             self._on_world_poses, 10)
         self.create_service(
             SetBool, '/cooperative_transport/set_enabled', self._on_set_enabled)

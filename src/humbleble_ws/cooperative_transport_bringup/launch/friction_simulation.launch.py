@@ -22,6 +22,8 @@ from launch_ros.substitutions import FindPackageShare
 def _launch_setup(context, *args, **kwargs):
     headless = LaunchConfiguration('headless').perform(context).lower() in (
         '1', 'true', 'yes')
+    filtered_poses = LaunchConfiguration('filtered_poses').perform(context).lower() in ('1', 'true', 'yes')
+    pose_parameters = {'world_pose_topic': '/cooperative_transport/model_poses'} if filtered_poses else {}
     auto_grasp = LaunchConfiguration('auto_grasp').perform(context).lower() in (
         '1', 'true', 'yes')
     auto_grasp_delay = float(
@@ -137,6 +139,11 @@ def _launch_setup(context, *args, **kwargs):
         arguments=bridge_arguments,
     )
 
+    pose_filter = Node(
+        package='cooperative_transport_gazebo', executable='transport_pose_filter',
+        output='screen', condition=IfCondition(str(filtered_poses).lower()),
+        parameters=[{'entity_names': ['amir1', 'amir2', 'cooperative_payload']}])
+
     def robot(namespace, x, yaw):
         return IncludeLaunchDescription(
             PythonLaunchDescriptionSource(robot_launch),
@@ -241,7 +248,7 @@ def _launch_setup(context, *args, **kwargs):
         package='cooperative_transport_control', executable='coordinator',
         output='screen', condition=IfCondition(
             str(enable_coordinator).lower()),
-        parameters=common + [{
+        parameters=common + [pose_parameters, {
             'max_linear_speed': max_linear_speed,
             'max_linear_acceleration': max_linear_acceleration,
             'odometry_timeout': odometry_timeout,
@@ -276,7 +283,7 @@ def _launch_setup(context, *args, **kwargs):
     slip_monitor = Node(
         package='cooperative_transport_control', executable='slip_monitor',
         output='screen',
-        parameters=common + [{
+        parameters=common + [pose_parameters, {
             'horizontal_slip_limit': horizontal_slip_limit,
             'vertical_slip_limit': vertical_slip_limit,
         }])
@@ -303,6 +310,7 @@ def _launch_setup(context, *args, **kwargs):
                 'GZ_SIM_SYSTEM_PLUGIN_PATH', '')),
         simulation,
         bridge,
+        pose_filter,
         # Start 0.11 m outside the verified grasp positions. Both bases move
         # inward only after the board has spawned and both grippers are open.
         TimerAction(
@@ -332,6 +340,7 @@ def _launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('auto_grasp', default_value='true'),

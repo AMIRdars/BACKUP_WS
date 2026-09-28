@@ -13,7 +13,7 @@ if world_path.exists():
     world_xml=world_path.read_text();(out/'world.sdf').write_text(world_xml)
     (out/'condition.json').write_text(json.dumps({'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:]},indent=2))
 duration = float(sys.argv[2]); headless = sys.argv[3]
-rclpy.init(); node = rclpy.create_node('performance_observer')
+rclpy.init(args=[]); node = rclpy.create_node('performance_observer')
 clock = {'sim': None, 'received': None}
 def receive(msg):
     clock.update(sim=msg.clock.sec + msg.clock.nanosec * 1e-9, received=time.monotonic())

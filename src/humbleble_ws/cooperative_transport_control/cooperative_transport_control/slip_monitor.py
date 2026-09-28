@@ -59,9 +59,11 @@ class SlipMonitor(Node):
             self.create_subscription(
                 Bool, f'/cooperative_transport/{name}/grasp_state',
                 lambda message, robot=name: self._on_grasp(robot, message), 10)
+        self.declare_parameter('world_pose_topic', '')
         world = self.get_parameter('world_name').value
+        pose_topic = str(self.get_parameter('world_pose_topic').value) or f'/world/{world}/pose/info'
         self.create_subscription(
-            TFMessage, f'/world/{world}/pose/info', self._on_poses, 10)
+            TFMessage, pose_topic, self._on_poses, 10)
         self.create_subscription(
             Bool, '/cooperative_transport/active', self._on_active, 10)
 
