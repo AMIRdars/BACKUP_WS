@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 from pathlib import Path
-import json,csv,collections,statistics,sys
+import json,csv,collections,statistics,sys,re
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'20260928'))
 import importlib.util
 # Import the label helper without rewriting the historical baseline summaries.
 source=(Path(__file__).resolve().parents[1]/'20260928/analyze.py').read_text()
 exec(source[source.index('def label('):source.index('def summarize(')],globals())
+original_label=label
+def label(process):
+ args=process.get('args',[])
+ # Fortress headless runs in the Ruby CLI process instead of a child named server.
+ if args and ((args[0].startswith('ign gazebo') and re.search(r'(^|\s)(-s|--server-only)(\s|$)',args[0])) or ('gazebo' in args and '-s' in args and Path(args[0]).name in ('ruby','ign'))):
+  return 'ign gazebo server'
+ return original_label(process)
 base=Path(__file__).resolve().parent
 result=[]
 for path in sorted(base.iterdir()):
@@ -20,7 +27,7 @@ for path in sorted(base.iterdir()):
  complete_rows=[r for r in valid if r.get('quality',{}).get('rotation_complete')]
  if complete_rows and 'rotation_completion' not in quality:
   first=complete_rows[0];q=first['quality'];quality['rotation_completion']={'sim':first['sim'],'poses':q.get('poses'),'angles':q.get('angles'),'position_error':q.get('rotation_completion',{}).get('position_error',q.get('position_error') if not q.get('pivot_started') else None),'orientation_error':q.get('rotation_completion',{}).get('orientation_error',q.get('orientation_error') if not q.get('pivot_started') else None),'pre_pivot_max_position_error':q.get('max_position_error'),'pre_pivot_max_orientation_error':q.get('max_orientation_error'),'derived_from_1hz_sample':True}
- for phase,selected in [('sim_65_80',[r for r in valid if 65<=r['sim']<80]),('supported_grasp',[r for r in valid if r.get('quality',{}).get('ever_grasp') and not r.get('quality',{}).get('support_removed')]),('transport',[r for r in valid if r.get('quality',{}).get('support_removed')])]:
+ for phase,selected in [('whole_run',valid),('sim_65_80',[r for r in valid if 65<=r['sim']<80]),('supported_grasp',[r for r in valid if r.get('quality',{}).get('ever_grasp') and not r.get('quality',{}).get('support_removed')]),('transport',[r for r in valid if r.get('quality',{}).get('support_removed')])]:
   if len(selected)<2:continue
   a,b=selected[0],selected[-1];cpus=collections.defaultdict(list)
   for r in selected:
