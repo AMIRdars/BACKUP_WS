@@ -33,6 +33,7 @@ from launch.actions import (
     TimerAction,
 )
 from launch.actions import SetEnvironmentVariable
+from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit, OnShutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
@@ -88,6 +89,9 @@ def launch_setup(context, *args, **kwargs):
     )
     launch_sim = LaunchConfiguration("launch_sim").perform(context).lower() in ("true", "1", "yes")
     headless = LaunchConfiguration("headless").perform(context).lower() in ("true", "1", "yes")
+    enable_d435 = LaunchConfiguration("enable_d435").perform(context).lower() in ("true", "1", "yes")
+    enable_lidar = LaunchConfiguration("enable_lidar").perform(context).lower() in ("true", "1", "yes")
+    enable_wrist_ft = LaunchConfiguration("enable_wrist_ft").perform(context).lower() in ("true", "1", "yes")
 
     # prefix 文字列: ns 空→"" , "amir1"→"amir1/"
     prefix = (ns + "/") if ns else ""
@@ -103,7 +107,14 @@ def launch_setup(context, *args, **kwargs):
 
     # xacro → robot_description (namespace を渡して Ignition 側を prefix)
     robot_description_xml = xacro.process_file(
-        xacro_file, mappings={"namespace": ns}).toxml()
+        xacro_file,
+        mappings={
+            "namespace": ns,
+            "enable_d435": str(enable_d435).lower(),
+            "enable_lidar": str(enable_lidar).lower(),
+            "enable_wrist_ft": str(enable_wrist_ft).lower(),
+        },
+    ).toxml()
     robot_description_content = ParameterValue(
         robot_description_xml,
         value_type=str,
@@ -143,12 +154,14 @@ def launch_setup(context, *args, **kwargs):
     scan_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
         namespace=ns, name="scan_bridge", output="screen",
+        condition=IfCondition(str(enable_lidar).lower()),
         arguments=[f"/{prefix}scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan"],
     )
 
     d435_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
         namespace=ns, name="d435_bridge", output="screen",
+        condition=IfCondition(str(enable_d435).lower()),
         arguments=[
             f"/{prefix}d435/image@sensor_msgs/msg/Image[gz.msgs.Image",
             f"/{prefix}d435/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
@@ -170,12 +183,20 @@ def launch_setup(context, *args, **kwargs):
         parameters=[{"use_sim_time": True}],
     )
 
-    ft_bridge = Node(
+    wrist_ft_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
-        namespace=ns, name="ft_bridge", output="screen",
+        namespace=ns, name="wrist_ft_bridge", output="screen",
+        condition=IfCondition(str(enable_wrist_ft).lower()),
         arguments=[
             f"/{prefix}ft_sensor@geometry_msgs/msg/WrenchStamped"
             "[gz.msgs.Wrench",
+        ],
+    )
+    # Finger loads regulate the physical grasp even when wrist safety is off.
+    finger_ft_bridge = Node(
+        package="ros_gz_bridge", executable="parameter_bridge",
+        namespace=ns, name="finger_ft_bridge", output="screen",
+        arguments=[
             f"/{prefix}finger_left_wrench@geometry_msgs/msg/WrenchStamped"
             "[gz.msgs.Wrench",
             f"/{prefix}finger_right_wrench@geometry_msgs/msg/WrenchStamped"
@@ -323,7 +344,8 @@ def launch_setup(context, *args, **kwargs):
         scan_bridge,
         d435_bridge,
         odom_bridge,
-        ft_bridge,
+        wrist_ft_bridge,
+        finger_ft_bridge,
         contact_bridge,
         rover_twist_relay,
         # Controller-manager service calls are serialized. Gazebo Fortress can
@@ -362,5 +384,8 @@ def generate_launch_description():
         DeclareLaunchArgument("pose_bridge", default_value="false"),
         DeclareLaunchArgument("launch_sim", default_value="true"),
         DeclareLaunchArgument("headless", default_value="false"),
+        DeclareLaunchArgument("enable_d435", default_value="true"),
+        DeclareLaunchArgument("enable_lidar", default_value="true"),
+        DeclareLaunchArgument("enable_wrist_ft", default_value="true"),
         OpaqueFunction(function=launch_setup),
     ])

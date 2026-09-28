@@ -67,10 +67,18 @@ class CooperativeRotationController(Node):
             float(self.get_parameter('pre_rotation_translation_distance_m').value),
             float(self.get_parameter('translation_velocity_m_s').value),
             float(self.get_parameter('translation_acceleration_m_s2').value))
+        # Positive right distance means payload-local -Y. This new option
+        # takes precedence over the legacy world +Y option when non-zero.
+        self._post_rotation_right_distance = float(self.get_parameter(
+            'post_rotation_translation_right_distance_m').value)
+        post_translation_distance = (
+            self._post_rotation_right_distance
+            if abs(self._post_rotation_right_distance) > 1.0e-12 else
+            float(self.get_parameter(
+                'post_rotation_translation_y_distance_m').value))
         self._post_rotation_translation_trajectory = (
             AccelerationLimitedTrajectory(
-                float(self.get_parameter(
-                    'post_rotation_translation_y_distance_m').value),
+                post_translation_distance,
                 float(self.get_parameter('translation_velocity_m_s').value),
                 float(self.get_parameter(
                     'translation_acceleration_m_s2').value)))
@@ -102,6 +110,7 @@ class CooperativeRotationController(Node):
         self._post_rotation_translation_elapsed = 0.0
         self._post_rotation_translation_clock_time: Optional[float] = None
         self._post_rotation_translation_target: Optional[np.ndarray] = None
+        self._post_rotation_direction_name = 'world +Y'
         self._post_rotation_settling_started = 0.0
         self._post_rotation_within_tolerance_since: Optional[float] = None
         self._settling_started = 0.0
@@ -234,6 +243,7 @@ class CooperativeRotationController(Node):
         self.declare_parameter('angular_acceleration_deg_s2', 0.25)
         self.declare_parameter('pre_rotation_translation_distance_m', 1.0)
         self.declare_parameter('post_rotation_translation_y_distance_m', 1.0)
+        self.declare_parameter('post_rotation_translation_right_distance_m', 0.0)
         self.declare_parameter('translation_velocity_m_s', 0.05)
         self.declare_parameter('translation_acceleration_m_s2', 0.025)
         self.declare_parameter('translation_settling_time', 1.0)
@@ -611,14 +621,34 @@ class CooperativeRotationController(Node):
         return True
 
     def _begin_post_rotation_translation(self) -> bool:
-        """Capture the completed turn and prepare world-+Y transport."""
+        """Capture the completed turn and prepare the final translation."""
         if not self._capture_rotation_reference():
             return False
         assert self._object_initial is not None
         self._post_rotation_translation_target = self._object_initial.copy()
-        self._post_rotation_translation_target[1, 3] += (
-            self._post_rotation_translation_trajectory.target_angle)
+        if abs(self._post_rotation_right_distance) > 1.0e-12:
+            if not all(name in self._base_transforms for name in self._names):
+                return False
+            # The payload mesh has a 90-degree roll in this world. Its local
+            # -Y points partly downward, so take horizontal right from the
+            # A-to-B formation heading instead of the full 3-D payload frame.
+            first = self._base_transforms[self._names[0]][:3, 3]
+            second = self._base_transforms[self._names[1]][:3, 3]
+            formation_yaw = math.atan2(
+                second[1] - first[1], second[0] - first[0])
+            right_world = np.array([
+                math.sin(formation_yaw), -math.cos(formation_yaw), 0.0])
+            self._post_rotation_translation_target[:3, 3] += (
+                right_world * self._post_rotation_right_distance)
+            distance = self._post_rotation_right_distance
+            direction_name = 'payload-local right'
+        else:
+            self._post_rotation_translation_target[1, 3] += (
+                self._post_rotation_translation_trajectory.target_angle)
+            distance = self._post_rotation_translation_trajectory.target_angle
+            direction_name = 'world +Y'
         self._post_rotation_translation_elapsed = 0.0
+        self._post_rotation_direction_name = direction_name
         self._post_rotation_translation_clock_time = (
             self.get_clock().now().nanoseconds * 1.0e-9)
         self._post_rotation_within_tolerance_since = None
@@ -626,9 +656,8 @@ class CooperativeRotationController(Node):
         self.get_logger().info(
             'シーケンス終了: 搬送（回転）')
         self.get_logger().info(
-            'シーケンス開始: 搬送（Y方向直進） '
-            f'{self._post_rotation_translation_trajectory.target_angle:.3f} m '
-            '（world +Y）')
+            'シーケンス開始: 搬送（横方向直進） '
+            f'{distance:.3f} m（{direction_name}）')
         return True
 
     def _tracking_errors(
@@ -906,7 +935,8 @@ class CooperativeRotationController(Node):
                             elif self._begin_post_rotation_translation():
                                 self._state = 'POST_ROTATION_TRANSLATING'
                                 self._status_detail = (
-                                    'post-rotation world-+Y transport in progress')
+                                    f'post-rotation {self._post_rotation_direction_name} '
+                                    'transport in progress')
                     else:
                         self._within_tolerance_since = None
                 if (self._state == 'SETTLING'
@@ -936,10 +966,12 @@ class CooperativeRotationController(Node):
                         prior_position_error):
                     self._post_rotation_translation_elapsed += trajectory_dt
                     self._status_detail = (
-                        'post-rotation world-+Y transport in progress')
+                        f'post-rotation {self._post_rotation_direction_name} '
+                        'transport in progress')
                 else:
                     self._status_detail = (
-                        'world-+Y reference paused while tracking catches up')
+                        f'{self._post_rotation_direction_name} reference '
+                        'paused while tracking catches up')
                 distance = self._post_rotation_translation_trajectory.sample(
                     self._post_rotation_translation_elapsed)
                 total_distance = (
@@ -972,7 +1004,8 @@ class CooperativeRotationController(Node):
                     self._post_rotation_settling_started = trajectory_now
                     self._post_rotation_within_tolerance_since = None
                     self._status_detail = (
-                        'holding world-+Y translation target before completion')
+                        f'holding {self._post_rotation_direction_name} '
+                        'translation target before completion')
 
         elif self._state == 'POST_ROTATION_SETTLING':
             if reason is not None:
@@ -991,7 +1024,8 @@ class CooperativeRotationController(Node):
                             self.get_parameter(
                                 'maximum_tracking_orientation_error_deg').value)):
                         self._enter_error(
-                            'world-+Y translation changed payload orientation by '
+                            f'{self._post_rotation_direction_name} translation '
+                            'changed payload orientation by '
                             f'{math.degrees(orientation_error):.1f} deg')
                 if self._state == 'POST_ROTATION_SETTLING':
                     if position_error <= float(
@@ -1002,16 +1036,21 @@ class CooperativeRotationController(Node):
                         self._post_rotation_within_tolerance_since = None
                     if self._post_rotation_within_tolerance_since is None:
                         self._status_detail = (
-                            'waiting for world-+Y translation target to settle')
+                            f'waiting for {self._post_rotation_direction_name} '
+                            'translation target to settle')
                     elif (settling_now
                           - self._post_rotation_within_tolerance_since >= float(
                               self.get_parameter(
                                   'translation_settling_time').value)):
                         self._state = 'FINISHED'
                         self._status_detail = (
-                            'world-+Y target reached and final pose is held')
+                            f'{self._post_rotation_direction_name} target '
+                            'reached and final pose is held')
                         self.get_logger().info(
-                            'シーケンス終了: 搬送（Y方向直進）')
+                            'シーケンス終了: 搬送（'
+                            + ('横方向直進' if abs(
+                                self._post_rotation_right_distance) > 1.0e-12
+                               else 'Y方向直進') + '）')
                         self.get_logger().info('シーケンス開始: 搬送完了')
                 if (self._state == 'POST_ROTATION_SETTLING'
                         and settling_now - self._post_rotation_settling_started

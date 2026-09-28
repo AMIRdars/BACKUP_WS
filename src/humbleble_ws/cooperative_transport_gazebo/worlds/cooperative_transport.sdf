@@ -33,5 +33,28 @@
       </link>
     </model>
 
+    <!-- Keep the payload at the gripper height while both DetachableJoint
+         commands are issued.  It is removed by grasp_support_remover after
+         AMIR 1 and AMIR 2 have both reported an attached grasp. -->
+    <model name="grasp_support">
+      <static>true</static>
+      <!-- Top surface z=0.645 m. This centres the 30 mm-thick payload at
+           z=0.660 m between the safely opened AMIR fingers. -->
+      <pose>0 0 0.3225 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.22 0.16 0.645</size></box></geometry>
+          <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.22 0.16 0.645</size></box></geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.4 0.4 0.4 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
   </world>
 </sdf>

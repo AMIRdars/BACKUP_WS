@@ -81,3 +81,23 @@ def test_holding_retention_mode_still_recovers_weak_contact():
         minimum_position=-1.0, maximum_position=0.15,
         allow_release=False)
     assert position == -0.49
+
+
+def test_holding_target_mode_closes_below_target():
+    position = holding_recovery_position(
+        -0.50, -0.50, (16.0, 18.0), target_force=20.0,
+        minimum_force=8.0, release_force=22.0,
+        position_gain=0.001, maximum_step=0.01,
+        minimum_position=-1.0, maximum_position=0.15,
+        maintain_target=True, force_tolerance=1.0)
+    assert position == pytest.approx(-0.497)
+
+
+def test_holding_target_mode_opens_above_target():
+    position = holding_recovery_position(
+        -0.50, -0.50, (23.0, 21.0), target_force=20.0,
+        minimum_force=8.0, release_force=24.0,
+        position_gain=0.001, maximum_step=0.01,
+        minimum_position=-1.0, maximum_position=0.15,
+        maintain_target=True, force_tolerance=1.0)
+    assert position == pytest.approx(-0.502)

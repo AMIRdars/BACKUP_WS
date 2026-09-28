@@ -22,6 +22,8 @@ setup(
     entry_points={
         'console_scripts': [
             'coordinator = cooperative_transport_control.coordinator:main',
+            'dual_base_approach = '
+            'cooperative_transport_control.dual_base_approach:main',
             'attach_manager = cooperative_transport_control.attach_manager:main',
             'friction_grasp_manager = cooperative_transport_control.friction_grasp_manager:main',
             'grasp_support_remover = cooperative_transport_control.grasp_support_remover:main',
@@ -29,6 +31,12 @@ setup(
             'safety_monitor = cooperative_transport_control.safety_monitor:main',
             'slip_monitor = cooperative_transport_control.slip_monitor:main',
             'wrench_monitor = cooperative_transport_control.wrench_monitor:main',
+            'single_robot_lateral_translation = '
+            'cooperative_transport_control.single_robot_lateral_translation:main',
+            'cooperative_lateral_goal = '
+            'cooperative_transport_control.cooperative_lateral_goal:main',
+            'pivot_rotation_controller = '
+            'cooperative_transport_control.pivot_rotation_controller:main',
         ],
     },
 )

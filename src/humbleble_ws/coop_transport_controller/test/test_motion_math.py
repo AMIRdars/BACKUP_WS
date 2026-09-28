@@ -32,11 +32,11 @@ def test_positive_pivot_rotation_has_positive_y_tangent():
 
 def test_amir_target_posture_is_inside_fk_and_changes_horizontal_tcp_position():
     initial = arm_tcp_position((0.0, 0.0, 0.0, 0.0, 0.0))
-    target = arm_tcp_position((0.0, 1.2, -1.5, 0.3, 1.5))
+    target = arm_tcp_position((0.0, 1.4, -1.6, 0.2, 1.570796))
     assert initial == pytest.approx((0.738477, 0.0, 0.0), abs=1.0e-6)
-    assert target[0] == pytest.approx(0.526962, abs=1.0e-6)
+    assert target[0] == pytest.approx(0.474987, abs=1.0e-6)
     assert target[1] == pytest.approx(0.0, abs=1.0e-6)
-    assert target[2] == pytest.approx(0.197321, abs=1.0e-6)
+    assert target[2] == pytest.approx(0.243902, abs=1.0e-6)
 
 
 def test_tcp_world_position_respects_opposite_amir_headings():

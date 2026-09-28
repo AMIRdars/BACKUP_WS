@@ -84,11 +84,13 @@ class FrictionGraspManager(Node):
         self.declare_parameter('holding_force_release_threshold', 18.0)
         self.declare_parameter('holding_max_release_offset', 0.002)
         self.declare_parameter('prioritize_grasp_retention', True)
+        self.declare_parameter('maintain_target_force', False)
         self.declare_parameter('bias_sample_duration', 0.50)
         self.declare_parameter('open_duration', 2.0)
         self.declare_parameter('close_duration', 3.0)
         self.declare_parameter('contact_verification_timeout', 2.0)
         self.declare_parameter('lift_duration', 3.0)
+        self.declare_parameter('lift_after_grasp', True)
         self.declare_parameter('lift_joint_2', 0.10)
         self.declare_parameter('lift_joint_3', -0.10)
         self.declare_parameter('minimum_contact_position', -0.90)
@@ -419,7 +421,11 @@ class FrictionGraspManager(Node):
             raw_forces = tuple(
                 self._contact_forces.get((robot, finger), 0.0)
                 for finger in _FINGERS)
-            if max(raw_forces) > 0.1 or self._bilateral_contact(robot):
+            # Wrist roll at Q_HOME introduces a small gravity component in
+            # the finger sensor's normal axis even with no payload contact.
+            # Switch from coarse search to fine force control only when both
+            # physical finger contact sensors identify the payload.
+            if self._bilateral_contact(robot):
                 self._contact_seen[robot] = True
             forces = tuple(max(filtered, raw) for filtered, raw in zip(
                 filtered_forces, raw_forces))
@@ -449,7 +455,10 @@ class FrictionGraspManager(Node):
                     float(self.get_parameter(
                         'holding_force_release_threshold').value),
                     gain, release_step, minimum_position, maximum_position,
-                    allow_release=not retain_grasp)
+                    allow_release=not retain_grasp,
+                    maintain_target=bool(self.get_parameter(
+                        'maintain_target_force').value),
+                    force_tolerance=tolerance)
                 # Do not release far enough to lose the payload during
                 # the support-removal transient. The bound is relative to the
                 # verified grasp position and still permits force relief.
@@ -506,9 +515,26 @@ class FrictionGraspManager(Node):
             return False
         self._held = False
         self._holding_position_floors.clear()
-        self._send_arm_pose(False)
-        self._set_state('LOWERING')
+        if bool(self.get_parameter('lift_after_grasp').value):
+            self._send_arm_pose(False)
+            self._set_state('LOWERING')
+        else:
+            self._send_grippers(
+                float(self.get_parameter('open_position').value))
+            self._set_state('OPENING_FOR_RELEASE')
         return True
+
+    def _enter_holding(self) -> None:
+        """Record a verified physical grasp and begin force maintenance."""
+        self._held = True
+        self._contact_lost_since = None
+        self._holding_position_floors = {
+            robot: self._joint_positions[robot]
+            for robot in self._names
+            if robot in self._joint_positions
+        }
+        self._capture_wrench_biases()
+        self._set_state('HOLDING')
 
     def _on_command(self, request: SetBool.Request,
                     response: SetBool.Response) -> SetBool.Response:
@@ -565,8 +591,11 @@ class FrictionGraspManager(Node):
                     stable = float(self.get_parameter(
                         'contact_stability_duration').value)
                     if now - self._contacts_valid_since >= stable:
-                        self._send_arm_pose(True)
-                        self._set_state('LIFTING')
+                        if bool(self.get_parameter('lift_after_grasp').value):
+                            self._send_arm_pose(True)
+                            self._set_state('LIFTING')
+                        else:
+                            self._enter_holding()
                 else:
                     self._contacts_valid_since = None
                 if (self._state == 'CLOSING_GRIPPERS' and elapsed >= float(
@@ -580,15 +609,7 @@ class FrictionGraspManager(Node):
             self._update_force_control()
             if elapsed >= float(self.get_parameter('lift_duration').value) + 0.5:
                 if self._contact_plausible():
-                    self._held = True
-                    self._contact_lost_since = None
-                    self._holding_position_floors = {
-                        robot: self._joint_positions[robot]
-                        for robot in self._names
-                        if robot in self._joint_positions
-                    }
-                    self._capture_wrench_biases()
-                    self._set_state('HOLDING')
+                    self._enter_holding()
                 elif elapsed >= (
                         float(self.get_parameter('lift_duration').value) + 0.5
                         + float(self.get_parameter(

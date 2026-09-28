@@ -71,6 +71,7 @@ class CooperativeCoordinator(Node):
         self.declare_parameter('admittance_max_velocity', 0.004)
         self.declare_parameter('admittance_force_sign', 1.0)
         self.declare_parameter('admittance_sensor_timeout', 0.25)
+        self.declare_parameter('allow_external_command_handoff', False)
 
         self._names = (
             self.get_parameter('robot1_namespace').value.strip('/'),
@@ -82,6 +83,7 @@ class CooperativeCoordinator(Node):
         self._last_commands = {name: Twist2(0.0, 0.0, 0.0) for name in self._names}
         self._enabled = False
         self._emergency_stop = False
+        self._external_control = False
         self._goal: Optional[Pose2] = None
         self._measured_payload: Optional[Pose2] = None
         self._measured_payload_time = 0.0
@@ -127,6 +129,10 @@ class CooperativeCoordinator(Node):
             Bool, '/cooperative_transport/enable', self._on_enable_topic, 10)
         self.create_subscription(
             Bool, '/cooperative_transport/emergency_stop', self._on_emergency_stop, 10)
+        if bool(self.get_parameter('allow_external_command_handoff').value):
+            self.create_subscription(
+                Bool, '/cooperative_transport/external_control',
+                self._on_external_control, 10)
         world = self.get_parameter('world_name').value
         self.create_subscription(
             TFMessage, f'/world/{world}/pose/info',
@@ -208,6 +214,12 @@ class CooperativeCoordinator(Node):
     def _on_enable_topic(self, message: Bool) -> None:
         self._set_enabled(message.data)
 
+    def _on_external_control(self, message: Bool) -> None:
+        if message.data and not self._external_control:
+            self._set_enabled(False)
+            self._external_control = True
+            self.get_logger().info('Base command control handed to pivot rotation')
+
     def _on_measured_payload(self, message: PoseStamped) -> None:
         pose = message.pose
         orientation = pose.orientation
@@ -251,6 +263,8 @@ class CooperativeCoordinator(Node):
         return response
 
     def _set_enabled(self, enabled: bool):
+        if enabled and self._external_control:
+            return False, 'External pivot controller owns base commands.'
         if enabled and self._emergency_stop:
             return False, 'Safety stop is latched; reset the safety monitor first.'
         if enabled and self._goal is None:
@@ -448,6 +462,8 @@ class CooperativeCoordinator(Node):
         return None
 
     def _control_tick(self) -> None:
+        if self._external_control:
+            return
         now = time.monotonic()
         dt = max(1.0e-3, min(0.1, now - self._last_tick))
         self._last_tick = now

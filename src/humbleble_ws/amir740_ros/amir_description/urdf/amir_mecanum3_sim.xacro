@@ -6,6 +6,7 @@
        が Ignition 側の topicを ${namespace}/ でprefixする。
        TF frame ID は共通名のまま、launch 側でTF topicをnamespace分離する。 -->
   <xacro:arg name="namespace" default=""/>
+  <xacro:arg name="enable_wrist_ft" default="true"/>
 
   <!-- メカナムローバー URDF
        mecanum3.gazebo (gz_ros2_control-system) と
@@ -49,6 +50,7 @@
         <param name="max">2.96706</param>
       </command_interface>
       <state_interface name="position">
+        <!-- Common AMIR spawn posture (radians): Q_HOME[0]. -->
         <param name="initial_value">0.0</param>
       </state_interface>
       <state_interface name="velocity"/>
@@ -59,7 +61,8 @@
         <param name="max">2.356194</param>
       </command_interface>
       <state_interface name="position">
-        <param name="initial_value">0.0</param>
+        <!-- Common AMIR spawn posture (radians): Q_HOME[1]. -->
+        <param name="initial_value">1.4</param>
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
@@ -69,7 +72,8 @@
         <param name="max">0.0</param>
       </command_interface>
       <state_interface name="position">
-        <param name="initial_value">0.0</param>
+        <!-- Common AMIR spawn posture (radians): Q_HOME[2]. -->
+        <param name="initial_value">-1.6</param>
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
@@ -79,7 +83,8 @@
         <param name="max">1.308997</param>
       </command_interface>
       <state_interface name="position">
-        <param name="initial_value">0.0</param>
+        <!-- Common AMIR spawn posture (radians): Q_HOME[3]. -->
+        <param name="initial_value">0.2</param>
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
@@ -89,7 +94,8 @@
         <param name="max">2.75762</param>
       </command_interface>
       <state_interface name="position">
-        <param name="initial_value">0.0</param>
+        <!-- Common AMIR spawn posture (radians): Q_HOME[4]. -->
+        <param name="initial_value">1.570796</param>
       </state_interface>
       <state_interface name="velocity"/>
     </joint>
@@ -173,6 +179,7 @@
 
   <!-- Joint_5 is the wrist joint directly upstream of the gripper.  Gazebo
        publishes its transmitted six-axis wrench in the gripper frame. -->
+  <xacro:if value="$(arg enable_wrist_ft)">
   <gazebo reference="Joint_5">
     <sensor name="wrist_ft_sensor" type="force_torque">
       <always_on>true</always_on>
@@ -184,6 +191,7 @@
       </force_torque>
     </sensor>
   </gazebo>
+  </xacro:if>
 
   <!-- Gazebo Fortress's contact message identifies the colliding bodies but
        does not expose the solver wrench.  These joint sensors provide the

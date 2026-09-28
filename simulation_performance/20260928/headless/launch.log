@@ -1,0 +1,803 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-09-28-21-59-26-961748-dars5070-Katana-15-HX-B14WGK-13287
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign gazebo-1]: process started with pid [13679]
+[INFO] [parameter_bridge-2]: process started with pid [13682]
+[parameter_bridge-2] [INFO] [1790600367.251726041] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-2] [INFO] [1790600367.252270560] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/pose/info (gz.msgs.Pose_V) -> /world/cooperative_transport_friction/pose/info (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[INFO] [robot_state_publisher-3]: process started with pid [15954]
+[INFO] [create-4]: process started with pid [15956]
+[INFO] [parameter_bridge-5]: process started with pid [15959]
+[INFO] [parameter_bridge-6]: process started with pid [15961]
+[INFO] [parameter_bridge-7]: process started with pid [15963]
+[INFO] [rover_twist_relay_ign.py-8]: process started with pid [15966]
+[create-4] [INFO] [1790600369.482323057] [amir1.ros_gz_sim]: Requesting list of world names.
+[parameter_bridge-7] [INFO] [1790600369.500837969] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.502299728] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.502549122] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.502712279] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.502855628] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503014398] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-6] [INFO] [1790600369.503186698] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_left_wrench (gz.msgs.Wrench) -> /amir1/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503221011] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503402581] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503563348] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503734029] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.503966050] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.504186738] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.504347256] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.504644911] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.504859043] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-6] [INFO] [1790600369.504863837] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_right_wrench (gz.msgs.Wrench) -> /amir1/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.505101974] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.505324571] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-7] [INFO] [1790600369.505587158] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[robot_state_publisher-3] [INFO] [1790600369.514833985] [amir1.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-3] [INFO] [1790600369.514949816] [amir1.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-3] [INFO] [1790600369.514960429] [amir1.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-3] [INFO] [1790600369.514967966] [amir1.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-3] [INFO] [1790600369.514974672] [amir1.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-3] [INFO] [1790600369.514981175] [amir1.robot_state_publisher]: got segment base_link
+[robot_state_publisher-3] [INFO] [1790600369.514987359] [amir1.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-3] [INFO] [1790600369.514993748] [amir1.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-3] [INFO] [1790600369.514999975] [amir1.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-3] [INFO] [1790600369.515006475] [amir1.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-3] [INFO] [1790600369.515012602] [amir1.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-3] [INFO] [1790600369.515018650] [amir1.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-3] [INFO] [1790600369.515024804] [amir1.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-3] [INFO] [1790600369.515030977] [amir1.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-3] [INFO] [1790600369.515037217] [amir1.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-3] [INFO] [1790600369.515043438] [amir1.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-3] [INFO] [1790600369.515050655] [amir1.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-3] [INFO] [1790600369.515057189] [amir1.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-3] [INFO] [1790600369.515068358] [amir1.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-3] [INFO] [1790600369.515075434] [amir1.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-3] [INFO] [1790600369.515081647] [amir1.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-3] [INFO] [1790600369.515087934] [amir1.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-3] [INFO] [1790600369.515094378] [amir1.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-3] [INFO] [1790600369.515100936] [amir1.robot_state_publisher]: got segment tcp_link
+[parameter_bridge-5] [INFO] [1790600369.516042819] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom (gz.msgs.Odometry) -> /amir1/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-5] [INFO] [1790600369.518304301] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom/tf (gz.msgs.Pose_V) -> /amir1/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[rover_twist_relay_ign.py-8] [INFO] [1790600369.664938912] [amir1.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[create-4] [INFO] [1790600369.687551564] [amir1.ros_gz_sim]: Requested creation of entity.
+[create-4] [INFO] [1790600369.687578219] [amir1.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790600369.771782576] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790600369.771803508] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[ign gazebo-1] [INFO] [1790600369.786250679] [amir1.gz_ros2_control]: connected to service!! /amir1/robot_state_publisher asking for robot_description
+[ign gazebo-1] [INFO] [1790600369.786714363] [amir1.gz_ros2_control]: Received URDF from param server
+[ign gazebo-1] [INFO] [1790600369.791409177] [amir1.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790600369.791462661] [amir1.gz_ros2_control]: Loading joint: front_left_joint
+[ign gazebo-1] [INFO] [1790600369.791470316] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791475245] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791479741] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791484045] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791487740] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791513653] [amir1.gz_ros2_control]: Loading joint: front_right_joint
+[ign gazebo-1] [INFO] [1790600369.791519041] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791523774] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791528251] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791532164] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791535731] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791553434] [amir1.gz_ros2_control]: Loading joint: back_left_joint
+[ign gazebo-1] [INFO] [1790600369.791558280] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791564877] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791567737] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791570315] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791572881] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791585167] [amir1.gz_ros2_control]: Loading joint: back_right_joint
+[ign gazebo-1] [INFO] [1790600369.791588473] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791591232] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791593935] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791596546] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791599081] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791670758] [amir1.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600369.791675426] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600369.791678892] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600369.791682751] [amir1.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600369.791685570] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600369.791688282] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600369.791697928] [resource_manager]: Initialize hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600369.791737285] [resource_manager]: Successful initialization of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600369.791759834] [resource_manager]: 'configure' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600369.791762780] [amir1.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790600369.791767786] [resource_manager]: Successful 'configure' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600369.791771355] [resource_manager]: 'activate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600369.791775606] [resource_manager]: Successful 'activate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600369.791836681] [amir1.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[INFO] [create-4]: process has finished cleanly [pid 15956]
+[ign gazebo-1] [INFO] [1790600369.791849849] [amir1.gz_ros2_control]: Loading joint: Joint_1
+[ign gazebo-1] [INFO] [1790600369.791853653] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791856799] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791865440] [amir1.gz_ros2_control]: 			 found initial value: 0.000000
+[ign gazebo-1] [INFO] [1790600369.791871115] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791875318] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791879218] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791899846] [amir1.gz_ros2_control]: Loading joint: Joint_2
+[ign gazebo-1] [INFO] [1790600369.791903547] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791906252] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791909514] [amir1.gz_ros2_control]: 			 found initial value: 1.400000
+[ign gazebo-1] [INFO] [1790600369.791924998] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791927866] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791930425] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791941754] [amir1.gz_ros2_control]: Loading joint: Joint_3
+[ign gazebo-1] [INFO] [1790600369.791944734] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791947604] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791950081] [amir1.gz_ros2_control]: 			 found initial value: -1.600000
+[ign gazebo-1] [INFO] [1790600369.791953134] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791955546] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791957997] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791968622] [amir1.gz_ros2_control]: Loading joint: Joint_4
+[ign gazebo-1] [INFO] [1790600369.791971438] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.791974012] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791976636] [amir1.gz_ros2_control]: 			 found initial value: 0.200000
+[ign gazebo-1] [INFO] [1790600369.791979771] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.791982283] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.791984746] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.791994823] [amir1.gz_ros2_control]: Loading joint: Joint_5
+[ign gazebo-1] [INFO] [1790600369.791997979] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792000624] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792006305] [amir1.gz_ros2_control]: 			 found initial value: 1.570796
+[ign gazebo-1] [INFO] [1790600369.792009684] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792012255] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792014867] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792024732] [amir1.gz_ros2_control]: Loading joint: Gripper
+[ign gazebo-1] [INFO] [1790600369.792028055] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792030716] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792033267] [amir1.gz_ros2_control]: 			 found initial value: -1.000000
+[ign gazebo-1] [INFO] [1790600369.792036536] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792039131] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792041647] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792051830] [amir1.gz_ros2_control]: Loading joint: left_inner_back_joint
+[ign gazebo-1] [INFO] [1790600369.792056961] [amir1.gz_ros2_control]: Joint 'left_inner_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600369.792060536] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792067375] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792072015] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792074993] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792077572] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792087980] [amir1.gz_ros2_control]: Loading joint: right_outer_back_joint
+[ign gazebo-1] [INFO] [1790600369.792091843] [amir1.gz_ros2_control]: Joint 'right_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600369.792094708] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792097476] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792100069] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792102651] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792105148] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792114675] [amir1.gz_ros2_control]: Loading joint: left_outer_back_joint
+[ign gazebo-1] [INFO] [1790600369.792118670] [amir1.gz_ros2_control]: Joint 'left_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600369.792121512] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792124041] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792127477] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792130229] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792132775] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792152993] [amir1.gz_ros2_control]: Loading joint: right_inner_front_joint
+[ign gazebo-1] [INFO] [1790600369.792157244] [amir1.gz_ros2_control]: Joint 'right_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600369.792166878] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792174143] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792179297] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792182001] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792184550] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792195322] [amir1.gz_ros2_control]: Loading joint: left_inner_front_joint
+[ign gazebo-1] [INFO] [1790600369.792199262] [amir1.gz_ros2_control]: Joint 'left_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600369.792202348] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600369.792205046] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792207798] [amir1.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600369.792210574] [amir1.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600369.792213323] [amir1.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600369.792222796] [amir1.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600369.792230985] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600369.792234809] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600369.792238766] [amir1.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600369.792241747] [amir1.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600369.792244668] [amir1.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600369.792248676] [resource_manager]: Initialize hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600369.792261172] [resource_manager]: Successful initialization of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600369.792275625] [resource_manager]: 'configure' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600369.792278020] [amir1.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790600369.792281712] [resource_manager]: Successful 'configure' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600369.792287831] [resource_manager]: 'activate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600369.792290765] [resource_manager]: Successful 'activate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600369.792292990] [amir1.gz_ros2_control]: Loading controller_manager
+[ign gazebo-1] [WARN] [1790600369.832105846] [amir1.gz_ros2_control]:  Desired controller update period (0.004 s) is slower than the gazebo simulation period (0.002 s).
+[INFO] [spawner-9]: process started with pid [17190]
+[spawner-9] [INFO] [1790600372.052974452] [amir1.spawner_joint_state_broadcaster]: waiting for service /amir1/controller_manager/list_controllers to become available...
+[ign gazebo-1] [INFO] [1790600372.305631974] [amir1.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-9] [INFO] [1790600372.331071661] [amir1.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ign gazebo-1] [INFO] [1790600372.331840159] [amir1.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600372.331961944] [amir1.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-9] [INFO] [1790600372.344952206] [amir1.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-9]: process has finished cleanly [pid 17190]
+[INFO] [spawner-10]: process started with pid [17574]
+[spawner-10] [INFO] [1790600373.755020888] [amir1.spawner_arm_controller]: [96mSetting controller param "type" to "joint_trajectory_controller/JointTrajectoryController" for [1marm_controller[0m
+[spawner-10] [INFO] [1790600373.761088498] [amir1.spawner_arm_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790600373.764448145] [amir1.controller_manager]: Loading controller 'arm_controller'
+[ign gazebo-1] [WARN] [1790600373.771170966] [amir1.arm_controller]: [Deprecated]: "allow_nonzero_velocity_at_trajectory_end" is set to true. The default behavior will change to false.
+[spawner-10] [INFO] [1790600373.773669581] [amir1.spawner_arm_controller]: [94mLoaded [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790600373.774243800] [amir1.controller_manager]: Configuring controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600373.774342469] [amir1.arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[ign gazebo-1] [INFO] [1790600373.774354404] [amir1.arm_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[ign gazebo-1] [INFO] [1790600373.774367985] [amir1.arm_controller]: Using 'splines' interpolation method.
+[ign gazebo-1] [INFO] [1790600373.774956727] [amir1.arm_controller]: Controller state will be published at 100.00 Hz.
+[ign gazebo-1] [INFO] [1790600373.775966336] [amir1.arm_controller]: Goals with partial set of joints are allowed
+[ign gazebo-1] [INFO] [1790600373.775977677] [amir1.arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[spawner-10] [INFO] [1790600373.790048845] [amir1.spawner_arm_controller]: [92mConfigured and activated [1marm_controller[0m
+[INFO] [spawner-10]: process has finished cleanly [pid 17574]
+[INFO] [spawner-11]: process started with pid [17615]
+[ign gazebo-1] [INFO] [1790600374.228344255] [amir1.controller_manager]: Loading controller 'mecanum_drive_controller'
+[spawner-11] [INFO] [1790600374.263211383] [amir1.spawner_mecanum_drive_controller]: [94mLoaded [1mmecanum_drive_controller[0m
+[ign gazebo-1] [INFO] [1790600374.263870909] [amir1.controller_manager]: Configuring controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600374.266878034] [amir1.mecanum_drive_controller]: MecanumDriveController configured successfully
+[spawner-11] [INFO] [1790600374.276222668] [amir1.spawner_mecanum_drive_controller]: [92mConfigured and activated [1mmecanum_drive_controller[0m
+[INFO] [spawner-11]: process has finished cleanly [pid 17615]
+[INFO] [spawner-12]: process started with pid [17654]
+[spawner-12] [INFO] [1790600374.988682425] [amir1.spawner_gripper_controller]: [96mSetting controller param "type" to "position_controllers/GripperActionController" for [1mgripper_controller[0m
+[spawner-12] [INFO] [1790600374.993038314] [amir1.spawner_gripper_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790600374.996578187] [amir1.controller_manager]: Loading controller 'gripper_controller'
+[spawner-12] [INFO] [1790600375.005707958] [amir1.spawner_gripper_controller]: [94mLoaded [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790600375.006441011] [amir1.controller_manager]: Configuring controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600375.006516537] [amir1.gripper_controller]: Action status changes will be monitored at 20.000000 Hz.
+[spawner-12] [INFO] [1790600375.018008411] [amir1.spawner_gripper_controller]: [92mConfigured and activated [1mgripper_controller[0m
+[INFO] [spawner-12]: process has finished cleanly [pid 17654]
+[INFO] [robot_state_publisher-13]: process started with pid [17691]
+[INFO] [create-14]: process started with pid [17693]
+[INFO] [parameter_bridge-15]: process started with pid [17695]
+[INFO] [parameter_bridge-16]: process started with pid [17697]
+[INFO] [parameter_bridge-17]: process started with pid [17699]
+[INFO] [rover_twist_relay_ign.py-18]: process started with pid [17701]
+[create-14] [INFO] [1790600376.483477493] [amir2.ros_gz_sim]: Requesting list of world names.
+[parameter_bridge-16] [INFO] [1790600376.509018562] [amir2.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir2/finger_left_wrench (gz.msgs.Wrench) -> /amir2/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[robot_state_publisher-13] [INFO] [1790600376.510737636] [amir2.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-13] [INFO] [1790600376.510831819] [amir2.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-13] [INFO] [1790600376.510837701] [amir2.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-13] [INFO] [1790600376.510840629] [amir2.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-13] [INFO] [1790600376.510843387] [amir2.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-13] [INFO] [1790600376.510845949] [amir2.robot_state_publisher]: got segment base_link
+[robot_state_publisher-13] [INFO] [1790600376.510848681] [amir2.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-13] [INFO] [1790600376.510851203] [amir2.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-13] [INFO] [1790600376.510853689] [amir2.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-13] [INFO] [1790600376.510856634] [amir2.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-13] [INFO] [1790600376.510860596] [amir2.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-13] [INFO] [1790600376.510864258] [amir2.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-13] [INFO] [1790600376.510868129] [amir2.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-13] [INFO] [1790600376.510871959] [amir2.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-13] [INFO] [1790600376.510875844] [amir2.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-13] [INFO] [1790600376.510879707] [amir2.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-13] [INFO] [1790600376.510883780] [amir2.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-13] [INFO] [1790600376.510888137] [amir2.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-13] [INFO] [1790600376.510892292] [amir2.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-13] [INFO] [1790600376.510896375] [amir2.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-13] [INFO] [1790600376.510900591] [amir2.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-13] [INFO] [1790600376.510904774] [amir2.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-13] [INFO] [1790600376.510909360] [amir2.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-13] [INFO] [1790600376.510913568] [amir2.robot_state_publisher]: got segment tcp_link
+[parameter_bridge-16] [INFO] [1790600376.510771498] [amir2.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir2/finger_right_wrench (gz.msgs.Wrench) -> /amir2/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-15] [INFO] [1790600376.514488946] [amir2.odom_bridge]: Creating GZ->ROS Bridge: [/amir2/odom (gz.msgs.Odometry) -> /amir2/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.514703360] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-15] [INFO] [1790600376.515982782] [amir2.odom_bridge]: Creating GZ->ROS Bridge: [/amir2/odom/tf (gz.msgs.Pose_V) -> /amir2/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.517768319] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.518226979] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.518643533] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.519042604] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.519407658] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.519844902] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.520247544] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.520656446] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.521119102] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.521509207] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.521843504] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.522160584] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.522419111] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.522664519] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.522923184] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.523173146] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-17] [INFO] [1790600376.523405171] [amir2.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir2/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[rover_twist_relay_ign.py-18] [INFO] [1790600376.683890193] [amir2.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[create-14] [INFO] [1790600376.685512670] [amir2.ros_gz_sim]: Requested creation of entity.
+[create-14] [INFO] [1790600376.685534003] [amir2.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790600376.766457552] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790600376.766482343] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[INFO] [create-14]: process has finished cleanly [pid 17693]
+[ign gazebo-1] [INFO] [1790600377.014198463] [amir2.gz_ros2_control]: connected to service!! /amir2/robot_state_publisher asking for robot_description
+[ign gazebo-1] [INFO] [1790600377.015337917] [amir2.gz_ros2_control]: Received URDF from param server
+[ign gazebo-1] [INFO] [1790600377.024058197] [amir2.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790600377.024117600] [amir2.gz_ros2_control]: Loading joint: front_left_joint
+[ign gazebo-1] [INFO] [1790600377.024124552] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024129275] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024133989] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024138483] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024142981] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024181342] [amir2.gz_ros2_control]: Loading joint: front_right_joint
+[ign gazebo-1] [INFO] [1790600377.024188692] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024194475] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024200576] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024206624] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024212365] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024239264] [amir2.gz_ros2_control]: Loading joint: back_left_joint
+[ign gazebo-1] [INFO] [1790600377.024244391] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024248136] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024252085] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024255738] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024259487] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024277218] [amir2.gz_ros2_control]: Loading joint: back_right_joint
+[ign gazebo-1] [INFO] [1790600377.024281426] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024285039] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024288901] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024292377] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024296012] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024308633] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024314290] [amir2.gz_ros2_control]: Topic name: /amir1/finger_right_wrench
+[ign gazebo-1] [INFO] [1790600377.024318133] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024322892] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024327932] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024332616] [amir2.gz_ros2_control]: Topic name: /amir1/finger_left_wrench
+[ign gazebo-1] [INFO] [1790600377.024336322] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024340330] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024344392] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024348180] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024351818] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024355881] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024359683] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024363312] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024368391] [resource_manager]: Initialize hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600377.024382858] [resource_manager]: Successful initialization of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600377.024396996] [resource_manager]: 'configure' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600377.024419067] [amir2.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790600377.024425163] [resource_manager]: Successful 'configure' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600377.024430352] [resource_manager]: 'activate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600377.024434101] [resource_manager]: Successful 'activate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600377.024483627] [amir2.gz_ros2_control]: The position_proportional_gain has been set to: 0.1
+[ign gazebo-1] [INFO] [1790600377.024496582] [amir2.gz_ros2_control]: Loading joint: Joint_1
+[ign gazebo-1] [INFO] [1790600377.024501336] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024505199] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024509580] [amir2.gz_ros2_control]: 			 found initial value: 0.000000
+[ign gazebo-1] [INFO] [1790600377.024517616] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024523645] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024528391] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024546895] [amir2.gz_ros2_control]: Loading joint: Joint_2
+[ign gazebo-1] [INFO] [1790600377.024551717] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024555287] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024559667] [amir2.gz_ros2_control]: 			 found initial value: 1.400000
+[ign gazebo-1] [INFO] [1790600377.024565326] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024568995] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024572579] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024589425] [amir2.gz_ros2_control]: Loading joint: Joint_3
+[ign gazebo-1] [INFO] [1790600377.024593774] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024597304] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024600936] [amir2.gz_ros2_control]: 			 found initial value: -1.600000
+[ign gazebo-1] [INFO] [1790600377.024605456] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024608940] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024612413] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024629604] [amir2.gz_ros2_control]: Loading joint: Joint_4
+[ign gazebo-1] [INFO] [1790600377.024633517] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024637148] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024640990] [amir2.gz_ros2_control]: 			 found initial value: 0.200000
+[ign gazebo-1] [INFO] [1790600377.024646054] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024649942] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024653381] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024668710] [amir2.gz_ros2_control]: Loading joint: Joint_5
+[ign gazebo-1] [INFO] [1790600377.024672974] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024676633] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024687009] [amir2.gz_ros2_control]: 			 found initial value: 1.570796
+[ign gazebo-1] [INFO] [1790600377.024691897] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024695573] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024699154] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024714503] [amir2.gz_ros2_control]: Loading joint: Gripper
+[ign gazebo-1] [INFO] [1790600377.024718872] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024722617] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024726277] [amir2.gz_ros2_control]: 			 found initial value: -1.000000
+[ign gazebo-1] [INFO] [1790600377.024732040] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024737366] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024744728] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024761224] [amir2.gz_ros2_control]: Loading joint: left_inner_back_joint
+[ign gazebo-1] [INFO] [1790600377.024768279] [amir2.gz_ros2_control]: Joint 'left_inner_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600377.024773037] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024776810] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024781000] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024784675] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024788207] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024802575] [amir2.gz_ros2_control]: Loading joint: right_outer_back_joint
+[ign gazebo-1] [INFO] [1790600377.024811480] [amir2.gz_ros2_control]: Joint 'right_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600377.024815879] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024819504] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024823336] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024827024] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024830518] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024844191] [amir2.gz_ros2_control]: Loading joint: left_outer_back_joint
+[ign gazebo-1] [INFO] [1790600377.024849104] [amir2.gz_ros2_control]: Joint 'left_outer_back_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600377.024857180] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024863731] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024868910] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024872591] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024876081] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024890717] [amir2.gz_ros2_control]: Loading joint: right_inner_front_joint
+[ign gazebo-1] [INFO] [1790600377.024895671] [amir2.gz_ros2_control]: Joint 'right_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600377.024899817] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024903323] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024907145] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024910824] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024914232] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024927982] [amir2.gz_ros2_control]: Loading joint: left_inner_front_joint
+[ign gazebo-1] [INFO] [1790600377.024932811] [amir2.gz_ros2_control]: Joint 'left_inner_front_joint'is mimicking joint 'Gripper' with multiplier: 1
+[ign gazebo-1] [INFO] [1790600377.024937014] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [INFO] [1790600377.024940465] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024944067] [amir2.gz_ros2_control]: 		 velocity
+[ign gazebo-1] [INFO] [1790600377.024947534] [amir2.gz_ros2_control]: 	Command:
+[ign gazebo-1] [INFO] [1790600377.024951066] [amir2.gz_ros2_control]: 		 position
+[ign gazebo-1] [INFO] [1790600377.024959395] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024963899] [amir2.gz_ros2_control]: Topic name: /amir1/finger_right_wrench
+[ign gazebo-1] [INFO] [1790600377.024967524] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024977259] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024981348] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024985067] [amir2.gz_ros2_control]: Topic name: /amir1/finger_left_wrench
+[ign gazebo-1] [INFO] [1790600377.024988509] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.024992158] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.024995873] [amir2.gz_ros2_control]: Loading sensor: finger_right_force_sensor
+[ign gazebo-1] [INFO] [1790600377.024999366] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.025002923] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_right_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.025006562] [amir2.gz_ros2_control]: Loading sensor: finger_left_force_sensor
+[ign gazebo-1] [INFO] [1790600377.025010108] [amir2.gz_ros2_control]: 	State:
+[ign gazebo-1] [WARN] [1790600377.025013714] [amir2.gz_ros2_control]: ForceTorque sensor 'finger_left_force_sensor' not found in hardware_info, skipping.
+[ign gazebo-1] [INFO] [1790600377.025017400] [resource_manager]: Initialize hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600377.025029446] [resource_manager]: Successful initialization of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600377.025049210] [resource_manager]: 'configure' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600377.025052214] [amir2.gz_ros2_control]: System Successfully configured!
+[ign gazebo-1] [INFO] [1790600377.025057553] [resource_manager]: Successful 'configure' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600377.025070969] [resource_manager]: 'activate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600377.025079144] [resource_manager]: Successful 'activate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600377.025082203] [amir2.gz_ros2_control]: Loading controller_manager
+[ign gazebo-1] [WARN] [1790600377.073413510] [amir2.gz_ros2_control]:  Desired controller update period (0.004 s) is slower than the gazebo simulation period (0.002 s).
+[INFO] [spawner-19]: process started with pid [17848]
+[ign gazebo-1] [INFO] [1790600380.061227145] [amir2.controller_manager]: Loading controller 'joint_state_broadcaster'
+[spawner-19] [INFO] [1790600380.089153643] [amir2.spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ign gazebo-1] [INFO] [1790600380.089940115] [amir2.controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600380.089986040] [amir2.joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-19] [INFO] [1790600380.100687345] [amir2.spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-19]: process has finished cleanly [pid 17848]
+[INFO] [spawner-20]: process started with pid [17886]
+[spawner-20] [INFO] [1790600380.465615480] [amir2.spawner_arm_controller]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[spawner-20] [INFO] [1790600381.218569586] [amir2.spawner_arm_controller]: [96mSetting controller param "type" to "joint_trajectory_controller/JointTrajectoryController" for [1marm_controller[0m
+[spawner-20] [INFO] [1790600381.224325318] [amir2.spawner_arm_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790600381.231562736] [amir2.controller_manager]: Loading controller 'arm_controller'
+[ign gazebo-1] [WARN] [1790600381.240597125] [amir2.arm_controller]: [Deprecated]: "allow_nonzero_velocity_at_trajectory_end" is set to true. The default behavior will change to false.
+[spawner-20] [INFO] [1790600381.244432997] [amir2.spawner_arm_controller]: [94mLoaded [1marm_controller[0m
+[ign gazebo-1] [INFO] [1790600381.245248700] [amir2.controller_manager]: Configuring controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600381.245341137] [amir2.arm_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[ign gazebo-1] [INFO] [1790600381.245350667] [amir2.arm_controller]: Command interfaces are [position] and state interfaces are [position velocity].
+[ign gazebo-1] [INFO] [1790600381.245358497] [amir2.arm_controller]: Using 'splines' interpolation method.
+[ign gazebo-1] [INFO] [1790600381.245708882] [amir2.arm_controller]: Controller state will be published at 100.00 Hz.
+[ign gazebo-1] [INFO] [1790600381.246622159] [amir2.arm_controller]: Goals with partial set of joints are allowed
+[ign gazebo-1] [INFO] [1790600381.246633764] [amir2.arm_controller]: Action status changes will be monitored at 20.00 Hz.
+[spawner-20] [INFO] [1790600381.260172377] [amir2.spawner_arm_controller]: [92mConfigured and activated [1marm_controller[0m
+[INFO] [spawner-20]: process has finished cleanly [pid 17886]
+[INFO] [spawner-21]: process started with pid [17924]
+[spawner-21] [INFO] [1790600381.657477317] [amir2.spawner_mecanum_drive_controller]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[INFO] [friction_grasp_manager-22]: process started with pid [17959]
+[ign gazebo-1] [WARN] [1790600382.258502304] [amir2.controller_manager.rclcpp]: failed to send response to /amir2/controller_manager/list_controllers (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[friction_grasp_manager-22] [INFO] [1790600382.621951581] [friction_grasp_manager]: Friction grasp manager ready; no detachable joint will be used.
+[INFO] [arm_home_positioner-23]: process started with pid [17994]
+[arm_home_positioner-23] [INFO] [1790600383.111495434] [arm_home_positioner]: Waiting to move all ('amir1', 'amir2') to Q_HOME=[0.0, 1.4, -1.6, 0.2, 1.570796] rad
+[ign gazebo-1] [INFO] [1790600384.041597983] [amir1.arm_controller]: Received new action goal
+[ign gazebo-1] [INFO] [1790600384.041664220] [amir1.arm_controller]: Accepted new action goal
+[ign gazebo-1] [INFO] [1790600384.041762557] [amir2.arm_controller]: Received new action goal
+[ign gazebo-1] [INFO] [1790600384.041823257] [amir2.arm_controller]: Accepted new action goal
+[arm_home_positioner-23] [INFO] [1790600384.041958456] [arm_home_positioner]: Sent Q_HOME=[0.0, 1.4, -1.6, 0.2, 1.570796] rad goals to all arm controllers
+[arm_home_positioner-23] [INFO] [1790600384.082139434] [arm_home_positioner]: All AMIR arm controllers accepted Q_HOME
+[INFO] [rotation_controller-24]: process started with pid [18030]
+[rotation_controller-24] [INFO] [1790600389.093309748] [cooperative_rotation_controller]: Rotation controller ready: target=30.0 deg, axis=[0.0, 0.0, 1.0]
+[ign gazebo-1] [INFO] [1790600392.338380362] [amir1.arm_controller]: Goal reached, success!
+[ign gazebo-1] [INFO] [1790600392.339805174] [amir2.arm_controller]: Goal reached, success!
+[arm_home_positioner-23] [INFO] [1790600392.376709199] [arm_home_positioner]: All AMIR arms reached Q_HOME
+[friction_grasp_manager-22] [WARN] [1790600394.626267756] [friction_grasp_manager]: Still waiting for both gripper action servers; no partial grasp command will be sent.
+[INFO] [create-25]: process started with pid [18065]
+[create-25] [INFO] [1790600395.482222179] [spawn_friction_payload]: Requested creation of entity.
+[create-25] [INFO] [1790600395.482611188] [spawn_friction_payload]: OK creation of entity.
+[INFO] [create-25]: process has finished cleanly [pid 18065]
+[INFO] [grasp_support_remover-26]: process started with pid [18084]
+[INFO] [coordinator-27]: process started with pid [18086]
+[INFO] [safety_monitor-28]: process started with pid [18088]
+[INFO] [slip_monitor-29]: process started with pid [18090]
+[INFO] [dual_base_approach-30]: process started with pid [18092]
+[slip_monitor-29] [INFO] [1790600396.920987670] [slip_monitor]: Payload slip monitor ready.
+[grasp_support_remover-26] [INFO] [1790600396.925158204] [grasp_support_remover]: Temporary grasp support will be removed after both configured grasp conditions have been satisfied.
+[coordinator-27] [INFO] [1790600396.927527245] [cooperative_coordinator]: Coordinator ready: /amir1/rover_twist and /amir2/rover_twist
+[dual_base_approach-30] [INFO] [1790600396.948454520] [dual_base_approach]: Waiting for the payload, opening both grippers to their safe maximum, then moving both AMIR bases 0.110 m toward it
+[safety_monitor-28] [INFO] [1790600396.963758472] [safety_monitor]: Safety monitor ready; emergency stop affects both robots.
+[INFO] [pivot_rotation_controller-31]: process started with pid [18239]
+[pivot_rotation_controller-31] [INFO] [1790600397.533264885] [pivot_rotation_controller]: Waiting for grasp; pivot=amir1, follower=amir2, target=30.0 deg
+[spawner-21] [WARN] [1790600442.158738178] [amir2.spawner_mecanum_drive_controller]: Failed getting a result from calling /amir2/controller_manager/list_controllers in 60.0. (Attempt 1 of 3.)
+[ign gazebo-1] [INFO] [1790600442.160895528] [amir2.controller_manager]: Loading controller 'mecanum_drive_controller'
+[spawner-21] [INFO] [1790600442.183802664] [amir2.spawner_mecanum_drive_controller]: [94mLoaded [1mmecanum_drive_controller[0m
+[ign gazebo-1] [INFO] [1790600442.185945225] [amir2.controller_manager]: Configuring controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600442.190533465] [amir2.mecanum_drive_controller]: MecanumDriveController configured successfully
+[spawner-21] [INFO] [1790600442.205106462] [amir2.spawner_mecanum_drive_controller]: [92mConfigured and activated [1mmecanum_drive_controller[0m
+[INFO] [spawner-21]: process has finished cleanly [pid 17924]
+[INFO] [spawner-32]: process started with pid [18295]
+[spawner-32] [INFO] [1790600442.676720959] [amir2.spawner_gripper_controller]: waiting for service /amir2/controller_manager/list_controllers to become available...
+[spawner-32] [INFO] [1790600443.680947156] [amir2.spawner_gripper_controller]: [96mSetting controller param "type" to "position_controllers/GripperActionController" for [1mgripper_controller[0m
+[spawner-32] [INFO] [1790600443.695480460] [amir2.spawner_gripper_controller]: [96mSetting controller param "params_file" to "['/home/dars5070/ros2_humble_ws/install/amir_gazebo/share/amir_gazebo/config/arm_controllers.yaml']" for [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790600443.706266215] [amir2.controller_manager]: Loading controller 'gripper_controller'
+[spawner-32] [INFO] [1790600443.734354235] [amir2.spawner_gripper_controller]: [94mLoaded [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790600443.735466057] [amir2.controller_manager]: Configuring controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600443.735526709] [amir2.gripper_controller]: Action status changes will be monitored at 20.000000 Hz.
+[spawner-32] [INFO] [1790600443.750534431] [amir2.spawner_gripper_controller]: [92mConfigured and activated [1mgripper_controller[0m
+[ign gazebo-1] [INFO] [1790600443.767558466] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790600443.767708973] [amir2.gripper_controller]: Received & accepted new action goal
+[dual_base_approach-30] [INFO] [1790600443.768533662] [dual_base_approach]: Opening both grippers to the safe maximum (-1.000000 rad) before base approach
+[ign gazebo-1] [INFO] [1790600443.800588203] [amir1.gripper_controller]: Received & accepted new action goal
+[ign gazebo-1] [INFO] [1790600443.800707844] [amir2.gripper_controller]: Received & accepted new action goal
+[friction_grasp_manager-22] [INFO] [1790600443.801092499] [friction_grasp_manager]: Friction grasp state: OPENING_GRIPPERS
+[dual_base_approach-30] [ERROR] [1790600443.802981953] [dual_base_approach]: amir2 gripper did not reach safe-open position
+[INFO] [spawner-32]: process has finished cleanly [pid 18295]
+[INFO] [dual_base_approach-30]: process has finished cleanly [pid 18092]
+[friction_grasp_manager-22] [INFO] [1790600445.990342918] [friction_grasp_manager]: Friction grasp state: READY_TO_GRASP
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[parameter_bridge-7] [INFO] [1790600480.094802679] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-6] [INFO] [1790600480.094806257] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-5] [INFO] [1790600480.094816467] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-17] [INFO] [1790600480.094825780] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [pivot_rotation_controller-31]: sending signal 'SIGINT' to process[pivot_rotation_controller-31]
+[INFO] [slip_monitor-29]: sending signal 'SIGINT' to process[slip_monitor-29]
+[INFO] [safety_monitor-28]: sending signal 'SIGINT' to process[safety_monitor-28]
+[INFO] [coordinator-27]: sending signal 'SIGINT' to process[coordinator-27]
+[INFO] [grasp_support_remover-26]: sending signal 'SIGINT' to process[grasp_support_remover-26]
+[ERROR] [slip_monitor-29]: process has died [pid 18090, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/slip_monitor --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_9h0_gxee --params-file /tmp/launch_params_4not1gsy'].
+[INFO] [rotation_controller-24]: sending signal 'SIGINT' to process[rotation_controller-24]
+[ERROR] [grasp_support_remover-26]: process has died [pid 18084, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/grasp_support_remover --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_nyttn3gj'].
+[INFO] [arm_home_positioner-23]: sending signal 'SIGINT' to process[arm_home_positioner-23]
+[INFO] [friction_grasp_manager-22]: sending signal 'SIGINT' to process[friction_grasp_manager-22]
+[INFO] [rover_twist_relay_ign.py-18]: sending signal 'SIGINT' to process[rover_twist_relay_ign.py-18]
+[ERROR] [rotation_controller-24]: process has died [pid 18030, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_rotation/lib/cooperative_rotation/rotation_controller --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_rotation/share/cooperative_rotation/config/rotation_params.yaml --params-file /tmp/launch_params_pf2q1jkn'].
+[INFO] [parameter_bridge-17]: sending signal 'SIGINT' to process[parameter_bridge-17]
+[ERROR] [rover_twist_relay_ign.py-8]: process has died [pid 15966, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_9rnp9zxl'].
+[ERROR] [arm_home_positioner-23]: process has died [pid 17994, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/coop_transport_controller/lib/coop_transport_controller/arm_home_positioner --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_hf1993f1'].
+[ERROR] [rover_twist_relay_ign.py-18]: process has died [pid 17701, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir2 -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params__kmm9_r9'].
+[ERROR] [friction_grasp_manager-22]: process has died [pid 17959, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/friction_grasp_manager --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_cykd3jfk --params-file /tmp/launch_params_loqbhkdo'].
+[INFO] [parameter_bridge-16]: sending signal 'SIGINT' to process[parameter_bridge-16]
+[INFO] [parameter_bridge-15]: sending signal 'SIGINT' to process[parameter_bridge-15]
+[INFO] [robot_state_publisher-13]: sending signal 'SIGINT' to process[robot_state_publisher-13]
+[INFO] [parameter_bridge-7]: sending signal 'SIGINT' to process[parameter_bridge-7]
+[ERROR] [robot_state_publisher-13]: process has died [pid 17691, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir2 -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_9rn8yzkj -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [parameter_bridge-6]: sending signal 'SIGINT' to process[parameter_bridge-6]
+[INFO] [parameter_bridge-5]: sending signal 'SIGINT' to process[parameter_bridge-5]
+[INFO] [robot_state_publisher-3]: sending signal 'SIGINT' to process[robot_state_publisher-3]
+[INFO] [parameter_bridge-2]: sending signal 'SIGINT' to process[parameter_bridge-2]
+[INFO] [ign gazebo-1]: sending signal 'SIGINT' to process[ign gazebo-1]
+[robot_state_publisher-3] [INFO] [1790600480.094830229] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [robot_state_publisher-3]: process has died [pid 15954, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_im8jpdnh -r /tf:=tf -r /tf_static:=tf_static'].
+[parameter_bridge-15] [INFO] [1790600480.094872555] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-18] Traceback (most recent call last):
+[rover_twist_relay_ign.py-18]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-18]     main()
+[rover_twist_relay_ign.py-18]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-18]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-18]     executor.spin_once()
+[rover_twist_relay_ign.py-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[rover_twist_relay_ign.py-8] Traceback (most recent call last):
+[rover_twist_relay_ign.py-8]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-8]     main()
+[rover_twist_relay_ign.py-8]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-8]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-8]     executor.spin_once()
+[rover_twist_relay_ign.py-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[rover_twist_relay_ign.py-8]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[parameter_bridge-2] [INFO] [1790600480.094898841] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-16] [INFO] [1790600480.095129804] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-8]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-8]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-8]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-8]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-8] KeyboardInterrupt
+[robot_state_publisher-13] [INFO] [1790600480.095297851] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-18]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[rover_twist_relay_ign.py-18]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-18]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-18]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-18]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-18] KeyboardInterrupt
+[ign gazebo-1] [INFO] [1790600480.102104671] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ign gazebo-1] [INFO] [1790600480.102177590] [amir2.controller_manager]: Shutdown request received....
+[ign gazebo-1] [INFO] [1790600480.102237721] [amir2.controller_manager]: Shutting down all controllers in the controller manager.
+[ign gazebo-1] [INFO] [1790600480.102265621] [amir2.controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600480.102309476] [amir2.controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600480.102347065] [amir2.controller_manager]: Deactivating controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600480.102382117] [amir2.controller_manager]: Shutting down controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600480.102401730] [amir2.controller_manager]: Deactivating controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600480.102428415] [amir2.controller_manager]: Shutting down controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600480.102446897] [amir2.controller_manager]: Deactivating controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600480.102468980] [amir2.controller_manager]: Shutting down controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600480.102499431] [resource_manager]: 'deactivate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600480.102517999] [resource_manager]: Successful 'deactivate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600480.102523311] [resource_manager]: 'shutdown' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600480.102528882] [resource_manager]: Successful 'shutdown' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600480.102534566] [resource_manager]: 'deactivate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600480.102539429] [resource_manager]: Successful 'deactivate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600480.102543439] [resource_manager]: 'shutdown' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600480.102548124] [resource_manager]: Successful 'shutdown' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600480.102552756] [amir2.controller_manager]: Shutting down the controller manager.
+[ign gazebo-1] [INFO] [1790600480.102562545] [amir1.controller_manager]: Shutdown request received....
+[ign gazebo-1] [INFO] [1790600480.102586845] [amir1.controller_manager]: Shutting down all controllers in the controller manager.
+[ign gazebo-1] [INFO] [1790600480.102602380] [amir1.controller_manager]: Deactivating controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600480.102631216] [amir1.controller_manager]: Shutting down controller 'joint_state_broadcaster'
+[ign gazebo-1] [INFO] [1790600480.102651116] [amir1.controller_manager]: Deactivating controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600480.102677556] [amir1.controller_manager]: Shutting down controller 'arm_controller'
+[ign gazebo-1] [INFO] [1790600480.102697227] [amir1.controller_manager]: Deactivating controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600480.102724910] [amir1.controller_manager]: Shutting down controller 'gripper_controller'
+[ign gazebo-1] [INFO] [1790600480.102744344] [amir1.controller_manager]: Deactivating controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600480.102766235] [amir1.controller_manager]: Shutting down controller 'mecanum_drive_controller'
+[ign gazebo-1] [INFO] [1790600480.102786311] [resource_manager]: 'deactivate' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600480.102792712] [resource_manager]: Successful 'deactivate' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600480.102796908] [resource_manager]: 'shutdown' hardware 'AmirGazeboSystem' 
+[ign gazebo-1] [INFO] [1790600480.102801947] [resource_manager]: Successful 'shutdown' of hardware 'AmirGazeboSystem'
+[ign gazebo-1] [INFO] [1790600480.102807524] [resource_manager]: 'deactivate' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600480.102812629] [resource_manager]: Successful 'deactivate' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600480.102816419] [resource_manager]: 'shutdown' hardware 'MecanumSystem' 
+[ign gazebo-1] [INFO] [1790600480.102821084] [resource_manager]: Successful 'shutdown' of hardware 'MecanumSystem'
+[ign gazebo-1] [INFO] [1790600480.102825366] [amir1.controller_manager]: Shutting down the controller manager.
+[pivot_rotation_controller-31] Traceback (most recent call last):
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller", line 33, in <module>
+[pivot_rotation_controller-31]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'pivot_rotation_controller')())
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/pivot_rotation_controller.py", line 234, in main
+[pivot_rotation_controller-31]     node._publish_stop()
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/pivot_rotation_controller.py", line 123, in _publish_stop
+[pivot_rotation_controller-31]     publisher.publish(Twist())
+[pivot_rotation_controller-31]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+[pivot_rotation_controller-31]     self.__publisher.publish(msg)
+[pivot_rotation_controller-31] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[pivot_rotation_controller-31] Error in sys.excepthook:
+[pivot_rotation_controller-31] Traceback (most recent call last):
+[pivot_rotation_controller-31]   File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 72, in apport_excepthook
+[pivot_rotation_controller-31]     from apport.fileutils import likely_packaged, get_recent_crashes
+[pivot_rotation_controller-31]   File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+[pivot_rotation_controller-31]     from apport.report import Report
+[pivot_rotation_controller-31]   File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+[pivot_rotation_controller-31]     import problem_report
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap>", line 1002, in _find_and_load_unlocked
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap>", line 945, in _find_spec
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap_external>", line 1439, in find_spec
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap_external>", line 1411, in _get_spec
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap_external>", line 1572, in find_spec
+[pivot_rotation_controller-31]   File "<frozen importlib._bootstrap_external>", line 126, in _path_join
+[pivot_rotation_controller-31] KeyboardInterrupt
+[pivot_rotation_controller-31] 
+[pivot_rotation_controller-31] Original exception was:
+[pivot_rotation_controller-31] Traceback (most recent call last):
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller", line 33, in <module>
+[pivot_rotation_controller-31]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'pivot_rotation_controller')())
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/pivot_rotation_controller.py", line 234, in main
+[pivot_rotation_controller-31]     node._publish_stop()
+[pivot_rotation_controller-31]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/pivot_rotation_controller.py", line 123, in _publish_stop
+[pivot_rotation_controller-31]     publisher.publish(Twist())
+[pivot_rotation_controller-31]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 70, in publish
+[pivot_rotation_controller-31]     self.__publisher.publish(msg)
+[pivot_rotation_controller-31] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:389
+[safety_monitor-28] Traceback (most recent call last):
+[safety_monitor-28]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/safety_monitor", line 33, in <module>
+[safety_monitor-28]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'safety_monitor')())
+[safety_monitor-28]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/safety_monitor.py", line 200, in main
+[safety_monitor-28]     rclpy.spin(node)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[safety_monitor-28]     executor.spin_once()
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[safety_monitor-28]     self._spin_once_impl(timeout_sec)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in _spin_once_impl
+[safety_monitor-28]     raise handler.exception()
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[safety_monitor-28]     self._handler.send(None)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 453, in handler
+[safety_monitor-28]     arg = take_from_wait_list(entity)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 375, in _take_subscription
+[safety_monitor-28]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[safety_monitor-28] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[safety_monitor-28] Error in sys.excepthook:
+[safety_monitor-28] Traceback (most recent call last):
+[safety_monitor-28]   File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 72, in apport_excepthook
+[safety_monitor-28]     from apport.fileutils import likely_packaged, get_recent_crashes
+[safety_monitor-28]   File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+[safety_monitor-28]     from apport.report import Report
+[safety_monitor-28]   File "/usr/lib/python3/dist-packages/apport/report.py", line 15, in <module>
+[safety_monitor-28]     import xml.dom, xml.dom.minidom
+[safety_monitor-28]   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+[safety_monitor-28]   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+[safety_monitor-28]   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+[safety_monitor-28]   File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+[safety_monitor-28]   File "<frozen importlib._bootstrap_external>", line 1012, in get_code
+[safety_monitor-28]   File "<frozen importlib._bootstrap_external>", line 672, in _compile_bytecode
+[safety_monitor-28] KeyboardInterrupt
+[safety_monitor-28] 
+[safety_monitor-28] Original exception was:
+[safety_monitor-28] Traceback (most recent call last):
+[safety_monitor-28]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/safety_monitor", line 33, in <module>
+[safety_monitor-28]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'safety_monitor')())
+[safety_monitor-28]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/safety_monitor.py", line 200, in main
+[safety_monitor-28]     rclpy.spin(node)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[safety_monitor-28]     executor.spin_once()
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[safety_monitor-28]     self._spin_once_impl(timeout_sec)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in _spin_once_impl
+[safety_monitor-28]     raise handler.exception()
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[safety_monitor-28]     self._handler.send(None)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 453, in handler
+[safety_monitor-28]     arg = take_from_wait_list(entity)
+[safety_monitor-28]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 375, in _take_subscription
+[safety_monitor-28]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[safety_monitor-28] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[coordinator-27] Traceback (most recent call last):
+[coordinator-27]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/coordinator", line 33, in <module>
+[coordinator-27]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'coordinator')())
+[coordinator-27]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/coordinator.py", line 589, in main
+[coordinator-27]     rclpy.spin(node)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[coordinator-27]     executor.spin_once()
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[coordinator-27]     self._spin_once_impl(timeout_sec)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in _spin_once_impl
+[coordinator-27]     raise handler.exception()
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[coordinator-27]     self._handler.send(None)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 453, in handler
+[coordinator-27]     arg = take_from_wait_list(entity)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 375, in _take_subscription
+[coordinator-27]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[coordinator-27] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[coordinator-27] Error in sys.excepthook:
+[coordinator-27] Traceback (most recent call last):
+[coordinator-27]   File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 72, in apport_excepthook
+[coordinator-27]     from apport.fileutils import likely_packaged, get_recent_crashes
+[coordinator-27]   File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+[coordinator-27]     from apport.report import Report
+[coordinator-27]   File "/usr/lib/python3/dist-packages/apport/report.py", line 21, in <module>
+[coordinator-27]     from urllib.request import urlopen
+[coordinator-27]   File "/usr/lib/python3.10/urllib/request.py", line 88, in <module>
+[coordinator-27]     import http.client
+[coordinator-27]   File "/usr/lib/python3.10/http/client.py", line 71, in <module>
+[coordinator-27]     import email.parser
+[coordinator-27]   File "/usr/lib/python3.10/email/parser.py", line 12, in <module>
+[coordinator-27]     from email.feedparser import FeedParser, BytesFeedParser
+[coordinator-27]   File "/usr/lib/python3.10/email/feedparser.py", line 532, in <module>
+[coordinator-27]     class BytesFeedParser(FeedParser):
+[coordinator-27] KeyboardInterrupt
+[coordinator-27] 
+[coordinator-27] Original exception was:
+[coordinator-27] Traceback (most recent call last):
+[coordinator-27]   File "/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/coordinator", line 33, in <module>
+[coordinator-27]     sys.exit(load_entry_point('cooperative-transport-control', 'console_scripts', 'coordinator')())
+[coordinator-27]   File "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/coordinator.py", line 589, in main
+[coordinator-27]     rclpy.spin(node)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[coordinator-27]     executor.spin_once()
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[coordinator-27]     self._spin_once_impl(timeout_sec)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in _spin_once_impl
+[coordinator-27]     raise handler.exception()
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[coordinator-27]     self._handler.send(None)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 453, in handler
+[coordinator-27]     arg = take_from_wait_list(entity)
+[coordinator-27]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 375, in _take_subscription
+[coordinator-27]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[coordinator-27] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[parameter_bridge-17] [INFO] [1790600480.159577216] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-16] [INFO] [1790600480.163128678] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-15] [INFO] [1790600480.166371986] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-7] [INFO] [1790600480.180972490] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-6] [INFO] [1790600480.184372271] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-5] [INFO] [1790600480.187241876] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790600480.192465654] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-16]: process has finished cleanly [pid 17697]
+[INFO] [parameter_bridge-6]: process has finished cleanly [pid 15961]
+[INFO] [parameter_bridge-15]: process has finished cleanly [pid 17695]
+[INFO] [parameter_bridge-2]: process has finished cleanly [pid 13682]
+[INFO] [parameter_bridge-5]: process has finished cleanly [pid 15959]
+[INFO] [parameter_bridge-17]: process has finished cleanly [pid 17699]
+[INFO] [parameter_bridge-7]: process has finished cleanly [pid 15963]
+[ERROR] [pivot_rotation_controller-31]: process has died [pid 18239, exit code 1, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /tmp/launch_params_2gzqto2a'].
+[ERROR] [safety_monitor-28]: process has died [pid 18088, exit code 1, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/safety_monitor --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_3t28l24q --params-file /tmp/launch_params_uuciquhd'].
+[ERROR] [coordinator-27]: process has died [pid 18086, exit code 1, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/coordinator --ros-args -p use_sim_time:=True -p use_sim_time:=True --params-file /home/dars5070/ros2_humble_ws/install/cooperative_transport_control/share/cooperative_transport_control/config/friction_transport.yaml --params-file /tmp/launch_params_o4q6cvf6 --params-file /tmp/launch_params_letgya2v'].
+[ERROR] [ign gazebo-1]: process has died [pid 13679, exit code -2, cmd 'ruby /usr/bin/ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf --force-version 6'].
+[INFO] [launch]: process[ign gazebo-1] was required: shutting down launched system

@@ -19,7 +19,9 @@ def holding_recovery_position(
         maximum_step: float,
         minimum_position: float,
         maximum_position: float,
-        allow_release: bool = True) -> float:
+        allow_release: bool = True,
+        maintain_target: bool = False,
+        force_tolerance: float = 0.0) -> float:
     """Keep a grasp while reopening above its safe normal-force ceiling."""
     forces = tuple(max(0.0, float(force)) for force in normal_forces)
     if len(forces) != 2:
@@ -42,6 +44,20 @@ def holding_recovery_position(
             -maximum_step, 0.0)
         return clamp(
             current_position + delta, minimum_position, maximum_position)
+    if maintain_target:
+        mean_force = sum(forces) / len(forces)
+        if mean_force < target_force - force_tolerance:
+            delta = clamp(
+                position_gain * (target_force - mean_force),
+                0.0, maximum_step)
+            return clamp(
+                current_position + delta, minimum_position, maximum_position)
+        if allow_release and mean_force > target_force + force_tolerance:
+            delta = clamp(
+                position_gain * (target_force - mean_force),
+                -maximum_step, 0.0)
+            return clamp(
+                current_position + delta, minimum_position, maximum_position)
     return clamp(commanded_position, minimum_position, maximum_position)
 
 

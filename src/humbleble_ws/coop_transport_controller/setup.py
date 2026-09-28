@@ -19,5 +19,6 @@ setup(
     license='Apache-2.0',
     entry_points={'console_scripts': [
         'cooperative_motion_server = coop_transport_controller.cooperative_motion_server:main',
+        'arm_home_positioner = coop_transport_controller.arm_home_positioner:main',
     ]},
 )

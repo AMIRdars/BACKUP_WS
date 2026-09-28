@@ -1,4 +1,4 @@
-"""Start Gazebo Fortress, two AMIRs, payload, bridges, and control nodes."""
+"""Spawn two AMIRs at Q_HOME, then spawn and grasp one payload."""
 
 import os
 
@@ -18,21 +18,18 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def _launch_setup(context, *args, **kwargs):
-    headless = LaunchConfiguration('headless').perform(context).lower() in ('1', 'true', 'yes')
-    auto_attach = (
-        LaunchConfiguration('auto_attach').perform(context).lower()
+    headless = (
+        LaunchConfiguration('headless').perform(context).lower()
         in ('1', 'true', 'yes'))
 
     gazebo_share = get_package_share_directory('cooperative_transport_gazebo')
-    description_share = get_package_share_directory('cooperative_transport_description')
-    control_share = get_package_share_directory('cooperative_transport_control')
+    description_share = get_package_share_directory(
+        'cooperative_transport_description')
     amir_gazebo_share = get_package_share_directory('amir_gazebo')
 
     world_file = os.path.join(gazebo_share, 'worlds', 'cooperative_transport.sdf')
     payload_file = os.path.join(
         description_share, 'models', 'cooperative_payload', 'model.sdf')
-    control_parameters = os.path.join(
-        control_share, 'config', 'cooperative_transport.yaml')
     robot_launch = os.path.join(
         amir_gazebo_share, 'launch', 'robot_bringup.launch.py')
 
@@ -60,10 +57,12 @@ def _launch_setup(context, *args, **kwargs):
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             '/amir1/grasp/attach@std_msgs/msg/Empty]gz.msgs.Empty',
             '/amir1/grasp/detach@std_msgs/msg/Empty]gz.msgs.Empty',
-            '/amir1/grasp/state@std_msgs/msg/Bool[gz.msgs.Boolean',
+            '/amir1/grasp/state@std_msgs/msg/String[gz.msgs.StringMsg',
             '/amir2/grasp/attach@std_msgs/msg/Empty]gz.msgs.Empty',
             '/amir2/grasp/detach@std_msgs/msg/Empty]gz.msgs.Empty',
-            '/amir2/grasp/state@std_msgs/msg/Bool[gz.msgs.Boolean',
+            '/amir2/grasp/state@std_msgs/msg/String[gz.msgs.StringMsg',
+            '/world/cooperative_transport/remove'
+            '@ros_gz_interfaces/srv/DeleteEntity',
         ],
     )
 
@@ -92,32 +91,77 @@ def _launch_setup(context, *args, **kwargs):
             '-world', 'cooperative_transport',
             '-name', 'cooperative_payload',
             '-file', payload_file,
-            '-x', '0.0', '-y', '0.0', '-z', '0.443',
+            # Roll about the 1.20 m longitudinal axis so the 1.20 x 0.08 m
+            # (largest) payload face is horizontal.  Its vertical thickness
+            # is then 0.03 m, so its centre is 0.645 + 0.03 / 2 m above the
+            # temporary support.
+            '-x', '0.0', '-y', '0.0', '-z', '0.660',
+            '-R', '1.5707963267948966',
             '-allow_renaming', 'false',
         ],
     )
 
-    common_parameters = [
-        control_parameters,
-        {'use_sim_time': True},
-    ]
     attach_manager = Node(
         package='cooperative_transport_control',
         executable='attach_manager',
         output='screen',
-        parameters=common_parameters + [{'auto_attach': auto_attach}],
+        parameters=[{
+            'use_sim_time': True,
+            # dual_base_approach requests grasp only after both bases arrive.
+            'auto_attach': False,
+            'close_grippers_before_attach': True,
+            'gripper_close_position': 0.20,
+            'gripper_maximum_effort': 0.8,
+            'require_gripper_contacts_before_attach': True,
+        }],
     )
-    coordinator = Node(
+
+    base_approach = Node(
         package='cooperative_transport_control',
-        executable='coordinator',
+        executable='dual_base_approach',
         output='screen',
-        parameters=common_parameters,
+        parameters=[{
+            'use_sim_time': True,
+            'robot_namespaces': ['amir1', 'amir2'],
+            'open_grippers_before_approach': True,
+            # -1.0 rad is the widest reliable command: the exact lower
+            # mechanical limit can leave Gazebo's gripper joint stalled.
+            'gripper_open_position': -1.0,
+            'gripper_maximum_effort': 0.8,
+            # Each AMIR travels 10 mm farther toward the payload after
+            # opening its gripper, compared with the previous 0.10 m move.
+            'approach_distance': 0.110,
+            'maximum_speed': 0.035,
+            'position_tolerance': 0.001,
+        }],
     )
-    safety_monitor = Node(
+
+    support_remover = Node(
         package='cooperative_transport_control',
-        executable='safety_monitor',
+        executable='grasp_support_remover',
         output='screen',
-        parameters=common_parameters,
+        parameters=[{
+            'use_sim_time': True,
+            'world_name': 'cooperative_transport',
+            'support_model_name': 'grasp_support',
+            'removal_delay': 1.0,
+            # This stage uses the existing fixed DetachableJoint grasp rather
+            # than the separate contact/friction grasp manager.
+            'require_physical_contact': False,
+            'require_friction_holding': False,
+        }],
+    )
+
+    arm_home_positioner = Node(
+        package='coop_transport_controller',
+        executable='arm_home_positioner',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'robot_namespaces': ['amir1', 'amir2'],
+            'motion_duration': LaunchConfiguration('home_motion_duration'),
+            'compensate_base': False,
+        }],
     )
 
     return [
@@ -128,19 +172,32 @@ def _launch_setup(context, *args, **kwargs):
         SetEnvironmentVariable('__GLX_VENDOR_LIBRARY_NAME', 'nvidia'),
         simulation,
         bridge,
-        # Both arms are at zero joint position. Their TCPs face the payload ends.
-        TimerAction(period=2.0, actions=[robot('amir1', '-1.34', '0.0')]),
-        TimerAction(period=6.0, actions=[robot('amir2', '1.34', '3.141592653589793')]),
-        TimerAction(period=11.0, actions=[spawn_payload]),
+        # Spawn 0.10 m farther from the payload than the grasp positions.
+        # After the supported payload appears, both bases approach together.
+        TimerAction(period=2.0, actions=[robot('amir1', '-1.174987', '0.0')]),
         TimerAction(
-            period=12.0,
-            actions=[attach_manager, coordinator, safety_monitor]),
+            period=6.0,
+            actions=[robot('amir2', '1.174987', '3.141592653589793')]),
+        # Reassert the common posture after all controllers become available.
+        TimerAction(
+            period=float(LaunchConfiguration('home_start_delay').perform(context)),
+            actions=[arm_home_positioner]),
+        # Start the grasp nodes just before payload creation. The approach
+        # node repeatedly sends detach so Fortress cannot keep the payload's
+        # DetachableJoint in its default attached state during positioning.
+        TimerAction(
+            period=19.0,
+            actions=[attach_manager, support_remover, base_approach]),
+        # Only spawn after the two arm controllers have reached Q_HOME; base
+        # motion begins after both initial grasp joints report detached.
+        TimerAction(period=20.0, actions=[spawn_payload]),
     ]
 
 
 def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('headless', default_value='false'),
-        DeclareLaunchArgument('auto_attach', default_value='true'),
+        DeclareLaunchArgument('home_start_delay', default_value='11.0'),
+        DeclareLaunchArgument('home_motion_duration', default_value='8.0'),
         OpaqueFunction(function=_launch_setup),
     ])

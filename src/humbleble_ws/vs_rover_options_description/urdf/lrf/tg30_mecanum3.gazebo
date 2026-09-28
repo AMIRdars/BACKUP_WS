@@ -3,6 +3,7 @@
 
   <xacro:arg name="front_laser_visual" default="false" />
   <xacro:arg name="back_laser_visual" default="false" />
+  <xacro:arg name="enable_lidar" default="true" />
 
   <!-- マルチロボット用 namespace (空なら従来どおり無 prefix) -->
   <xacro:arg name="namespace" default=""/>
@@ -13,6 +14,7 @@
   <!-- ±90° = 180° FOV: front/back LRF each covers only its own hemisphere -->
   <xacro:property name="LRF_ANGLE" value="90" />
 
+  <xacro:if value="$(arg enable_lidar)">
   <gazebo reference="front_lrf_link">
     <selfCollide>true</selfCollide>
     <sensor name="tg30_lidar_front" type="gpu_lidar">
@@ -44,8 +46,10 @@
       <ignition_frame_id>front_lrf_link</ignition_frame_id>
     </sensor>
   </gazebo>
+  </xacro:if>
 
   <!-- 後部 LRF センサー: use_back_lrf と連動 -->
+  <xacro:if value="$(arg enable_lidar)">
   <xacro:if value="$(arg use_back_lrf)">
   <gazebo reference="back_lrf_link">
     <selfCollide>true</selfCollide>
@@ -78,6 +82,7 @@
       <ignition_frame_id>back_lrf_link</ignition_frame_id>
     </sensor>
   </gazebo>
+  </xacro:if>
   </xacro:if>
 
 </robot>

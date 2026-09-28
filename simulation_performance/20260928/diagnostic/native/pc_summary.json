@@ -1,0 +1,1561 @@
+{
+  "n_samples": 4351,
+  "sampling_cpu_period_ms": 10,
+  "libraries": [
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libdart.so.6.12.1",
+      "samples": 2042,
+      "percent": 46.931739829924155
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libdart-external-odelcpsolver.so.6.12.1",
+      "samples": 1629,
+      "percent": 37.43966904159963
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "samples": 317,
+      "percent": 7.285681452539646
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libignition-gazebo6.so.6.16.0",
+      "samples": 135,
+      "percent": 3.102735003447483
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins/libignition-gazebo6-physics-system.so.6.16.0",
+      "samples": 74,
+      "percent": 1.700758446334176
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+      "samples": 42,
+      "percent": 0.9652953344058837
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/ign-physics-5/engine-plugins/libignition-physics5-dartsim-plugin.so.5.3.2",
+      "samples": 31,
+      "percent": 0.7124798896805332
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libode.so.8.0.2",
+      "samples": 30,
+      "percent": 0.689496667432774
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libignition-msgs8.so.8.7.0",
+      "samples": 16,
+      "percent": 0.3677315559641462
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libdart-collision-ode.so.6.12.1",
+      "samples": 9,
+      "percent": 0.20684900022983221
+    },
+    {
+      "library": "/opt/ros/humble/lib/libfastrtps.so.2.6.11",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "/opt/ros/humble/lib/libcontroller_manager.so",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "/home/dars5070/ros2_humble_ws/simulation_performance/20260928/profiling_support/build/libphase_meter.so",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libignition-physics5.so.5.3.2",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libignition-plugin1.so.1.4.0",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "[vdso]",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "/opt/ros/humble/lib/librclcpp_lifecycle.so",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libprotobuf.so.23.0.4",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/ign-gazebo-6/plugins/libignition-gazebo6-contact-system.so.6.16.0",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/opt/ros/humble/lib/libgz_hardware_plugins.so",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libzmq.so.5.2.4",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/opt/ros/humble/lib/libgz_ros2_control-system.so",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libignition-transport11.so.11.4.1",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "/usr/lib/x86_64-linux-gnu/libsdformat12.so.12.7.2",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    }
+  ],
+  "functions": [
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dDot(double const*, double const*, int)",
+      "samples": 604,
+      "percent": 13.881866237646518
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "[not covered by exported function symbol]",
+      "samples": 497,
+      "percent": 11.422661457136291
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dSolveL1(double const*, double*, int, int)",
+      "samples": 352,
+      "percent": 8.090094231211216
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::BoxedLcpConstraintSolver::solveConstrainedGroup(dart::constraint::ConstrainedGroup&)",
+      "samples": 349,
+      "percent": 8.021144564467939
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstrainedGroup::getConstraint(unsigned long)",
+      "samples": 265,
+      "percent": 6.090553895656171
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dSolveL1T(double const*, double*, int, int)",
+      "samples": 244,
+      "percent": 5.6079062284532295
+    },
+    {
+      "library": "libc.so.6",
+      "function": "[not covered by exported function symbol]",
+      "samples": 226,
+      "percent": 5.194208227993565
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getArticulatedInertia() const",
+      "samples": 177,
+      "percent": 4.068030337853367
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dSolveLCP(int, double*, double*, double*, double*, int, double*, double*, int*, bool)",
+      "samples": 168,
+      "percent": 3.8611813376235347
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getSkeleton()",
+      "samples": 106,
+      "percent": 2.4362215582624684
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::getSkeleton()",
+      "samples": 100,
+      "percent": 2.2983222247759136
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "[not covered by exported function symbol]",
+      "samples": 88,
+      "percent": 2.022523557802804
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::isReactive() const",
+      "samples": 63,
+      "percent": 1.4479430016088255
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::BoxedLcpConstraintSolver::isSymmetric(unsigned long, double*)",
+      "samples": 61,
+      "percent": 1.4019765571133074
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dLDLTAddTL(double*, double*, double const*, int, int, void*)",
+      "samples": 57,
+      "percent": 1.3100436681222707
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::getVelocityChange(double*, bool)",
+      "samples": 54,
+      "percent": 1.2410940013789933
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__libc_malloc@@GLIBC_2.2.5",
+      "samples": 53,
+      "percent": 1.2181107791312342
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, unsigned long>, std::allocator<std::pair<unsigned long const, unsigned long> >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(unsigned long const&)",
+      "samples": 43,
+      "percent": 0.9882785566536428
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointConstraint::getVelocityChange(double*, bool)",
+      "samples": 40,
+      "percent": 0.9193288899103654
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::updateVelocityChangeFD()",
+      "samples": 40,
+      "percent": 0.9193288899103654
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::solve1(double*, int, int, int)",
+      "samples": 37,
+      "percent": 0.850379223167088
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::dAdInvT(Eigen::Transform<double, 3, 1, 0> const&, Eigen::Matrix<double, 6, 1, 0, 6, 1> const&)",
+      "samples": 34,
+      "percent": 0.7814295564238106
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointCoulombFrictionConstraint::getVelocityChange(double*, bool)",
+      "samples": 28,
+      "percent": 0.6435302229372558
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__libc_free@@GLIBC_2.2.5",
+      "samples": 25,
+      "percent": 0.5745805561939784
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::_Rb_tree_increment(std::_Rb_tree_node_base const*)@@GLIBCXX_3.4",
+      "samples": 23,
+      "percent": 0.5286141116984602
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::updateBiasImpulse()",
+      "samples": 21,
+      "percent": 0.48264766720294183
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::math::v6::graph::Graph<unsigned long, bool, ignition::math::v6::graph::DirectedEdge<bool> >::IncidentsTo(unsigned long const&) const",
+      "samples": 21,
+      "percent": 0.48264766720294183
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::clearConstraintImpulse()",
+      "samples": 20,
+      "percent": 0.4596644449551827
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::AdInvT(Eigen::Transform<double, 3, 1, 0> const&, Eigen::Matrix<double, 6, 1, 0, 6, 1> const&)",
+      "samples": 20,
+      "percent": 0.4596644449551827
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dxHashSpace::collide(void*, void (*)(void*, dxGeom*, dxGeom*))",
+      "samples": 20,
+      "percent": 0.4596644449551827
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "[not covered by exported function symbol]",
+      "samples": 18,
+      "percent": 0.41369800045966443
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::pN_equals_ANC_times_qC(double*, double*)",
+      "samples": 17,
+      "percent": 0.3907147782119053
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::pC_plusequals_s_times_qC(double*, double, double*)",
+      "samples": 15,
+      "percent": 0.344748333716387
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dLDLTRemove(double**, int const*, double*, double*, int, int, int, int, void*)",
+      "samples": 13,
+      "percent": 0.2987818892208688
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::isKinematic() const",
+      "samples": 13,
+      "percent": 0.2987818892208688
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::transfer_i_from_N_to_C(int)",
+      "samples": 12,
+      "percent": 0.2757986669731096
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View::EntityComponentData(unsigned long) const",
+      "samples": 12,
+      "percent": 0.2757986669731096
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::pN_plusequals_s_times_qN(double*, double, double*)",
+      "samples": 11,
+      "percent": 0.2528154447253505
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "[not covered by exported function symbol]",
+      "samples": 11,
+      "percent": 0.2528154447253505
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::isImpulseApplied() const",
+      "samples": 10,
+      "percent": 0.22983222247759136
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::collision::CollisionGroup::updateEngineData()",
+      "samples": 8,
+      "percent": 0.1838657779820731
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, std::unordered_map<unsigned long, unsigned long, std::hash<unsigned long>, std::equal_to<unsigned long>, std::allocator<std::pair<unsigned long const, unsigned long> > > >, std::allocator<std::pair<unsigned long const, std::unordered_map<unsigned long, unsigned long, std::hash<unsigned long>, std::equal_to<unsigned long>, std::allocator<std::pair<unsigned long const, unsigned long> > > > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(unsigned long const&)",
+      "samples": 8,
+      "percent": 0.1838657779820731
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::getTangentBasisMatrixODE(Eigen::Matrix<double, 3, 1, 0, 3, 1> const&)",
+      "samples": 7,
+      "percent": 0.16088255573431395
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::updateBiasImpulse(dart::dynamics::BodyNode*, Eigen::Matrix<double, 6, 1, 0, 6, 1> const&)",
+      "samples": 7,
+      "percent": 0.16088255573431395
+    },
+    {
+      "library": "libc.so.6",
+      "function": "pthread_cond_broadcast@@GLIBC_2.3.2",
+      "samples": 7,
+      "percent": 0.16088255573431395
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::math::v6::graph::Graph<unsigned long, bool, ignition::math::v6::graph::DirectedEdge<bool> >::AdjacentsTo(unsigned long const&) const",
+      "samples": 7,
+      "percent": 0.16088255573431395
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::updateVelocityChange()",
+      "samples": 6,
+      "percent": 0.1378993334865548
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstraintBase::compressPath(std::shared_ptr<dart::dynamics::Skeleton>)",
+      "samples": 6,
+      "percent": 0.1378993334865548
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Function_handler<bool (ignition::msgs::Wrench const&, ignition::msgs::Wrench const&), ignition::gazebo::v6::systems::PhysicsPrivate::wrenchEql::{lambda(ignition::msgs::Wrench const&, ignition::msgs::Wrench const&)#1}>::_M_invoke(std::_Any_data const&, ignition::msgs::Wrench const&, ignition::msgs::Wrench const&)",
+      "samples": 6,
+      "percent": 0.1378993334865548
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::transfer_i_to_C(int)",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstraintBase::getDimension() const",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::computeRestitutionCoefficient(dart::dynamics::ShapeNode const*)",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getParentJoint()",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::updateBiasImpulse(dart::dynamics::BodyNode*)",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Hashtable<ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> >, std::pair<ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > const, unsigned long>, std::allocator<std::pair<ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > const, unsigned long> >, std::__detail::_Select1st, std::equal_to<ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > >, std::hash<ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > >, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node(unsigned long, ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > const&, unsigned long) const",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::SimulationFeatures::Write(ignition::physics::ChangedWorldPoses&) const",
+      "samples": 5,
+      "percent": 0.11491611123879568
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::collision::CollisionObject::getTransform() const",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::ContactConstraint(dart::collision::Contact&, double)",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::dirtyAcceleration()",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::GetContactsFromLastStep() const",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Function_handler<bool (ignition::msgs::Contacts const&, ignition::msgs::Contacts const&), ignition::gazebo::v6::systems::PhysicsPrivate::contactsEql::{lambda(ignition::msgs::Contacts const&, ignition::msgs::Contacts const&)#1}>::_M_invoke(std::_Any_data const&, ignition::msgs::Contacts const&, ignition::msgs::Contacts const&)",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "void std::vector<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal, std::allocator<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal> >::_M_realloc_insert<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal const&>(__gnu_cxx::__normal_iterator<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal*, std::vector<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal, std::allocator<ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal> > >, ignition::physics::GetContactsFromLastStepFeature::Implementation<ignition::physics::FeaturePolicy<double, 3ul> >::ContactInternal const&)",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::KinematicsFeatures::SelectFrame(ignition::physics::FrameID const&) const",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::EntityComponentManager::ComponentImplementation(unsigned long, unsigned long) const",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::math::v6::graph::Graph<unsigned long, bool, ignition::math::v6::graph::DirectedEdge<bool> >::Vertices() const",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libdart-collision-ode.so.6.12.1",
+      "function": "[not covered by exported function symbol]",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libdart-collision-ode.so.6.12.1",
+      "function": "dart::collision::OdeCollisionObject::updateEngineData()",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "operator new(unsigned long)@@GLIBCXX_3.4",
+      "samples": 4,
+      "percent": 0.09193288899103655
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::pN_plusequals_ANi(double*, int, int)",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getArticulatedInertiaImplicit() const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::SkeletonRefCountingBase::incrementReferenceCount() const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::getRelativeTransform() const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Node::getBodyNodePtr() const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstraintBase::getRootSkeleton(std::shared_ptr<dart::dynamics::Skeleton>)",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > >, std::allocator<std::pair<unsigned long const, ignition::physics::EntityPtr<ignition::physics::Link<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList> > > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(unsigned long const&) const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::SetJointVelocityCommandFeature::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityCommandFeatureList>::SetVelocityCommand(unsigned long, double)",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "std::_Hashtable<dart::dynamics::ShapeNode const*, std::pair<dart::dynamics::ShapeNode const* const, unsigned long>, std::allocator<std::pair<dart::dynamics::ShapeNode const* const, unsigned long> >, std::__detail::_Select1st, std::equal_to<dart::dynamics::ShapeNode const*>, std::hash<dart::dynamics::ShapeNode const*>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(dart::dynamics::ShapeNode const* const&) const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::shared_ptr<ignition::physics::dartsim::ShapeInfo> >, std::allocator<std::pair<unsigned long const, std::shared_ptr<ignition::physics::dartsim::ShapeInfo> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::at(unsigned long const&) const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::SimulationFeatures::convertContact(dart::collision::Contact const&) const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, std::unordered_set<unsigned long, std::hash<unsigned long>, std::equal_to<unsigned long>, std::allocator<unsigned long> > >, std::allocator<std::pair<unsigned long const, std::unordered_set<unsigned long, std::hash<unsigned long>, std::equal_to<unsigned long>, std::allocator<unsigned long> > > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::clear()",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::EntityComponentManager::EntityMatches(unsigned long, std::set<unsigned long, std::less<unsigned long>, std::allocator<unsigned long> > const&) const",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::_Rb_tree_insert_and_rebalance(bool, std::_Rb_tree_node_base*, std::_Rb_tree_node_base*, std::_Rb_tree_node_base&)@@GLIBCXX_3.4",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Contact::MergeFrom(ignition::msgs::Contact const&)",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libcontroller_manager.so",
+      "function": "controller_manager::ControllerManager::write(rclcpp::Time const&, rclcpp::Duration const&)",
+      "samples": 3,
+      "percent": 0.0689496667432774
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::getWorldTransform() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstraintSolver::updateConstraints()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::getRelVelocity(double*)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::updateArticulatedInertia() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::transformInertia(Eigen::Transform<double, 3, 1, 0> const&, Eigen::Matrix<double, 6, 6, 0, 6, 6> const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointConstraint::update()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::dirtyVelocity()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointCoulombFrictionConstraint::getRootSkeleton() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::SkeletonRefCountingBase::decrementReferenceCount() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::dirtyTransform()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::updateArtInertia(double) const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::getInformation(dart::constraint::ConstraintInfo*)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::isMobile() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::BoxedLcpConstraintSolver::isSymmetric(unsigned long, double*, unsigned long, unsigned long)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::verifyTransform(Eigen::Transform<double, 3, 1, 0> const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getSkeleton() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::deque<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*, std::allocator<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*> > >, std::allocator<std::pair<unsigned long const, std::deque<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*, std::allocator<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*> > > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned long const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_add_ref_copy()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::Each<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::JointTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >, ignition::gazebo::v6::components::Component<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, ignition::gazebo::v6::components::NameTag, ignition::gazebo::v6::serializers::StringSerializer> >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::JointTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >*, ignition::gazebo::v6::components::Component<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, ignition::gazebo::v6::components::NameTag, ignition::gazebo::v6::serializers::StringSerializer>*)> >::type)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, ignition::math::v6::Pose3<double> >, std::allocator<std::pair<unsigned long const, ignition::math::v6::Pose3<double> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(unsigned long const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::Model::Entity() const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, unsigned long, std::allocator<unsigned long>, std::__detail::_Identity, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, true, true> >::find(unsigned long const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, unsigned long, std::allocator<unsigned long>, std::__detail::_Identity, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, true, true> >::_M_rehash(unsigned long, unsigned long const&)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "sCylinderBoxData::_cldTestAxis(double (&) [4], int)",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dxGeom::computePosr()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "operator delete(void*)@@GLIBCXX_3.4",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::_Rb_tree_increment(std::_Rb_tree_node_base*)@@GLIBCXX_3.4",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-plugin1.so.1.4.0",
+      "function": "ignition::plugin::Plugin::PrivateQueryInterface(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Entity::~Entity()",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "[not covered by exported function symbol]",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libfastrtps.so.2.6.11",
+      "function": "[not covered by exported function symbol]",
+      "samples": 2,
+      "percent": 0.045966444495518274
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::_dRemoveRowCol(double*, int, int, int)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::dLCP(int, int, int, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, double*, bool*, int*, int*, int*, double**)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart-external-odelcpsolver.so.6.12.1",
+      "function": "dart::external::ode::dLCP::transfer_i_from_C_to_N(int, void*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstraintSolver::buildConstrainedGroups()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::getTransform(dart::dynamics::Frame const*) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::AdInvRLinear(Eigen::Transform<double, 3, 1, 0> const&, Eigen::Matrix<double, 3, 1, 0, 3, 1> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::dirtyVelocity()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "non-virtual thunk to dart::dynamics::FreeJoint::integratePositions(double)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::JacobianNode::dirtyJacobianDeriv()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::collision::CollisionGroup::updateSkeletonSource(std::pair<dart::dynamics::MetaSkeleton const* const, dart::collision::CollisionGroup::CollisionSource<std::weak_ptr<dart::dynamics::MetaSkeleton const>, dart::dynamics::BodyNode> >&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::FreeJoint::convertToTransform(Eigen::Matrix<double, 6, 1, 0, 6, 1> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "virtual thunk to dart::dynamics::Frame::dirtyVelocity()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstrainedGroup::addConstraint(std::shared_ptr<dart::constraint::ConstraintBase> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::dirtyTransform()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ConstrainedGroup::~ConstrainedGroup()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::addConstraintImpulse(Eigen::Matrix<double, 6, 1, 0, 6, 1> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::getSpatialVelocity() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::getBodyVelocityChange() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::collision::CollisionResult::addObject(dart::collision::CollisionObject*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::isDynamic() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::getLinearAcceleration(dart::dynamics::Frame const*, dart::dynamics::Frame const*) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::math::expAngular(Eigen::Matrix<double, 3, 1, 0, 3, 1> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointCoulombFrictionConstraint::unexcite()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::DegreeOfFreedom::setCommand(double)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Node::getBodyNodePtr()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::applyImpulse(double*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::BodyNode::clearExternalForces()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointConstraint::unexcite()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Joint::getRelativeSpatialVelocity() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Skeleton::clearConstraintImpulses()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::collision::BodyNodeCollisionFilter::ignoresCollision(dart::collision::CollisionObject const*, dart::collision::CollisionObject const*) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::ContactConstraint::computeSecondarySlipCompliance(dart::dynamics::ShapeNode const*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::dynamics::Frame::getSpatialAcceleration(dart::dynamics::Frame const*, dart::dynamics::Frame const*) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart.so.6.12.1",
+      "function": "dart::constraint::JointCoulombFrictionConstraint::excite()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList> > ignition::gazebo::v6::systems::physics_system::EntityFeatureMap<ignition::physics::Joint, ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::DetachableJointFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityLimitsCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointEffortLimitsCommandFeatureList>::EntityCast<ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList>(unsigned long) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View* ignition::gazebo::v6::EntityComponentManager::FindView<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::ModelTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >, ignition::gazebo::v6::components::Component<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, ignition::gazebo::v6::components::NameTag, ignition::gazebo::v6::serializers::StringSerializer>, ignition::gazebo::v6::components::Component<ignition::math::v6::Pose3<double>, ignition::gazebo::v6::components::PoseTag, ignition::gazebo::v6::serializers::DefaultSerializer<ignition::math::v6::Pose3<double> > >, ignition::gazebo::v6::components::Component<unsigned long, ignition::gazebo::v6::components::ParentEntityTag, ignition::gazebo::v6::serializers::DefaultSerializer<unsigned long> > >() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Deque_base<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*, std::allocator<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint const*> >::~_Deque_base()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::systems::PhysicsPrivate::RemovePhysicsEntities(ignition::gazebo::v6::EntityComponentManager const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::FrameSemantics::Frame<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList>::FrameDataRelativeToWorld() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::Identity::Identity(ignition::physics::Identity const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::Each<ignition::gazebo::v6::components::Component<bool, ignition::gazebo::v6::components::EnableContactSurfaceCustomizationTag, ignition::gazebo::v6::serializers::DefaultSerializer<bool> > >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<bool, ignition::gazebo::v6::components::EnableContactSurfaceCustomizationTag, ignition::gazebo::v6::serializers::DefaultSerializer<bool> >*)> >::type)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::vector<ignition::physics::SpecifyData<ignition::physics::RequireData<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint>, ignition::physics::ExpectData<ignition::physics::GetContactsFromLastStepFeature::ExtraContactDataT<ignition::physics::FeaturePolicy<double, 3ul> > > >, std::allocator<ignition::physics::SpecifyData<ignition::physics::RequireData<ignition::physics::GetContactsFromLastStepFeature::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::ContactPoint>, ignition::physics::ExpectData<ignition::physics::GetContactsFromLastStepFeature::ExtraContactDataT<ignition::physics::FeaturePolicy<double, 3ul> > > > > >::~vector()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList> > ignition::gazebo::v6::systems::physics_system::EntityFeatureMap<ignition::physics::Joint, ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::DetachableJointFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityLimitsCommandFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::JointEffortLimitsCommandFeatureList>::EntityCast<ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList>(unsigned long) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::EachRemoved<ignition::gazebo::v6::components::Component<ignition::gazebo::v6::components::DetachableJointInfo, ignition::gazebo::v6::components::DetachableJointTag, ignition::gazebo::v6::serializers::DetachableJointInfoSerializer> >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<ignition::gazebo::v6::components::DetachableJointInfo, ignition::gazebo::v6::components::DetachableJointTag, ignition::gazebo::v6::serializers::DetachableJointInfoSerializer> const*)> >::type) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View* ignition::gazebo::v6::EntityComponentManager::FindView<ignition::gazebo::v6::components::Component<ignition::math::v6::Vector3<double>, ignition::gazebo::v6::components::LinearVelocityCmdTag, ignition::gazebo::v6::serializers::DefaultSerializer<ignition::math::v6::Vector3<double> > > >() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::Each<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::JointTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >, ignition::gazebo::v6::components::Component<std::vector<double, std::allocator<double> >, ignition::gazebo::v6::components::JointPositionTag, ignition::gazebo::v6::serializers::VectorDoubleSerializer> >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::JointTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >*, ignition::gazebo::v6::components::Component<std::vector<double, std::allocator<double> >, ignition::gazebo::v6::components::JointPositionTag, ignition::gazebo::v6::serializers::VectorDoubleSerializer>*)> >::type)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View* ignition::gazebo::v6::EntityComponentManager::FindView<ignition::gazebo::v6::components::Component<ignition::math::v6::Pose3<double>, ignition::gazebo::v6::components::PoseTag, ignition::gazebo::v6::serializers::DefaultSerializer<ignition::math::v6::Pose3<double> > >, ignition::gazebo::v6::components::Component<ignition::math::v6::Vector3<double>, ignition::gazebo::v6::components::WorldLinearVelocityTag, ignition::gazebo::v6::serializers::DefaultSerializer<ignition::math::v6::Vector3<double> > >, ignition::gazebo::v6::components::Component<unsigned long, ignition::gazebo::v6::components::ParentEntityTag, ignition::gazebo::v6::serializers::DefaultSerializer<unsigned long> > >() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View* ignition::gazebo::v6::EntityComponentManager::FindView<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::WorldTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > > >() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::EntityPtr<ignition::physics::Shape<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList> >::EntityPtr<ignition::plugin::TemplatePluginPtr<ignition::physics::detail::DeterminePlugin<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::Specializer> >(std::shared_ptr<ignition::plugin::TemplatePluginPtr<ignition::physics::detail::DeterminePlugin<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>::Specializer> > const&, ignition::physics::Identity const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::EntityPtr<ignition::physics::World<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList> > ignition::gazebo::v6::systems::physics_system::EntityFeatureMap<ignition::physics::World, ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::MinimumFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::CollisionFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::SetContactPropertiesCallbackFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::NestedModelFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::CollisionDetectorFeatureList, ignition::gazebo::v6::systems::PhysicsPrivate::SolverFeatureList>::EntityCast<ignition::gazebo::v6::systems::PhysicsPrivate::ContactFeatureList>(unsigned long) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, std::pair<unsigned long const, std::tuple<ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::DetachableJointFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityLimitsCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointEffortLimitsCommandFeatureList> > > >, std::allocator<std::pair<unsigned long const, std::tuple<ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::DetachableJointFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointGetTransmittedWrenchFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointPositionLimitsCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointVelocityLimitsCommandFeatureList> >, ignition::physics::EntityPtr<ignition::physics::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointEffortLimitsCommandFeatureList> > > > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(unsigned long const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::physics::GetBasicJointProperties::Joint<ignition::physics::FeaturePolicy<double, 3ul>, ignition::gazebo::v6::systems::PhysicsPrivate::JointFeatureList>::GetDegreesOfFreedom() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::systems::PhysicsPrivate::CreateWorldEntities(ignition::gazebo::v6::EntityComponentManager const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-physics-system.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::View* ignition::gazebo::v6::EntityComponentManager::FindView<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::JointTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >, ignition::gazebo::v6::components::Component<std::vector<double, std::allocator<double> >, ignition::gazebo::v6::components::JointPositionTag, ignition::gazebo::v6::serializers::VectorDoubleSerializer> >() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__pthread_mutex_lock@GLIBC_2.2.5",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__pthread_mutex_unlock@GLIBC_2.2.5",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__getpid@@GLIBC_2.2.5",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__write@@GLIBC_2.2.5",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "__pthread_rwlock_rdlock@GLIBC_2.2.5",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libc.so.6",
+      "function": "pthread_cond_wait@@GLIBC_2.3.2",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::JointFeatures::GetJointPosition(ignition::physics::Identity const&, unsigned long) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "[not covered by exported function symbol]",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "void Eigen::internal::quaternionbase_assign_impl<Eigen::Block<Eigen::Matrix<double, 4, 4, 0, 4, 4> const, 3, 3, false>, 3, 3>::run<Eigen::Quaternion<double, 0> >(Eigen::QuaternionBase<Eigen::Quaternion<double, 0> >&, Eigen::Block<Eigen::Matrix<double, 4, 4, 0, 4, 4> const, 3, 3, false> const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "std::_Rb_tree<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, ignition::physics::CompositeData::DataEntry>, std::_Select1st<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, ignition::physics::CompositeData::DataEntry> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, ignition::physics::CompositeData::DataEntry> > >::_M_erase(std::_Rb_tree_node<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, ignition::physics::CompositeData::DataEntry> >*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "std::_Hashtable<dart::dynamics::ShapeNode const*, std::pair<dart::dynamics::ShapeNode const* const, unsigned short>, std::allocator<std::pair<dart::dynamics::ShapeNode const* const, unsigned short> >, std::__detail::_Select1st, std::equal_to<dart::dynamics::ShapeNode const*>, std::hash<dart::dynamics::ShapeNode const*>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find(dart::dynamics::ShapeNode const* const&) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::SimulationFeatures::GetContactsFromLastStep(ignition::physics::Identity const&) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5-dartsim-plugin.so.5.3.2",
+      "function": "ignition::physics::dartsim::Base::~Base()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5.so.5.3.2",
+      "function": "[not covered by exported function symbol]",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-physics5.so.5.3.2",
+      "function": "ignition::physics::Identity::operator bool() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::SimulationRunner::Step(ignition::gazebo::v6::UpdateInfo const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::EntityComponentManager::SetChanged(unsigned long, unsigned long, ignition::gazebo::v6::ComponentState)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::Barrier::Wait()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::EntityComponentManager::SetAllComponentsUnchanged()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::EachNoCache<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::ModelTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::RecreateTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > > >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::ModelTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >*, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::RecreateTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >*)> >::type)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::pair<std::_Rb_tree_iterator<std::pair<unsigned long const, std::reference_wrapper<ignition::math::v6::graph::DirectedEdge<bool> const> > >, bool> std::_Rb_tree<unsigned long, std::pair<unsigned long const, std::reference_wrapper<ignition::math::v6::graph::DirectedEdge<bool> const> >, std::_Select1st<std::pair<unsigned long const, std::reference_wrapper<ignition::math::v6::graph::DirectedEdge<bool> const> > >, std::less<unsigned long>, std::allocator<std::pair<unsigned long const, std::reference_wrapper<ignition::math::v6::graph::DirectedEdge<bool> const> > > >::_M_emplace_unique<std::pair<unsigned long, ignition::math::v6::graph::DirectedEdge<bool> const&> >(std::pair<unsigned long, ignition::math::v6::graph::DirectedEdge<bool> const&>&&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::EntityComponentManager::Entities() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<unsigned long, unsigned long, std::allocator<unsigned long>, std::__detail::_Identity, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, true, true> >::_M_insert_unique_node(unsigned long, unsigned long, std::__detail::_Hash_node<unsigned long, false>*, unsigned long)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::detail::BaseView::Entities() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "std::_Hashtable<std::vector<unsigned long, std::allocator<unsigned long> >, std::pair<std::vector<unsigned long, std::allocator<unsigned long> > const, std::pair<std::unique_ptr<ignition::gazebo::v6::detail::BaseView, std::default_delete<ignition::gazebo::v6::detail::BaseView> >, std::unique_ptr<std::mutex, std::default_delete<std::mutex> > > >, std::allocator<std::pair<std::vector<unsigned long, std::allocator<unsigned long> > const, std::pair<std::unique_ptr<ignition::gazebo::v6::detail::BaseView, std::default_delete<ignition::gazebo::v6::detail::BaseView> >, std::unique_ptr<std::mutex, std::default_delete<std::mutex> > > > >, std::__detail::_Select1st, std::equal_to<std::vector<unsigned long, std::allocator<unsigned long> > >, ignition::gazebo::v6::detail::ComponentTypeHasher, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node(unsigned long, std::vector<unsigned long, std::allocator<unsigned long> > const&, unsigned long) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::SimulationRunner::PublishStats()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "ignition::gazebo::v6::SimulationRunner::UpdateCurrentInfo()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6.so.6.16.0",
+      "function": "void ignition::gazebo::v6::EntityComponentManager::Each<ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::DefaultLevelTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > > >(ignition::gazebo::v6::EntityComponentManager::identity<std::function<bool (unsigned long const&, ignition::gazebo::v6::components::Component<std::add_lvalue_reference<void>, ignition::gazebo::v6::components::DefaultLevelTag, ignition::gazebo::v6::serializers::DefaultSerializer<std::add_lvalue_reference<void> > >*)> >::type)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "sCylinderBoxData::_cldTestSeparatingAxes()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dxSafeNormalize3(double*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dBoxBox",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dxBox::computeAABB()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dxGeom::AABBTest(dxGeom*, double*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libode.so.8.0.2",
+      "function": "dLineClosestApproach(double const*, double const*, double const*, double const*, double*, double*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libdart-collision-ode.so.6.12.1",
+      "function": "dart::collision::detail::OdeMesh::updateEngineData()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "operator delete(void*, unsigned long)@@CXXABI_1.3.9",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::_Rb_tree_decrement(std::_Rb_tree_node_base*)@@GLIBCXX_3.4",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned long) const@@GLIBCXX_3.4.18",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const@@GLIBCXX_3.4.18",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "__cxxabiv1::__vmi_class_type_info::__do_dyncast(long, __cxxabiv1::__class_type_info::__sub_kind, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info const*, void const*, __cxxabiv1::__class_type_info::__dyncast_result&) const@@CXXABI_1.3",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "__dynamic_cast@@CXXABI_1.3",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_replace(unsigned long, unsigned long, char const*, unsigned long)@@GLIBCXX_3.4.21",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libstdc++.so.6.0.30",
+      "function": "[not covered by exported function symbol]",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Vector3d::MergeFrom(ignition::msgs::Vector3d const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Wrench::Clear()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Vector3d::Vector3d(google::protobuf::Arena*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Entity* google::protobuf::Arena::CreateMaybeMessage<ignition::msgs::Entity>(google::protobuf::Arena*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Contact::Clear()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Clock::Clock(google::protobuf::Arena*)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Clock::GetMetadata() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Vector3d::Clear()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-msgs8.so.8.7.0",
+      "function": "ignition::msgs::Vector3d::~Vector3d()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libprotobuf.so.23.0.4",
+      "function": "[not covered by exported function symbol]",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libphase_meter.so",
+      "function": "non-virtual thunk to PhaseMeter::Update(ignition::gazebo::v6::UpdateInfo const&, ignition::gazebo::v6::EntityComponentManager&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libphase_meter.so",
+      "function": "PhaseMeter::PreUpdate(ignition::gazebo::v6::UpdateInfo const&, ignition::gazebo::v6::EntityComponentManager&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libphase_meter.so",
+      "function": "PhaseMeter::Update(ignition::gazebo::v6::UpdateInfo const&, ignition::gazebo::v6::EntityComponentManager&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libm.so.6",
+      "function": "__sqrt_finite@GLIBC_2.15",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-gazebo6-contact-system.so.6.16.0",
+      "function": "non-virtual thunk to ignition::gazebo::v6::systems::Contact::PreUpdate(ignition::gazebo::v6::UpdateInfo const&, ignition::gazebo::v6::EntityComponentManager&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libgz_hardware_plugins.so",
+      "function": "gz_ros2_control::GazeboSimSystem::write(rclcpp::Time const&, rclcpp::Duration const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libzmq.so.5.2.4",
+      "function": "[not covered by exported function symbol]",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "librclcpp_lifecycle.so",
+      "function": "rclcpp_lifecycle::MutexMap::getMutex(rclcpp_lifecycle::State const*) const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "librclcpp_lifecycle.so",
+      "function": "rclcpp_lifecycle::State::id() const",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libgz_ros2_control-system.so",
+      "function": "gz_ros2_control::GazeboSimROS2ControlPlugin::PreUpdate(ignition::gazebo::v6::UpdateInfo const&, ignition::gazebo::v6::EntityComponentManager&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libignition-transport11.so.11.4.1",
+      "function": "ignition::transport::v11::NodeShared::Publish(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char*, unsigned long, void (*)(void*, void*), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libsdformat12.so.12.7.2",
+      "function": "sdf::v12::Param::~Param()",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libfastrtps.so.2.6.11",
+      "function": "eprosima::fastrtps::types::MinimalStructHeader::~MinimalStructHeader()@@CODEABI_1.0",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    },
+    {
+      "library": "libfastrtps.so.2.6.11",
+      "function": "eprosima::fastrtps::rtps::CacheChangePool::~CacheChangePool()@@CODEABI_1.0",
+      "samples": 1,
+      "percent": 0.022983222247759137
+    }
+  ]
+}

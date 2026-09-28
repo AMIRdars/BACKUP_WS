@@ -12,11 +12,12 @@ BehaviorTree.CPP -> /cooperative_motion Action -> cooperative_coordinator
 active Action goal. `EmergencyStop` disables the coordinator and publishes a
 zero `Twist` to both bases.
 
-The default tree begins with `REPOSITION_ARMS` (`motion_type="5"`). It sends
-the requested Joint_1..Joint_5 targets to both AMIR arm controllers while the
-Action server tracks each `gripper_base_1` grasp point and commands the two
-bases to compensate its horizontal displacement. Both grasp-state topics and
-joint-state topics must be available before this step starts.
+The simulation launch starts the separate `arm_home_positioner` executable
+after all configured robots are spawned. It sends the common `Q_HOME` posture
+to every configured AMIR arm controller while tracking each `gripper_base_1`
+point and compensating its horizontal displacement with the bases. The
+executable exits after all arms reach the target; only then is the payload
+spawned.
 
 ## Build and run
 

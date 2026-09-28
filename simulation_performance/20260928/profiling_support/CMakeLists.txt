@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.10)
+project(simulation_phase_meter)
+find_package(ignition-gazebo6 REQUIRED)
+add_library(phase_meter SHARED phase_meter.cpp)
+target_link_libraries(phase_meter ignition-gazebo6::ignition-gazebo6)
+add_library(pc_sampler SHARED pc_sampler.cpp)
+target_link_libraries(pc_sampler ignition-gazebo6::ignition-gazebo6)

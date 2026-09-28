@@ -43,6 +43,8 @@ def generate_launch_description():
         'translation_acceleration_m_s2')
     post_rotation_translation_y_distance = LaunchConfiguration(
         'post_rotation_translation_y_distance_m')
+    post_rotation_translation_right_distance = LaunchConfiguration(
+        'post_rotation_translation_right_distance_m')
     enable_formation_distance_control = LaunchConfiguration(
         'enable_formation_distance_control')
     formation_distance_kp = LaunchConfiguration('formation_distance_kp')
@@ -54,13 +56,13 @@ def generate_launch_description():
         launch_arguments={
             'headless': headless,
             'auto_grasp': 'true',
-            # Keep auto-close after the deliberately delayed payload spawn;
-            # this removes a timing race with the second robot's controller.
-            'auto_grasp_delay': '15.0',
+            # Closing is requested by dual_base_approach only after both
+            # open grippers have completed their 0.11 m approach.
+            'auto_grasp_delay': '0.0',
             # Stage C uses Gazebo finger/payload contacts only. The custom
             # bristle-wrench helper is absent from this world.
             'contact_only': 'true',
-            # At a 1.34 m base radius, 2 deg/s needs about 0.047 m/s.  The old
+            # Retain sufficient base-speed margin for payload-centred turns.
             # 0.030 m/s cap forced a persistent yaw lag and excessive internal
             # contact load, so retain bounded tracking margin here.
             'max_linear_speed': '0.060',
@@ -107,9 +109,22 @@ def generate_launch_description():
                     translation_acceleration, value_type=float),
                 'post_rotation_translation_y_distance_m': ParameterValue(
                     post_rotation_translation_y_distance, value_type=float),
+                'post_rotation_translation_right_distance_m': ParameterValue(
+                    0.0, value_type=float),
                 'auto_start': ParameterValue(auto_start, value_type=bool),
                 'require_grasp': True,
                 'require_support_removed': True,
+                # Q_HOME rolls the grippers, so force.x is not their contact
+                # normal.  The friction grasp manager already gates on all
+                # four contact-normal forces and keeps regulating them while
+                # transporting; use its grasp-state output here instead of
+                # the rotation controller's force.x startup gate.
+                'pre_rotation_force_stability_duration': 0.0,
+                # Friction-held payloads trail the formation slightly.  Keep
+                # pause/resume hysteresis below the 15 deg hard error limit
+                # without repeatedly stopping a 1 deg/s requested turn.
+                'tracking_pause_orientation_error_deg': 5.0,
+                'tracking_resume_orientation_error_deg': 2.0,
                 # The physical-contact plant settles more slowly than the
                 # fixed-joint plant after the desired angle reaches its end.
                 'settling_timeout': 20.0,
@@ -131,6 +146,17 @@ def generate_launch_description():
             'output_directory': excel_output_directory,
         }],
     )
+    lateral_goal = Node(
+        package='cooperative_transport_control',
+        executable='cooperative_lateral_goal',
+        name='rotation_followup_lateral_goal',
+        output='screen',
+        parameters=[{
+            'right_distance_m': ParameterValue(
+                post_rotation_translation_right_distance, value_type=float),
+            'wait_for_rotation': True,
+        }],
+    )
 
     return LaunchDescription([
         DeclareLaunchArgument('headless', default_value='false'),
@@ -147,15 +173,17 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'translation_acceleration_m_s2', default_value='0.025'),
         DeclareLaunchArgument(
-            'post_rotation_translation_y_distance_m', default_value='1.0'),
+            'post_rotation_translation_y_distance_m', default_value='0.0'),
+        DeclareLaunchArgument(
+            'post_rotation_translation_right_distance_m', default_value='0.5'),
         DeclareLaunchArgument(
             'enable_formation_distance_control', default_value='true'),
         DeclareLaunchArgument('formation_distance_kp', default_value='0.8'),
         DeclareLaunchArgument(
             'formation_distance_max_correction_speed', default_value='0.012'),
-        DeclareLaunchArgument('target_normal_force', default_value='14.0'),
+        DeclareLaunchArgument('target_normal_force', default_value='20.0'),
         DeclareLaunchArgument(
-            'gripper_maximum_effort', default_value='0.8'),
+            'gripper_maximum_effort', default_value='1.2'),
         DeclareLaunchArgument(
             'excel_output_directory',
             default_value=os.path.expanduser(
@@ -170,4 +198,7 @@ def generate_launch_description():
         # still start later while it waits for HOLDING and support removal.
         data_recorder,
         TimerAction(period=21.5, actions=[rotation_controller]),
+        # The goal node waits for /cooperative_rotation/complete, then uses
+        # the validated cooperative lateral-translation implementation.
+        TimerAction(period=29.0, actions=[lateral_goal]),
     ])

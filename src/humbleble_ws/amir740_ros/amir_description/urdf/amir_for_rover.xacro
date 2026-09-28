@@ -556,9 +556,14 @@ so we need to left one on the joints open -->
 <!-- end of outer joint -->
 
 
-<!-- D435 depth camera mounted at end effector (tcp_link) -->
-<xacro:sensor_d435 parent="tcp_link" name="d435" topics_ns="d435" use_nominal_extrinsics="true">
-  <origin xyz="0 -0.06 0.03" rpy="0 0 1.5708"/>
-</xacro:sensor_d435>
+<!-- D435 depth camera mounted at end effector (tcp_link).  The cooperative
+     transport simulation does not consume camera data, so it can be omitted
+     to avoid rendering 1280x720 RGB-D images for both robots. -->
+<xacro:arg name="enable_d435" default="true"/>
+<xacro:if value="$(arg enable_d435)">
+  <xacro:sensor_d435 parent="tcp_link" name="d435" topics_ns="d435" use_nominal_extrinsics="true">
+    <origin xyz="0 -0.06 0.03" rpy="0 0 1.5708"/>
+  </xacro:sensor_d435>
+</xacro:if>
 
 </robot>

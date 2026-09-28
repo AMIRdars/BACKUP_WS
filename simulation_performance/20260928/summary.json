@@ -1,0 +1,1751 @@
+{
+  "gui": {
+    "wall_30_60": {
+      "n": 28,
+      "wall_start": 31.003235445000087,
+      "wall_end": 59.53625170400005,
+      "sim_start": 23.794,
+      "sim_end": 49.186,
+      "rtf": 0.8899164311796438,
+      "total_cpu": 969.0124270004031,
+      "system_cpu": 46.70357142857143,
+      "available_gib_min": 24.79727554321289,
+      "process_cpu": {
+        "ign gazebo gui": 220.50491244363053,
+        "ign gazebo server": 139.5784506864732,
+        "friction_grasp_manager": 77.67033739725868,
+        "rotation_controller": 74.01119803087016,
+        "coordinator": 72.55691427284347,
+        "slip_monitor": 66.67805321488511,
+        "dual_base_approach": 64.67129310611514,
+        "safety_monitor": 63.537802360223374,
+        "pivot_rotation_controller": 39.91156045333802,
+        "grasp_support_remover": 27.90596115283313,
+        "/amir1/rover_twist_relay_ign": 26.690999136090028,
+        "/amir2/rover_twist_relay_ign": 26.555521866528387,
+        "cooperative_transport_friction_bridge": 11.77740332916137,
+        "/amir1/finger_ft_bridge": 7.651774028461508,
+        "/amir2/finger_ft_bridge": 7.416510731764723,
+        "/amir1/odom_bridge": 6.9083053793607725,
+        "/amir2/odom_bridge": 6.840294780527831,
+        "/amir1/robot_state_publisher": 6.46678547383269,
+        "/amir2/robot_state_publisher": 6.3317537318187975,
+        "/amir1/finger_contact_bridge": 6.131239302009875,
+        "/amir2/finger_contact_bridge": 6.031484196411225,
+        "arm_home_positioner": 4.609284799298664,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          80.30184289393094
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          72.51865335277034
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          70.54977763529129
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          69.6730403915821
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          64.03144851495726
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          60.06230964935779
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          58.86315870568744
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          37.597149707144155
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          28.885687729376674
+        ],
+        [
+          "('grasp_support_remover', 8617, 'grasp_support_r')",
+          25.900264113226076
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 7770, 'python3')",
+          24.45086461734056
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 8136, 'python3')",
+          24.21123727849349
+        ]
+      ]
+    },
+    "wall_90_150": {
+      "n": 58,
+      "wall_start": 90.97323224000002,
+      "wall_end": 149.61925443400003,
+      "sim_start": 66.144,
+      "sim_end": 81.5,
+      "rtf": 0.26184214078838314,
+      "total_cpu": 581.782138918078,
+      "system_cpu": 28.248275862068965,
+      "available_gib_min": 24.828746795654297,
+      "process_cpu": {
+        "ign gazebo gui": 215.6603479509721,
+        "ign gazebo server": 119.6359928746531,
+        "friction_grasp_manager": 51.45719907633393,
+        "coordinator": 35.268656340296104,
+        "slip_monitor": 33.04096260653124,
+        "rotation_controller": 24.14392836172274,
+        "dual_base_approach": 17.827832483274587,
+        "safety_monitor": 16.420305234850456,
+        "pivot_rotation_controller": 11.008362978505536,
+        "grasp_support_remover": 7.372608528908793,
+        "/amir1/rover_twist_relay_ign": 6.9200422646106645,
+        "/amir2/rover_twist_relay_ign": 6.836196827814763,
+        "/amir2/finger_contact_bridge": 6.684996664207049,
+        "/amir1/finger_contact_bridge": 6.652004691719724,
+        "cooperative_transport_friction_bridge": 4.741387090749724,
+        "/amir1/finger_ft_bridge": 3.2670012264948878,
+        "/amir2/finger_ft_bridge": 3.2502909386008456,
+        "/amir1/odom_bridge": 3.0997054364595327,
+        "/amir2/odom_bridge": 3.0991865903865508,
+        "/amir1/robot_state_publisher": 1.9105359719665354,
+        "/amir2/robot_state_publisher": 1.8761954182845246,
+        "arm_home_positioner": 1.6083993607346168,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          96.64734876808114
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          48.474627586903246
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          34.297112892815775
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          32.20310321561025
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          23.942561667084313
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          23.072579751483097
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          16.219176684609607
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          14.811976750521245
+        ],
+        [
+          "('ign gazebo gui', 7935, 'QSGRenderThread')",
+          10.605432526376534
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          10.421800211026708
+        ],
+        [
+          "('ign gazebo gui', 7966, 'ignition::gui::')",
+          7.992248286370654
+        ],
+        [
+          "('ign gazebo gui', 7965, 'ignition::gui::')",
+          7.97593343035792
+        ]
+      ]
+    },
+    "wall_150_180": {
+      "n": 30,
+      "wall_start": 150.64624163400003,
+      "wall_end": 180.6002380870001,
+      "sim_start": 81.788,
+      "sim_end": 91.402,
+      "rtf": 0.32095884150500753,
+      "total_cpu": 633.3925350101944,
+      "system_cpu": 30.543333333333333,
+      "available_gib_min": 24.77001953125,
+      "process_cpu": {
+        "ign gazebo gui": 220.7400630877227,
+        "ign gazebo server": 122.4969348360896,
+        "friction_grasp_manager": 58.38703488269136,
+        "coordinator": 41.246658985444185,
+        "slip_monitor": 36.534140887579674,
+        "rotation_controller": 33.468746482450804,
+        "dual_base_approach": 21.75470657661217,
+        "safety_monitor": 20.10678202625458,
+        "pivot_rotation_controller": 13.105406307968634,
+        "grasp_support_remover": 8.97364131455879,
+        "/amir1/rover_twist_relay_ign": 8.328021481198771,
+        "/amir2/rover_twist_relay_ign": 8.327026446627878,
+        "/amir2/finger_contact_bridge": 7.230002705887537,
+        "/amir1/finger_contact_bridge": 7.133333692422823,
+        "cooperative_transport_friction_bridge": 5.325820848682643,
+        "/amir2/finger_ft_bridge": 3.5829208098097967,
+        "/amir1/finger_ft_bridge": 3.548769434000649,
+        "/amir1/odom_bridge": 3.389246272266001,
+        "/amir2/odom_bridge": 3.3883160894286726,
+        "/amir2/robot_state_publisher": 2.2272550140431857,
+        "/amir1/robot_state_publisher": 2.2261078819454103,
+        "arm_home_positioner": 1.8715989465085243,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          95.3530871079042
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          55.02972935528458
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          40.05222501996983
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          35.53455434109073
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          32.17631271768803
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          25.046114870168513
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          19.947373433925467
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          18.299226894999535
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          12.32936248146762
+        ],
+        [
+          "('ign gazebo gui', 7935, 'QSGRenderThread')",
+          11.36141192699811
+        ],
+        [
+          "('grasp_support_remover', 8617, 'grasp_support_r')",
+          8.295041935196675
+        ],
+        [
+          "('ign gazebo gui', 7964, 'ignition::gui::')",
+          8.068742981332587
+        ]
+      ]
+    },
+    "sim_20_40": {
+      "n": 22,
+      "wall_start": 26.847230964000005,
+      "wall_end": 48.95624509700008,
+      "sim_start": 20.266,
+      "sim_end": 39.92,
+      "rtf": 0.888958679105655,
+      "total_cpu": 907.1170774714308,
+      "system_cpu": 45.09090909090909,
+      "available_gib_min": 24.79727554321289,
+      "process_cpu": {
+        "ign gazebo gui": 221.55930848087817,
+        "ign gazebo server": 135.93477909575194,
+        "friction_grasp_manager": 75.76597928760687,
+        "rotation_controller": 73.21261615961465,
+        "coordinator": 72.64797990256446,
+        "slip_monitor": 66.60420615513677,
+        "dual_base_approach": 65.27026753768473,
+        "safety_monitor": 64.13610653287594,
+        "pivot_rotation_controller": 40.54514544594064,
+        "grasp_support_remover": 28.28931370809702,
+        "/amir1/rover_twist_relay_ign": 26.245265590962184,
+        "/amir2/rover_twist_relay_ign": 25.900242729063873,
+        "cooperative_transport_friction_bridge": 11.703540009261447,
+        "/amir1/finger_ft_bridge": 7.8659265810053265,
+        "/amir2/finger_ft_bridge": 7.607970502941,
+        "arm_home_positioner": 7.2628144391823515,
+        "/amir1/odom_bridge": 7.1323589475343985,
+        "/amir2/odom_bridge": 7.09003104094243,
+        "/amir1/robot_state_publisher": 6.656918554402578,
+        "/amir2/robot_state_publisher": 6.5250791109495445,
+        "/amir2/finger_contact_bridge": 6.184332628726855,
+        "/amir1/finger_contact_bridge": 6.18222332917752,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          77.64622649078532
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          70.48662206923697
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          69.53198264780443
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          69.42160718274022
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          63.74565012108223
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          60.41059029546963
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          59.227747748291996
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          37.92429170181427
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          28.531436986605613
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 7770, 'python3')",
+          23.732797632598412
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 8136, 'python3')",
+          23.38442267742867
+        ],
+        [
+          "('grasp_support_remover', 8617, 'grasp_support_r')",
+          25.95751590446525
+        ]
+      ]
+    },
+    "sim_40_55": {
+      "n": 19,
+      "wall_start": 50.024261560000014,
+      "wall_end": 69.06729209000002,
+      "sim_start": 40.872,
+      "sim_end": 54.954,
+      "rtf": 0.739483139399241,
+      "total_cpu": 911.8525997501573,
+      "system_cpu": 43.81578947368421,
+      "available_gib_min": 24.847259521484375,
+      "process_cpu": {
+        "ign gazebo gui": 228.85828244724527,
+        "ign gazebo server": 139.33198911812673,
+        "friction_grasp_manager": 78.51147889824924,
+        "coordinator": 67.73312973458857,
+        "rotation_controller": 63.98849132509259,
+        "slip_monitor": 62.5995796936969,
+        "dual_base_approach": 54.64238561079849,
+        "safety_monitor": 52.55502143684884,
+        "pivot_rotation_controller": 33.26217768083848,
+        "grasp_support_remover": 23.27044252837555,
+        "/amir2/rover_twist_relay_ign": 22.023778566479336,
+        "/amir1/rover_twist_relay_ign": 21.978414270110935,
+        "cooperative_transport_friction_bridge": 9.993898124275102,
+        "/amir1/finger_contact_bridge": 7.706143553505767,
+        "/amir2/finger_contact_bridge": 7.26064281040206,
+        "/amir1/finger_ft_bridge": 6.3143191566068655,
+        "/amir2/finger_ft_bridge": 6.165676674025757,
+        "/amir1/odom_bridge": 5.817934257914192,
+        "/amir2/odom_bridge": 5.716236781608442,
+        "/amir1/robot_state_publisher": 5.221245176073484,
+        "/amir2/robot_state_publisher": 5.122694768795954,
+        "arm_home_positioner": 3.778637136498715,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          86.52600810528342
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          73.64079592315355
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          65.64392150900176
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          61.402433246187876
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          60.5631491295117
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          50.86389969695929
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          48.728124304889285
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          31.67178571530248
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          29.042157714364887
+        ],
+        [
+          "('grasp_support_remover', 8617, 'grasp_support_r')",
+          21.9268988212691
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 8136, 'python3')",
+          20.435660897481316
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 7770, 'python3')",
+          20.435303484435714
+        ]
+      ]
+    },
+    "sim_65_80": {
+      "n": 56,
+      "wall_start": 86.85524908500008,
+      "wall_end": 143.46123055400005,
+      "sim_start": 65.062,
+      "sim_end": 79.928,
+      "rtf": 0.26262242282896026,
+      "total_cpu": 582.3583324786155,
+      "system_cpu": 28.303571428571427,
+      "available_gib_min": 24.828746795654297,
+      "process_cpu": {
+        "ign gazebo gui": 216.0241652441888,
+        "ign gazebo server": 119.690619084793,
+        "friction_grasp_manager": 51.49945768877359,
+        "coordinator": 35.37766184151893,
+        "slip_monitor": 33.10567363570465,
+        "rotation_controller": 24.134838576663878,
+        "dual_base_approach": 17.802240096194048,
+        "safety_monitor": 16.44890546106984,
+        "pivot_rotation_controller": 11.035534935673095,
+        "grasp_support_remover": 7.391830960965575,
+        "/amir1/rover_twist_relay_ign": 6.888394080445629,
+        "/amir2/rover_twist_relay_ign": 6.83632959589906,
+        "/amir2/finger_contact_bridge": 6.679796190696988,
+        "/amir1/finger_contact_bridge": 6.64552509228317,
+        "cooperative_transport_friction_bridge": 4.719086746239333,
+        "/amir1/finger_ft_bridge": 3.2441896807339132,
+        "/amir2/finger_ft_bridge": 3.2269843062136006,
+        "/amir1/odom_bridge": 3.105880553580163,
+        "/amir2/odom_bridge": 3.1053955532438895,
+        "/amir1/robot_state_publisher": 1.9090170352706481,
+        "/amir2/robot_state_publisher": 1.8733805710175941,
+        "arm_home_positioner": 1.6134255474460197,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          96.68263950020314
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          48.48025394056212
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          34.423649968173194
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          32.27249604286637
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          23.961055987750996
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          23.094862596275682
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          16.223340779125266
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          14.870226589634845
+        ],
+        [
+          "('ign gazebo gui', 7935, 'QSGRenderThread')",
+          10.600808887475122
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          10.410500173048318
+        ],
+        [
+          "('ign gazebo gui', 7965, 'ignition::gui::')",
+          7.999383497739962
+        ],
+        [
+          "('ign gazebo gui', 7967, 'ignition::gui::')",
+          7.998878272634409
+        ]
+      ]
+    },
+    "sim_80_90": {
+      "n": 32,
+      "wall_start": 144.487232554,
+      "wall_end": 176.47122931,
+      "sim_start": 80.208,
+      "sim_end": 89.96,
+      "rtf": 0.30490248215056415,
+      "total_cpu": 620.7255776964931,
+      "system_cpu": 29.928125,
+      "available_gib_min": 24.77001953125,
+      "process_cpu": {
+        "ign gazebo gui": 219.55329763866897,
+        "ign gazebo server": 121.65891686437789,
+        "friction_grasp_manager": 56.6079263683185,
+        "coordinator": 39.73384957347959,
+        "slip_monitor": 35.61701654475706,
+        "rotation_controller": 31.43222667013217,
+        "dual_base_approach": 20.655625598815888,
+        "safety_monitor": 19.200534599466465,
+        "pivot_rotation_controller": 12.569990387291734,
+        "grasp_support_remover": 8.601933409413853,
+        "/amir1/rover_twist_relay_ign": 7.966235329653898,
+        "/amir2/rover_twist_relay_ign": 7.934757055324934,
+        "/amir2/finger_contact_bridge": 7.11832397488197,
+        "/amir1/finger_contact_bridge": 7.057682751641396,
+        "cooperative_transport_friction_bridge": 5.2103171317577806,
+        "/amir1/finger_ft_bridge": 3.542596146502662,
+        "/amir2/finger_ft_bridge": 3.513901746292581,
+        "/amir1/odom_bridge": 3.332065621162078,
+        "/amir2/odom_bridge": 3.331192563639741,
+        "/amir2/robot_state_publisher": 2.1508543914369977,
+        "/amir1/robot_state_publisher": 2.119319593437105,
+        "arm_home_positioner": 1.817013736039899,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 7673, 'ruby')",
+          95.55204224099931
+        ],
+        [
+          "('friction_grasp_manager', 8436, 'friction_grasp_')",
+          53.33605512995657
+        ],
+        [
+          "('coordinator', 8619, 'coordinator')",
+          38.582927565705994
+        ],
+        [
+          "('slip_monitor', 8623, 'slip_monitor')",
+          34.678936711981876
+        ],
+        [
+          "('rotation_controller', 8548, 'rotation_contro')",
+          30.189196703011202
+        ],
+        [
+          "('ign gazebo gui', 7945, 'ignition::gui::')",
+          24.747130674840328
+        ],
+        [
+          "('dual_base_approach', 8625, 'dual_base_appro')",
+          18.868082166806964
+        ],
+        [
+          "('safety_monitor', 8621, 'safety_monitor')",
+          17.413161938382707
+        ],
+        [
+          "('pivot_rotation_controller', 8769, 'pivot_rotation_')",
+          11.872525759461471
+        ],
+        [
+          "('ign gazebo gui', 7935, 'QSGRenderThread')",
+          11.20746384595407
+        ],
+        [
+          "('ign gazebo gui', 7966, 'ignition::gui::')",
+          8.057717183208048
+        ],
+        [
+          "('ign gazebo gui', 7967, 'ignition::gui::')",
+          8.056872954315295
+        ]
+      ]
+    },
+    "last": {
+      "wall": 180.6002380870001,
+      "sim": 91.402
+    }
+  },
+  "headless": {
+    "wall_30_60": {
+      "n": 28,
+      "wall_start": 30.76468154500003,
+      "wall_end": 59.504455592,
+      "sim_start": 25.844,
+      "sim_end": 51.432,
+      "rtf": 0.890334070064515,
+      "total_cpu": 796.1364804983175,
+      "system_cpu": 39.31785714285714,
+      "available_gib_min": 25.144737243652344,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 132.59887621774195,
+        "friction_grasp_manager": 80.14097693024242,
+        "rotation_controller": 76.14856025735479,
+        "coordinator": 73.55827069749678,
+        "slip_monitor": 68.22863212369755,
+        "dual_base_approach": 67.78769578737605,
+        "safety_monitor": 66.68031399681304,
+        "pivot_rotation_controller": 42.76312217028139,
+        "grasp_support_remover": 30.338354178025803,
+        "/amir1/rover_twist_relay_ign": 28.725409847305958,
+        "/amir2/rover_twist_relay_ign": 28.42524465808259,
+        "/amir2/spawner": 25.671851246421674,
+        "cooperative_transport_friction_bridge": 13.055459653409313,
+        "/amir2/finger_ft_bridge": 8.42509705342955,
+        "/amir1/finger_ft_bridge": 8.391211233053008,
+        "/amir1/odom_bridge": 7.519306895992017,
+        "/amir2/odom_bridge": 7.34980839708861,
+        "/amir1/robot_state_publisher": 7.216965019607514,
+        "/amir2/robot_state_publisher": 7.015164680511061,
+        "/amir2/finger_contact_bridge": 6.276840821532175,
+        "/amir1/finger_contact_bridge": 6.244048286535466,
+        "arm_home_positioner": 5.102524709543156,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          76.58622500977994
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          73.96556283465696
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          71.78334972427105
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          70.57078360815808
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          65.50753906439283
+        ],
+        [
+          "('dual_base_approach', 18092, 'dual_base_appro')",
+          62.91986830455696
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          61.611455481189736
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          40.64310299716536
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          28.358205215441636
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          26.309209853365076
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          26.04008224746514
+        ],
+        [
+          "('/amir2/spawner', 17924, 'spawner')",
+          23.524163763776116
+        ]
+      ]
+    },
+    "wall_90_150": {
+      "n": 22,
+      "wall_start": 90.21345672100006,
+      "wall_end": 112.39845023700002,
+      "sim_start": 78.896,
+      "sim_end": 99.098,
+      "rtf": 0.9106155467401955,
+      "total_cpu": 678.038365575921,
+      "system_cpu": 34.11363636363636,
+      "available_gib_min": 25.183517456054688,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 132.39805020595702,
+        "friction_grasp_manager": 77.1863849994272,
+        "rotation_controller": 72.97096688145966,
+        "coordinator": 70.60606110012282,
+        "slip_monitor": 65.96359428984455,
+        "safety_monitor": 65.01098851728989,
+        "pivot_rotation_controller": 40.44667311914265,
+        "grasp_support_remover": 28.827561446691256,
+        "/amir2/rover_twist_relay_ign": 26.502007984189863,
+        "/amir1/rover_twist_relay_ign": 26.36970917496737,
+        "cooperative_transport_friction_bridge": 12.175439305035402,
+        "/amir1/finger_ft_bridge": 7.8722353561791865,
+        "/amir2/finger_ft_bridge": 7.786664734121338,
+        "/amir1/odom_bridge": 7.141403976927092,
+        "/amir2/odom_bridge": 6.923381270277838,
+        "/amir1/robot_state_publisher": 6.668677776353165,
+        "/amir2/robot_state_publisher": 6.582501464625513,
+        "/amir1/finger_contact_bridge": 6.021329973854452,
+        "/amir2/finger_contact_bridge": 5.8945052610869215,
+        "arm_home_positioner": 4.690228738367886,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          72.76164296278696
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          71.80633634918682
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          69.35938625693161
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          67.85387419456048
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          63.555985650569525
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          60.27945760539681
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          38.38253084914961
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          27.020593958510783
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          24.478558421293055
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          24.26667174946296
+        ],
+        [
+          "('cooperative_transport_friction_bridge', 13732, 'parameter_bridg')",
+          7.91567742814898
+        ],
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 16347, 'ruby')",
+          6.755254080958009
+        ]
+      ]
+    },
+    "wall_150_180": {},
+    "sim_20_40": {
+      "n": 21,
+      "wall_start": 24.534455689000083,
+      "wall_end": 45.625437469000076,
+      "sim_start": 20.16,
+      "sim_end": 39.092,
+      "rtf": 0.8976348373669689,
+      "total_cpu": 672.0531521170042,
+      "system_cpu": 34.43809523809524,
+      "available_gib_min": 25.1507568359375,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 123.10224744894435,
+        "friction_grasp_manager": 76.1715646342949,
+        "coordinator": 73.17659153388522,
+        "rotation_controller": 71.60219639938279,
+        "slip_monitor": 67.52259048783695,
+        "dual_base_approach": 67.45902297273,
+        "safety_monitor": 66.01481265954905,
+        "pivot_rotation_controller": 42.72591244971996,
+        "grasp_support_remover": 30.27452721841813,
+        "/amir1/rover_twist_relay_ign": 25.9002457339673,
+        "/amir2/rover_twist_relay_ign": 25.85997067359051,
+        "/amir2/spawner": 23.884164226225163,
+        "cooperative_transport_friction_bridge": 12.047745528974735,
+        "arm_home_positioner": 9.803855093273384,
+        "/amir2/finger_ft_bridge": 8.267757629396689,
+        "/amir1/finger_ft_bridge": 8.222177062980137,
+        "/amir1/odom_bridge": 7.409826023179101,
+        "/amir2/odom_bridge": 7.36359490684344,
+        "/amir1/robot_state_publisher": 7.045202365908377,
+        "/amir2/robot_state_publisher": 6.819368604534263,
+        "/amir2/finger_contact_bridge": 6.326625745376375,
+        "/amir1/finger_contact_bridge": 6.280136355257946,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          70.35032227824138
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          70.07433537275305
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          67.3582164637446
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          69.97194804666182
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          64.63219098033552
+        ],
+        [
+          "('dual_base_approach', 18092, 'dual_base_appro')",
+          62.49699903784863
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          60.802348184000145
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          40.57467002098329
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          23.375361852040108
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          23.33122408822937
+        ],
+        [
+          "('/amir2/spawner', 17924, 'spawner')",
+          21.580223160225813
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          28.139875882216522
+        ]
+      ]
+    },
+    "sim_40_55": {
+      "n": 16,
+      "wall_start": 46.6984417000001,
+      "wall_end": 62.68999400100006,
+      "sim_start": 40.058,
+      "sim_end": 54.258,
+      "rtf": 0.8879688308377713,
+      "total_cpu": 802.5888819489489,
+      "system_cpu": 39.45625,
+      "available_gib_min": 25.144737243652344,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 133.8678769895572,
+        "friction_grasp_manager": 80.41081174947493,
+        "rotation_controller": 76.83567621197064,
+        "coordinator": 74.30898660213272,
+        "slip_monitor": 69.57673536168582,
+        "dual_base_approach": 68.39807987922846,
+        "safety_monitor": 67.93011333916368,
+        "pivot_rotation_controller": 42.9602704684358,
+        "grasp_support_remover": 30.36096261704888,
+        "/amir1/rover_twist_relay_ign": 28.947916545227827,
+        "/amir2/rover_twist_relay_ign": 28.54192283180454,
+        "/amir2/spawner": 25.78442556835764,
+        "cooperative_transport_friction_bridge": 12.95380690401248,
+        "/amir1/finger_ft_bridge": 8.265169079234674,
+        "/amir2/finger_ft_bridge": 8.205692050379149,
+        "/amir1/odom_bridge": 7.324784377691096,
+        "/amir1/robot_state_publisher": 7.0325607401445085,
+        "/amir2/odom_bridge": 7.030848908704331,
+        "/amir2/robot_state_publisher": 6.857071422080579,
+        "/amir2/finger_contact_bridge": 6.09470584525574,
+        "/amir1/finger_contact_bridge": 6.094674322014182,
+        "arm_home_positioner": 4.8057901353441155,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          77.72113115563945
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          74.43645425330106
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          72.67348678111459
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          71.55591880814107
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          67.1128866043289
+        ],
+        [
+          "('dual_base_approach', 18092, 'dual_base_appro')",
+          63.59075759937059
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          62.9442138565108
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          40.910818851822604
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          28.484196485783038
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          26.721817956073043
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          26.31399845389615
+        ],
+        [
+          "('/amir2/spawner', 17924, 'spawner')",
+          23.7944527491318
+        ]
+      ]
+    },
+    "sim_65_80": {
+      "n": 16,
+      "wall_start": 75.47645304299999,
+      "wall_end": 91.25643113300009,
+      "sim_start": 65.612,
+      "sim_end": 79.86,
+      "rtf": 0.9029163360517641,
+      "total_cpu": 688.0750593785879,
+      "system_cpu": 35.525,
+      "available_gib_min": 25.166912078857422,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 132.22453662550424,
+        "friction_grasp_manager": 76.94368300443358,
+        "rotation_controller": 72.72615616074047,
+        "coordinator": 70.82826335405629,
+        "slip_monitor": 65.48789546261412,
+        "safety_monitor": 64.70953906787598,
+        "dual_base_approach": 64.60897111439928,
+        "pivot_rotation_controller": 40.19093846861228,
+        "grasp_support_remover": 28.55589716949446,
+        "/amir2/spawner": 28.233369465460004,
+        "/amir1/rover_twist_relay_ign": 26.357017435563876,
+        "/amir2/rover_twist_relay_ign": 26.356981387734667,
+        "cooperative_transport_friction_bridge": 12.112176666489358,
+        "/amir1/finger_ft_bridge": 8.191172200602692,
+        "/amir2/finger_ft_bridge": 8.012828109322756,
+        "/amir1/odom_bridge": 7.301538607108452,
+        "/amir2/odom_bridge": 7.185182736887655,
+        "/amir1/robot_state_publisher": 6.949442599227166,
+        "/amir2/robot_state_publisher": 6.706960667031641,
+        "/amir2/finger_contact_bridge": 6.234062170327568,
+        "/amir1/finger_contact_bridge": 6.229507497829616,
+        "arm_home_positioner": 4.9305730062398805,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          72.43480220261384
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          71.24411435637673
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          68.80968126842988
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          67.92099642255076
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          62.815275742880004
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          59.78136701418893
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          37.93738858275455
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          26.47475109467419
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          24.100845497852603
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          23.983314492537357
+        ],
+        [
+          "('cooperative_transport_friction_bridge', 13732, 'parameter_bridg')",
+          7.719746520814992
+        ],
+        [
+          "('dual_base_approach', 18092, 'dual_base_appro')",
+          58.90653961591118
+        ]
+      ]
+    },
+    "sim_80_90": {
+      "n": 10,
+      "wall_start": 92.31644639900003,
+      "wall_end": 101.77245208600004,
+      "sim_start": 80.84,
+      "sim_end": 89.444,
+      "rtf": 0.9098979299291939,
+      "total_cpu": 670.1868649865904,
+      "system_cpu": 32.84,
+      "available_gib_min": 25.19533920288086,
+      "process_cpu": {
+        "ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 130.48945224754104,
+        "friction_grasp_manager": 76.08639794505915,
+        "rotation_controller": 72.4630655612779,
+        "coordinator": 69.89849108908072,
+        "slip_monitor": 65.43357077440118,
+        "safety_monitor": 63.53038818231419,
+        "pivot_rotation_controller": 40.22432646115787,
+        "grasp_support_remover": 28.432618935771877,
+        "/amir2/rover_twist_relay_ign": 26.24934638942492,
+        "/amir1/rover_twist_relay_ign": 25.963238544700033,
+        "cooperative_transport_friction_bridge": 11.983721197879767,
+        "/amir1/finger_ft_bridge": 7.892288965369333,
+        "/amir2/finger_ft_bridge": 7.798415430994997,
+        "/amir1/odom_bridge": 7.130768124945469,
+        "/amir2/odom_bridge": 6.93996868786836,
+        "/amir1/robot_state_publisher": 6.562894546907907,
+        "/amir2/robot_state_publisher": 6.560803990858197,
+        "/amir1/finger_contact_bridge": 5.992385310665219,
+        "/amir2/finger_contact_bridge": 5.98796377338177,
+        "arm_home_positioner": 4.566758826990493,
+        "sh": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 13684, 'ruby')",
+          71.81078734208349
+        ],
+        [
+          "('friction_grasp_manager', 17959, 'friction_grasp_')",
+          70.85443651863804
+        ],
+        [
+          "('rotation_controller', 18030, 'rotation_contro')",
+          68.7587710076829
+        ],
+        [
+          "('coordinator', 18086, 'coordinator')",
+          67.14134582783275
+        ],
+        [
+          "('slip_monitor', 18090, 'slip_monitor')",
+          63.05813535284928
+        ],
+        [
+          "('safety_monitor', 18088, 'safety_monitor')",
+          58.87105931185999
+        ],
+        [
+          "('pivot_rotation_controller', 18239, 'pivot_rotation_')",
+          38.13600291443363
+        ],
+        [
+          "('grasp_support_remover', 18084, 'grasp_support_r')",
+          26.72030452498471
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 17701, 'python3')",
+          24.15450716268247
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 15966, 'python3')",
+          23.77767531597462
+        ],
+        [
+          "('cooperative_transport_friction_bridge', 13732, 'parameter_bridg')",
+          7.79768404581116
+        ],
+        [
+          "('ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf', 16347, 'ruby')",
+          6.753136685528755
+        ]
+      ]
+    },
+    "last": {
+      "wall": 112.39845023700002,
+      "sim": 99.098
+    }
+  },
+  "diagnostic": {
+    "wall_30_60": {
+      "n": 29,
+      "wall_start": 30.02918743200007,
+      "wall_end": 59.63316923299999,
+      "sim_start": 23.634,
+      "sim_end": 49.43,
+      "rtf": 0.8713692696273952,
+      "total_cpu": 940.0415850985682,
+      "system_cpu": 46.5551724137931,
+      "available_gib_min": 24.834999084472656,
+      "process_cpu": {
+        "ign gazebo gui": 207.39245241819057,
+        "ign gazebo server": 139.65158478377623,
+        "friction_grasp_manager": 77.71763687353886,
+        "coordinator": 73.66906497381723,
+        "rotation_controller": 72.32272849326091,
+        "slip_monitor": 67.68808238357256,
+        "safety_monitor": 63.42608918489823,
+        "dual_base_approach": 63.26089966482287,
+        "pivot_rotation_controller": 39.72412244968341,
+        "grasp_support_remover": 27.3220187878147,
+        "/amir2/rover_twist_relay_ign": 25.965037114776628,
+        "/amir1/rover_twist_relay_ign": 25.93255019169787,
+        "cooperative_transport_friction_bridge": 11.680283171588437,
+        "/amir1/finger_ft_bridge": 7.406670098261405,
+        "/amir2/finger_ft_bridge": 7.342930515978597,
+        "/amir1/odom_bridge": 6.721959485230595,
+        "/amir2/odom_bridge": 6.526915930447281,
+        "/amir1/robot_state_publisher": 6.363218504006248,
+        "/amir2/robot_state_publisher": 6.329592678900394,
+        "/amir1/finger_contact_bridge": 6.04182147651862,
+        "/amir2/finger_contact_bridge": 5.943165751174085,
+        "arm_home_positioner": 4.537394645726028,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          80.56576787821145
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          72.59076379954693
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          68.99360034972142
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          71.06827494806141
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          65.32619358935875
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          59.001410043533426
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          58.93950242319996
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          37.761387246161135
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          28.90937499836756
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          25.565946699753464
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 18922, 'python3')",
+          23.84397687872844
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          23.778481651150297
+        ]
+      ]
+    },
+    "wall_90_150": {
+      "n": 58,
+      "wall_start": 90.87817917799998,
+      "wall_end": 149.6541713680001,
+      "sim_start": 66.064,
+      "sim_end": 81.9,
+      "rtf": 0.269429734998064,
+      "total_cpu": 688.402194695174,
+      "system_cpu": 32.87758620689655,
+      "available_gib_min": 24.758094787597656,
+      "process_cpu": {
+        "ign gazebo gui": 189.22774537742686,
+        "ign gazebo server": 119.80279746181886,
+        "friction_grasp_manager": 70.08450289175278,
+        "coordinator": 57.796193382378846,
+        "slip_monitor": 55.95643040609774,
+        "rotation_controller": 42.95964284824106,
+        "dual_base_approach": 31.42084016153456,
+        "safety_monitor": 29.246174881393802,
+        "pivot_rotation_controller": 20.55828836707208,
+        "grasp_support_remover": 12.969411224313973,
+        "/amir1/rover_twist_relay_ign": 11.073371169913576,
+        "/amir2/rover_twist_relay_ign": 10.891318120076333,
+        "/amir2/finger_contact_bridge": 6.704058650413005,
+        "/amir1/finger_contact_bridge": 6.571156559638443,
+        "cooperative_transport_friction_bridge": 4.915752172441269,
+        "/amir2/finger_ft_bridge": 3.2767975946492616,
+        "/amir1/finger_ft_bridge": 3.259975700439779,
+        "/amir1/odom_bridge": 3.127301275160182,
+        "/amir2/odom_bridge": 3.043266755617699,
+        "/amir1/robot_state_publisher": 1.9563005704265073,
+        "/amir2/robot_state_publisher": 1.9222409804291924,
+        "arm_home_positioner": 1.6386281439382693,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          96.2765062222069
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          66.97426919621965
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          56.79271788609457
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          55.103121173120314
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          41.89040086611698
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          29.7985125619274
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          27.625060465149694
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          24.294208976921087
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          19.889652638490176
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          12.401840470741705
+        ],
+        [
+          "('ign gazebo gui', 18696, 'QSGRenderThread')",
+          10.75138496229396
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          10.421018397207279
+        ]
+      ]
+    },
+    "wall_150_180": {
+      "n": 30,
+      "wall_start": 150.68317329499996,
+      "wall_end": 180.65433715099994,
+      "sim_start": 82.256,
+      "sim_end": 94.296,
+      "rtf": 0.40171946801424263,
+      "total_cpu": 510.1972214090233,
+      "system_cpu": 26.56,
+      "available_gib_min": 24.478713989257812,
+      "process_cpu": {
+        "ign gazebo server": 126.42956297939338,
+        "ign gazebo gui": 69.76482613531743,
+        "friction_grasp_manager": 62.54922572134797,
+        "coordinator": 41.60825222125228,
+        "rotation_controller": 36.64272374885815,
+        "slip_monitor": 36.31786886869089,
+        "dual_base_approach": 24.87673502743182,
+        "safety_monitor": 23.323626806208765,
+        "pivot_rotation_controller": 14.870101522083644,
+        "grasp_support_remover": 10.258961221946237,
+        "/amir1/rover_twist_relay_ign": 9.742057508110896,
+        "/amir2/rover_twist_relay_ign": 9.677941767666068,
+        "/amir2/finger_contact_bridge": 7.969612896363938,
+        "/amir1/finger_contact_bridge": 7.774738289093739,
+        "cooperative_transport_friction_bridge": 5.838648851590774,
+        "/amir2/finger_ft_bridge": 3.8709675613861716,
+        "/amir1/finger_ft_bridge": 3.8400473180810755,
+        "/amir1/odom_bridge": 3.612789206376222,
+        "/amir2/odom_bridge": 3.515986592636072,
+        "/amir1/robot_state_publisher": 2.7429955714691117,
+        "/amir2/robot_state_publisher": 2.6782981267487873,
+        "arm_home_positioner": 2.29125346696992,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          93.48657525015744
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          58.549114214744854
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          40.15748562891413
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          35.156138833119435
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          35.09373721060936
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          22.585985722696574
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          21.064640043049042
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          14.001130159204815
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          9.485735111938522
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          8.903668737390154
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 18922, 'python3')",
+          8.839599944168409
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          26.233646127485784
+        ]
+      ]
+    },
+    "sim_20_40": {
+      "n": 22,
+      "wall_start": 25.845172045000027,
+      "wall_end": 48.00654823499997,
+      "sim_start": 20.074,
+      "sim_end": 39.692,
+      "rtf": 0.8852338334860445,
+      "total_cpu": 883.5556678040429,
+      "system_cpu": 44.63636363636363,
+      "available_gib_min": 24.835529327392578,
+      "process_cpu": {
+        "ign gazebo gui": 210.8158055223351,
+        "ign gazebo server": 136.20901295867722,
+        "friction_grasp_manager": 76.51774273454976,
+        "coordinator": 74.87966967835322,
+        "rotation_controller": 72.73003700731356,
+        "slip_monitor": 68.53443004667659,
+        "safety_monitor": 65.20032544776642,
+        "dual_base_approach": 64.04022726147547,
+        "pivot_rotation_controller": 40.915626542232644,
+        "grasp_support_remover": 28.149117655543005,
+        "/amir2/rover_twist_relay_ign": 25.818100477680225,
+        "/amir1/rover_twist_relay_ign": 25.775114619317318,
+        "cooperative_transport_friction_bridge": 11.70757800308829,
+        "/amir2/finger_ft_bridge": 7.662931835132902,
+        "/amir1/finger_ft_bridge": 7.661152126656847,
+        "arm_home_positioner": 7.625589580614578,
+        "/amir1/odom_bridge": 6.974443314863264,
+        "/amir2/odom_bridge": 6.89082915022615,
+        "/amir1/robot_state_publisher": 6.62916989495061,
+        "/amir2/robot_state_publisher": 6.585623201602296,
+        "/amir1/finger_contact_bridge": 5.942954174499753,
+        "/amir2/finger_contact_bridge": 5.813487011508945,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          77.16064000718809
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          71.3041599035248
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          69.1991697452426
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          72.20912472855919
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          66.033917840658
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          60.6400700467539
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          59.53597365293714
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          28.834302611652042
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          38.903173912151914
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 18922, 'python3')",
+          23.536899422725867
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          23.365882510683363
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          26.314380849194837
+        ]
+      ]
+    },
+    "sim_40_55": {
+      "n": 19,
+      "wall_start": 49.06618548900008,
+      "wall_end": 67.993166772,
+      "sim_start": 40.626,
+      "sim_end": 54.744,
+      "rtf": 0.7459192667285348,
+      "total_cpu": 894.290664536313,
+      "system_cpu": 43.257894736842104,
+      "available_gib_min": 24.834999084472656,
+      "process_cpu": {
+        "ign gazebo gui": 212.99578717586905,
+        "ign gazebo server": 139.74943855150389,
+        "friction_grasp_manager": 79.05225322235965,
+        "coordinator": 67.25638733534412,
+        "rotation_controller": 62.88312118021705,
+        "slip_monitor": 62.155434205405456,
+        "dual_base_approach": 54.666375259524116,
+        "safety_monitor": 52.86697150391427,
+        "pivot_rotation_controller": 33.23045808940942,
+        "grasp_support_remover": 22.98543379244454,
+        "/amir1/rover_twist_relay_ign": 21.887254638840936,
+        "/amir2/rover_twist_relay_ign": 21.787559682033173,
+        "cooperative_transport_friction_bridge": 9.946075088965882,
+        "/amir1/finger_contact_bridge": 7.568957771470539,
+        "/amir2/finger_contact_bridge": 7.265811947154137,
+        "/amir1/finger_ft_bridge": 6.349360243107118,
+        "/amir2/finger_ft_bridge": 6.298875695333908,
+        "/amir1/odom_bridge": 5.700652511814253,
+        "/amir2/odom_bridge": 5.446543815549497,
+        "/amir2/robot_state_publisher": 5.248285403831774,
+        "/amir1/robot_state_publisher": 5.198557519578279,
+        "arm_home_positioner": 3.751069902641924,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          86.79634389394664
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          74.14773162476888
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          65.00701222331806
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          60.28241652209473
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          60.156480601229404
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          50.816897970955196
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          49.014109814596985
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          31.530084329311805
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          28.96932351402123
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          21.53741733622259
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          20.287050175254883
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 18922, 'python3')",
+          20.18778419901079
+        ]
+      ]
+    },
+    "sim_65_80": {
+      "n": 55,
+      "wall_start": 87.77817184399998,
+      "wall_end": 143.46218081100005,
+      "sim_start": 65.268,
+      "sim_end": 79.844,
+      "rtf": 0.26176276224361195,
+      "total_cpu": 689.5357815007101,
+      "system_cpu": 32.88,
+      "available_gib_min": 24.758094787597656,
+      "process_cpu": {
+        "ign gazebo gui": 188.0803199293544,
+        "ign gazebo server": 119.50181398922375,
+        "friction_grasp_manager": 70.40195914266629,
+        "coordinator": 58.375890833698364,
+        "slip_monitor": 56.823721747308106,
+        "rotation_controller": 42.8893403369766,
+        "dual_base_approach": 31.778174616812137,
+        "safety_monitor": 29.572861950297774,
+        "pivot_rotation_controller": 20.833891281764455,
+        "grasp_support_remover": 13.130723134025418,
+        "/amir1/rover_twist_relay_ign": 11.113574763837192,
+        "/amir2/rover_twist_relay_ign": 10.957014505273492,
+        "/amir2/finger_contact_bridge": 6.646885950749018,
+        "/amir1/finger_contact_bridge": 6.541898348357156,
+        "cooperative_transport_friction_bridge": 4.866810384378323,
+        "/amir2/finger_ft_bridge": 3.244337820059959,
+        "/amir1/finger_ft_bridge": 3.226341479766644,
+        "/amir1/odom_bridge": 3.104336421719843,
+        "/amir2/odom_bridge": 2.9977248153549105,
+        "/amir1/robot_state_publisher": 1.9218603891201713,
+        "/amir2/robot_state_publisher": 1.9037951156076984,
+        "arm_home_positioner": 1.6225045443583164,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          96.36592983101983
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          67.33334126383993
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          57.4059572280129
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          55.99423551739392
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          41.84973170716833
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          30.17275893713282
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          28.00404496373723
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          24.174841790814554
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          20.18141914477907
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          12.56715701040466
+        ],
+        [
+          "('ign gazebo gui', 18696, 'QSGRenderThread')",
+          10.6504628236168
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          10.49629895974435
+        ]
+      ]
+    },
+    "sim_80_90": {
+      "n": 26,
+      "wall_start": 144.4972513340001,
+      "wall_end": 170.33216889999994,
+      "sim_start": 80.128,
+      "sim_end": 89.92,
+      "rtf": 0.3790219177198696,
+      "total_cpu": 563.353335117636,
+      "system_cpu": 28.842307692307692,
+      "available_gib_min": 24.478713989257812,
+      "process_cpu": {
+        "ign gazebo gui": 128.01666653767248,
+        "ign gazebo server": 125.2791134224257,
+        "friction_grasp_manager": 61.967011328901734,
+        "coordinator": 42.23818513173038,
+        "slip_monitor": 36.91440167165553,
+        "rotation_controller": 36.397435821549585,
+        "dual_base_approach": 23.85968879483224,
+        "safety_monitor": 22.517564937271537,
+        "pivot_rotation_controller": 14.514032920024501,
+        "grasp_support_remover": 9.900352853644756,
+        "/amir1/rover_twist_relay_ign": 9.417121348600789,
+        "/amir2/rover_twist_relay_ign": 9.34135185180948,
+        "/amir2/finger_contact_bridge": 7.7431155928750055,
+        "/amir1/finger_contact_bridge": 7.518145484039316,
+        "cooperative_transport_friction_bridge": 5.768508939973671,
+        "/amir1/finger_ft_bridge": 3.7969391085044437,
+        "/amir2/finger_ft_bridge": 3.7953902483852993,
+        "/amir1/odom_bridge": 3.572922138755282,
+        "/amir2/odom_bridge": 3.498813308973448,
+        "/amir1/robot_state_publisher": 2.6057808128903726,
+        "/amir2/robot_state_publisher": 2.531207420829538,
+        "arm_home_positioner": 2.159585442290951,
+        "sh": 0.0,
+        "ign gazebo -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf": 0.0
+      },
+      "threads_top": [
+        [
+          "('ign gazebo server', 18458, 'ruby')",
+          94.1597333968257
+        ],
+        [
+          "('friction_grasp_manager', 19193, 'friction_grasp_')",
+          58.1691908327205
+        ],
+        [
+          "('coordinator', 19395, 'coordinator')",
+          40.82368552767334
+        ],
+        [
+          "('slip_monitor', 19399, 'slip_monitor')",
+          35.79772340226983
+        ],
+        [
+          "('rotation_controller', 19337, 'rotation_contro')",
+          34.908066509994924
+        ],
+        [
+          "('dual_base_approach', 19401, 'dual_base_appro')",
+          21.738576486594713
+        ],
+        [
+          "('safety_monitor', 19397, 'safety_monitor')",
+          20.35754926868339
+        ],
+        [
+          "('ign gazebo gui', 18700, 'ignition::gui::')",
+          25.964642359239765
+        ],
+        [
+          "('pivot_rotation_controller', 19545, 'pivot_rotation_')",
+          13.696926208944257
+        ],
+        [
+          "('grasp_support_remover', 19393, 'grasp_support_r')",
+          9.19504244771777
+        ],
+        [
+          "('/amir1/rover_twist_relay_ign', 18542, 'python3')",
+          8.635613137700666
+        ],
+        [
+          "('/amir2/rover_twist_relay_ign', 18922, 'python3')",
+          8.523346509976646
+        ]
+      ]
+    },
+    "last": {
+      "wall": 210.61618685100007,
+      "sim": 105.664
+    }
+  }
+}

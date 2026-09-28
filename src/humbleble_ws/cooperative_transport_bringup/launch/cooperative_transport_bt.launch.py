@@ -25,7 +25,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('start_simulation', default_value='false'),
-        DeclareLaunchArgument('bt_start_delay', default_value='14.0'),
+        DeclareLaunchArgument('bt_start_delay', default_value='25.0'),
         DeclareLaunchArgument('bt_xml_path', default_value=default_tree),
         simulation,
         Node(

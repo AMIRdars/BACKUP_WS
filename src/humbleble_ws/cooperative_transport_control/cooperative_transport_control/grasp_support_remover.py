@@ -22,6 +22,7 @@ class GraspSupportRemover(Node):
         self.declare_parameter('removal_delay', 1.0)
         self.declare_parameter('retry_period', 1.0)
         self.declare_parameter('require_physical_contact', True)
+        self.declare_parameter('require_friction_holding', True)
 
         self._names = (
             self.get_parameter('robot1_namespace').value.strip('/'),
@@ -59,8 +60,8 @@ class GraspSupportRemover(Node):
         self._publish_status()
         self.create_timer(0.1, self._tick)
         self.get_logger().info(
-            'Temporary grasp support will be removed only after both robots '
-            'are HOLDING and physical finger contact is verified.')
+            'Temporary grasp support will be removed after both configured '
+            'grasp conditions have been satisfied.')
 
     def _now(self) -> float:
         return self.get_clock().now().nanoseconds * 1.0e-9
@@ -90,7 +91,9 @@ class GraspSupportRemover(Node):
             or self._physical_contact_verified)
         ready_to_remove = (
             all(self._grasped.values())
-            and self._friction_grasp_holding
+            and (
+                not bool(self.get_parameter('require_friction_holding').value)
+                or self._friction_grasp_holding)
             and physical_contact_ready)
         if not ready_to_remove:
             self._holding_since = None

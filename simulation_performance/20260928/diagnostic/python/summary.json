@@ -1,0 +1,2193 @@
+{
+  "safety_monitor-19397": {
+    "main_cpu_s": 10.292594843000002,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 12445,
+        "self_cpu_s": 1.8020886390000002,
+        "inclusive_cpu_s": 8.197499772,
+        "inclusive_percent": 79.64463672224623
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 118274,
+        "self_cpu_s": 0.9651065310000001,
+        "inclusive_cpu_s": 1.7308234900000001,
+        "inclusive_percent": 16.816201515763872
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 1419288,
+        "self_cpu_s": 0.45905013100000003,
+        "inclusive_cpu_s": 0.45905013100000003,
+        "inclusive_percent": 4.46000389602628
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 309332,
+        "self_cpu_s": 0.45001476300000004,
+        "inclusive_cpu_s": 1.534174052,
+        "inclusive_percent": 14.905610056567925
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 309332,
+        "self_cpu_s": 0.41877265100000005,
+        "inclusive_cpu_s": 0.962279426,
+        "inclusive_percent": 9.349240309934542
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 9097,
+        "self_cpu_s": 0.356054602,
+        "inclusive_cpu_s": 0.591066722,
+        "inclusive_percent": 5.742640519868367
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 288704,
+        "self_cpu_s": 0.337922636,
+        "inclusive_cpu_s": 0.453241881,
+        "inclusive_percent": 4.40357254816311
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 6404,
+        "self_cpu_s": 0.29572601800000003,
+        "inclusive_cpu_s": 1.300888394,
+        "inclusive_percent": 12.639071233671798
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 45490,
+        "self_cpu_s": 0.291901573,
+        "inclusive_cpu_s": 1.11913774,
+        "inclusive_percent": 10.873232232211356
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 309332,
+        "self_cpu_s": 0.271864463,
+        "inclusive_cpu_s": 0.39016848400000004,
+        "inclusive_percent": 3.7907688969740585
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 282038,
+        "self_cpu_s": 0.260421931,
+        "inclusive_cpu_s": 0.693843722,
+        "inclusive_percent": 6.741193378187654
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 709644,
+        "self_cpu_s": 0.242716332,
+        "inclusive_cpu_s": 0.242716332,
+        "inclusive_percent": 2.358164638774949
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 118274,
+        "self_cpu_s": 0.18615994500000002,
+        "inclusive_cpu_s": 0.18615994500000002,
+        "inclusive_percent": 1.8086784512518483
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 309332,
+        "self_cpu_s": 0.15333829100000002,
+        "inclusive_cpu_s": 0.15333829100000002,
+        "inclusive_percent": 1.489792354007653
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 359344,
+        "self_cpu_s": 0.150361203,
+        "inclusive_cpu_s": 0.150361203,
+        "inclusive_percent": 1.4608677917819792
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 245646,
+        "self_cpu_s": 0.145119306,
+        "inclusive_cpu_s": 0.145119306,
+        "inclusive_percent": 1.4099389727624974
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 108,
+        "function": "get_num_entities",
+        "calls": 118274,
+        "self_cpu_s": 0.13693833500000002,
+        "inclusive_cpu_s": 0.20789843200000002,
+        "inclusive_percent": 2.019883568441362
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 318666,
+        "self_cpu_s": 0.130421474,
+        "inclusive_cpu_s": 0.15420181900000002,
+        "inclusive_percent": 1.4981821528209938
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 86,
+        "function": "is_ready",
+        "calls": 118261,
+        "self_cpu_s": 0.126882091,
+        "inclusive_cpu_s": 0.126882091,
+        "inclusive_percent": 1.2327512443209845
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'list' objects>",
+        "calls": 325096,
+        "self_cpu_s": 0.12315827900000001,
+        "inclusive_cpu_s": 0.12315827900000001,
+        "inclusive_percent": 1.1965717185862028
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 6404,
+        "self_cpu_s": 0.29572601800000003,
+        "inclusive_cpu_s": 1.300888394,
+        "inclusive_percent": 12.639071233671798
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 12445,
+        "self_cpu_s": 1.8020886390000002,
+        "inclusive_cpu_s": 8.197499772,
+        "inclusive_percent": 79.64463672224623
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/safety_monitor.py",
+        "line": 169,
+        "function": "_monitor_tick",
+        "calls": 263,
+        "self_cpu_s": 0.00265494,
+        "inclusive_cpu_s": 0.027959745,
+        "inclusive_percent": 0.2716491363595783
+      }
+    ]
+  },
+  "pivot_rotation_controller-19545": {
+    "main_cpu_s": 7.588348596,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 7246,
+        "self_cpu_s": 1.4015573650000002,
+        "inclusive_cpu_s": 6.367532037,
+        "inclusive_percent": 83.91195997975736
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 87620,
+        "self_cpu_s": 0.773601288,
+        "inclusive_cpu_s": 1.396481239,
+        "inclusive_percent": 18.40296635471015
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 1051440,
+        "self_cpu_s": 0.373143208,
+        "inclusive_cpu_s": 0.373143208,
+        "inclusive_percent": 4.917317691449925
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 208940,
+        "self_cpu_s": 0.34396276800000003,
+        "inclusive_cpu_s": 1.161649831,
+        "inclusive_percent": 15.308335091673746
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 208940,
+        "self_cpu_s": 0.31036187200000004,
+        "inclusive_cpu_s": 0.7146358500000001,
+        "inclusive_percent": 9.41754112847032
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 6739,
+        "self_cpu_s": 0.279261064,
+        "inclusive_cpu_s": 0.46731092,
+        "inclusive_percent": 6.158269010550343
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 192489,
+        "self_cpu_s": 0.248774229,
+        "inclusive_cpu_s": 0.332672556,
+        "inclusive_percent": 4.383991481036594
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 33695,
+        "self_cpu_s": 0.21664497000000002,
+        "inclusive_cpu_s": 0.8249315960000001,
+        "inclusive_percent": 10.871029257075001
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 208940,
+        "self_cpu_s": 0.203202075,
+        "inclusive_cpu_s": 0.29038795100000003,
+        "inclusive_percent": 3.826760820569978
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 525985,
+        "self_cpu_s": 0.198115647,
+        "inclusive_cpu_s": 0.198115647,
+        "inclusive_percent": 2.610787373479804
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 188692,
+        "self_cpu_s": 0.18864281100000002,
+        "inclusive_cpu_s": 0.5072727140000001,
+        "inclusive_percent": 6.6848894404692425
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3534,
+        "self_cpu_s": 0.160171888,
+        "inclusive_cpu_s": 0.69542366,
+        "inclusive_percent": 9.164361009542635
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 87620,
+        "self_cpu_s": 0.15862562900000002,
+        "inclusive_cpu_s": 0.15862562900000002,
+        "inclusive_percent": 2.0903840538324157
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 181980,
+        "self_cpu_s": 0.118301559,
+        "inclusive_cpu_s": 0.118301559,
+        "inclusive_percent": 1.5589895153519906
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 208940,
+        "self_cpu_s": 0.113886027,
+        "inclusive_cpu_s": 0.113886027,
+        "inclusive_percent": 1.5008012027812223
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 108,
+        "function": "get_num_entities",
+        "calls": 87620,
+        "self_cpu_s": 0.113674627,
+        "inclusive_cpu_s": 0.171689961,
+        "inclusive_percent": 2.2625470987258267
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 86,
+        "function": "is_ready",
+        "calls": 87607,
+        "self_cpu_s": 0.110055386,
+        "inclusive_cpu_s": 0.110055386,
+        "inclusive_percent": 1.4503206410155278
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 235995,
+        "self_cpu_s": 0.10825619500000001,
+        "inclusive_cpu_s": 0.10825619500000001,
+        "inclusive_percent": 1.4266107260420857
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 117,
+        "function": "__enter__",
+        "calls": 87620,
+        "self_cpu_s": 0.103051213,
+        "inclusive_cpu_s": 0.103051213,
+        "inclusive_percent": 1.3580189641567173
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 121,
+        "function": "__exit__",
+        "calls": 87607,
+        "self_cpu_s": 0.094041283,
+        "inclusive_cpu_s": 0.094041283,
+        "inclusive_percent": 1.2392852253726379
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3534,
+        "self_cpu_s": 0.160171888,
+        "inclusive_cpu_s": 0.69542366,
+        "inclusive_percent": 9.164361009542635
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 7246,
+        "self_cpu_s": 1.4015573650000002,
+        "inclusive_cpu_s": 6.367532037,
+        "inclusive_percent": 83.91195997975736
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/pivot_rotation_controller.py",
+        "line": 154,
+        "function": "_tick",
+        "calls": 263,
+        "self_cpu_s": 0.000545756,
+        "inclusive_cpu_s": 0.001797077,
+        "inclusive_percent": 0.023682056474675955
+      }
+    ]
+  },
+  "rover_twist_relay_ign.py-18542": {
+    "main_cpu_s": 3.574397472000001,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 5923,
+        "self_cpu_s": 0.7927572700000001,
+        "inclusive_cpu_s": 2.808957065,
+        "inclusive_percent": 78.5854703346209
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 22872,
+        "self_cpu_s": 0.22078255900000002,
+        "inclusive_cpu_s": 0.392574005,
+        "inclusive_percent": 10.982942106333269
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 85770,
+        "self_cpu_s": 0.14477714800000002,
+        "inclusive_cpu_s": 0.480186993,
+        "inclusive_percent": 13.434068168454655
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 5718,
+        "self_cpu_s": 0.13859855100000001,
+        "inclusive_cpu_s": 0.21006945700000001,
+        "inclusive_percent": 5.877059242727664
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 85770,
+        "self_cpu_s": 0.13576881100000002,
+        "inclusive_cpu_s": 0.307897115,
+        "inclusive_percent": 8.613958503829199
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2964,
+        "self_cpu_s": 0.11735754100000001,
+        "inclusive_cpu_s": 0.31753685600000003,
+        "inclusive_percent": 8.883647061845279
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 71580,
+        "self_cpu_s": 0.104329923,
+        "inclusive_cpu_s": 0.136979671,
+        "inclusive_percent": 3.8322450727158515
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 274464,
+        "self_cpu_s": 0.10295480600000001,
+        "inclusive_cpu_s": 0.10295480600000001,
+        "inclusive_percent": 2.8803401638036963
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 28590,
+        "self_cpu_s": 0.101622872,
+        "inclusive_cpu_s": 0.34629835400000003,
+        "inclusive_percent": 9.68830010407975
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 85770,
+        "self_cpu_s": 0.086256712,
+        "inclusive_cpu_s": 0.12317214000000001,
+        "inclusive_percent": 3.4459553243551526
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 68616,
+        "self_cpu_s": 0.07410167100000001,
+        "inclusive_cpu_s": 0.19694498300000002,
+        "inclusive_percent": 5.509879204614656
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py",
+        "line": 82,
+        "function": "ok",
+        "calls": 8682,
+        "self_cpu_s": 0.056483397000000005,
+        "inclusive_cpu_s": 0.062758493,
+        "inclusive_percent": 1.7557782393149584
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 137232,
+        "self_cpu_s": 0.054735523,
+        "inclusive_cpu_s": 0.054735523,
+        "inclusive_percent": 1.5313216683027013
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 106723,
+        "self_cpu_s": 0.052553447,
+        "inclusive_cpu_s": 0.052553447,
+        "inclusive_percent": 1.4702742885109108
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 85770,
+        "self_cpu_s": 0.048956164,
+        "inclusive_cpu_s": 0.048956164,
+        "inclusive_percent": 1.3696340259721398
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 22872,
+        "self_cpu_s": 0.047742967000000004,
+        "inclusive_cpu_s": 0.047742967000000004,
+        "inclusive_percent": 1.3356927251094473
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/service.py",
+        "line": 82,
+        "function": "handle",
+        "calls": 102924,
+        "self_cpu_s": 0.047631690000000004,
+        "inclusive_cpu_s": 0.047631690000000004,
+        "inclusive_percent": 1.332579557061638
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'list' objects>",
+        "calls": 94452,
+        "self_cpu_s": 0.042395074000000005,
+        "inclusive_cpu_s": 0.042395074000000005,
+        "inclusive_percent": 1.186076096240032
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py",
+        "line": 245,
+        "function": "services",
+        "calls": 80052,
+        "self_cpu_s": 0.038520065,
+        "inclusive_cpu_s": 0.038520065,
+        "inclusive_percent": 1.0776659647324187
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 51462,
+        "self_cpu_s": 0.037439692000000004,
+        "inclusive_cpu_s": 0.037439692000000004,
+        "inclusive_percent": 1.0474406468022477
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2964,
+        "self_cpu_s": 0.11735754100000001,
+        "inclusive_cpu_s": 0.31753685600000003,
+        "inclusive_percent": 8.883647061845279
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 5923,
+        "self_cpu_s": 0.7927572700000001,
+        "inclusive_cpu_s": 2.808957065,
+        "inclusive_percent": 78.5854703346209
+      }
+    ]
+  },
+  "rover_twist_relay_ign.py-18922": {
+    "main_cpu_s": 3.557821942,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 6119,
+        "self_cpu_s": 0.7831343970000001,
+        "inclusive_cpu_s": 2.7861491650000003,
+        "inclusive_percent": 78.31052847557037
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 23688,
+        "self_cpu_s": 0.217082924,
+        "inclusive_cpu_s": 0.385886975,
+        "inclusive_percent": 10.84615760121702
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 88829,
+        "self_cpu_s": 0.143344471,
+        "inclusive_cpu_s": 0.47714525,
+        "inclusive_percent": 13.41116159769864
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 5921,
+        "self_cpu_s": 0.138831227,
+        "inclusive_cpu_s": 0.210811349,
+        "inclusive_percent": 5.9252922837811886
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 88829,
+        "self_cpu_s": 0.134103996,
+        "inclusive_cpu_s": 0.30522618,
+        "inclusive_percent": 8.57901786474507
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3062,
+        "self_cpu_s": 0.118111829,
+        "inclusive_cpu_s": 0.31928356700000005,
+        "inclusive_percent": 8.974130021260072
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 74114,
+        "self_cpu_s": 0.105125831,
+        "inclusive_cpu_s": 0.137714262,
+        "inclusive_percent": 3.870746323032262
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 29605,
+        "self_cpu_s": 0.102857798,
+        "inclusive_cpu_s": 0.345856155,
+        "inclusive_percent": 9.72100798292283
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 284246,
+        "self_cpu_s": 0.10095920000000001,
+        "inclusive_cpu_s": 0.10095920000000001,
+        "inclusive_percent": 2.8376687098412416
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 88829,
+        "self_cpu_s": 0.08560459000000001,
+        "inclusive_cpu_s": 0.122140443,
+        "inclusive_percent": 3.4330116849900523
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 71052,
+        "self_cpu_s": 0.072936793,
+        "inclusive_cpu_s": 0.19564519300000002,
+        "inclusive_percent": 5.49901586390295
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/context.py",
+        "line": 82,
+        "function": "ok",
+        "calls": 8983,
+        "self_cpu_s": 0.054290047,
+        "inclusive_cpu_s": 0.060365609,
+        "inclusive_percent": 1.6967012398058903
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 142122,
+        "self_cpu_s": 0.053856998,
+        "inclusive_cpu_s": 0.053856998,
+        "inclusive_percent": 1.5137631640363862
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 110447,
+        "self_cpu_s": 0.052327432,
+        "inclusive_cpu_s": 0.052327432,
+        "inclusive_percent": 1.470771524068587
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 88829,
+        "self_cpu_s": 0.048981741,
+        "inclusive_cpu_s": 0.048981741,
+        "inclusive_percent": 1.3767339062635982
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/service.py",
+        "line": 82,
+        "function": "handle",
+        "calls": 106590,
+        "self_cpu_s": 0.04754307,
+        "inclusive_cpu_s": 0.04754307,
+        "inclusive_percent": 1.3362970596913588
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 23684,
+        "self_cpu_s": 0.046967480000000006,
+        "inclusive_cpu_s": 0.046967480000000006,
+        "inclusive_percent": 1.320118903241055
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'list' objects>",
+        "calls": 97811,
+        "self_cpu_s": 0.041799529,
+        "inclusive_cpu_s": 0.041799529,
+        "inclusive_percent": 1.1748628706388478
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py",
+        "line": 245,
+        "function": "services",
+        "calls": 82894,
+        "self_cpu_s": 0.038486530000000005,
+        "inclusive_cpu_s": 0.038486530000000005,
+        "inclusive_percent": 1.0817441296223251
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 53297,
+        "self_cpu_s": 0.038054062,
+        "inclusive_cpu_s": 0.038054062,
+        "inclusive_percent": 1.0695887152409946
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3062,
+        "self_cpu_s": 0.118111829,
+        "inclusive_cpu_s": 0.31928356700000005,
+        "inclusive_percent": 8.974130021260072
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 6119,
+        "self_cpu_s": 0.7831343970000001,
+        "inclusive_cpu_s": 2.7861491650000003,
+        "inclusive_percent": 78.31052847557037
+      }
+    ]
+  },
+  "arm_home_positioner-19228": {
+    "main_cpu_s": 1.5583e-05,
+    "top_self": [
+      {
+        "file": "/home/dars5070/ros2_humble_ws/simulation_performance/20260928/profiling_support/sitecustomize.py",
+        "line": 12,
+        "function": "save",
+        "calls": 1,
+        "self_cpu_s": 5.5810000000000004e-06,
+        "inclusive_cpu_s": 6.415e-06,
+        "inclusive_percent": 41.16665597125073
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _signal.setitimer>",
+        "calls": 1,
+        "self_cpu_s": 5.005e-06,
+        "inclusive_cpu_s": 5.005e-06,
+        "inclusive_percent": 32.11833408201245
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/simulation_performance/20260928/profiling_support/sitecustomize.py",
+        "line": 17,
+        "function": "alarm",
+        "calls": 1,
+        "self_cpu_s": 4.163000000000001e-06,
+        "inclusive_cpu_s": 1.0578000000000001e-05,
+        "inclusive_percent": 67.88166591798755
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+        "calls": 1,
+        "self_cpu_s": 8.340000000000001e-07,
+        "inclusive_cpu_s": 8.340000000000001e-07,
+        "inclusive_percent": 5.351986138740936
+      }
+    ],
+    "selected": []
+  },
+  "rotation_controller-19337": {
+    "main_cpu_s": 14.848682498999985,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 12309,
+        "self_cpu_s": 2.1672363910000003,
+        "inclusive_cpu_s": 11.04173708,
+        "inclusive_percent": 74.36172926954043
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 209888,
+        "self_cpu_s": 1.577562289,
+        "inclusive_cpu_s": 2.8459083300000003,
+        "inclusive_percent": 19.16606628360236
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 2518656,
+        "self_cpu_s": 0.7603606810000001,
+        "inclusive_cpu_s": 0.7603606810000001,
+        "inclusive_percent": 5.1207282602426725
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 434768,
+        "self_cpu_s": 0.578223673,
+        "inclusive_cpu_s": 2.0138292790000003,
+        "inclusive_percent": 13.562343185232937
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 434768,
+        "self_cpu_s": 0.5397485240000001,
+        "inclusive_cpu_s": 1.244862901,
+        "inclusive_percent": 8.383658961553241
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 7496,
+        "self_cpu_s": 0.447513714,
+        "inclusive_cpu_s": 0.7775577650000001,
+        "inclusive_percent": 5.2365438149301555
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 420083,
+        "self_cpu_s": 0.43842572100000005,
+        "inclusive_cpu_s": 0.589578032,
+        "inclusive_percent": 3.9705747095050783
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 1259328,
+        "self_cpu_s": 0.40351816700000004,
+        "inclusive_cpu_s": 0.40351816700000004,
+        "inclusive_percent": 2.7175351552380205
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 7230,
+        "self_cpu_s": 0.37952139700000004,
+        "inclusive_cpu_s": 2.4773709800000003,
+        "inclusive_percent": 16.684113086577508
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 37480,
+        "self_cpu_s": 0.36381068800000005,
+        "inclusive_cpu_s": 1.439764558,
+        "inclusive_percent": 9.696244485643517
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 434768,
+        "self_cpu_s": 0.35288154400000005,
+        "inclusive_cpu_s": 0.5055099710000001,
+        "inclusive_percent": 3.4044095901036653
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 412280,
+        "self_cpu_s": 0.343108177,
+        "inclusive_cpu_s": 0.9116615790000001,
+        "inclusive_percent": 6.139679928245472
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 209881,
+        "self_cpu_s": 0.294687439,
+        "inclusive_cpu_s": 0.29469546900000004,
+        "inclusive_percent": 1.9846573527304319
+      },
+      {
+        "file": "<frozen importlib._bootstrap>",
+        "line": 1053,
+        "function": "_handle_fromlist",
+        "calls": 181582,
+        "self_cpu_s": 0.24781591900000002,
+        "inclusive_cpu_s": 0.38023747300000005,
+        "inclusive_percent": 2.560748894897631
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 700938,
+        "self_cpu_s": 0.23726965000000003,
+        "inclusive_cpu_s": 0.24767638600000003,
+        "inclusive_percent": 1.6680024373656066
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 427272,
+        "self_cpu_s": 0.22640016500000001,
+        "inclusive_cpu_s": 0.22640016500000001,
+        "inclusive_percent": 1.524715509374299
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 108,
+        "function": "get_num_entities",
+        "calls": 209888,
+        "self_cpu_s": 0.221172102,
+        "inclusive_cpu_s": 0.33600923400000005,
+        "inclusive_percent": 2.2628892093465485
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 434768,
+        "self_cpu_s": 0.199604406,
+        "inclusive_cpu_s": 0.199604406,
+        "inclusive_percent": 1.3442566774085363
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 86,
+        "function": "is_ready",
+        "calls": 209888,
+        "self_cpu_s": 0.197989469,
+        "inclusive_cpu_s": 0.197989469,
+        "inclusive_percent": 1.333380715853639
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 117,
+        "function": "__enter__",
+        "calls": 209888,
+        "self_cpu_s": 0.190742705,
+        "inclusive_cpu_s": 0.190742705,
+        "inclusive_percent": 1.2845766283496598
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 7230,
+        "self_cpu_s": 0.37952139700000004,
+        "inclusive_cpu_s": 2.4773709800000003,
+        "inclusive_percent": 16.684113086577508
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 12309,
+        "self_cpu_s": 2.1672363910000003,
+        "inclusive_cpu_s": 11.04173708,
+        "inclusive_percent": 74.36172926954043
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_rotation/cooperative_rotation/rotation_controller.py",
+        "line": 303,
+        "function": "_on_finger_wrench",
+        "calls": 2140,
+        "self_cpu_s": 0.025881082000000003,
+        "inclusive_cpu_s": 0.07059836400000001,
+        "inclusive_percent": 0.47545204097908755
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_rotation/cooperative_rotation/rotation_controller.py",
+        "line": 701,
+        "function": "_control_loop",
+        "calls": 535,
+        "self_cpu_s": 0.004347047000000001,
+        "inclusive_cpu_s": 0.09831065900000001,
+        "inclusive_percent": 0.6620833801693917
+      }
+    ]
+  },
+  "dual_base_approach-19401": {
+    "main_cpu_s": 11.164982284000004,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 10620,
+        "self_cpu_s": 1.5319391420000001,
+        "inclusive_cpu_s": 6.991320477,
+        "inclusive_percent": 62.61828544966814
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 106568,
+        "self_cpu_s": 0.8626487140000001,
+        "inclusive_cpu_s": 1.554051727,
+        "inclusive_percent": 13.918980679683088
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 1278816,
+        "self_cpu_s": 0.41425950100000003,
+        "inclusive_cpu_s": 0.41425950100000003,
+        "inclusive_percent": 3.7103462456331457
+      },
+      {
+        "file": "<frozen importlib._bootstrap>",
+        "line": 1053,
+        "function": "_handle_fromlist",
+        "calls": 290338,
+        "self_cpu_s": 0.371238365,
+        "inclusive_cpu_s": 0.5691989070000001,
+        "inclusive_percent": 5.098072639270476
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 243584,
+        "self_cpu_s": 0.36451348,
+        "inclusive_cpu_s": 1.233517357,
+        "inclusive_percent": 11.048090589160127
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 243584,
+        "self_cpu_s": 0.329040233,
+        "inclusive_cpu_s": 0.758278581,
+        "inclusive_percent": 6.791578900099576
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 907942,
+        "self_cpu_s": 0.302482589,
+        "inclusive_cpu_s": 0.32487466400000004,
+        "inclusive_percent": 2.9097642587893953
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 7612,
+        "self_cpu_s": 0.292515589,
+        "inclusive_cpu_s": 0.492612007,
+        "inclusive_percent": 4.412116333636628
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 226498,
+        "self_cpu_s": 0.269000393,
+        "inclusive_cpu_s": 0.35976978200000004,
+        "inclusive_percent": 3.222304996538765
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 5519,
+        "self_cpu_s": 0.26649378900000004,
+        "inclusive_cpu_s": 1.229300968,
+        "inclusive_percent": 11.010326185305747
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 72,
+        "function": "__init__",
+        "calls": 65733,
+        "self_cpu_s": 0.236139759,
+        "inclusive_cpu_s": 0.551970226,
+        "inclusive_percent": 4.94376266759511
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 38060,
+        "self_cpu_s": 0.232866133,
+        "inclusive_cpu_s": 0.8868831760000001,
+        "inclusive_percent": 7.943435586735766
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 639408,
+        "self_cpu_s": 0.21947270700000002,
+        "inclusive_cpu_s": 0.21947270700000002,
+        "inclusive_percent": 1.9657237371036023
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 243584,
+        "self_cpu_s": 0.215657118,
+        "inclusive_cpu_s": 0.308580242,
+        "inclusive_percent": 2.7638220478165145
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.all>",
+        "calls": 205543,
+        "self_cpu_s": 0.207922459,
+        "inclusive_cpu_s": 0.38273989900000005,
+        "inclusive_percent": 3.4280385697385842
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/action_msgs/msg/_goal_info.py",
+        "line": 80,
+        "function": "__init__",
+        "calls": 34365,
+        "self_cpu_s": 0.20560260900000002,
+        "inclusive_cpu_s": 1.1363519210000002,
+        "inclusive_percent": 10.177821084664425
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 220748,
+        "self_cpu_s": 0.203337231,
+        "inclusive_cpu_s": 0.546036005,
+        "inclusive_percent": 4.890612372780008
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/action/client.py",
+        "line": 241,
+        "function": "take_data",
+        "calls": 74,
+        "self_cpu_s": 0.175549946,
+        "inclusive_cpu_s": 2.0694878930000002,
+        "inclusive_percent": 18.535523302761376
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 91344,
+        "self_cpu_s": 0.146828235,
+        "inclusive_cpu_s": 0.146828235,
+        "inclusive_percent": 1.3150780831100148
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 317415,
+        "self_cpu_s": 0.134685145,
+        "inclusive_cpu_s": 0.134685145,
+        "inclusive_percent": 1.206317588098736
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 5519,
+        "self_cpu_s": 0.26649378900000004,
+        "inclusive_cpu_s": 1.229300968,
+        "inclusive_percent": 11.010326185305747
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 10620,
+        "self_cpu_s": 1.5319391420000001,
+        "inclusive_cpu_s": 6.991320477,
+        "inclusive_percent": 62.61828544966814
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/dual_base_approach.py",
+        "line": 277,
+        "function": "_tick",
+        "calls": 157,
+        "self_cpu_s": 0.000693056,
+        "inclusive_cpu_s": 0.024503401,
+        "inclusive_percent": 0.21946654617728
+      }
+    ]
+  },
+  "slip_monitor-19399": {
+    "main_cpu_s": 19.98447103,
+    "top_self": [
+      {
+        "file": "<frozen importlib._bootstrap>",
+        "line": 1053,
+        "function": "_handle_fromlist",
+        "calls": 1855551,
+        "self_cpu_s": 1.999271996,
+        "inclusive_cpu_s": 3.065313857,
+        "inclusive_percent": 15.338478823875077
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 6710812,
+        "self_cpu_s": 1.7269408620000002,
+        "inclusive_cpu_s": 1.7363769560000002,
+        "inclusive_percent": 8.68863105454936
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_quaternion.py",
+        "line": 104,
+        "function": "__init__",
+        "calls": 260815,
+        "self_cpu_s": 1.670347521,
+        "inclusive_cpu_s": 3.6841053780000004,
+        "inclusive_percent": 18.434840594327206
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2293,
+        "self_cpu_s": 1.5768021760000002,
+        "inclusive_cpu_s": 18.745066696000002,
+        "inclusive_percent": 93.79816292290424
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 77,
+        "function": "__init__",
+        "calls": 262221,
+        "self_cpu_s": 1.026427711,
+        "inclusive_cpu_s": 2.3739037560000003,
+        "inclusive_percent": 11.878742011416652
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'get' of 'dict' objects>",
+        "calls": 3333739,
+        "self_cpu_s": 0.935724458,
+        "inclusive_cpu_s": 0.935724458,
+        "inclusive_percent": 4.682257822062553
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 80,
+        "function": "__init__",
+        "calls": 172242,
+        "self_cpu_s": 0.9345930600000001,
+        "inclusive_cpu_s": 6.967709664,
+        "inclusive_percent": 34.86561967810063
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.all>",
+        "calls": 1235319,
+        "self_cpu_s": 0.903216894,
+        "inclusive_cpu_s": 1.407105287,
+        "inclusive_percent": 7.040993403766864
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 72,
+        "function": "__init__",
+        "calls": 263086,
+        "self_cpu_s": 0.7894005930000001,
+        "inclusive_cpu_s": 1.8095561580000001,
+        "inclusive_percent": 9.054811384717446
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/std_msgs/msg/_header.py",
+        "line": 76,
+        "function": "__init__",
+        "calls": 173993,
+        "self_cpu_s": 0.749583482,
+        "inclusive_cpu_s": 3.302214353,
+        "inclusive_percent": 16.523901723707517
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.hasattr>",
+        "calls": 1856250,
+        "self_cpu_s": 0.5850898280000001,
+        "inclusive_cpu_s": 0.5850898280000001,
+        "inclusive_percent": 2.9277223656392173
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform_stamped.py",
+        "line": 83,
+        "function": "__init__",
+        "calls": 86471,
+        "self_cpu_s": 0.568293175,
+        "inclusive_cpu_s": 6.812437774,
+        "inclusive_percent": 34.08865695656093
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'keys' of 'dict' objects>",
+        "calls": 1232329,
+        "self_cpu_s": 0.421177026,
+        "inclusive_cpu_s": 0.421177026,
+        "inclusive_percent": 2.1075215119166453
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/std_msgs/msg/_header.py",
+        "line": 129,
+        "function": "stamp",
+        "calls": 261688,
+        "self_cpu_s": 0.36692169500000005,
+        "inclusive_cpu_s": 0.8693851480000001,
+        "inclusive_percent": 4.35030352664781
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 134,
+        "function": "translation",
+        "calls": 258013,
+        "self_cpu_s": 0.356793423,
+        "inclusive_cpu_s": 0.8542692230000001,
+        "inclusive_percent": 4.274665172361082
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 148,
+        "function": "rotation",
+        "calls": 258711,
+        "self_cpu_s": 0.355063379,
+        "inclusive_cpu_s": 0.8520602220000001,
+        "inclusive_percent": 4.263611584819616
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 132,
+        "function": "x",
+        "calls": 349743,
+        "self_cpu_s": 0.259120059,
+        "inclusive_cpu_s": 0.348887165,
+        "inclusive_percent": 1.7457913420688622
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 124,
+        "function": "sec",
+        "calls": 350082,
+        "self_cpu_s": 0.25416135500000003,
+        "inclusive_cpu_s": 0.344046249,
+        "inclusive_percent": 1.721567953855419
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_quaternion.py",
+        "line": 166,
+        "function": "x",
+        "calls": 347112,
+        "self_cpu_s": 0.250989779,
+        "inclusive_cpu_s": 0.339465691,
+        "inclusive_percent": 1.6986473672002917
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 139,
+        "function": "nanosec",
+        "calls": 350082,
+        "self_cpu_s": 0.24632020200000002,
+        "inclusive_cpu_s": 0.335609306,
+        "inclusive_percent": 1.6793504591449773
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2293,
+        "self_cpu_s": 1.5768021760000002,
+        "inclusive_cpu_s": 18.745066696000002,
+        "inclusive_percent": 93.79816292290424
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 3255,
+        "self_cpu_s": 0.13607048700000002,
+        "inclusive_cpu_s": 0.5797314530000001,
+        "inclusive_percent": 2.9009096719634315
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/slip_monitor.py",
+        "line": 165,
+        "function": "_tick",
+        "calls": 262,
+        "self_cpu_s": 0.0030593770000000003,
+        "inclusive_cpu_s": 0.046588657000000006,
+        "inclusive_percent": 0.2331242940083964
+      }
+    ]
+  },
+  "friction_grasp_manager-19193": {
+    "main_cpu_s": 19.939836428000007,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 34409,
+        "self_cpu_s": 1.270278508,
+        "inclusive_cpu_s": 6.397737396,
+        "inclusive_percent": 32.0852050070789
+      },
+      {
+        "file": "<frozen importlib._bootstrap>",
+        "line": 1053,
+        "function": "_handle_fromlist",
+        "calls": 1134355,
+        "self_cpu_s": 1.200012843,
+        "inclusive_cpu_s": 1.8403068880000002,
+        "inclusive_percent": 9.229297816183667
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 3981077,
+        "self_cpu_s": 1.186351358,
+        "inclusive_cpu_s": 1.5588122660000001,
+        "inclusive_percent": 7.817578000845974
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 28601,
+        "self_cpu_s": 1.164441863,
+        "inclusive_cpu_s": 8.656532648,
+        "inclusive_percent": 43.413258073894156
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 133368,
+        "self_cpu_s": 0.864133718,
+        "inclusive_cpu_s": 1.546172821,
+        "inclusive_percent": 7.754190093700199
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.all>",
+        "calls": 711950,
+        "self_cpu_s": 0.568966594,
+        "inclusive_cpu_s": 0.9696313310000001,
+        "inclusive_percent": 4.862784780111937
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 1600416,
+        "self_cpu_s": 0.40858204600000003,
+        "inclusive_cpu_s": 0.40858204600000003,
+        "inclusive_percent": 2.0490742111919187
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 72,
+        "function": "__init__",
+        "calls": 134882,
+        "self_cpu_s": 0.405738508,
+        "inclusive_cpu_s": 0.9377140460000001,
+        "inclusive_percent": 4.702716842166463
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 77,
+        "function": "__init__",
+        "calls": 102463,
+        "self_cpu_s": 0.381333421,
+        "inclusive_cpu_s": 0.8914500660000001,
+        "inclusive_percent": 4.470698991031863
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'get' of 'dict' objects>",
+        "calls": 1254493,
+        "self_cpu_s": 0.347359215,
+        "inclusive_cpu_s": 0.347359215,
+        "inclusive_percent": 1.742036431714303
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.hasattr>",
+        "calls": 1134355,
+        "self_cpu_s": 0.345426732,
+        "inclusive_cpu_s": 0.345426732,
+        "inclusive_percent": 1.7323448627439257
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/ros_gz_interfaces/msg/_entity.py",
+        "line": 143,
+        "function": "__init__",
+        "calls": 85500,
+        "self_cpu_s": 0.32970206,
+        "inclusive_cpu_s": 0.7601212730000001,
+        "inclusive_percent": 3.8120737637176356
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 261179,
+        "self_cpu_s": 0.293961325,
+        "inclusive_cpu_s": 1.0446673400000002,
+        "inclusive_percent": 5.2390968389943895
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 261179,
+        "self_cpu_s": 0.28181158,
+        "inclusive_cpu_s": 0.653668993,
+        "inclusive_percent": 3.278206395324798
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/std_msgs/msg/_header.py",
+        "line": 76,
+        "function": "__init__",
+        "calls": 54480,
+        "self_cpu_s": 0.24578728100000002,
+        "inclusive_cpu_s": 1.068315401,
+        "inclusive_percent": 5.357693905150823
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 273234,
+        "self_cpu_s": 0.24301741400000001,
+        "inclusive_cpu_s": 0.323883348,
+        "inclusive_percent": 1.6243029333239418
+      },
+      {
+        "file": "/usr/lib/python3.10/abc.py",
+        "line": 117,
+        "function": "__instancecheck__",
+        "calls": 353082,
+        "self_cpu_s": 0.230318282,
+        "inclusive_cpu_s": 0.37246090800000003,
+        "inclusive_percent": 1.867923587763144
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/ros_gz_interfaces/msg/_contact.py",
+        "line": 101,
+        "function": "__init__",
+        "calls": 21375,
+        "self_cpu_s": 0.226084637,
+        "inclusive_cpu_s": 1.8503123010000002,
+        "inclusive_percent": 9.279475825597778
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/ros_gz_interfaces/msg/_contacts.py",
+        "line": 147,
+        "function": "contacts",
+        "calls": 42750,
+        "self_cpu_s": 0.22486683400000002,
+        "inclusive_cpu_s": 0.674492787,
+        "inclusive_percent": 3.3826395188120038
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/ros_gz_interfaces/msg/_contact.py",
+        "line": 195,
+        "function": "positions",
+        "calls": 42750,
+        "self_cpu_s": 0.22429326800000002,
+        "inclusive_cpu_s": 0.7500382050000001,
+        "inclusive_percent": 3.761506307778824
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 28601,
+        "self_cpu_s": 1.164441863,
+        "inclusive_cpu_s": 8.656532648,
+        "inclusive_percent": 43.413258073894156
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 34409,
+        "self_cpu_s": 1.270278508,
+        "inclusive_cpu_s": 6.397737396,
+        "inclusive_percent": 32.0852050070789
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/friction_grasp_manager.py",
+        "line": 199,
+        "function": "_on_contact",
+        "calls": 21375,
+        "self_cpu_s": 0.10428525300000001,
+        "inclusive_cpu_s": 0.8447572870000001,
+        "inclusive_percent": 4.236530675917537
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/friction_grasp_manager.py",
+        "line": 219,
+        "function": "_on_finger_wrench",
+        "calls": 2132,
+        "self_cpu_s": 0.042011169,
+        "inclusive_cpu_s": 0.39265270900000004,
+        "inclusive_percent": 1.9691872118300202
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/friction_grasp_manager.py",
+        "line": 554,
+        "function": "_tick",
+        "calls": 53,
+        "self_cpu_s": 0.0005168670000000001,
+        "inclusive_cpu_s": 0.041024673000000005,
+        "inclusive_percent": 0.2057422745072881
+      }
+    ]
+  },
+  "grasp_support_remover-19393": {
+    "main_cpu_s": 4.603762707000003,
+    "top_self": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 5637,
+        "self_cpu_s": 0.9940173310000001,
+        "inclusive_cpu_s": 3.90746281,
+        "inclusive_percent": 84.87541732024368
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 37,
+        "function": "__add__",
+        "calls": 38941,
+        "self_cpu_s": 0.355546851,
+        "inclusive_cpu_s": 0.6407787540000001,
+        "inclusive_percent": 13.91858778962909
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 482,
+        "function": "enter_context",
+        "calls": 127949,
+        "self_cpu_s": 0.218084833,
+        "inclusive_cpu_s": 0.7161337680000001,
+        "inclusive_percent": 15.555401387459035
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 509,
+        "function": "_push_cm_exit",
+        "calls": 127949,
+        "self_cpu_s": 0.19661545200000002,
+        "inclusive_cpu_s": 0.448303791,
+        "inclusive_percent": 9.737769288550773
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 533,
+        "function": "__exit__",
+        "calls": 5563,
+        "self_cpu_s": 0.190409622,
+        "inclusive_cpu_s": 0.298072926,
+        "inclusive_percent": 6.4745501662538185
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "calls": 467292,
+        "self_cpu_s": 0.17044342,
+        "inclusive_cpu_s": 0.17044342,
+        "inclusive_percent": 3.7022633625499735
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/callback_groups.py",
+        "line": 101,
+        "function": "can_execute",
+        "calls": 114150,
+        "self_cpu_s": 0.159871345,
+        "inclusive_cpu_s": 0.21230716600000002,
+        "inclusive_percent": 4.611600977547948
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "calls": 27818,
+        "self_cpu_s": 0.14001803100000002,
+        "inclusive_cpu_s": 0.5210908200000001,
+        "inclusive_percent": 11.318802752532912
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 514,
+        "function": "_push_exit_callback",
+        "calls": 127949,
+        "self_cpu_s": 0.12621794,
+        "inclusive_cpu_s": 0.180814318,
+        "inclusive_percent": 3.927533400561079
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 479,
+        "function": "can_execute",
+        "calls": 111260,
+        "self_cpu_s": 0.116217308,
+        "inclusive_cpu_s": 0.315164543,
+        "inclusive_percent": 6.8458033799351465
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2836,
+        "self_cpu_s": 0.109148691,
+        "inclusive_cpu_s": 0.269497991,
+        "inclusive_percent": 5.853863636156341
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "calls": 233646,
+        "self_cpu_s": 0.09085706,
+        "inclusive_cpu_s": 0.09085706,
+        "inclusive_percent": 1.9735391631252452
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 112,
+        "function": "add_to_wait_set",
+        "calls": 38941,
+        "self_cpu_s": 0.079771721,
+        "inclusive_cpu_s": 0.079771721,
+        "inclusive_percent": 1.7327504929545439
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.lock' objects>",
+        "calls": 148270,
+        "self_cpu_s": 0.072025451,
+        "inclusive_cpu_s": 0.072025451,
+        "inclusive_percent": 1.5644909519442778
+      },
+      {
+        "file": "/usr/lib/python3.10/contextlib.py",
+        "line": 442,
+        "function": "_create_exit_wrapper",
+        "calls": 127949,
+        "self_cpu_s": 0.07087402100000001,
+        "inclusive_cpu_s": 0.07087402100000001,
+        "inclusive_percent": 1.5394803231764387
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'list' objects>",
+        "calls": 136451,
+        "self_cpu_s": 0.058778543,
+        "inclusive_cpu_s": 0.058778543,
+        "inclusive_percent": 1.2767500573091541
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/waitable.py",
+        "line": 26,
+        "function": "__init__",
+        "calls": 83445,
+        "self_cpu_s": 0.057299273000000005,
+        "inclusive_cpu_s": 0.057299273000000005,
+        "inclusive_percent": 1.2446182969612376
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'pop' of 'collections.deque' objects>",
+        "calls": 127949,
+        "self_cpu_s": 0.055314563000000004,
+        "inclusive_cpu_s": 0.055314563000000004,
+        "inclusive_percent": 1.2015076910001123
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'collections.deque' objects>",
+        "calls": 127949,
+        "self_cpu_s": 0.054596378,
+        "inclusive_cpu_s": 0.054596378,
+        "inclusive_percent": 1.185907734058196
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/qos_event.py",
+        "line": 86,
+        "function": "is_ready",
+        "calls": 38941,
+        "self_cpu_s": 0.053712590000000004,
+        "inclusive_cpu_s": 0.053712590000000004,
+        "inclusive_percent": 1.16671065427265
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 2836,
+        "self_cpu_s": 0.109148691,
+        "inclusive_cpu_s": 0.269497991,
+        "inclusive_percent": 5.853863636156341
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 5637,
+        "self_cpu_s": 0.9940173310000001,
+        "inclusive_cpu_s": 3.90746281,
+        "inclusive_percent": 84.87541732024368
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/grasp_support_remover.py",
+        "line": 85,
+        "function": "_tick",
+        "calls": 53,
+        "self_cpu_s": 0.0005183340000000001,
+        "inclusive_cpu_s": 0.002653874,
+        "inclusive_percent": 0.057645759977263705
+      }
+    ]
+  },
+  "coordinator-19395": {
+    "main_cpu_s": 19.975458656999994,
+    "top_self": [
+      {
+        "file": "<frozen importlib._bootstrap>",
+        "line": 1053,
+        "function": "_handle_fromlist",
+        "calls": 1857920,
+        "self_cpu_s": 1.9717244790000001,
+        "inclusive_cpu_s": 3.0092223280000003,
+        "inclusive_percent": 15.064596911998711
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "calls": 6734818,
+        "self_cpu_s": 1.7167970780000001,
+        "inclusive_cpu_s": 1.723200572,
+        "inclusive_percent": 8.626588263074197
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_quaternion.py",
+        "line": 104,
+        "function": "__init__",
+        "calls": 262398,
+        "self_cpu_s": 1.681930122,
+        "inclusive_cpu_s": 3.6880989580000003,
+        "inclusive_percent": 18.46315031523735
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3027,
+        "self_cpu_s": 1.56402989,
+        "inclusive_cpu_s": 18.691895512000002,
+        "inclusive_percent": 93.57429950901181
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 77,
+        "function": "__init__",
+        "calls": 263406,
+        "self_cpu_s": 0.9995969840000001,
+        "inclusive_cpu_s": 2.370362938,
+        "inclusive_percent": 11.866375529601942
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'get' of 'dict' objects>",
+        "calls": 3349411,
+        "self_cpu_s": 0.9315215400000001,
+        "inclusive_cpu_s": 0.9315215400000001,
+        "inclusive_percent": 4.663329918953162
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 80,
+        "function": "__init__",
+        "calls": 172100,
+        "self_cpu_s": 0.9179715740000001,
+        "inclusive_cpu_s": 6.88450215,
+        "inclusive_percent": 34.464801375599286
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.all>",
+        "calls": 1238565,
+        "self_cpu_s": 0.8897754630000001,
+        "inclusive_cpu_s": 1.3865548760000002,
+        "inclusive_percent": 6.941291811160041
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 72,
+        "function": "__init__",
+        "calls": 263280,
+        "self_cpu_s": 0.780738032,
+        "inclusive_cpu_s": 1.791680015,
+        "inclusive_percent": 8.969406138627722
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/std_msgs/msg/_header.py",
+        "line": 76,
+        "function": "__init__",
+        "calls": 174585,
+        "self_cpu_s": 0.7342166920000001,
+        "inclusive_cpu_s": 3.2605358960000004,
+        "inclusive_percent": 16.322708539447788
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.hasattr>",
+        "calls": 1857942,
+        "self_cpu_s": 0.559486645,
+        "inclusive_cpu_s": 0.559486645,
+        "inclusive_percent": 2.800870080667406
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform_stamped.py",
+        "line": 83,
+        "function": "__init__",
+        "calls": 86050,
+        "self_cpu_s": 0.5521130000000001,
+        "inclusive_cpu_s": 6.679079687000001,
+        "inclusive_percent": 33.436427176401544
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'keys' of 'dict' objects>",
+        "calls": 1236878,
+        "self_cpu_s": 0.43904072400000005,
+        "inclusive_cpu_s": 0.43904072400000005,
+        "inclusive_percent": 2.1979005916149372
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/std_msgs/msg/_header.py",
+        "line": 129,
+        "function": "stamp",
+        "calls": 261882,
+        "self_cpu_s": 0.35240094400000005,
+        "inclusive_cpu_s": 0.845525076,
+        "inclusive_percent": 4.232819333556093
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 148,
+        "function": "rotation",
+        "calls": 258149,
+        "self_cpu_s": 0.350379514,
+        "inclusive_cpu_s": 0.843088916,
+        "inclusive_percent": 4.2206235685334645
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_transform.py",
+        "line": 134,
+        "function": "translation",
+        "calls": 258149,
+        "self_cpu_s": 0.34639851000000005,
+        "inclusive_cpu_s": 0.8304481570000001,
+        "inclusive_percent": 4.157342122950385
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 132,
+        "function": "x",
+        "calls": 351031,
+        "self_cpu_s": 0.257029494,
+        "inclusive_cpu_s": 0.346471984,
+        "inclusive_percent": 1.7344882535580024
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/builtin_interfaces/msg/_time.py",
+        "line": 124,
+        "function": "sec",
+        "calls": 351267,
+        "self_cpu_s": 0.253300707,
+        "inclusive_cpu_s": 0.342675903,
+        "inclusive_percent": 1.7154845297127443
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_vector3.py",
+        "line": 162,
+        "function": "z",
+        "calls": 351030,
+        "self_cpu_s": 0.24951873400000002,
+        "inclusive_cpu_s": 0.337810897,
+        "inclusive_percent": 1.691129614596464
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/geometry_msgs/msg/_quaternion.py",
+        "line": 166,
+        "function": "x",
+        "calls": 349685,
+        "self_cpu_s": 0.24913591200000001,
+        "inclusive_cpu_s": 0.33750934800000004,
+        "inclusive_percent": 1.6896200172191127
+      }
+    ],
+    "selected": [
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 373,
+        "function": "_take_subscription",
+        "calls": 3027,
+        "self_cpu_s": 1.56402989,
+        "inclusive_cpu_s": 18.691895512000002,
+        "inclusive_percent": 93.57429950901181
+      },
+      {
+        "file": "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py",
+        "line": 488,
+        "function": "_wait_for_ready_callbacks",
+        "calls": 3991,
+        "self_cpu_s": 0.17787934900000002,
+        "inclusive_cpu_s": 0.804898729,
+        "inclusive_percent": 4.0294380360469955
+      },
+      {
+        "file": "/home/dars5070/ros2_humble_ws/build/cooperative_transport_control/cooperative_transport_control/coordinator.py",
+        "line": 464,
+        "function": "_control_tick",
+        "calls": 262,
+        "self_cpu_s": 0.0019400480000000002,
+        "inclusive_cpu_s": 0.07853721400000001,
+        "inclusive_percent": 0.3931685141681502
+      }
+    ]
+  }
+}
