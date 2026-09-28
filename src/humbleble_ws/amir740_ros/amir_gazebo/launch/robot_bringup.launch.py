@@ -97,6 +97,9 @@ def launch_setup(context, *args, **kwargs):
     enable_wrist_ft = LaunchConfiguration("enable_wrist_ft").perform(context).lower() in ("true", "1", "yes")
 
     aggregate_contacts = LaunchConfiguration("aggregate_contacts").perform(context).lower() in ("true", "1", "yes")
+    contact_transport = LaunchConfiguration("contact_input_transport").perform(context)
+    if contact_transport not in ("ros", "gazebo"):
+        raise ValueError("contact_input_transport must be ros or gazebo")
     finger_collision_boxes = int(LaunchConfiguration("finger_collision_boxes").perform(context))
     if finger_collision_boxes not in (1, 3, 9):
         raise ValueError("finger_collision_boxes must be 1, 3, or 9")
@@ -236,6 +239,7 @@ def launch_setup(context, *args, **kwargs):
     contact_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
         namespace=ns, name="finger_contact_bridge", output="screen",
+        condition=IfCondition(str(not (aggregate_contacts and contact_transport == "gazebo")).lower()),
         arguments=contact_arguments,
         remappings=contact_remappings,
     )
@@ -415,6 +419,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument("event_startup", default_value="false"),
         DeclareLaunchArgument("aggregate_contacts", default_value="false"),
+        DeclareLaunchArgument("contact_input_transport", default_value="ros", choices=["ros", "gazebo"]),
         DeclareLaunchArgument("finger_collision_boxes", default_value="9"),
         DeclareLaunchArgument("namespace", default_value=""),
         DeclareLaunchArgument("x", default_value="0.0"),

@@ -28,6 +28,7 @@ def generate_launch_description():
             'event_startup': LaunchConfiguration('event_startup'),
             'slip_monitor_rate': LaunchConfiguration('slip_monitor_rate'),
             'aggregate_contacts': LaunchConfiguration('aggregate_contacts'),
+            'contact_input_transport': LaunchConfiguration('contact_input_transport'),
             'filtered_poses': LaunchConfiguration('filtered_poses'),
             'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
             'auto_grasp': 'true',
@@ -105,6 +106,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('event_startup', default_value='true'),
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
+        DeclareLaunchArgument('contact_input_transport', default_value='ros', choices=['ros', 'gazebo']),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('slip_monitor_rate', default_value='50.0'),

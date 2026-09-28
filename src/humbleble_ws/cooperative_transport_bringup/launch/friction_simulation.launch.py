@@ -28,6 +28,9 @@ def _launch_setup(context, *args, **kwargs):
     headless = LaunchConfiguration('headless').perform(context).lower() in (
         '1', 'true', 'yes')
     aggregate_contacts = LaunchConfiguration('aggregate_contacts').perform(context).lower() in ('true', '1', 'yes')
+    contact_transport = LaunchConfiguration('contact_input_transport').perform(context)
+    if contact_transport not in ('ros', 'gazebo'):
+        raise ValueError('contact_input_transport must be ros or gazebo')
     filtered_poses = LaunchConfiguration('filtered_poses').perform(context).lower() in ('1', 'true', 'yes')
     pose_parameters = {'world_pose_topic': '/cooperative_transport/model_poses'} if filtered_poses else {}
     auto_grasp = LaunchConfiguration('auto_grasp').perform(context).lower() in (
@@ -154,6 +157,8 @@ def _launch_setup(context, *args, **kwargs):
         package='cooperative_transport_gazebo', executable='finger_contact_aggregator',
         output='screen', condition=IfCondition(str(aggregate_contacts).lower()),
         parameters=[{'use_sim_time': True,
+                     'input_transport': contact_transport,
+                     'world_name': 'cooperative_transport_friction',
                      'collision_count': int(LaunchConfiguration('finger_collision_boxes').perform(context))}])
 
     def robot(namespace, x, yaw):
@@ -162,6 +167,7 @@ def _launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'namespace': namespace,
                 'aggregate_contacts': str(aggregate_contacts).lower(),
+                'contact_input_transport': contact_transport,
                 'event_startup': str(event_startup).lower(),
                 'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
                 'x': x, 'y': '0.0', 'z': '0.03', 'yaw': yaw,
@@ -394,6 +400,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('event_startup', default_value='true'),
         DeclareLaunchArgument('aggregate_contacts', default_value='true'),
+        DeclareLaunchArgument('contact_input_transport', default_value='ros', choices=['ros', 'gazebo']),
         DeclareLaunchArgument('filtered_poses', default_value='true'),
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('slip_monitor_rate', default_value='50.0'),

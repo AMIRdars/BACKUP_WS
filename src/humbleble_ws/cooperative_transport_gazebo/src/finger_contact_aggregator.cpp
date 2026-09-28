@@ -7,6 +7,11 @@
 #include <rclcpp/create_timer.hpp>
 #include <stdexcept>
 #include <limits>
+#include <mutex>
+#include <memory>
+#include <functional>
+#include <ignition/transport/Node.hh>
+#include <ignition/msgs/contacts.pb.h>
 #include <std_msgs/msg/bool.hpp>
 #include <std_msgs/msg/float64_multi_array.hpp>
 #include <ros_gz_interfaces/msg/contacts.hpp>
@@ -25,6 +30,10 @@ class FingerContactAggregator : public rclcpp::Node {
     const int count=declare_parameter<int>("collision_count",9);
     const double rate=declare_parameter<double>("publish_rate",30.0);
     timeout_=declare_parameter<double>("contact_timeout",0.25);
+    const auto transport=declare_parameter<std::string>("input_transport","ros");
+    const auto world=declare_parameter<std::string>("world_name","cooperative_transport_friction");
+    if(transport!="ros" && transport!="gazebo")throw std::invalid_argument("input_transport must be ros or gazebo");
+    if(transport=="gazebo")gz_node_=std::make_unique<ignition::transport::Node>();
     payload_=declare_parameter<std::string>("payload_token","cooperative_payload");
     if(count<=0||rate<=0||timeout_<=0)throw std::invalid_argument("positive count/rate/timeout required");
     for(const auto &robot:robots)for(const auto &side:{std::string("left"),std::string("right")}) {
@@ -34,29 +43,57 @@ class FingerContactAggregator : public rclcpp::Node {
     }
     for(size_t f=0;f<fingers_.size();++f)for(int s=0;s<count;++s) {
       const auto &finger=fingers_[f];
-      subscriptions_.push_back(create_subscription<ros_gz_interfaces::msg::Contacts>(
-        "/"+finger.robot+"/finger_"+finger.side+"_contact_segments/segment_"+std::to_string(s),rclcpp::QoS(1),
-        [this,f,s](const ros_gz_interfaces::msg::Contacts::SharedPtr message) {
-          auto &finger=fingers_[f];auto &segment=finger.segments[s];
-          segment.touching=false;segment.depth=0;segment.has_depth=false;segment.seen=now().seconds();segment.received=true;
-          for(const auto &contact:message->contacts) {
-            const std::string token="finger_"+finger.side+"_1";
-            const auto is_finger=[&](const std::string &name){return name.find(finger.robot)!=std::string::npos&&name.find(token)!=std::string::npos;};
-            const auto is_payload=[&](const std::string &name){return name.find(payload_)!=std::string::npos;};
-            if((is_finger(contact.collision1.name)&&is_payload(contact.collision2.name))||
-               (is_finger(contact.collision2.name)&&is_payload(contact.collision1.name))) {
-              segment.touching=true;
-              for(double depth:contact.depths){segment.has_depth=true;segment.depth=std::max(segment.depth,depth);}
+      if(transport=="gazebo") {
+        const auto suffix=s==0?std::string():"_"+std::to_string(s);
+        const auto topic="/world/"+world+"/model/"+finger.robot+
+          "/link/finger_"+finger.side+"_1/sensor/finger_"+finger.side+"_contact_sensor"+suffix+"/contact";
+        std::function<void(const ignition::msgs::Contacts &)> callback=
+          [this,f,s](const ignition::msgs::Contacts &message) {
+            std::lock_guard<std::mutex> guard(mutex_);
+            auto &segment=reset_segment(f,s);
+            for(const auto &contact:message.contact()) {
+              if(matches(f,contact.collision1().name(),contact.collision2().name())) {
+                segment.touching=true;
+                for(double depth:contact.depth()){segment.has_depth=true;segment.depth=std::max(segment.depth,depth);}
+              }
             }
-          }
-        }));
+          };
+        if(!gz_node_->Subscribe(topic,callback))throw std::runtime_error("Cannot subscribe to "+topic);
+      } else {
+        subscriptions_.push_back(create_subscription<ros_gz_interfaces::msg::Contacts>(
+          "/"+finger.robot+"/finger_"+finger.side+"_contact_segments/segment_"+std::to_string(s),rclcpp::QoS(1),
+          [this,f,s](const ros_gz_interfaces::msg::Contacts::SharedPtr message) {
+            std::lock_guard<std::mutex> guard(mutex_);
+            auto &segment=reset_segment(f,s);
+            for(const auto &contact:message->contacts) {
+              if(matches(f,contact.collision1.name,contact.collision2.name)) {
+                segment.touching=true;
+                for(double depth:contact.depths){segment.has_depth=true;segment.depth=std::max(segment.depth,depth);}
+              }
+            }
+          }));
+      }
     }
+    RCLCPP_INFO(get_logger(),"Contact input: %s; %zu fingers x %d segments",transport.c_str(),fingers_.size(),count);
     diagnostics_=create_publisher<std_msgs::msg::Float64MultiArray>("/cooperative_transport/contact_metrics",10);
     timer_=rclcpp::create_timer(this,get_clock(),std::chrono::duration<double>(1.0/rate),[this](){publish();});
   }
+  ~FingerContactAggregator() override {gz_node_.reset();}
  private:
+  Segment &reset_segment(size_t f,int s) {
+    auto &segment=fingers_[f].segments[s];
+    segment=Segment{};segment.seen=now().seconds();segment.received=true;
+    return segment;
+  }
+  bool matches(size_t f,const std::string &a,const std::string &b) const {
+    const auto &finger=fingers_[f];const auto token="finger_"+finger.side+"_1";
+    const auto is_finger=[&](const auto &name){return name.find(finger.robot)!=std::string::npos&&name.find(token)!=std::string::npos;};
+    const auto is_payload=[&](const auto &name){return name.find(payload_)!=std::string::npos;};
+    return (is_finger(a)&&is_payload(b))||(is_finger(b)&&is_payload(a));
+  }
   void publish() {
     const double time=now().seconds();std_msgs::msg::Float64MultiArray metrics;
+    std::lock_guard<std::mutex> guard(mutex_);
     for(auto &finger:fingers_) {
       int count=0;double depth=0;bool has_depth=false;
       for(const auto &segment:finger.segments)if(segment.received&&time>=segment.seen&&time-segment.seen<=timeout_&&segment.touching){++count;if(segment.has_depth){has_depth=true;depth=std::max(depth,segment.depth);}}
@@ -70,5 +107,7 @@ class FingerContactAggregator : public rclcpp::Node {
   std::vector<rclcpp::Subscription<ros_gz_interfaces::msg::Contacts>::SharedPtr> subscriptions_;
   rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr diagnostics_;
   rclcpp::TimerBase::SharedPtr timer_;
+  std::mutex mutex_;
+  std::unique_ptr<ignition::transport::Node> gz_node_;
 };
 int main(int argc,char **argv) {rclcpp::init(argc,argv);rclcpp::spin(std::make_shared<FingerContactAggregator>());rclcpp::shutdown();return 0;}

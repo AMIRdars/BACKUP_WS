@@ -13,7 +13,7 @@ def label(process):
  if args and ((args[0].startswith('ign gazebo') and re.search(r'(^|\s)(-s|--server-only)(\s|$)',args[0])) or ('gazebo' in args and '-s' in args and Path(args[0]).name in ('ruby','ign'))):
   return 'ign gazebo server'
  return original_label(process)
-base=Path(__file__).resolve().parent
+base=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path(__file__).resolve().parent
 result=[]
 for path in sorted(base.iterdir()):
  if not path.is_dir() or not (path/'samples.jsonl').exists():continue
