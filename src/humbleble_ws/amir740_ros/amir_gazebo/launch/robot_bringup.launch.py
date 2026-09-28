@@ -251,7 +251,8 @@ def launch_setup(context, *args, **kwargs):
     # ── コントローラ (OnProcessExit で順番に起動、対象 CM を明示) ──
     def spawner(controller, extra=None):
         args = [controller, "--controller-manager", cm,
-                "--controller-manager-timeout", "60", "--service-call-timeout", "60.0"]
+                "--controller-manager-timeout", "60",
+                "--service-call-timeout", "5.0" if event_startup else "60.0"]
         if extra:
             args[1:1] = extra
         return Node(package="controller_manager", executable="spawner",

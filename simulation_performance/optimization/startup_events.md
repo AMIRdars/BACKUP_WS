@@ -36,3 +36,5 @@ flowchart TD
 RTF=0.3 の初回 J2 は、RSP の GetParameters 応答送信 timeout の直後、sim=0.408 秒で停止。手順の早送りは起こさず試行を中止した。次に robot entity 作成前の `description` gate を追加し、robot_description が空でなく、GetParameters の応答が実際に返ることを確認する。空の description は進行させない接続テストを追加した。
 
 上流 [gz_ros2_control Humble の getURDF](https://raw.githubusercontent.com/ros-controls/gz_ros2_control/humble/gz_ros2_control/src/gz_ros2_control_plugin.cpp) は取得 future を期限なしで待つ。J2 ログとの整合から、この応答喪失が初期化停止の原因と判断した。gate は生成前の準備と失敗検出を改善するが、Gazebo 自身の後続要求の通信失敗まで完全に防ぐ保証はない。
+
+GUI K で spawner の ListControllers 応答喪失後の再送まで 60 wall 秒を待つケースを観測した。インストール済み controller_manager/service_caller は最大 3 回の再試行を持つため、event_startup=true の spawner 応答期限を 5 秒へ短縮。K2 の headless 全工程完走で確認した。旧起動経路の spawner は 60 秒を維持する。
