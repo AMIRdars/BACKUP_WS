@@ -7,6 +7,11 @@ import rclpy
 from rosgraph_msgs.msg import Clock
 from rclpy.qos import qos_profile_sensor_data
 out = Path(sys.argv[1]); out.mkdir(parents=True, exist_ok=True)
+import xml.etree.ElementTree as ET
+world_path=Path('src/humbleble_ws/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf')
+if world_path.exists():
+    world_xml=world_path.read_text();(out/'world.sdf').write_text(world_xml)
+    (out/'condition.json').write_text(json.dumps({'max_step_size':float(ET.fromstring(world_xml).findtext('world/physics/max_step_size')),'arguments':sys.argv[4:]},indent=2))
 duration = float(sys.argv[2]); headless = sys.argv[3]
 rclpy.init(); node = rclpy.create_node('performance_observer')
 clock = {'sim': None, 'received': None}

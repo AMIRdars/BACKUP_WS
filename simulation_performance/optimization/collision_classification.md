@@ -46,3 +46,11 @@
 注意：base_footprint に self_collide=true、wheel は false、アーム・指は指定なし。固定リンクは URDF→SDF で base_footprint へ統合される。同一固定リンク内の形状は独立したジョイント拘束ではない。
 
 使用可能方式：Fortress の公式比較表は collide bitmask をサポートすると記載する。[公式ドキュメント](https://gazebosim.org/docs/fortress/comparison/)。実際の採用には既存構成の有効な衝突対を確認し、finger↔payload、wheel↔ground、base↔obstacle、arm↔payload、robot↔robot の保護を維持する。
+
+## 使用中エンジンの対応方式
+
+[DART 実装の SDFFeatures.cc（ign-physics5）](https://raw.githubusercontent.com/gazebosim/gz-physics/ign-physics5/dartsim/src/SDFFeatures.cc) は `surface/contact/collide_bitmask` を読み取り `SetCollisionFilterMask` へ渡す。一方 `category_bitmask` の追加は TODO と記載されているため、この構成で category_bitmask が有効であるとは仮定しない。
+
+同じ実装は model の SelfCollide を skeleton の self-collision 設定へ渡す。モデル／リンクの設定を混同しない。今回の変換 SDF は model レベルの self_collide を指定しておらず、不要な自己衝突対をさらに安全に除外できる確証は得られていない。
+
+**判断：現時点では衝突マスクや筐体 collision の削除は保留。** finger↔payload、wheel↔ground、arm↔payload、robot↔robot、障害物検出を守る。LiDAR 無効でも筐体が消えるわけではない。性能だけを目的に外部衝突を無効化しない。
