@@ -39,6 +39,7 @@ class DualBaseApproach(Node):
         # that exact limit stalls the Fortress gripper joint, preventing the
         # following close command from moving the fingers.
         self.declare_parameter('gripper_open_position', -1.0)
+        self.declare_parameter('gripper_open_tolerance', 0.02)
         self.declare_parameter('gripper_maximum_effort', 0.8)
         self.declare_parameter(
             'attach_service', '/cooperative_transport/attach_all')
@@ -56,6 +57,8 @@ class DualBaseApproach(Node):
         self._grasp_states: Dict[str, bool] = {}
         self._arm_home_states: Dict[str, bool] = {}
         self._joint_state_times: Dict[str, float] = {}
+        self._gripper_positions: Dict[str, float] = {}
+        self._gripper_state_times: Dict[str, float] = {}
         self._base_command_publishers = {
             name: self.create_publisher(Twist, f'/{name}/rover_twist', 10)
             for name in self._names
@@ -93,7 +96,7 @@ class DualBaseApproach(Node):
         self._motion_started_at = 0.0
         self._request_pending = False
         self._open_goals_sent = False
-        self._opened_grippers = set()
+        self._accepted_open_goals = set()
         rate = float(self.get_parameter('control_rate').value)
         self._timer = self.create_timer(1.0 / rate, self._tick)
         distance = float(self.get_parameter('approach_distance').value)
@@ -127,6 +130,9 @@ class DualBaseApproach(Node):
         required_names = (
             'Joint_1', 'Joint_2', 'Joint_3', 'Joint_4', 'Joint_5')
         positions = dict(zip(message.name, message.position))
+        if 'Gripper' in positions:
+            self._gripper_positions[robot] = positions['Gripper']
+            self._gripper_state_times[robot] = time.monotonic()
         if not all(name in positions for name in required_names):
             return
         target = tuple(float(value) for value in self.get_parameter(
@@ -163,6 +169,18 @@ class DualBaseApproach(Node):
             self._arm_home_states.get(name, False)
             and name in self._joint_state_times
             and now - self._joint_state_times[name] <= timeout
+            for name in self._names)
+
+    def _grippers_open(self) -> bool:
+        now = time.monotonic()
+        timeout = float(self.get_parameter('state_timeout').value)
+        target = float(self.get_parameter('gripper_open_position').value)
+        tolerance = float(self.get_parameter('gripper_open_tolerance').value)
+        return all(
+            name in self._accepted_open_goals
+            and name in self._gripper_positions
+            and now - self._gripper_state_times[name] <= timeout
+            and abs(self._gripper_positions[name] - target) <= tolerance
             for name in self._names)
 
     def _publish_zero(self) -> None:
@@ -257,6 +275,7 @@ class DualBaseApproach(Node):
         if handle is None or not handle.accepted:
             self._finish(False, f'{robot} gripper controller rejected open command')
             return
+        self._accepted_open_goals.add(robot)
         result_future = handle.get_result_async()
         result_future.add_done_callback(
             lambda result, name=robot: self._on_open_result(name, result))
@@ -267,12 +286,12 @@ class DualBaseApproach(Node):
         except Exception as exception:
             self._finish(False, f'{robot} gripper open action failed: {exception}')
             return
-        if not (result.reached_goal or result.stalled):
-            self._finish(False, f'{robot} gripper did not reach safe-open position')
-            return
-        self._opened_grippers.add(robot)
-        if len(self._opened_grippers) == len(self._names):
-            self._start_moving()
+        # The grasp manager may send the same open goal and cancel ours.
+        # Neither a canceled action nor a stalled flag proves the physical
+        # opening: the timer gates motion on fresh measured joint positions.
+        if self._phase == 'OPENING_GRIPPERS' and not result.reached_goal:
+            self.get_logger().info(
+                f'{robot} open action ended; waiting for measured safe opening')
 
     def _tick(self) -> None:
         now = time.monotonic()
@@ -308,6 +327,11 @@ class DualBaseApproach(Node):
             self._publish_zero()
             if not self._open_goals_sent:
                 self._send_open_goals()
+            if self._grippers_open() and self._states_ready() and self._arms_ready():
+                self._start_moving()
+            elif now - self._started_at > float(
+                    self.get_parameter('startup_timeout').value):
+                self._finish(False, 'Timed out waiting for measured safe-open grippers')
             return
 
         if self._phase == 'REQUESTING_GRASP':
