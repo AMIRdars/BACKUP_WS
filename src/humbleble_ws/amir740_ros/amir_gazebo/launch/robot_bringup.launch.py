@@ -305,6 +305,17 @@ def launch_setup(context, *args, **kwargs):
             f"[{model_name}] mecanum_drive_controller could not be started "
             "after three attempts; transport motion remains blocked."))]
 
+    description_ready = Node(
+        package='cooperative_transport_control', executable='simulation_startup_gate',
+        namespace=ns, name='description_ready', output='screen',
+        parameters=[{'use_sim_time': False, 'mode': 'description',
+                     'stage': (ns or 'robot') + '_description_ready',
+                     'robot_namespaces': [ns] if ns else [''], 'timeout': 180.0}])
+    def start_spawn_after_description(event, _context):
+        if event.returncode == 0:
+            return [spawn_robot]
+        return [EmitEvent(event=Shutdown(reason='Robot description readiness failed'))]
+
     manager_ready = Node(
         package='cooperative_transport_control', executable='simulation_startup_gate',
         namespace=ns, name='manager_ready', output='screen',
@@ -365,7 +376,7 @@ def launch_setup(context, *args, **kwargs):
 
     actions += [
         robot_state_publisher,
-        spawn_robot,
+        description_ready if event_startup else spawn_robot,
         scan_bridge,
         d435_bridge,
         odom_bridge,
@@ -373,6 +384,7 @@ def launch_setup(context, *args, **kwargs):
         finger_ft_bridge,
         contact_bridge,
         rover_twist_relay,
+        RegisterEventHandler(OnProcessExit(target_action=description_ready, on_exit=start_spawn_after_description)),
         # Controller-manager service calls are serialized. Gazebo Fortress can
         # otherwise drop a response while two spawners load controllers at once.
         # スポーン完了 → jsb → arm → mecanum (成功時のみ) → gripper

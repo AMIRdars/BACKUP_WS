@@ -30,3 +30,9 @@ flowchart TD
 | robot spawn 後 JSB: 2 秒 | ListControllers サービスへ応答するまで待つ |
 
 準備に失敗した gate / entity create の非ゼロ終了では launch を停止し、次工程へ進めない。ListControllers の応答待ちは 5 wall 秒で取り消し・再確認し、各 gate に 180 wall 秒の期限を設ける。controller spawner の一時失敗に対する 2/3 秒の再試行 backoff は残すが、次工程は active 状態で判定する。旧 TimerAction 経路は `event_startup:=false` の比較用として残す。
+
+## robot_description 応答の確認を追加
+
+RTF=0.3 の初回 J2 は、RSP の GetParameters 応答送信 timeout の直後、sim=0.408 秒で停止。手順の早送りは起こさず試行を中止した。次に robot entity 作成前の `description` gate を追加し、robot_description が空でなく、GetParameters の応答が実際に返ることを確認する。空の description は進行させない接続テストを追加した。
+
+上流 [gz_ros2_control Humble の getURDF](https://raw.githubusercontent.com/ros-controls/gz_ros2_control/humble/gz_ros2_control/src/gz_ros2_control_plugin.cpp) は取得 future を期限なしで待つ。J2 ログとの整合から、この応答喪失が初期化停止の原因と判断した。gate は生成前の準備と失敗検出を改善するが、Gazebo 自身の後続要求の通信失敗まで完全に防ぐ保証はない。

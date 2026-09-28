@@ -1,0 +1,140 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-09-28-23-28-19-719547-dars5070-Katana-15-HX-B14WGK-46186
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign gazebo-1]: process started with pid [46199]
+[INFO] [parameter_bridge-2]: process started with pid [46201]
+[INFO] [transport_pose_filter-3]: process started with pid [46204]
+[INFO] [finger_contact_aggregator-4]: process started with pid [46206]
+[INFO] [simulation_startup_gate-5]: process started with pid [46208]
+[INFO] [rotation_controller-6]: process started with pid [46210]
+[INFO] [pivot_rotation_controller-7]: process started with pid [46212]
+[transport_pose_filter-3] [INFO] [1790605699.990399708] [transport_pose_filter]: Filtering /world/cooperative_transport_friction/pose/info -> /cooperative_transport/model_poses (3 models)
+[parameter_bridge-2] [INFO] [1790605700.013742409] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-2] [INFO] [1790605700.014301715] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/pose/info (gz.msgs.Pose_V) -> /world/cooperative_transport_friction/pose/info (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[pivot_rotation_controller-7] [INFO] [1790605700.292619851] [pivot_rotation_controller]: Waiting for grasp; pivot=amir1, follower=amir2, target=30.0 deg
+[simulation_startup_gate-5] [INFO] [1790605700.357348696] [startup_world_ready]: Waiting for world: ['amir1']
+[rotation_controller-6] [INFO] [1790605700.371938469] [cooperative_rotation_controller]: Rotation controller ready: target=30.0 deg, axis=[0.0, 0.0, 1.0]
+[simulation_startup_gate-5] [INFO] [1790605702.948458191] [startup_world_ready]: Ready: world_ready
+[INFO] [simulation_startup_gate-5]: process has finished cleanly [pid 46208]
+[INFO] [robot_state_publisher-8]: process started with pid [46420]
+[INFO] [create-9]: process started with pid [46422]
+[INFO] [parameter_bridge-10]: process started with pid [46424]
+[INFO] [parameter_bridge-11]: process started with pid [46426]
+[INFO] [parameter_bridge-12]: process started with pid [46428]
+[INFO] [rover_twist_relay_ign.py-13]: process started with pid [46430]
+[INFO] [simulation_startup_gate-14]: process started with pid [46432]
+[create-9] [INFO] [1790605703.375904717] [amir1.ros_gz_sim]: Requesting list of world names.
+[robot_state_publisher-8] [INFO] [1790605703.379396808] [amir1.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-8] [INFO] [1790605703.379499891] [amir1.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-8] [INFO] [1790605703.379508213] [amir1.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-8] [INFO] [1790605703.379512615] [amir1.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-8] [INFO] [1790605703.379516392] [amir1.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-8] [INFO] [1790605703.379520466] [amir1.robot_state_publisher]: got segment base_link
+[robot_state_publisher-8] [INFO] [1790605703.379524626] [amir1.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-8] [INFO] [1790605703.379528783] [amir1.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-8] [INFO] [1790605703.379532640] [amir1.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-8] [INFO] [1790605703.379536454] [amir1.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-8] [INFO] [1790605703.379540295] [amir1.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-8] [INFO] [1790605703.379543930] [amir1.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-8] [INFO] [1790605703.379547653] [amir1.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-8] [INFO] [1790605703.379551508] [amir1.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-8] [INFO] [1790605703.379555178] [amir1.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-8] [INFO] [1790605703.379559315] [amir1.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-8] [INFO] [1790605703.379563441] [amir1.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-8] [INFO] [1790605703.379567473] [amir1.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-8] [INFO] [1790605703.379571782] [amir1.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-8] [INFO] [1790605703.379575861] [amir1.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-8] [INFO] [1790605703.379580010] [amir1.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-8] [INFO] [1790605703.379583977] [amir1.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-8] [INFO] [1790605703.379587732] [amir1.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-8] [INFO] [1790605703.379591753] [amir1.robot_state_publisher]: got segment tcp_link
+[parameter_bridge-10] [INFO] [1790605703.384041669] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom (gz.msgs.Odometry) -> /amir1/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-11] [INFO] [1790605703.385219064] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_left_wrench (gz.msgs.Wrench) -> /amir1/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-10] [INFO] [1790605703.386330381] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom/tf (gz.msgs.Pose_V) -> /amir1/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[parameter_bridge-11] [INFO] [1790605703.386428355] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_right_wrench (gz.msgs.Wrench) -> /amir1/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.396378509] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.397776252] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.398089915] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.398385869] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.398662251] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.398975366] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.399271460] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.399558840] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.399855903] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_left_1/sensor/finger_left_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.400184130] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.400469041] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_1/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.400767900] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_2/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.401050866] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_3/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.401325307] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_4/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.401594334] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_5/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.401886235] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_6/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.402273809] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_7/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[parameter_bridge-12] [INFO] [1790605703.402624844] [amir1.finger_contact_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (gz.msgs.Contacts) -> /world/cooperative_transport_friction/model/amir1/link/finger_right_1/sensor/finger_right_contact_sensor_8/contact (ros_gz_interfaces/msg/Contacts)] (Lazy 0)
+[create-9] [INFO] [1790605703.582812171] [amir1.ros_gz_sim]: Requested creation of entity.
+[create-9] [INFO] [1790605703.582847569] [amir1.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790605703.672221042] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790605703.672242604] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[INFO] [create-9]: process has finished cleanly [pid 46422]
+[INFO] [simulation_startup_gate-15]: process started with pid [46581]
+[ign gazebo-1] [INFO] [1790605703.798264119] [amir1.gz_ros2_control]: connected to service!! /amir1/robot_state_publisher asking for robot_description
+[rover_twist_relay_ign.py-13] [INFO] [1790605703.822592193] [amir1.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[simulation_startup_gate-14] [INFO] [1790605703.844574612] [startup_amir1_controllers_ready]: Waiting for controllers: ['amir1']
+[robot_state_publisher-8] [WARN] [1790605703.899869387] [amir1.robot_state_publisher.rclcpp]: failed to send response to /amir1/robot_state_publisher/get_parameters (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[simulation_startup_gate-15] [INFO] [1790605703.998813389] [amir1.manager_ready]: Waiting for manager: ['amir1']
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[robot_state_publisher-8] [INFO] [1790605840.326147289] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-10] [INFO] [1790605840.326134154] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-13] Traceback (most recent call last):
+[rover_twist_relay_ign.py-13]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-13]     main()
+[rover_twist_relay_ign.py-13]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-13]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-13]     executor.spin_once()
+[rover_twist_relay_ign.py-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[parameter_bridge-2] [INFO] [1790605840.326218816] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[transport_pose_filter-3] [INFO] [1790605840.326216695] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [simulation_startup_gate-15]: sending signal 'SIGINT' to process[simulation_startup_gate-15]
+[INFO] [simulation_startup_gate-14]: sending signal 'SIGINT' to process[simulation_startup_gate-14]
+[INFO] [rover_twist_relay_ign.py-13]: sending signal 'SIGINT' to process[rover_twist_relay_ign.py-13]
+[INFO] [parameter_bridge-12]: sending signal 'SIGINT' to process[parameter_bridge-12]
+[INFO] [parameter_bridge-11]: sending signal 'SIGINT' to process[parameter_bridge-11]
+[INFO] [parameter_bridge-10]: sending signal 'SIGINT' to process[parameter_bridge-10]
+[ERROR] [simulation_startup_gate-15]: process has died [pid 46581, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/simulation_startup_gate --ros-args -r __node:=manager_ready -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_3lis0uew'].
+[ERROR] [simulation_startup_gate-14]: process has died [pid 46432, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/simulation_startup_gate --ros-args -r __node:=startup_amir1_controllers_ready -p use_sim_time:=True --params-file /tmp/launch_params_bw2pehay'].
+[ERROR] [rover_twist_relay_ign.py-13]: process has died [pid 46430, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_k08rmu2y'].
+[INFO] [robot_state_publisher-8]: sending signal 'SIGINT' to process[robot_state_publisher-8]
+[INFO] [pivot_rotation_controller-7]: sending signal 'SIGINT' to process[pivot_rotation_controller-7]
+[INFO] [rotation_controller-6]: sending signal 'SIGINT' to process[rotation_controller-6]
+[ERROR] [robot_state_publisher-8]: process has died [pid 46420, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_hh13o58g -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [finger_contact_aggregator-4]: sending signal 'SIGINT' to process[finger_contact_aggregator-4]
+[INFO] [transport_pose_filter-3]: sending signal 'SIGINT' to process[transport_pose_filter-3]
+[INFO] [parameter_bridge-2]: sending signal 'SIGINT' to process[parameter_bridge-2]
+[ERROR] [rotation_controller-6]: process has died [pid 46210, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_rotation/lib/cooperative_rotation/rotation_controller --ros-args --params-file /home/dars5070/ros2_humble_ws/install/cooperative_rotation/share/cooperative_rotation/config/rotation_params.yaml --params-file /tmp/launch_params_lrwjwmxt'].
+[ERROR] [finger_contact_aggregator-4]: process has died [pid 46206, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/finger_contact_aggregator --ros-args --params-file /tmp/launch_params_cz2tv_52'].
+[ERROR] [pivot_rotation_controller-7]: process has died [pid 46212, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller --ros-args --params-file /tmp/launch_params_3lk27zae'].
+[INFO] [ign gazebo-1]: sending signal 'SIGINT' to process[ign gazebo-1]
+[ERROR] [transport_pose_filter-3]: process has died [pid 46204, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/transport_pose_filter --ros-args --params-file /tmp/launch_params_aoy0n3hg'].
+[finger_contact_aggregator-4] [INFO] [1790605840.326320486] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-13]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[rover_twist_relay_ign.py-13]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-13]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-13]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-13]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-13] KeyboardInterrupt
+[ign gazebo-1] [INFO] [1790605840.326588638] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-12] [INFO] [1790605840.326669121] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-11] [INFO] [1790605840.326842511] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-12] [INFO] [1790605840.338363787] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-11] [INFO] [1790605840.340094281] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-10] [INFO] [1790605840.341813897] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790605840.351814756] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-10]: process has finished cleanly [pid 46424]
+[INFO] [parameter_bridge-12]: process has finished cleanly [pid 46428]
+[INFO] [parameter_bridge-2]: process has finished cleanly [pid 46201]
+[INFO] [parameter_bridge-11]: process has finished cleanly [pid 46426]
+[ERROR] [ign gazebo-1]: process[ign gazebo-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [ign gazebo-1]: sending signal 'SIGTERM' to process[ign gazebo-1]
+[ERROR] [ign gazebo-1]: process has died [pid 46199, exit code -15, cmd 'ruby /usr/bin/ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf --force-version 6'].
+[INFO] [launch]: process[ign gazebo-1] was required: shutting down launched system

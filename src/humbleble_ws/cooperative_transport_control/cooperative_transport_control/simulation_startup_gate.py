@@ -5,6 +5,7 @@ import time
 import rclpy
 from control_msgs.action import GripperCommand
 from controller_manager_msgs.srv import ListControllers
+from rcl_interfaces.srv import GetParameters
 from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile, qos_profile_sensor_data
@@ -29,7 +30,7 @@ class SimulationStartupGate(Node):
         }.items():
             self.declare_parameter(key, value)
         self._mode = self.get_parameter('mode').value
-        if self._mode not in ('world', 'manager', 'controllers', 'open_home'):
+        if self._mode not in ('world', 'description', 'manager', 'controllers', 'open_home'):
             raise ValueError('Unknown readiness mode')
         self._names = self.get_parameter('robot_namespaces').value
         self._started = time.monotonic()
@@ -48,12 +49,19 @@ class SimulationStartupGate(Node):
         self._requests = {}
         self._last_request = {}
         self._controller_clients = {}
+        self._description_clients = {}
+        self._description_valid = {}
         self._actions = {}
         qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
         self._publisher = self.create_publisher(
             Bool, '/cooperative_transport/startup/' +
             self.get_parameter('stage').value, qos)
         self.create_subscription(Clock, '/clock', self._on_clock, qos_profile_sensor_data)
+        if self._mode == 'description':
+            for name in self._names:
+                prefix = '/' + name.strip('/') if name.strip('/') else ''
+                self._description_clients[name] = self.create_client(
+                    GetParameters, prefix + '/robot_state_publisher/get_parameters')
         if self._mode in ('manager', 'controllers'):
             for name in self._names:
                 prefix = '/' + name.strip('/') if name.strip('/') else ''
@@ -114,6 +122,34 @@ class SimulationStartupGate(Node):
                   and self._actions[name].server_is_ready()))
             for name in self._names)
 
+    def _description(self, now):
+        for name, client in self._description_clients.items():
+            pending = self._requests.get(name)
+            if pending:
+                future, sent = pending
+                if future.done():
+                    try:
+                        response = future.result()
+                        self._description_valid[name] = bool(
+                            response.values and '<robot' in response.values[0].string_value)
+                        self._response_seen[name] = now
+                    except Exception:
+                        self._description_valid[name] = False
+                    self._requests.pop(name, None)
+                elif now - sent > 5.0:
+                    client.remove_pending_request(future)
+                    future.cancel()
+                    self._requests.pop(name, None)
+            if (name not in self._requests and client.service_is_ready()
+                    and now - self._last_request.get(name, 0.0) >= 0.5):
+                request = GetParameters.Request()
+                request.names = ['robot_description']
+                self._last_request[name] = now
+                self._requests[name] = (client.call_async(request), now)
+        return all(self._description_valid.get(name, False)
+                   and now - self._response_seen.get(name, 0.0) < 2.0
+                   for name in self._names)
+
     def _open_home(self, now):
         names = ['Joint_1', 'Joint_2', 'Joint_3', 'Joint_4', 'Joint_5', 'Gripper']
         targets = list(self.get_parameter('arm_home_positions').value) + [
@@ -132,6 +168,8 @@ class SimulationStartupGate(Node):
         now = time.monotonic()
         if self._mode == 'world':
             ready = self._clock_advancing and now - self._clock_seen < 1.0
+        elif self._mode == 'description':
+            ready = self._description(now)
         elif self._mode == 'open_home':
             ready = self._open_home(now)
         else:
