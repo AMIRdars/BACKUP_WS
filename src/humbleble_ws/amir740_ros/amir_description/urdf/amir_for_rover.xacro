@@ -8,6 +8,9 @@
 <!-- <xacro:include filename="$(find amir_description)/urdf/amir_mecanum3.gazebo.xacro" />
 <xacro:include filename="$(find amir_description)/urdf/amir_mecanum3.gazebo_ros2_control.xacro" /> -->
 
+<xacro:arg name="finger_collision_boxes" default="9"/>
+<xacro:property name="finger_collision_boxes" value="$(arg finger_collision_boxes)"/>
+
 <!-- Emit one identical visual/collision pair.  A stack of these boxes follows
      the original STL finger silhouette while retaining stable primitive
      contacts in Gazebo Fortress. -->
@@ -19,13 +22,21 @@
     </geometry>
     <material name="silver-amir"/>
   </visual>
+  <xacro:if value="${int(finger_collision_boxes) == 9}">
   <collision>
     <origin xyz="${xyz}" rpy="0 0 0"/>
     <geometry>
       <box size="${size}"/>
     </geometry>
   </collision>
+  </xacro:if>
 </xacro:macro>
+<xacro:macro name="finger_collision_box" params="xyz size">
+  <collision><origin xyz="${xyz}" rpy="0 0 0"/>
+    <geometry><box size="${size}"/></geometry>
+  </collision>
+</xacro:macro>
+
 
 <link name="link0_1">
   <inertial>
@@ -313,6 +324,15 @@ so we need to left one on the joints open -->
                     size="0.009000 0.008000 0.050000"/>
   <xacro:finger_box xyz="-0.025967 0.045477 0.000403"
                     size="0.003800 0.006000 0.050000"/>
+  <!-- Collision experiment: original contact pad retained exactly in 3-box mode. -->
+  <xacro:if value="${int(finger_collision_boxes) == 3}">
+    <xacro:finger_collision_box xyz="-0.018767 0.022477 0.000403" size="0.018200 0.008000 0.050000"/>
+    <xacro:finger_collision_box xyz="-0.011617 -0.001023 0.000403" size="0.032500 0.039000 0.050000"/>
+    <xacro:finger_collision_box xyz="-0.021067 0.037477 0.000403" size="0.013600 0.022000 0.050000"/>
+  </xacro:if>
+  <xacro:if value="${int(finger_collision_boxes) == 1}">
+    <xacro:finger_collision_box xyz="-0.011617 0.013977 0.000403" size="0.032500 0.069000 0.050000"/>
+  </xacro:if>
 </link>
 
 <link name="finger_left_1">
@@ -345,6 +365,15 @@ so we need to left one on the joints open -->
                     size="0.009000 0.008000 0.050000"/>
   <xacro:finger_box xyz="0.025600 0.045000 0.000403"
                     size="0.003800 0.006000 0.050000"/>
+  <!-- Collision experiment: original contact pad retained exactly in 3-box mode. -->
+  <xacro:if value="${int(finger_collision_boxes) == 3}">
+    <xacro:finger_collision_box xyz="0.018400 0.022000 0.000403" size="0.018200 0.008000 0.050000"/>
+    <xacro:finger_collision_box xyz="0.011250 -0.001500 0.000403" size="0.032500 0.039000 0.050000"/>
+    <xacro:finger_collision_box xyz="0.020700 0.037000 0.000403" size="0.013600 0.022000 0.050000"/>
+  </xacro:if>
+  <xacro:if value="${int(finger_collision_boxes) == 1}">
+    <xacro:finger_collision_box xyz="0.011250 0.013500 0.000403" size="0.032500 0.069000 0.050000"/>
+  </xacro:if>
 </link>
 <!-- end of inner link -->
 

@@ -142,6 +142,7 @@ def _launch_setup(context, *args, **kwargs):
             PythonLaunchDescriptionSource(robot_launch),
             launch_arguments={
                 'namespace': namespace,
+                'finger_collision_boxes': LaunchConfiguration('finger_collision_boxes'),
                 'x': x, 'y': '0.0', 'z': '0.03', 'yaw': yaw,
                 'world_name': 'cooperative_transport_friction',
                 'launch_sim': 'false', 'pose_bridge': 'false',
@@ -331,6 +332,7 @@ def _launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('headless', default_value='false'),
         DeclareLaunchArgument('auto_grasp', default_value='true'),
         DeclareLaunchArgument('auto_grasp_delay', default_value='4.0'),

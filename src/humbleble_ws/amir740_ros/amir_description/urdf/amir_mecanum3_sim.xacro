@@ -268,14 +268,30 @@
         <collision>finger_left_1_collision</collision>
       </contact>
     </sensor>
+    <xacro:if value="${int(finger_collision_boxes) > 1}">
     <xacro:finger_segment_contact side="left" suffix="_1" collision_suffix="_1"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 2}">
     <xacro:finger_segment_contact side="left" suffix="_2" collision_suffix="_2"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 3}">
     <xacro:finger_segment_contact side="left" suffix="_3" collision_suffix="_3"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 4}">
     <xacro:finger_segment_contact side="left" suffix="_4" collision_suffix="_4"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 5}">
     <xacro:finger_segment_contact side="left" suffix="_5" collision_suffix="_5"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 6}">
     <xacro:finger_segment_contact side="left" suffix="_6" collision_suffix="_6"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 7}">
     <xacro:finger_segment_contact side="left" suffix="_7" collision_suffix="_7"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 8}">
     <xacro:finger_segment_contact side="left" suffix="_8" collision_suffix="_8"/>
+    </xacro:if>
   </gazebo>
 
   <gazebo reference="finger_right_1">
@@ -305,14 +321,30 @@
         <collision>finger_right_1_collision</collision>
       </contact>
     </sensor>
+    <xacro:if value="${int(finger_collision_boxes) > 1}">
     <xacro:finger_segment_contact side="right" suffix="_1" collision_suffix="_1"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 2}">
     <xacro:finger_segment_contact side="right" suffix="_2" collision_suffix="_2"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 3}">
     <xacro:finger_segment_contact side="right" suffix="_3" collision_suffix="_3"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 4}">
     <xacro:finger_segment_contact side="right" suffix="_4" collision_suffix="_4"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 5}">
     <xacro:finger_segment_contact side="right" suffix="_5" collision_suffix="_5"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 6}">
     <xacro:finger_segment_contact side="right" suffix="_6" collision_suffix="_6"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 7}">
     <xacro:finger_segment_contact side="right" suffix="_7" collision_suffix="_7"/>
+    </xacro:if>
+    <xacro:if value="${int(finger_collision_boxes) > 8}">
     <xacro:finger_segment_contact side="right" suffix="_8" collision_suffix="_8"/>
+    </xacro:if>
   </gazebo>
 
 </robot>

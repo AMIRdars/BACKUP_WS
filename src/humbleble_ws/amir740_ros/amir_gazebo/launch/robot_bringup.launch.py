@@ -93,6 +93,10 @@ def launch_setup(context, *args, **kwargs):
     enable_lidar = LaunchConfiguration("enable_lidar").perform(context).lower() in ("true", "1", "yes")
     enable_wrist_ft = LaunchConfiguration("enable_wrist_ft").perform(context).lower() in ("true", "1", "yes")
 
+    finger_collision_boxes = int(LaunchConfiguration("finger_collision_boxes").perform(context))
+    if finger_collision_boxes not in (1, 3, 9):
+        raise ValueError("finger_collision_boxes must be 1, 3, or 9")
+
     # prefix 文字列: ns 空→"" , "amir1"→"amir1/"
     prefix = (ns + "/") if ns else ""
     # namespace 空のときは絶対名を無 prefix にして従来挙動を保つ
@@ -110,6 +114,7 @@ def launch_setup(context, *args, **kwargs):
         xacro_file,
         mappings={
             "namespace": ns,
+            "finger_collision_boxes": str(finger_collision_boxes),
             "enable_d435": str(enable_d435).lower(),
             "enable_lidar": str(enable_lidar).lower(),
             "enable_wrist_ft": str(enable_wrist_ft).lower(),
@@ -211,7 +216,7 @@ def launch_setup(context, *args, **kwargs):
     contact_remappings = []
     for side in ("left", "right"):
         ros_contact = f"/{prefix}finger_{side}_contact"
-        for index in range(9):
+        for index in range(finger_collision_boxes):
             suffix = "" if index == 0 else f"_{index}"
             sensor = f"finger_{side}_contact_sensor{suffix}"
             gz_contact = (
@@ -374,6 +379,7 @@ def launch_setup(context, *args, **kwargs):
 
 def generate_launch_description():
     return LaunchDescription([
+        DeclareLaunchArgument("finger_collision_boxes", default_value="9"),
         DeclareLaunchArgument("namespace", default_value=""),
         DeclareLaunchArgument("x", default_value="0.0"),
         DeclareLaunchArgument("y", default_value="0.0"),
