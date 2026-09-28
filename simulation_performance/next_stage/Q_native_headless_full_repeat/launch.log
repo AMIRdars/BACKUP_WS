@@ -1,0 +1,1549 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-09-29-01-15-17-961930-dars5070-Katana-15-HX-B14WGK-73166
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [ign gazebo-1]: process started with pid [73177]
+[INFO] [parameter_bridge-2]: process started with pid [73179]
+[INFO] [transport_pose_filter-3]: process started with pid [73182]
+[INFO] [finger_contact_aggregator-4]: process started with pid [73184]
+[INFO] [simulation_startup_gate-5]: process started with pid [73186]
+[INFO] [rotation_controller-6]: process started with pid [73188]
+[INFO] [pivot_rotation_controller-7]: process started with pid [73190]
+[transport_pose_filter-3] [INFO] [1790612118.238511755] [transport_pose_filter]: Filtering /world/cooperative_transport_friction/pose/info -> /cooperative_transport/model_poses (3 models)
+[finger_contact_aggregator-4] [INFO] [1790612118.248526972] [finger_contact_aggregator]: Contact input: gazebo; 4 fingers x 9 segments
+[parameter_bridge-2] [INFO] [1790612118.276975648] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/clock (gz.msgs.Clock) -> /clock (rosgraph_msgs/msg/Clock)] (Lazy 0)
+[parameter_bridge-2] [INFO] [1790612118.278360774] [cooperative_transport_friction_bridge]: Creating GZ->ROS Bridge: [/world/cooperative_transport_friction/pose/info (gz.msgs.Pose_V) -> /world/cooperative_transport_friction/pose/info (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[simulation_startup_gate-5] [INFO] [1790612118.573856356] [startup_world_ready]: Waiting for world: ['amir1']
+[pivot_rotation_controller-7] [INFO] [1790612118.583114435] [pivot_rotation_controller]: Waiting for grasp; pivot=amir1, follower=amir2, target=30.0 deg
+[rotation_controller-6] [INFO] [1790612118.624772721] [cooperative_rotation_controller]: Rotation controller ready: target=30.0 deg, axis=[0.0, 0.0, 1.0]
+[simulation_startup_gate-5] [INFO] [1790612121.165702350] [startup_world_ready]: Ready: world_ready
+[INFO] [simulation_startup_gate-5]: process has finished cleanly [pid 73186]
+[INFO] [robot_state_publisher-8]: process started with pid [73404]
+[INFO] [simulation_startup_gate-9]: process started with pid [73406]
+[INFO] [parameter_bridge-10]: process started with pid [73408]
+[INFO] [parameter_bridge-11]: process started with pid [73410]
+[INFO] [rover_twist_relay_ign.py-12]: process started with pid [73412]
+[INFO] [simulation_startup_gate-13]: process started with pid [73414]
+[robot_state_publisher-8] [INFO] [1790612121.600119481] [amir1.robot_state_publisher]: got segment back_left_arm
+[robot_state_publisher-8] [INFO] [1790612121.600230399] [amir1.robot_state_publisher]: got segment back_left_wheel_1
+[robot_state_publisher-8] [INFO] [1790612121.600238471] [amir1.robot_state_publisher]: got segment back_right_arm
+[robot_state_publisher-8] [INFO] [1790612121.600243692] [amir1.robot_state_publisher]: got segment back_right_wheel_1
+[robot_state_publisher-8] [INFO] [1790612121.600248676] [amir1.robot_state_publisher]: got segment base_footprint
+[robot_state_publisher-8] [INFO] [1790612121.600253406] [amir1.robot_state_publisher]: got segment base_link
+[robot_state_publisher-8] [INFO] [1790612121.600257520] [amir1.robot_state_publisher]: got segment finger_left_1
+[robot_state_publisher-8] [INFO] [1790612121.600260362] [amir1.robot_state_publisher]: got segment finger_right_1
+[robot_state_publisher-8] [INFO] [1790612121.600262950] [amir1.robot_state_publisher]: got segment front_left_arm
+[robot_state_publisher-8] [INFO] [1790612121.600265525] [amir1.robot_state_publisher]: got segment front_left_wheel_1
+[robot_state_publisher-8] [INFO] [1790612121.600268272] [amir1.robot_state_publisher]: got segment front_lrf_link
+[robot_state_publisher-8] [INFO] [1790612121.600270871] [amir1.robot_state_publisher]: got segment front_right_arm
+[robot_state_publisher-8] [INFO] [1790612121.600273617] [amir1.robot_state_publisher]: got segment front_right_wheel_1
+[robot_state_publisher-8] [INFO] [1790612121.600276324] [amir1.robot_state_publisher]: got segment gripper_base_1
+[robot_state_publisher-8] [INFO] [1790612121.600279153] [amir1.robot_state_publisher]: got segment inner_link_left_1
+[robot_state_publisher-8] [INFO] [1790612121.600281798] [amir1.robot_state_publisher]: got segment inner_link_right_1
+[robot_state_publisher-8] [INFO] [1790612121.600284499] [amir1.robot_state_publisher]: got segment link0_1
+[robot_state_publisher-8] [INFO] [1790612121.600287121] [amir1.robot_state_publisher]: got segment link1_1
+[robot_state_publisher-8] [INFO] [1790612121.600289759] [amir1.robot_state_publisher]: got segment link2_1
+[robot_state_publisher-8] [INFO] [1790612121.600292321] [amir1.robot_state_publisher]: got segment link3_1
+[robot_state_publisher-8] [INFO] [1790612121.600295040] [amir1.robot_state_publisher]: got segment link4_1
+[robot_state_publisher-8] [INFO] [1790612121.600297500] [amir1.robot_state_publisher]: got segment outer_link_left_1
+[robot_state_publisher-8] [INFO] [1790612121.600300127] [amir1.robot_state_publisher]: got segment outer_link_right_1
+[robot_state_publisher-8] [INFO] [1790612121.600302763] [amir1.robot_state_publisher]: got segment tcp_link
+[parameter_bridge-11] [INFO] [1790612121.966771052] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_left_wrench (gz.msgs.Wrench) -> /amir1/finger_left_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-10] [INFO] [1790612121.970754054] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom (gz.msgs.Odometry) -> /amir1/odom (nav_msgs/msg/Odometry)] (Lazy 0)
+[parameter_bridge-11] [INFO] [1790612121.973791195] [amir1.finger_ft_bridge]: Creating GZ->ROS Bridge: [/amir1/finger_right_wrench (gz.msgs.Wrench) -> /amir1/finger_right_wrench (geometry_msgs/msg/WrenchStamped)] (Lazy 0)
+[parameter_bridge-10] [INFO] [1790612121.979461299] [amir1.odom_bridge]: Creating GZ->ROS Bridge: [/amir1/odom/tf (gz.msgs.Pose_V) -> /amir1/odom/tf (tf2_msgs/msg/TFMessage)] (Lazy 0)
+[rover_twist_relay_ign.py-12] [INFO] [1790612122.031961348] [amir1.rover_twist_relay_ign]: rover_twist_relay_ign: /rover_twist → /mecanum_drive_controller/reference_unstamped
+[simulation_startup_gate-9] [INFO] [1790612122.037387343] [amir1.description_ready]: Waiting for description: ['amir1']
+[simulation_startup_gate-13] [INFO] [1790612122.059847412] [startup_amir1_controllers_ready]: Waiting for controllers: ['amir1']
+[simulation_startup_gate-9] [INFO] [1790612123.024645001] [amir1.description_ready]: Ready: amir1_description_ready
+[INFO] [simulation_startup_gate-9]: process has finished cleanly [pid 73406]
+[INFO] [create-14]: process started with pid [73563]
+[create-14] [INFO] [1790612123.214792623] [amir1.ros_gz_sim]: Requesting list of world names.
+[create-14] [INFO] [1790612123.419180827] [amir1.ros_gz_sim]: Requested creation of entity.
+[create-14] [INFO] [1790612123.419267962] [amir1.ros_gz_sim]: OK creation of entity.
+[ign gazebo-1] [INFO] [1790612123.528601054] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_state_publisher
+[ign gazebo-1] [INFO] [1790612123.528622407] [GazeboSimROS2ControlPlugin]: robot_param_node is robot_description
+[INFO] [create-14]: process has finished cleanly [pid 73563]
+[INFO] [simulation_startup_gate-15]: process started with pid [73591]
+[ign gazebo-1] [INFO] [1790612123.894925670] [amir1.gz_ros2_control]: connected to service!! /amir1/robot_state_publisher asking for robot_description
+[simulation_startup_gate-15] [INFO] [1790612123.952501081] [amir1.manager_ready]: Waiting for manager: ['amir1']
+[robot_state_publisher-8] [WARN] [1790612123.995334471] [amir1.robot_state_publisher.rclcpp]: failed to send response to /amir1/robot_state_publisher/get_parameters (timeout): client will not receive response, at ./src/rmw_response.cpp:154, at ./src/rcl/service.c:314
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachableNetwork is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachableNetwork is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachableException sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] 
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Exception sending a multicast message:Exception sending a multicast message:Network is unreachable
+[finger_contact_aggregator-4] Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-2] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[ign gazebo-1] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-11] Exception sending a multicast message:Network is unreachable
+[parameter_bridge-10] Exception sending a multicast message:Network is unreachable
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[parameter_bridge-10] [INFO] [1790612258.432921475] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-11] [INFO] [1790612258.433010827] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790612258.433013381] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[finger_contact_aggregator-4] [INFO] [1790612258.433030577] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [simulation_startup_gate-15]: sending signal 'SIGINT' to process[simulation_startup_gate-15]
+[INFO] [simulation_startup_gate-13]: sending signal 'SIGINT' to process[simulation_startup_gate-13]
+[INFO] [rover_twist_relay_ign.py-12]: sending signal 'SIGINT' to process[rover_twist_relay_ign.py-12]
+[ERROR] [simulation_startup_gate-15]: process has died [pid 73591, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/simulation_startup_gate --ros-args -r __node:=manager_ready -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_8x4mvic4'].
+[INFO] [parameter_bridge-11]: sending signal 'SIGINT' to process[parameter_bridge-11]
+[INFO] [parameter_bridge-10]: sending signal 'SIGINT' to process[parameter_bridge-10]
+[ERROR] [simulation_startup_gate-13]: process has died [pid 73414, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/simulation_startup_gate --ros-args -r __node:=startup_amir1_controllers_ready -p use_sim_time:=True --params-file /tmp/launch_params_mk118a50'].
+[INFO] [robot_state_publisher-8]: sending signal 'SIGINT' to process[robot_state_publisher-8]
+[ERROR] [rover_twist_relay_ign.py-12]: process has died [pid 73412, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py --ros-args -r __node:=rover_twist_relay_ign -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params__z99jtay'].
+[INFO] [pivot_rotation_controller-7]: sending signal 'SIGINT' to process[pivot_rotation_controller-7]
+[INFO] [rotation_controller-6]: sending signal 'SIGINT' to process[rotation_controller-6]
+[INFO] [finger_contact_aggregator-4]: sending signal 'SIGINT' to process[finger_contact_aggregator-4]
+[ERROR] [robot_state_publisher-8]: process has died [pid 73404, exit code -2, cmd '/opt/ros/humble/lib/robot_state_publisher/robot_state_publisher --ros-args -r __node:=robot_state_publisher -r __ns:=/amir1 -p use_sim_time:=True --params-file /tmp/launch_params_rcxauthg -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [transport_pose_filter-3]: sending signal 'SIGINT' to process[transport_pose_filter-3]
+[INFO] [parameter_bridge-2]: sending signal 'SIGINT' to process[parameter_bridge-2]
+[INFO] [ign gazebo-1]: sending signal 'SIGINT' to process[ign gazebo-1]
+[ERROR] [finger_contact_aggregator-4]: process has died [pid 73184, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/finger_contact_aggregator --ros-args --params-file /tmp/launch_params_3e_nle4j'].
+[ERROR] [pivot_rotation_controller-7]: process has died [pid 73190, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_control/lib/cooperative_transport_control/pivot_rotation_controller --ros-args --params-file /tmp/launch_params_yv0mw5fc'].
+[ERROR] [transport_pose_filter-3]: process has died [pid 73182, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/cooperative_transport_gazebo/transport_pose_filter --ros-args --params-file /tmp/launch_params_3y8pm_11'].
+[ERROR] [rotation_controller-6]: process has died [pid 73188, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/cooperative_rotation/lib/cooperative_rotation/rotation_controller --ros-args --params-file /home/dars5070/ros2_humble_ws/install/cooperative_rotation/share/cooperative_rotation/config/rotation_params.yaml --params-file /tmp/launch_params_v_l5oxwt'].
+[transport_pose_filter-3] [INFO] [1790612258.433076673] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-12] Traceback (most recent call last):
+[rover_twist_relay_ign.py-12]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 36, in <module>
+[rover_twist_relay_ign.py-12]     main()
+[rover_twist_relay_ign.py-12]   File "/home/dars5070/ros2_humble_ws/install/mecanumrover_description/lib/mecanumrover_description/rover_twist_relay_ign.py", line 31, in main
+[rover_twist_relay_ign.py-12]     rclpy.spin(RoverTwistRelayIgn())
+[rover_twist_relay_ign.py-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[rover_twist_relay_ign.py-12]     executor.spin_once()
+[rover_twist_relay_ign.py-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[rover_twist_relay_ign.py-12]     self._spin_once_impl(timeout_sec)
+[rover_twist_relay_ign.py-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[robot_state_publisher-8] [INFO] [1790612258.433165790] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ign gazebo-1] [INFO] [1790612258.433408577] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rover_twist_relay_ign.py-12]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[rover_twist_relay_ign.py-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[rover_twist_relay_ign.py-12]     return next(self._cb_iter)
+[rover_twist_relay_ign.py-12]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[rover_twist_relay_ign.py-12]     wait_set.wait(timeout_nsec)
+[rover_twist_relay_ign.py-12] KeyboardInterrupt
+[parameter_bridge-11] [INFO] [1790612258.465712976] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-10] [INFO] [1790612258.468589436] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[parameter_bridge-2] [INFO] [1790612258.482656046] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [parameter_bridge-11]: process has finished cleanly [pid 73410]
+[INFO] [parameter_bridge-2]: process has finished cleanly [pid 73179]
+[INFO] [parameter_bridge-10]: process has finished cleanly [pid 73408]
+[ERROR] [ign gazebo-1]: process[ign gazebo-1] failed to terminate '5' seconds after receiving 'SIGINT', escalating to 'SIGTERM'
+[INFO] [ign gazebo-1]: sending signal 'SIGTERM' to process[ign gazebo-1]
+[ERROR] [ign gazebo-1]: process has died [pid 73177, exit code -15, cmd 'ruby /usr/bin/ign gazebo -s -r -v 1 /home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/share/cooperative_transport_gazebo/worlds/cooperative_transport_contact.sdf --force-version 6'].
+[INFO] [launch]: process[ign gazebo-1] was required: shutting down launched system

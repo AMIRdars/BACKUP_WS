@@ -92,8 +92,8 @@ class FingerContactAggregator : public rclcpp::Node {
     return (is_finger(a)&&is_payload(b))||(is_finger(b)&&is_payload(a));
   }
   void publish() {
-    const double time=now().seconds();std_msgs::msg::Float64MultiArray metrics;
     std::lock_guard<std::mutex> guard(mutex_);
+    const double time=now().seconds();std_msgs::msg::Float64MultiArray metrics;
     for(auto &finger:fingers_) {
       int count=0;double depth=0;bool has_depth=false;
       for(const auto &segment:finger.segments)if(segment.received&&time>=segment.seen&&time-segment.seen<=timeout_&&segment.touching){++count;if(segment.has_depth){has_depth=true;depth=std::max(depth,segment.depth);}}
