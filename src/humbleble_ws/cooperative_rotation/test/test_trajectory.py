@@ -25,6 +25,24 @@ def test_acceleration_limited_trajectory_preserves_negative_direction():
     assert trajectory.sample(trajectory.duration) == pytest.approx(-1.0)
 
 
+@pytest.mark.parametrize('distance', [0.5, -0.5, 0.02, -0.02, 0.0])
+def test_translation_feedforward_matches_trajectory_derivative(distance):
+    trajectory = AccelerationLimitedTrajectory(distance, 0.10, 0.025)
+    assert trajectory.velocity(-1.0) == 0.0
+    assert trajectory.velocity(trajectory.duration) == 0.0
+    assert trajectory.velocity(trajectory.duration + 1.0) == 0.0
+    if distance == 0.0:
+        assert trajectory.velocity(0.0) == 0.0
+        return
+    for fraction in (0.1, 0.3, 0.5, 0.7, 0.9):
+        elapsed = trajectory.duration * fraction
+        delta = 1.0e-7
+        derivative = (trajectory.sample(elapsed + delta)
+                      - trajectory.sample(elapsed - delta)) / (2 * delta)
+        assert trajectory.velocity(elapsed) == pytest.approx(derivative)
+        assert abs(trajectory.velocity(elapsed)) <= 0.10
+
+
 @pytest.mark.parametrize('acceleration', [0.0, -1.0, math.inf])
 def test_acceleration_limited_trajectory_rejects_invalid_acceleration(
         acceleration):

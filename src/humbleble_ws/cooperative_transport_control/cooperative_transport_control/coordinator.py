@@ -5,7 +5,7 @@ import time
 from typing import Dict, Optional, Tuple
 
 import rclpy
-from geometry_msgs.msg import PoseStamped, Twist, WrenchStamped
+from geometry_msgs.msg import PoseStamped, Twist, TwistStamped, WrenchStamped
 from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from std_msgs.msg import Bool, Float64MultiArray, String
@@ -72,6 +72,10 @@ class CooperativeCoordinator(Node):
         self.declare_parameter('admittance_force_sign', 1.0)
         self.declare_parameter('admittance_sensor_timeout', 0.25)
         self.declare_parameter('allow_external_command_handoff', False)
+        self.declare_parameter('enable_translation_feedforward', False)
+        self.declare_parameter('enable_rotation_feedforward', False)
+        self.declare_parameter('goal_velocity_timeout', 0.15)
+        self.declare_parameter('world_frame', 'world')
 
         self._names = (
             self.get_parameter('robot1_namespace').value.strip('/'),
@@ -90,7 +94,10 @@ class CooperativeCoordinator(Node):
         self._payload_offset_local: Optional[Tuple[float, float]] = None
         self._formation_distance_target: Optional[float] = None
         self._alignment_recovering = False
-        self._last_tick = time.monotonic()
+        self._last_tick = self.get_clock().now().nanoseconds * 1.0e-9
+        self._goal_velocity = (0.0, 0.0)
+        self._goal_angular_velocity = 0.0
+        self._goal_velocity_stamp: Optional[float] = None
         self._last_goal_log_time = 0.0
         self._wrench_y: Dict[str, float] = {}
         self._wrench_times: Dict[str, float] = {}
@@ -122,6 +129,9 @@ class CooperativeCoordinator(Node):
 
         self.create_subscription(
             PoseStamped, '/cooperative_transport/goal', self._on_goal, 10)
+        self.create_subscription(
+            TwistStamped, '/cooperative_transport/goal_velocity',
+            self._on_goal_velocity, 1)
         self.create_subscription(
             PoseStamped, '/cooperative_transport/measured_payload_pose',
             self._on_measured_payload, 10)
@@ -213,6 +223,40 @@ class CooperativeCoordinator(Node):
                 f'y={self._goal.y:.3f}, yaw={self._goal.yaw:.3f}')
             self._last_goal_log_time = now
 
+    def _on_goal_velocity(self, message: TwistStamped) -> None:
+        velocity = (message.twist.linear.x, message.twist.linear.y)
+        angular = message.twist.angular.z
+        if (message.header.frame_id != self.get_parameter('world_frame').value
+                or not all(math.isfinite(value) for value in (*velocity, angular))):
+            self._goal_velocity = (0.0, 0.0)
+            self._goal_angular_velocity = 0.0
+            self._goal_velocity_stamp = None
+            return
+        self._goal_velocity = velocity
+        self._goal_angular_velocity = angular
+        self._goal_velocity_stamp = (
+            message.header.stamp.sec + message.header.stamp.nanosec * 1.0e-9)
+
+    def _translation_feedforward(self) -> Tuple[float, float]:
+        if (not self.get_parameter('enable_translation_feedforward').value
+                or self._goal_velocity_stamp is None):
+            return (0.0, 0.0)
+        age = (self.get_clock().now().nanoseconds * 1.0e-9
+               - self._goal_velocity_stamp)
+        if not 0.0 <= age <= float(self.get_parameter('goal_velocity_timeout').value):
+            return (0.0, 0.0)
+        return self._goal_velocity
+
+    def _rotation_feedforward(self) -> float:
+        if (not self.get_parameter('enable_rotation_feedforward').value
+                or self._goal_velocity_stamp is None):
+            return 0.0
+        age = (self.get_clock().now().nanoseconds * 1.0e-9
+               - self._goal_velocity_stamp)
+        if not 0.0 <= age <= float(self.get_parameter('goal_velocity_timeout').value):
+            return 0.0
+        return self._goal_angular_velocity
+
     def _on_enable_topic(self, message: Bool) -> None:
         self._set_enabled(message.data)
 
@@ -279,6 +323,7 @@ class CooperativeCoordinator(Node):
             if bool(self.get_parameter('enable_lateral_admittance').value):
                 self._capture_wrench_bias()
         if not enabled:
+            self._goal_velocity_stamp = None
             self._alignment_recovering = False
             self._formation_distance_target = None
             self._reset_admittance()
@@ -466,8 +511,8 @@ class CooperativeCoordinator(Node):
     def _control_tick(self) -> None:
         if self._external_control:
             return
-        now = time.monotonic()
-        dt = max(1.0e-3, min(0.1, now - self._last_tick))
+        now = self.get_clock().now().nanoseconds * 1.0e-9
+        dt = max(0.0, min(0.1, now - self._last_tick))
         self._last_tick = now
         blocked_state = self._ready_state()
         if blocked_state is not None:
@@ -479,6 +524,8 @@ class CooperativeCoordinator(Node):
         alignment_error = self._formation_alignment_error()
         recovery_velocity = self._recovery_velocity(alignment_error)
         formation_distance_error = self._formation_distance_error()
+        feedforward = self._translation_feedforward()
+        angular_feedforward = self._rotation_feedforward()
         command1, command2, payload = rigid_body_commands(
             self._poses[self._names[0]], self._poses[self._names[1]], self._goal,
             float(self.get_parameter('position_kp').value),
@@ -496,6 +543,8 @@ class CooperativeCoordinator(Node):
             float(self.get_parameter('formation_distance_kp').value),
             float(self.get_parameter(
                 'formation_distance_max_correction_speed').value),
+            center_velocity_feedforward=feedforward,
+            angular_velocity_feedforward=angular_feedforward,
         )
         correction = self._lateral_admittance_correction(dt)
         corrected_x, corrected_y = clamp_vector(
@@ -527,7 +576,9 @@ class CooperativeCoordinator(Node):
                 self.get_parameter('formation_distance_tolerance').value)
         if (position_error <= float(self.get_parameter('position_tolerance').value)
                 and yaw_error <= float(self.get_parameter('yaw_tolerance').value)
-                and alignment_ok and distance_ok):
+                and alignment_ok and distance_ok
+                and math.hypot(*feedforward) <= 1.0e-9
+                and abs(angular_feedforward) <= 1.0e-9):
             self._publish_stop()
             self._publish_state('HOLDING', True)
             return

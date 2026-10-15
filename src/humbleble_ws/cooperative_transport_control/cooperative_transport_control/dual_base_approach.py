@@ -11,7 +11,7 @@ from nav_msgs.msg import Odometry
 from rclpy.action import ActionClient
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Empty, String
+from std_msgs.msg import Bool, Empty, String
 from std_srvs.srv import SetBool
 
 
@@ -91,6 +91,8 @@ class DualBaseApproach(Node):
 
         self._attach_client = self.create_client(
             SetBool, str(self.get_parameter('attach_service').value))
+        self.create_subscription(
+            Bool, '/cooperative_transport/active', self._on_transport_active, 10)
         self._phase = 'WAITING_FOR_DETACH'
         self._started_at = time.monotonic()
         self._motion_started_at = 0.0
@@ -226,6 +228,14 @@ class DualBaseApproach(Node):
             'Both bases reached the payload; gripper-close sequence requested. '
             'Holding both bases stopped during grasp.')
 
+    def _on_transport_active(self, message: Bool) -> None:
+        """Relinquish base commands once the transport coordinator takes over."""
+        if message.data and self._phase == 'HOLDING_ZERO':
+            self._phase = 'HANDED_OFF'
+            self._timer.cancel()
+            self.get_logger().info(
+                'Transport coordinator is active; base command control handed off.')
+
     def _start_moving(self) -> None:
         """Capture approach targets only after both grippers are safely open."""
         distance = float(self.get_parameter('approach_distance').value)
@@ -343,6 +353,9 @@ class DualBaseApproach(Node):
             self._publish_zero()
             return
 
+        if self._phase == 'HANDED_OFF':
+            return
+
         if not self._states_ready():
             self._finish(False, 'Lost fresh odometry while approaching payload')
             return
@@ -386,7 +399,8 @@ def main(args=None) -> None:
         pass
     finally:
         if rclpy.ok():
-            node._publish_zero()
+            if node._phase != 'HANDED_OFF':
+                node._publish_zero()
             node.destroy_node()
             rclpy.shutdown()
 

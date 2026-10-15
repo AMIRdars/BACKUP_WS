@@ -215,8 +215,11 @@ def _launch_setup(context, *args, **kwargs):
             # 2.3 N at the supported grasp height.  Keep the 20 N setpoint,
             # while allowing that small left/right load imbalance.
             'force_tolerance': 3.0,
+            'holding_force_tolerance': float(LaunchConfiguration(
+                'holding_force_tolerance').perform(context)),
             'maximum_normal_force': 26.0,
-            'holding_force_release_threshold': 22.0,
+            'holding_force_release_threshold': float(LaunchConfiguration(
+                'holding_force_release_threshold').perform(context)),
             'prioritize_grasp_retention': False,
             'maintain_target_force': True,
             # Preserve Q_HOME. The temporary support is removed only after
@@ -271,6 +274,12 @@ def _launch_setup(context, *args, **kwargs):
             str(enable_coordinator).lower()),
         parameters=common + [pose_parameters, {
             'max_linear_speed': max_linear_speed,
+            'enable_translation_feedforward': LaunchConfiguration(
+                'enable_translation_feedforward').perform(context).lower()
+                in ('true', '1', 'yes'),
+            'enable_rotation_feedforward': LaunchConfiguration(
+                'enable_rotation_feedforward').perform(context).lower()
+                in ('true', '1', 'yes'),
             'max_linear_acceleration': max_linear_acceleration,
             'odometry_timeout': odometry_timeout,
             'yaw_tolerance': yaw_tolerance,
@@ -408,6 +417,8 @@ def generate_launch_description():
         DeclareLaunchArgument('auto_grasp', default_value='true'),
         DeclareLaunchArgument('auto_grasp_delay', default_value='4.0'),
         DeclareLaunchArgument('max_linear_speed', default_value='0.035'),
+        DeclareLaunchArgument('enable_translation_feedforward', default_value='false'),
+        DeclareLaunchArgument('enable_rotation_feedforward', default_value='false'),
         DeclareLaunchArgument(
             'max_linear_acceleration', default_value='0.040'),
         DeclareLaunchArgument('yaw_tolerance', default_value='0.0349066'),
@@ -434,6 +445,8 @@ def generate_launch_description():
         DeclareLaunchArgument('open_world', default_value='false'),
         DeclareLaunchArgument('contact_only', default_value='false'),
         DeclareLaunchArgument('target_normal_force', default_value='20.0'),
+        DeclareLaunchArgument('holding_force_tolerance', default_value='0.5'),
+        DeclareLaunchArgument('holding_force_release_threshold', default_value='22.0'),
         DeclareLaunchArgument(
             'gripper_maximum_effort', default_value='1.2'),
         DeclareLaunchArgument(

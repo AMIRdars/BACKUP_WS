@@ -8,7 +8,7 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, Float64, String
 
 
 def _yaw(q) -> float:
@@ -68,6 +68,7 @@ class PivotRotationController(Node):
         self._started = False
         self._finished = False
         self._omega = 0.0
+        self._last_tick_sim = None
         self._initial_pivot = None
         self._initial_vector_angle = None
         self._target_yaw = {}
@@ -77,6 +78,16 @@ class PivotRotationController(Node):
             for name in (self._pivot, self._follower)}
         self._active_publisher = self.create_publisher(
             Bool, '/cooperative_transport/active', 10)
+        self._state_publisher = self.create_publisher(
+            String, '/cooperative_pivot/state', 10)
+        self._angle_publisher = self.create_publisher(
+            Float64, '/cooperative_pivot/angle_deg', 10)
+        self._desired_angle_publisher = self.create_publisher(
+            Float64, '/cooperative_pivot/desired_angle_deg', 10)
+        completion_qos = QoSProfile(depth=1)
+        completion_qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
+        self._complete_publisher = self.create_publisher(
+            Bool, '/cooperative_pivot/complete', completion_qos)
         self._handoff_publisher = self.create_publisher(
             Bool, '/cooperative_transport/external_control', 10)
         if self._wait_for_rotation_complete:
@@ -145,6 +156,12 @@ class PivotRotationController(Node):
             self._follower: follower[2] + self._target,
         }
         self._started = True
+        self._last_tick_sim = self.get_clock().now().nanoseconds * 1.0e-9
+        self._state_publisher.publish(String(data='ROTATING'))
+        self._desired_angle_publisher.publish(
+            Float64(data=math.degrees(self._target)))
+        self._angle_publisher.publish(Float64(data=0.0))
+        self._complete_publisher.publish(Bool(data=False))
         if self._take_over_coordinator:
             self._handoff_publisher.publish(Bool(data=True))
             self._handoff_ready_at = time.monotonic() + 0.5
@@ -162,11 +179,15 @@ class PivotRotationController(Node):
             self._handoff_publisher.publish(Bool(data=True))
             return
         if self._finished or self._emergency:
+            if self._emergency and not self._finished:
+                self._finished = True
+                self._state_publisher.publish(String(data='ERROR'))
             self._publish_stop()
             return
         if not all(self._grasped.values()):
             self.get_logger().error('Grasp lost; stopping pivot rotation')
             self._finished = True
+            self._state_publisher.publish(String(data='ERROR'))
             self._publish_stop()
             return
 
@@ -175,19 +196,28 @@ class PivotRotationController(Node):
         vector_angle = math.atan2(
             follower[1] - pivot[1], follower[0] - pivot[0])
         rotated = _wrap(vector_angle - self._initial_vector_angle)
+        self._angle_publisher.publish(Float64(data=math.degrees(rotated)))
         error = _wrap(self._target - rotated)
-        if abs(error) <= self._angle_tolerance:
+        now = self.get_clock().now().nanoseconds * 1.0e-9
+        dt = max(0.0, min(0.1, now - self._last_tick_sim))
+        self._last_tick_sim = now
+        max_delta = self._alpha * dt
+        # Reaching the angle tolerance while still moving must not bypass
+        # braking. Reserve half the tolerance for the final low-speed stop.
+        if (abs(error) <= self._angle_tolerance
+                and abs(self._omega) <= max_delta):
             self._finished = True
             self._omega = 0.0
             self._publish_stop()
+            self._state_publisher.publish(String(data='FINISHED'))
+            self._complete_publisher.publish(Bool(data=True))
             self.get_logger().info('Pivot rotation complete; both robots stopped')
             return
 
         sign = 1.0 if error >= 0.0 else -1.0
-        braking_omega = math.sqrt(2.0 * self._alpha * abs(error))
+        braking_distance = max(0.0, abs(error) - 0.5 * self._angle_tolerance)
+        braking_omega = math.sqrt(2.0 * self._alpha * braking_distance)
         desired = sign * min(self._max_omega, braking_omega)
-        dt = 1.0 / float(self.get_parameter('control_rate').value)
-        max_delta = self._alpha * dt
         self._omega += max(-max_delta, min(max_delta, desired - self._omega))
 
         # Keep A at its captured position while B follows the rigid-body arc.

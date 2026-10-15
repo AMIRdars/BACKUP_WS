@@ -38,6 +38,10 @@ setup(
             'cooperative_transport_control.cooperative_lateral_goal:main',
             'pivot_rotation_controller = '
             'cooperative_transport_control.pivot_rotation_controller:main',
+            'distributed_straight_leader = '
+            'cooperative_transport_control.distributed_straight:leader_main',
+            'distributed_straight_follower = '
+            'cooperative_transport_control.distributed_straight:follower_main',
         ],
     },
 )

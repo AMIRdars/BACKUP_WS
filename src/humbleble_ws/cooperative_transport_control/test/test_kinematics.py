@@ -35,6 +35,45 @@ def test_straight_goal_generates_same_world_direction():
     assert command2.y == pytest.approx(0.0, abs=1.0e-9)
 
 
+def test_feedforward_tracks_a_moving_goal_without_position_lag():
+    first, second, _ = rigid_body_commands(
+        Pose2(-1.0, 0.0, 0.0), Pose2(1.0, 0.0, math.pi),
+        Pose2(0.0, 0.0, 0.0), 0.35, 0.5, 0.2, 0.11, 0.04,
+        center_velocity_feedforward=(0.10, 0.0))
+    assert first.x == pytest.approx(0.10)
+    assert second.x == pytest.approx(-0.10)
+
+
+def test_feedforward_and_feedback_share_the_existing_speed_limit():
+    first, second, _ = rigid_body_commands(
+        Pose2(-1.0, 0.0, 0.0), Pose2(1.0, 0.0, math.pi),
+        Pose2(0.1, 0.0, 0.0), 0.35, 0.5, 0.2, 0.11, 0.04,
+        center_velocity_feedforward=(0.10, 0.10))
+    assert math.hypot(first.x, first.y) == pytest.approx(0.11)
+    assert math.hypot(second.x, second.y) == pytest.approx(0.11)
+
+
+@pytest.mark.parametrize('omega', [math.radians(1.0), -math.radians(1.0)])
+def test_rotation_feedforward_synchronizes_orbit_and_heading_without_lag(omega):
+    first, second, _ = rigid_body_commands(
+        Pose2(-1.0, 0.0, 0.0), Pose2(1.0, 0.0, math.pi),
+        Pose2(0.0, 0.0, 0.0), 0.35, 0.5, 0.2, 0.11, 0.04,
+        angular_velocity_feedforward=omega)
+    assert first.y == pytest.approx(-omega)
+    assert second.y == pytest.approx(-omega)
+    assert first.yaw == pytest.approx(omega)
+    assert second.yaw == pytest.approx(omega)
+
+
+def test_rotation_feedforward_obeys_angular_speed_limit():
+    first, second, _ = rigid_body_commands(
+        Pose2(-1.0, 0.0, 0.0), Pose2(1.0, 0.0, math.pi),
+        Pose2(0.0, 0.0, 0.0), 0.35, 0.5, 0.2, 0.11, 0.04,
+        angular_velocity_feedforward=0.2)
+    assert first.yaw == pytest.approx(0.04)
+    assert second.yaw == pytest.approx(0.04)
+
+
 def test_turn_adds_opposite_tangential_velocities():
     command1, command2, _ = rigid_body_commands(
         Pose2(-1.34, 0.0, 0.0), Pose2(1.34, 0.0, math.pi),

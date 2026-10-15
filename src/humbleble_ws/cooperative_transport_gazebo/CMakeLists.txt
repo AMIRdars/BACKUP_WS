@@ -3,6 +3,7 @@ project(cooperative_transport_gazebo)
 
 find_package(ament_cmake REQUIRED)
 find_package(ignition-gazebo6 REQUIRED)
+find_package(DART 6 REQUIRED)
 find_package(ignition-transport11 REQUIRED)
 find_package(ignition-msgs8 REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -17,6 +18,14 @@ target_link_libraries(cooperative_friction_grip-system
   ignition-gazebo6::core)
 
 install(TARGETS cooperative_friction_grip-system
+  LIBRARY DESTINATION lib)
+
+add_library(cooperative_dart_contact_parameters-system SHARED
+  src/dart_contact_parameters.cpp)
+target_compile_features(cooperative_dart_contact_parameters-system PUBLIC cxx_std_17)
+target_link_libraries(cooperative_dart_contact_parameters-system
+  ignition-gazebo6::core dart)
+install(TARGETS cooperative_dart_contact_parameters-system
   LIBRARY DESTINATION lib)
 
 add_executable(transport_pose_filter src/transport_pose_filter.cpp)

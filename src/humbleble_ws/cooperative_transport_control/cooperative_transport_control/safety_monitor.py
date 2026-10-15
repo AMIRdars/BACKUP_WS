@@ -54,6 +54,7 @@ class SafetyMonitor(Node):
         self._attached: Dict[str, Optional[bool]] = {name: None for name in self._names}
         self._active = False
         self._external_fault = False
+        self._follower_fault = False
         self._wrench_fault = False
         self._latched = False
         self._reason = 'OK'
@@ -73,6 +74,9 @@ class SafetyMonitor(Node):
         self.create_subscription(
             Bool, self.get_parameter('external_fault_topic').value,
             self._on_external_fault, 10)
+        self.create_subscription(
+            Bool, '/distributed_transport/follower/fault',
+            lambda message: setattr(self, '_follower_fault', message.data), 10)
         self.create_subscription(
             Bool, self.get_parameter('wrench_fault_topic').value,
             lambda message: setattr(self, '_wrench_fault', message.data), 10)
@@ -112,6 +116,8 @@ class SafetyMonitor(Node):
             return None
         if self._external_fault:
             return 'external slip/contact monitor fault'
+        if self._follower_fault:
+            return 'distributed follower lost local feedback'
         if self._wrench_fault:
             return 'wrist force/torque threshold exceeded'
         if len(self._positions) != 2:

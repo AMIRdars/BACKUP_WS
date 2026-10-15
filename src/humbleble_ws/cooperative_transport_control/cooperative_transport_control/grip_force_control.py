@@ -97,7 +97,13 @@ def next_gripper_position(
         delta = search_step
     else:
         error = target_force - sum(forces) / 2.0
-        if abs(error) <= force_tolerance:
+        # Completion checks both fingers. A mean inside the band can still
+        # leave the lighter finger below it and stall contact acquisition.
+        if min(forces) < target_force - force_tolerance:
+            delta = clamp(position_gain * max(
+                error, target_force - force_tolerance - min(forces)),
+                0.0, maximum_step)
+        elif abs(error) <= force_tolerance:
             delta = 0.0
         else:
             delta = clamp(

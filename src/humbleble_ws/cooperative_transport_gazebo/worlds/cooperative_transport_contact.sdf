@@ -4,6 +4,14 @@
        plugin, detachable joint, pose constraint, or direct payload wrench. -->
   <world name="cooperative_transport_friction">
     <gravity>0 0 -9.81</gravity>
+    <!-- Native DART compliance avoids hard-contact oscillation between the
+         independently driven fingers. ODE surface kp/kd are not read by DART. -->
+    <plugin filename="libcooperative_dart_contact_parameters-system.so"
+            name="cooperative_transport::DartContactParameters">
+      <constraint_force_mixing>0.05</constraint_force_mixing>
+      <error_reduction_parameter>0.2</error_reduction_parameter>
+      <max_error_velocity>0.2</max_error_velocity>
+    </plugin>
     <physics name="2ms_contact" type="ignored">
       <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>

@@ -73,6 +73,9 @@ class FrictionGraspManager(Node):
         self.declare_parameter('maximum_effort', 0.8)
         self.declare_parameter('target_normal_force', 14.0)
         self.declare_parameter('force_tolerance', 3.0)
+        self.declare_parameter('holding_force_tolerance', 3.0)
+        self.declare_parameter('holding_force_position_gain', 0.000025)
+        self.declare_parameter('holding_force_command_min_step', 0.00001)
         self.declare_parameter('force_position_gain', 0.00025)
         self.declare_parameter('force_control_max_step', 0.004)
         self.declare_parameter('overforce_release_max_step', 0.006)
@@ -458,6 +461,13 @@ class FrictionGraspManager(Node):
                 release_step = overforce_step if over_force else maximum_step
                 control_position = self._gripper_commands.get(
                     robot, self._joint_positions[robot])
+                holding_gain = gain
+                if (bool(self.get_parameter('maintain_target_force').value)
+                        and not over_force
+                        and min(forces) >= float(self.get_parameter(
+                            'minimum_normal_force').value)):
+                    holding_gain = float(self.get_parameter(
+                        'holding_force_position_gain').value)
                 position = holding_recovery_position(
                     control_position,
                     self._gripper_commands.get(
@@ -466,11 +476,12 @@ class FrictionGraspManager(Node):
                     float(self.get_parameter('minimum_normal_force').value),
                     float(self.get_parameter(
                         'holding_force_release_threshold').value),
-                    gain, release_step, minimum_position, maximum_position,
+                    holding_gain, release_step, minimum_position, maximum_position,
                     allow_release=not retain_grasp,
                     maintain_target=bool(self.get_parameter(
                         'maintain_target_force').value),
-                    force_tolerance=tolerance)
+                    force_tolerance=float(self.get_parameter(
+                        'holding_force_tolerance').value))
                 # Do not release far enough to lose the payload during
                 # the support-removal transient. The bound is relative to the
                 # verified grasp position and still permits force relief.
@@ -498,7 +509,17 @@ class FrictionGraspManager(Node):
                      else search_step),
                     minimum_position, maximum_position)
             previous = self._gripper_commands.get(robot)
-            if previous is None or abs(position - previous) >= 1.0e-4:
+            minimum_change = (
+                float(self.get_parameter('holding_force_command_min_step').value)
+                if self._state == 'HOLDING'
+                and bool(self.get_parameter('maintain_target_force').value)
+                else 1.0e-4)
+            if previous is None or abs(position - previous) >= minimum_change:
+                if self._state == 'HOLDING':
+                    self.get_logger().info(
+                        f'{robot} holding correction at sim={now:.3f}: '
+                        f'position={control_position:.7f}->{position:.7f}; '
+                        f'raw={raw_forces}; filtered={filtered_forces}')
                 self._send_gripper(robot, position)
 
     def _contact_plausible(self) -> bool:
