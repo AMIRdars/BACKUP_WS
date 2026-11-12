@@ -1,0 +1,24 @@
+/**/follower_controller:
+  ros__parameters:
+    use_sim_time: true
+    mode: B
+    axes_enabled: [true, false, false, false]
+    recenter_enabled: false
+    control_rate_hz: 100.0
+    bias_samples: 100
+    cutoff_hz: 8.0
+    max_age_s: 0.05
+    max_skew_s: 0.02
+    # Measured in calibration_v2 (2026-10-16); certificate still required.
+    sensor_sign: 1.0
+    sensor_header_frame: 'amir2/Joint_5/wrist_ft_sensor'
+    calibration_file: ''
+    max_abs_wrench: [50.0, 50.0, 100.0, 5.0, 5.0, 5.0]
+    deadband: [0.2, 0.2, 0.2, 0.02]
+    soft_limit: [20.0, 20.0, 20.0, 2.0]
+    admittance:
+      mass: [3.0, 3.0, 3.0, 0.4]
+      damping: [35.0, 35.0, 35.0, 4.0]
+      stiffness: [20.0, 20.0, 20.0, 2.0]
+      max_velocity: [0.03, 0.03, 0.02, 0.08]
+      max_offset: [0.05, 0.05, 0.03, 0.10]

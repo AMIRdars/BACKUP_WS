@@ -9,13 +9,15 @@ find_package(geometry_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(std_srvs REQUIRED)
 
 add_library(coop_transport_bt_nodes SHARED
   src/cooperative_motion_bt_node.cpp
-  src/transport_safety_nodes.cpp)
+  src/transport_safety_nodes.cpp
+  src/follower_compliant_carry.cpp)
 target_include_directories(coop_transport_bt_nodes PUBLIC include)
 ament_target_dependencies(coop_transport_bt_nodes
-  behaviortree_cpp_v3 coop_transport_interfaces geometry_msgs rclcpp rclcpp_action std_msgs)
+  behaviortree_cpp_v3 coop_transport_interfaces geometry_msgs rclcpp rclcpp_action std_msgs std_srvs)
 
 add_executable(bt_runner src/bt_runner.cpp)
 target_include_directories(bt_runner PRIVATE include)

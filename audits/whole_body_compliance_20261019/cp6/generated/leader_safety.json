@@ -1,0 +1,38 @@
+{
+  "robot": "leader",
+  "simulation_only": true,
+  "urdf_sha256": "7985e9314d09bbd5566efac713199b0db0d2ea0ca21a2714a7acdb5346cbd5e3",
+  "world_sha256": "9a2acd66b84de7c593fc99b38ffdda0ac09c4c1a9be841a1813f8c7353c6fe13",
+  "controller_yaml_file": "/home/dars5070/ros2_humble_ws/audits/whole_body_compliance_20261019/cp6/generated/leader_controllers.yaml",
+  "controller_yaml_sha256": "a1b6f42ebf6260e864143b8fce6e174c21ef16680aee5e426d88067c24512f33",
+  "base_controller_yaml_file": "/home/dars5070/ros2_humble_ws/audits/whole_body_compliance_20261019/cp6/generated/leader_base_controller.yaml",
+  "base_controller_yaml_sha256": "2246c8f8e69b7fccc8ee6b022e9ac64885dc3bea70f139e8ecbf27f8ad753a9e",
+  "max_base_velocity": [
+    0.01,
+    0.01,
+    0.02
+  ],
+  "joint_margin_rad": 0.01,
+  "effort_limits_source": "selected URDF joint/limit/@effort",
+  "joint_reaction_projection_verified": true,
+  "measured_static_joint_torque_Nm": [
+    1.987910329241413e-10,
+    -3.5204724207830114,
+    -2.6259560114954055,
+    -0.1499561645190046,
+    -0.006183113566342636
+  ],
+  "predicted_static_joint_torque_Nm": [
+    5.415127464856845e-12,
+    -3.5204723586113724,
+    -2.625956014349934,
+    -0.14995616451990632,
+    -0.006183113566342635
+  ],
+  "max_static_projection_error_Nm": 6.21716389481719e-08,
+  "probe": "/home/dars5070/ros2_humble_ws/audits/whole_body_compliance_20261019/cp6/static_proof/runtime.json",
+  "motion_evidence": "/home/dars5070/ros2_humble_ws/audits/whole_body_compliance_20261019/cp1/motion_run3/motion.json",
+  "require_grasp_for_base_motion": true,
+  "ungrasped_base_test_only": false,
+  "scope": "simulated transmitted joint torque; not certified hardware bearing/drive limits"
+}

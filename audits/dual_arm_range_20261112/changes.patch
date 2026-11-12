@@ -1,0 +1,468 @@
+--- a/tools/dual_arm_only_runtime.py
++++ b/tools/dual_arm_only_runtime.py
+@@ -8,6 +8,7 @@
+ from launch.event_handlers import OnProcessExit
+ from launch.events import Shutdown
+ from amir_native_arm_support import SCENE
++from dual_arm_workspace import common_reach,trajectory_rate_proof
+ from amir_compliance_control.wrench import LocalModel
+ from amir_compliance_control.stroke_kinematics import solve_stroke_pose
+ import xml.etree.ElementTree as ET
+@@ -33,10 +34,20 @@
+     config=context.launch_configurations
+     root=Path(config['workspace_directory']).expanduser().resolve()
+     distance=float(config['dual_arm_distance_m']);speed=float(config['dual_arm_speed_m_s'])
+-    if not math.isfinite(distance) or not 0<distance<=.03:
+-        raise ValueError('initial dual-arm experiment requires 0 < arm distance <=0.03 m')
++    reach=common_reach(root)
++    if not math.isfinite(distance) or not 0<distance<=reach['maximum_common_verified_m']:
++        raise ValueError('dual-arm distance exceeds common verified horizontal URDF reach: '+str(reach['maximum_common_verified_m']))
+     if not math.isfinite(speed) or not 0<speed<=.005:
+         raise ValueError('initial dual-arm experiment requires 0 < arm speed <=0.005 m/s')
++    requested_speed=speed
++    impedance=float(config.get('dual_arm_admittance_scale','1.0'))
++    if not math.isfinite(impedance) or not .25<=impedance<=1.:
++        raise ValueError('dual_arm_admittance_scale must be in [0.25,1] for bounded simulation comparison')
++    rate=trajectory_rate_proof(root,distance,speed)
++    # Slow the Cartesian profile instead of increasing the 0.03 rad/s bound.
++    if rate['peak_joint_speed_rad_s']>.03*.95:
++        speed*=.03*.95/rate['peak_joint_speed_rad_s']
++        rate=trajectory_rate_proof(root,distance,speed)
+     if config.get('enable_base_assist','false')!='false':raise ValueError('dual arm requires enable_base_assist=false')
+     domain=int(config['ros_domain_id'])
+     if not 0<=domain<=232:raise ValueError('invalid ROS domain')
+@@ -48,10 +59,15 @@
+     if not out.is_absolute():out=root/out
+     if out.exists():raise ValueError('output already exists: '+str(out))
+     out.mkdir(parents=True);(out/'arm_plan.json').write_text(json.dumps(proof,indent=2))
++    (out/'workspace_reach.json').write_text(json.dumps(reach,indent=2))
++    (out/'trajectory_rate_proof.json').write_text(json.dumps(rate,indent=2))
+     (out/'launch_policy.json').write_text(json.dumps({'mode':'DUAL_ARM_ONLY','leader_arm_distance_m':distance,
+-        'leader_arm_speed_m_s':speed,'base_fixture':False,'physical_base_approach':True,
++        'leader_arm_speed_m_s':speed,'requested_arm_speed_m_s':requested_speed,
++        'base_fixture':False,'physical_base_approach':True,
+         'both_base_commands_after_approach':[0.,0.,0.],'follower_force_source':'own Gazebo wrist F/T',
+         'follower_stiffness_N_m':0.,'force_deadband_N':.003,
++        'virtual_mass_kg':2*impedance,'virtual_damping_Ns_m':34.6*impedance,
++        'admittance_scale':impedance,
+         'deadband_basis':'previous native stationary measured absolute XY max 0.00287245N; experimental only',
+         'legacy_forward_distance_m':config['forward_distance_m'],
+         'legacy_translation_velocity_m_s':config['translation_velocity_m_s'],
+@@ -62,10 +78,11 @@
+         env.update(__NV_PRIME_RENDER_OFFLOAD='1',__GLX_VENDOR_LIBRARY_NAME='nvidia')
+     cmd=['/usr/bin/python3','-u',str(root/'tools/amir_af_trial.py'),'--stage','AF-2',
+          '--native-arm-stroke','--dual-arm-only','--profile','pose_hold_micro',
+-         '--virtual-mass-kg','2','--virtual-damping-ns-m','34.6','--virtual-stiffness-n-m','0',
++         '--virtual-mass-kg',str(2*impedance),'--virtual-damping-ns-m',str(34.6*impedance),'--virtual-stiffness-n-m','0',
+          '--arm-horizon','.08','--control-on-wrench','--wrench-on-measurement','--wrench-cutoff-hz','8',
+          '--distance',str(distance),'--speed',str(speed),'--start-delay-s',str(delay),
+-         '--output',str(out/'trial'),'--prefer-smt-cores']
++         '--output',str(out/'trial')]
++    if config.get('native_cpu_policy','smt')=='smt':cmd+=['--prefer-smt-cores']
+     if config['headless']=='false':
+         cmd+=['--gui']
+         if config['keep_gui_open']=='true':
+--- a/tools/amir_af_trial.py
++++ b/tools/amir_af_trial.py
+@@ -155,8 +155,12 @@
+     p.add_argument('--af1-force-sign',type=int,choices=[-1,1])
+     a=p.parse_args()
+     if a.dual_arm_only and (not a.native_arm_stroke or a.follower_base_fixture or a.leader_base_distance_calibration
+-            or a.progressive_stroke or not 0<a.distance<=.03):
+-        raise ValueError('dual arm experiment: native, <=0.03m, no base fixture/calibration/progressive base stroke')
++            or a.progressive_stroke):
++        raise ValueError('dual arm experiment: native, no base fixture/calibration/progressive base stroke')
++    if a.dual_arm_only:
++        from dual_arm_workspace import common_reach
++        if not 0<a.distance<=common_reach(ROOT)['maximum_common_verified_m']:
++            raise ValueError('dual arm distance exceeds actual common URDF horizontal reach')
+     if a.follower_base_fixture and not a.native_arm_stroke:raise ValueError('post-grasp base fixture requires native arm stroke')
+     if a.progressive_stroke and not a.native_arm_stroke:raise ValueError('progressive stroke requires native arm stroke')
+     if a.keep_gui_open and (not a.gui or a.stage!='AF-2'):
+@@ -206,9 +210,11 @@
+     if os.getenv('ROS_LOCALHOST_ONLY')!='1' or not os.getenv('IGN_PARTITION') or not os.getenv('ROS_DOMAIN_ID'):
+         raise ValueError('explicit isolated localhost ROS domain and Gazebo partition required')
+     out=a.output.resolve();out.mkdir(parents=True,exist_ok=False);folder=out/'generated';folder.mkdir()
++    cpu_policy=None
+     if a.prefer_smt_cores:
+         from af_cpu_affinity import prefer_smt_cores
+-        (out/'cpu_affinity.json').write_text(json.dumps(prefer_smt_cores(),indent=2))
++        cpu_policy=prefer_smt_cores()
++        (out/'cpu_affinity.json').write_text(json.dumps(cpu_policy,indent=2))
+     if a.native_arm_stroke:
+         (out/'controller_isolation.json').write_text(json.dumps(controller_isolation,indent=2))
+     (out/'command.json').write_text(json.dumps({'argv':__import__('sys').argv,
+@@ -227,7 +233,7 @@
+         sources += [Path(__file__).with_name(name) for name in ('amir_native_arm_support.py',
+             'native_arm_stroke_runtime.py','cp9_transport_preparation.py','amir_cp9_grasp_preparation.py')]
+         if a.dual_arm_only:
+-            sources += [ROOT/'tools/dual_arm_only_runtime.py',ROOT/'tools/dual_arm_preparation.py',ROOT/'tools/dual_arm_single_probe.py']
++            sources += [ROOT/'tools/dual_arm_only_runtime.py',ROOT/'tools/dual_arm_preparation.py',ROOT/'tools/dual_arm_single_probe.py',ROOT/'tools/dual_arm_workspace.py']
+             sources += [ROOT/'src/humbleble_ws/cooperative_transport_bringup/config/compliance_dual_arm_gui.config']
+         sources += list((ROOT/'src/vendor/joint_trajectory_controller').rglob('*.cpp'))
+         sources += [ROOT/'src/vendor/joint_trajectory_controller/AMIR_PATCH.json']
+@@ -244,7 +250,7 @@
+     gui_holding=[False];gui_process=[None]
+     native_prep={};native_monitor={};native_maintenance={};native_jtc_samples={r:[] for r in ('leader','follower')}
+     native_monitor_wall={};native_wrench_limits={}
+-    native_base_home={};native_base_radii={};native_leader_debug={}
++    native_base_home={};native_base_radii={};native_leader_debug={};native_grasp_offsets={}
+     native_wrench_violation_since={}
+     base_fixture_state=['unknown']
+     if a.native_arm_stroke:
+@@ -256,6 +262,10 @@
+     jtc_trace=(out/'jtc_state_samples.jsonl').open('w',buffering=1);jtc_state={}
+     local_trace=LocalControlTrace(out)
+     def start(name,argv):
++        if name=='gui' and a.dual_arm_only:
++            from af_cpu_affinity import gui_command
++            argv,proof=gui_command(argv,cpu_policy)
++            (out/'gui_cpu_affinity.json').write_text(json.dumps(proof,indent=2))
+         if a.native_arm_stroke and name=='grasp_monitor':argv=[*argv,'hold_safe_force_imbalance:=true','simulation_source_watchdog:=true']
+         f=(out/(name+'.log')).open('w');logs.append(f)
+         proc=subprocess.Popen(argv,stdout=f,stderr=subprocess.STDOUT,start_new_session=True);processes.append(proc)
+@@ -485,6 +495,19 @@
+             clearance=separation-sum(native_base_radii.values())
+             row['follower_gt_drift_since_grasp_m']=drift
+             row['base_collision_circle_clearance_m']=clearance
++            if a.dual_arm_only and 'cooperative_payload' in poses:
++                payload=np.array([poses['cooperative_payload'].translation.x,
++                    poses['cooperative_payload'].translation.y,poses['cooperative_payload'].translation.z])
++                for robot in ('leader','follower'):
++                    if robot+'_tcp_world_evaluation_0' not in row:continue
++                    tcp=np.array([row[robot+'_tcp_world_evaluation_'+str(i)] for i in range(3)])
++                    offset=tcp-payload
++                    if robot not in native_grasp_offsets:native_grasp_offsets[robot]=offset.copy()
++                    residual=float(np.linalg.norm(offset-native_grasp_offsets[robot]))
++                    row[robot+'_native_grasp_translation_residual_m']=residual
++                    if status.get('armed') and residual>.002 and constraint_stop[0] is None:
++                        event('native_grasp_translation_guard_stop','recorder',{'robot':robot,'residual_m':residual})
++                        constraint_stop[0]=constraint_stop_client.call_async(Trigger.Request())
+             if status.get('armed') and constraint_stop[0] is None and (drift>=.001 or clearance<=a.speed*.15):
+                 event('native_base_drift_or_collision_stop','recorder',{'drift_m':drift,'circle_clearance_m':clearance})
+                 constraint_stop[0]=constraint_stop_client.call_async(Trigger.Request())
+@@ -769,7 +792,7 @@
+                 policy['dual_arm_only']=True
+                 policy['controller_parameters'].update(virtual_stiffness=[0.,0.],force_deadband_N=.003,
+                     joint_request_acceleration_rad_s2=.15,
+-                    arm_displacement_stop_m=.05,displacement_limit_m=[.05,.012])
++                    arm_displacement_stop_m=.26,displacement_limit_m=[.26,.012])
+         if a.arm_nullspace_pose_hold is not None:
+             policy['controller_parameters']['arm_nullspace_pose_hold']=a.arm_nullspace_pose_hold
+         if a.leader_acceleration is not None:policy['leader_acceleration_m_s2']=a.leader_acceleration
+@@ -842,7 +865,11 @@
+                 g=Vector3Stamped();g.header.stamp=Time(seconds=sim[0]).to_msg();g.header.frame_id='leader/base_footprint'
+                 g.vector.x=(d-previous)*(1 if a.direction=='forward' else -1)
+                 goal.publish(g);wait(lambda:state['leader'].get('accepted_goals')==index,5.,True)
+-                wait(lambda:state['leader'].get('completed_goals')==index,max(60.,(d-previous)/a.speed*4+30),True)
++                if a.dual_arm_only:
++                    from dual_arm_workspace import wait_for_arm_completion
++                    wait_for_arm_completion(wait,sim,lambda:state['leader'].get('completed_goals')==index,d-previous,a.speed)
++                else:
++                    wait(lambda:state['leader'].get('completed_goals')==index,max(60.,(d-previous)/a.speed*4+30),True)
+                 simwait(2. if a.progressive_stroke else 0.)
+                 checkpoint={'leader_target_total_m':d,'leader_odom_x_m':latest['leader','odom'].pose.pose.position.x,
+                     'follower_arm_actual_m':adm.get('e_arm_m'),'grasp_held':native_grip_held() if a.native_arm_stroke else all(grasp.get(r)=='attached' for r in ('leader','follower')),
+--- a/src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py
++++ b/src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py
+@@ -59,8 +59,10 @@
+             description='Audited Gazebo F/T sensor only; no target proxy or synthetic force'),
+         DeclareLaunchArgument('arm_only_trial', default_value='dual_arm',choices=['micro','native_stroke','dual_arm']),
+         DeclareLaunchArgument('arm_only_experiment.enabled',default_value='true',choices=['true','false']),
+-        DeclareLaunchArgument('dual_arm_distance_m',default_value='0.03'),
+-        DeclareLaunchArgument('dual_arm_speed_m_s',default_value='0.005'),
++        DeclareLaunchArgument('dual_arm_distance_m',default_value='0.213'),
++        DeclareLaunchArgument('dual_arm_speed_m_s',default_value='0.003'),
++        DeclareLaunchArgument('dual_arm_admittance_scale',default_value='0.25',
++            description='Simulation impedance comparison: scales virtual M and D together, not actuator or safety limits'),
+         DeclareLaunchArgument('leader_base_distance_m',default_value='0.5'),
+         DeclareLaunchArgument('calibrate_leader_distance',default_value='true',choices=['true','false'],
+             description='Native 0.005m/s only: measured offline leader raw-odom distance correction'),
+--- a/src/humbleble_ws/cooperative_transport_bringup/README_dual_arm_only.md
++++ b/src/humbleble_ws/cooperative_transport_bringup/README_dual_arm_only.md
+@@ -1,6 +1,6 @@
+ # 接近後、両台車停止・両アーム協調追従
+ 
+-`compliance_round_trip.launch.py` の既定 `ARM_ONLY / dual_arm` は、車輪で接近後に両台車を停止し、リーダーアームの30 mm水平移動へフォロワーアームが自身のF/Tから追従するGazebo実験です。
++`compliance_round_trip.launch.py` の既定 `ARM_ONLY / dual_arm` は、車輪で接近後に両台車を停止し、リーダーアームの最大213 mm水平移動へフォロワーアームが自身のF/Tから追従するGazebo実験です。
+ 
+ ```bash
+ cd ~/ros2_humble_ws
+@@ -14,7 +14,9 @@
+   translation_velocity_m_s:=0.1 record_data:=true
+ ```
+ 
+-このモードでは旧走行引数 `forward_distance_m` と `translation_velocity_m_s` は走行目標に使用しません。アーム試験値は `dual_arm_distance_m:=0.03`、`dual_arm_speed_m_s:=0.005` です。初期試験の許可範囲は距離30 mm以下、速度5 mm/s以下です。往復は行いません。
++このモードでは旧走行引数 `forward_distance_m` と `translation_velocity_m_s` は走行目標に使用しません。既定は `dual_arm_distance_m:=0.213`、要求速度上限は `dual_arm_speed_m_s:=0.003` です。実URDFの連続IKで求めた共通水平可動域を超える距離は拒否します。関節速度0.03rad/sを守るため、要求速度が高い場合は軌道を自動で減速します。小距離の回帰試験は `dual_arm_distance_m:=0.03` で実行できます。往復は行いません。
++
++213mmでは動作完了・接触継続・停止後把持保持を確認しましたが、最終ログの指反力が1サンプルで既存8N下限を下回り、独立評価は67/71項目合格です。全項目合格は未達であり、瞬間的な反力低下の原因は報告書の残課題に記録しています。
+ 
+ Humble 2.53.1 JTCの既存ワークスペース修正版が必要です。未ビルドの場合のみ先に実行してください。
+ 
+@@ -26,7 +28,7 @@
+ 
+ INITで把持前10 mmアーム単体試験を実施して復帰し、BASE_APPROACH → BASE_STOP → DUAL_GRASP → SETTLE_AND_BIAS → ARM_ONLY → HOLDを進みます。異常時は共有停止し、グリッパを開きません。把持後に両台車へ出す最終速度はゼロに限定します。世界固定治具は使用しません。台車の物理的な微小ずれはwheel odomとは別に記録します。
+ 
+-フォロワーは既存 `StrictArmOnly` を流用します。自身のWrist F/TをTCP参照点・台車座標軸へ変換し、静止荷重をtare後、`M=2 kg, D=34.6 Ns/m, K=0`の速度型アドミッタンスと2×5 DLSを使用します。3 mN死域は過去の静止ログに基づく暫定実験設定です。両機のアームAPI、関節名、Gazebo物理設定を継承しています。
++フォロワーは既存 `StrictArmOnly` を流用します。自身のWrist F/TをTCP参照点・台車座標軸へ変換し、静止荷重をtare後、`M=0.5 kg, D=8.65 Ns/m, K=0`の速度型アドミッタンスと2×5 DLSを使用します。仮想M・Dは従来値の1/4にして応答時定数M/Dを維持し、追従に必要な反力を抑えます。`dual_arm_admittance_scale:=1.0`で従来M=2,D=34.6に戻せます。3 mN死域は過去の静止ログに基づく暫定実験設定です。両機のアームAPI、関節名、Gazebo物理設定を継承しています。
+ 
+ 終了後は停止・把持確認して物理を一時停止し、GUIを残します。GUIを閉じるかCtrl+Cで終了します。長時間の動的把持耐久試験にはなりません。出力先は起動ログの`Dual arm output`です。
+ 
+@@ -39,9 +41,9 @@
+ # この試験だけのGazeboウィンドウを動画化する手順
+ PYTHONNOUSERSITE=1 /usr/bin/python3 tools/amir_gazebo_window_video.py \
+   --case <出力先>/trial --output <新規保存先>.avi \
+-  --include-preparation --duration-s 360 --fps 2
++  --include-preparation --duration-s 900 --fps 2
+ ```
+ 
+ 以前のモードは `arm_only_trial:=native_stroke` または `arm_only_trial:=micro` で選択できます。`arm_only_experiment.enabled:=false` は旧native_strokeを選択します。`control_mode:=WHOLE_BODY`は既存アーカイブの検証経路を使用します。今回、台車追従・回転は動かしません。
+ 
+-監査表、実測値、成功・失敗ログ、差分、残課題はワークスペースの `audits/dual_arm_only_20261112/REPORT.md` を参照してください。力・トルクの実験停止境界は既存設定を継承しており、実機の校正済み安全定格ではありません。
++監査表、実測値、成功・失敗ログ、差分、残課題はワークスペースの `audits/dual_arm_range_20261112/REPORT.md` を参照してください。力・トルクの実験停止境界は既存設定を継承しており、実機の校正済み安全定格ではありません。
+--- /dev/null
++++ b/tools/dual_arm_workspace.py
+@@ -0,0 +1,55 @@
++"""Offline common horizontal reach from actual URDF and existing soft margins."""
++from pathlib import Path
++import xml.etree.ElementTree as ET
++import numpy as np
++from amir_compliance_control.wrench import LocalModel
++from amir_compliance_control.stroke_kinematics import solve_stroke_pose
++from amir_native_arm_support import SCENE
++from amir_compliance_control.arm_translation import duration,reference
++
++
++def common_reach(root, step=.001):
++    proof={}
++    for robot,sign in (('leader',1.),('follower',-1.)):
++        path=Path(root)/SCENE/(robot+'.urdf');tree=ET.parse(path);model=LocalModel(path.read_text())
++        q=np.array([float(tree.find(f"ros2_control/joint[@name='{n}']/state_interface[@name='position']/param").text) for n in model.names])
++        home,sensor=model.frames(q);last=0.;reason='scan bound'
++        for value in np.arange(step,.601,step):
++            try:next_q=solve_stroke_pose(model,q,home+[sign*value,0.,0.],sensor[:3,:3])
++            except ValueError as exc:
++                reason=str(exc);break
++            q=next_q;last=float(value)
++        proof[robot]={'verified_horizontal_reach_m':last,'first_unverified_m':last+step,
++                      'last_q_rad':q.tolist(),'boundary_reason':reason}
++    return {'maximum_common_verified_m':min(p['verified_horizontal_reach_m'] for p in proof.values()),
++            'resolution_m':step,'arms':proof,'scope':'same initial grasp, horizontal translation, fixed orientation; not collision/load qualification'}
++
++
++def trajectory_rate_proof(root,distance,speed):
++    total=duration(distance,speed,.0012);times=np.linspace(0,total,501);proof={}
++    for robot,sign in (('leader',1.),('follower',-1.)):
++        path=Path(root)/SCENE/(robot+'.urdf');tree=ET.parse(path);model=LocalModel(path.read_text())
++        q=np.array([float(tree.find(f"ros2_control/joint[@name='{n}']/state_interface[@name='position']/param").text) for n in model.names])
++        home,sensor=model.frames(q);samples=[]
++        for t in times:
++            x=reference(t,distance,speed,.0012)[0]
++            q=solve_stroke_pose(model,q,home+[sign*x,0,0],sensor[:3,:3]);samples.append(q.copy())
++        qdot=np.diff(samples,axis=0)/(total/500)
++        proof[robot]={'peak_joint_speed_rad_s':float(np.max(abs(qdot))),
++            'peak_joint_acceleration_rad_s2':float(np.max(abs(np.diff(qdot,axis=0)/(total/500))))}
++    return {'duration_s':total,'arms':proof,
++            'peak_joint_speed_rad_s':max(p['peak_joint_speed_rad_s'] for p in proof.values())}
++
++
++def wait_for_arm_completion(wait,sim,completed,distance,speed):
++    """Profile/arrival budget uses sim time; all existing wall heartbeats remain."""
++    budget=duration(distance,speed,.0012)+10.
++    started=sim[0]
++    def ready():
++        if completed():return True
++        if sim[0]-started>budget:
++            raise RuntimeError('leader arm simulation-time mission budget exceeded')
++        return False
++    # This is a batch-runner deadline, not a controller/sensor watchdog.
++    # Native clock/permit/F/T/joint guards continue their original checks.
++    wait(ready,max(60.,budget*10.),True)
+--- /dev/null
++++ b/tools/test_dual_arm_range.py
+@@ -0,0 +1,107 @@
++"""The visible excursion stays inside actual common reach and joint rate bounds."""
++from pathlib import Path
++import numpy as np
++import pytest
++from dual_arm_workspace import common_reach,trajectory_rate_proof,wait_for_arm_completion
++from amir_compliance_control.arm_translation import duration
++from dual_arm_only_runtime import arm_plan
++from test_dual_arm_only import public_context
++from launch.actions import ExecuteProcess
++from launch.utilities import perform_substitutions
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++def test_common_reach_is_limited_by_extended_leader_not_follower():
++    proof=common_reach(ROOT)
++    assert .21<proof['maximum_common_verified_m']<.22
++    assert proof['arms']['follower']['verified_horizontal_reach_m']>.26
++    plan=arm_plan(ROOT,proof['maximum_common_verified_m'])
++    assert abs(plan['leader']['samples'][-1]['q_rad'][2]-plan['leader']['samples'][0]['q_rad'][2])>1.4
++
++
++@pytest.mark.parametrize('distance',[.214,.5,float('nan')])
++def test_unreachable_request_is_refused_before_simulation(tmp_path,distance):
++    module,ctx=public_context()
++    ctx.launch_configurations.update(workspace_directory=str(ROOT),dual_arm_distance_m=str(distance),output_directory=str(tmp_path/'out'))
++    with pytest.raises(ValueError,match='URDF reach'):module['setup'](ctx)
++    assert not (tmp_path/'out').exists()
++
++
++def test_endpoint_profile_slows_instead_of_increasing_joint_speed_limit():
++    initial=trajectory_rate_proof(ROOT,.213,.005)
++    assert initial['peak_joint_speed_rad_s']>.03
++    selected=.005*(.03*.95)/initial['peak_joint_speed_rad_s']
++    slowed=trajectory_rate_proof(ROOT,.213,selected)
++    assert slowed['peak_joint_speed_rad_s']<.03
++    assert slowed['duration_s']>initial['duration_s']
++
++
++def test_slow_endpoint_velocity_avoids_ik_tolerance_acceleration_spikes():
++    from amir_compliance_control.wrench import LocalModel
++    from amir_compliance_control.stroke_kinematics import solve_stroke_pose,stroke_pose_velocity
++    from amir_compliance_control.arm_translation import reference
++    from amir_native_arm_support import SCENE
++    model=LocalModel((ROOT/SCENE/'leader.urdf').read_text())
++    q=np.array([0.,1.4,-1.6,.2,1.570796]);home,sensor=model.frames(q)
++    rotation=sensor[:3,:3];total=duration(.213,.003,.0012)
++    for x in np.linspace(0,reference(total-12,.213,.003,.0012)[0],100):
++        q=solve_stroke_pose(model,q,home+[x,0,0],rotation)
++    old=[];smooth=[]
++    for t in np.arange(total-12,total+1,.008):
++        x,v,_=reference(t,.213,.003,.0012)
++        q=solve_stroke_pose(model,q,home+[x,0,0],rotation)
++        future=solve_stroke_pose(model,q,home+[reference(t+.08,.213,.003,.0012)[0],0,0],rotation)
++        old.append((future-q)/.08)
++        smooth.append(stroke_pose_velocity(model,q,v))
++    # The previous implementation violates the unchanged 0.15 rad/s2 guard
++    # even on this exact, noise-free URDF path. The differential solve does not.
++    assert np.max(abs(np.diff(old,axis=0)/.008))>.15
++    assert np.max(abs(np.diff(smooth,axis=0)/.008))<.01
++    assert np.max(np.abs(smooth))<.03
++    np.testing.assert_allclose(smooth[-1],0.,atol=1e-14)
++
++
++def test_lower_virtual_impedance_preserves_pole_and_existing_actuator_caps(tmp_path):
++    module,ctx=public_context()
++    ctx.launch_configurations.update(workspace_directory=str(ROOT),dual_arm_distance_m='.1',
++        dual_arm_admittance_scale='.25',headless='true',output_directory=str(tmp_path/'out'))
++    process=next(a for a in module['setup'](ctx) if isinstance(a,ExecuteProcess))
++    argv=[perform_substitutions(ctx,v) for v in process.cmd]
++    mass=float(argv[argv.index('--virtual-mass-kg')+1]);damping=float(argv[argv.index('--virtual-damping-ns-m')+1])
++    assert mass==.5 and damping==8.65
++    assert mass/damping==pytest.approx(2/34.6)
++    assert argv[argv.index('--speed')+1]=='0.003'
++    assert '--follower-base-fixture' not in argv
++
++
++def test_slow_simulation_can_complete_full_profile_and_hold_without_wall_deadline_false_failure():
++    speed=.004374273787108695;total=duration(.213,speed,.0012);sim=[0.]
++    def wait(predicate,wall_timeout,healthy):
++        assert healthy is True
++        # RTF=0.35 still keeps the existing sensor/clock heartbeats healthy.
++        assert wall_timeout>(total+2)/.35
++        for _ in range(2000):
++            sim[0]+=.1
++            if predicate():return
++        pytest.fail('profile and hold could not complete')
++    wait_for_arm_completion(wait,sim,lambda:sim[0]>=total+2,.213,speed)
++
++
++def test_uncompleted_arm_mission_still_has_bounded_simulation_deadline():
++    sim=[0.]
++    def wait(predicate,wall_timeout,healthy):
++        sim[0]=10000.
++        predicate()
++    with pytest.raises(RuntimeError,match='simulation-time mission budget'):
++        wait_for_arm_completion(wait,sim,lambda:False,.213,.004374273787108695)
++
++
++def test_gui_affinity_only_uses_spare_cpus_within_original_permission():
++    from af_cpu_affinity import gui_command
++    command,proof=gui_command(['ign','gazebo','-g'],{'before':[0,1,2,3],'after':[0,1]})
++    assert command[-3:]==['ign','gazebo','-g']
++    assert proof['gui_cpus']==[2,3] and proof['control_cpus']==[0,1]
++    assert proof['watchdogs_changed'] is False
++    command,proof=gui_command(['ign','gazebo','-g'],{'before':[0,1],'after':[0,1]})
++    assert command==['ign','gazebo','-g']
+--- a/tools/test_dual_arm_only.py
++++ b/tools/test_dual_arm_only.py
+@@ -60,8 +60,8 @@
+     process=next(a for a in module['setup'](ctx) if isinstance(a,ExecuteProcess))
+     argv=[perform_substitutions(ctx,v) for v in process.cmd]
+     assert '--dual-arm-only' in argv and '--follower-base-fixture' not in argv
+-    assert argv[argv.index('--distance')+1]=='0.03'
+-    assert argv[argv.index('--speed')+1]=='0.005'
++    assert argv[argv.index('--distance')+1]=='0.213'
++    assert float(argv[argv.index('--speed')+1])==0.003
+     assert argv[argv.index('--virtual-stiffness-n-m')+1]=='0'
+ 
+ 
+--- a/tools/af_cpu_affinity.py
++++ b/tools/af_cpu_affinity.py
+@@ -1,5 +1,6 @@
+ """Optional process-local SMT-core preference, based on observed Linux topology."""
+ import os
++import shutil
+ from pathlib import Path
+ 
+ 
+@@ -31,3 +32,15 @@
+     return {'scope':'this runner and subsequently created threads/children only; no other process or watchdog change',
+         'policy':'prefer observed SMT cores, otherwise inherit','before':sorted(before),
+         'after':sorted(os.sched_getaffinity(0)),'observed_topology':topology}
++
++
++def gui_command(argv,policy):
++    """Only the new GUI child uses spare permitted CPUs; critical tasks keep theirs."""
++    spare=set(policy.get('before',[]))-set(policy.get('after',[])) if policy else set()
++    taskset=shutil.which('taskset')
++    if spare and taskset:
++        return [taskset,'--cpu-list',','.join(map(str,sorted(spare))),*argv],{
++            'scope':'new owned GUI child and its threads only','gui_cpus':sorted(spare),
++            'control_cpus':policy['after'],'watchdogs_changed':False}
++    return argv,{'scope':'GUI inherits existing permitted CPUs; no spare CPU set available',
++                 'watchdogs_changed':False}
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_only_leader.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_only_leader.py
+@@ -13,7 +13,7 @@
+ from .wrench import finite
+ from .admittance import rotation_error
+ from .arm_translation import reference
+-from .stroke_kinematics import solve_stroke_pose
++from .stroke_kinematics import solve_stroke_pose,stroke_pose_velocity
+ from .arm_servo_response import validate_response
+ 
+ 
+@@ -87,7 +87,10 @@
+             desired=solve_stroke_pose(self.model,q,target,self.rotation_home)
+             ahead,_,_=reference(self.sim-start+.08,distance,self.p('speed_m_s'),self.p('arm_acceleration_m_s2'))
+             future=solve_stroke_pose(self.model,desired,self.origin+[ahead,0,0],self.rotation_home)
+-            qdot=(future-desired)/.08
++            # Pose IK accepts a 1um residual. Differencing two independently
++            # accepted solves turns that tolerance into spurious acceleration
++            # at small velocities. Differentiate the same constrained path.
++            qdot=stroke_pose_velocity(self.model,desired,v)
+             knots=np.vstack((desired+self.tau*qdot,future+self.tau*qdot))
+             if np.max(abs(qdot))>.03 or np.any(knots<=self.model.lower+.01) or np.any(knots>=self.model.upper-.01):
+                 raise ValueError('leader arm-only joint speed/position bound')
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/stroke_kinematics.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/stroke_kinematics.py
+@@ -7,6 +7,14 @@
+ import numpy as np
+ from .wrench import finite
+ from .admittance import rotation_error
++
++
++def stroke_pose_velocity(model, q, velocity_x):
++    """Differentiate the fixed-orientation path without differencing IK errors."""
++    velocity=finite([velocity_x,0.,0.,0.,0.,0.],(6,))
++    weight=np.array([1.,1.,1.,.1,.1,.1])
++    jacobian=model.jacobian(finite(q,(5,)))*weight[:,None]
++    return np.linalg.lstsq(jacobian,velocity*weight,rcond=None)[0]
+ 
+ 
+ def solve_stroke_pose(model,seed,target,rotation):

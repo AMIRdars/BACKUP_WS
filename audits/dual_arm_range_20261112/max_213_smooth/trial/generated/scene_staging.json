@@ -1,0 +1,18 @@
+{
+  "robots": {
+    "leader": {
+      "original_x_m": -1.174987,
+      "initial_approach_m": 0.11,
+      "staged_x_m": -1.064987
+    },
+    "follower": {
+      "original_x_m": 1.174987,
+      "initial_approach_m": 0.11,
+      "staged_x_m": 1.064987
+    }
+  },
+  "policy_source": "cooperative_transport_bringup/launch/friction_simulation.launch.py: approach_distance",
+  "payload_z_m": 0.65,
+  "support_source": "cooperative_transport_contact.sdf",
+  "payload_pose_source": "friction_simulation.launch.py: spawn_payload"
+}

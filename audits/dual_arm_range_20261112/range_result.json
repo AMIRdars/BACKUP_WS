@@ -1,0 +1,147 @@
+{
+  "passed": false,
+  "motion_completed": true,
+  "safe_stop_verified": true,
+  "grasp_held_after_stop": true,
+  "passed_checks": 67,
+  "failed_checks": [
+    "native_force_band:leader/left",
+    "native_force_band:leader/right",
+    "native_force_band:follower/left",
+    "native_force_band:follower/right"
+  ],
+  "requested_arm_distance_m": 0.213,
+  "leader_actual_arm_distance_m": 0.21299907481172414,
+  "payload_displacement_xyz_m": [
+    0.21284119236934476,
+    2.8213666194914315e-06,
+    -4.9132804034179856e-06
+  ],
+  "follower_actual_arm_distance_m": 0.2112594088740834,
+  "kinematic_reach": {
+    "maximum_common_verified_m": 0.213,
+    "resolution_m": 0.001,
+    "arms": {
+      "leader": {
+        "verified_horizontal_reach_m": 0.213,
+        "first_unverified_m": 0.214,
+        "last_q_rad": [
+          1.1113318337852874e-06,
+          0.4431427007571462,
+          -0.07701814476377439,
+          -0.3661243572262342,
+          1.570795999997981
+        ],
+        "boundary_reason": "stroke pose residual outside numerical acceptance"
+      },
+      "follower": {
+        "verified_horizontal_reach_m": 0.264,
+        "first_unverified_m": 0.265,
+        "last_q_rad": [
+          -3.7359402743830574e-06,
+          2.344805466429015,
+          -2.273077582570213,
+          -0.07172788245822896,
+          1.5707960000006256
+        ],
+        "boundary_reason": "stroke pose residual outside numerical acceptance"
+      }
+    },
+    "scope": "same initial grasp, horizontal translation, fixed orientation; not collision/load qualification"
+  },
+  "trajectory_rate_proof": {
+    "duration_s": 133.125,
+    "arms": {
+      "leader": {
+        "peak_joint_speed_rad_s": 0.019546101629940426,
+        "peak_joint_acceleration_rad_s2": 0.0016140601246630898
+      },
+      "follower": {
+        "peak_joint_speed_rad_s": 0.010271067922279315,
+        "peak_joint_acceleration_rad_s2": 0.00026102062574846654
+      }
+    },
+    "peak_joint_speed_rad_s": 0.019546101629940426
+  },
+  "launch_policy": {
+    "mode": "DUAL_ARM_ONLY",
+    "leader_arm_distance_m": 0.213,
+    "leader_arm_speed_m_s": 0.003,
+    "requested_arm_speed_m_s": 0.003,
+    "base_fixture": false,
+    "physical_base_approach": true,
+    "both_base_commands_after_approach": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "follower_force_source": "own Gazebo wrist F/T",
+    "follower_stiffness_N_m": 0.0,
+    "force_deadband_N": 0.003,
+    "virtual_mass_kg": 0.5,
+    "virtual_damping_Ns_m": 8.65,
+    "admittance_scale": 0.25,
+    "deadband_basis": "previous native stationary measured absolute XY max 0.00287245N; experimental only",
+    "legacy_forward_distance_m": "1.0",
+    "legacy_translation_velocity_m_s": "0.1",
+    "legacy_route_used": false,
+    "gui_review_mode": "paused"
+  },
+  "measured_joint_change_rad": {
+    "leader": [
+      1.1113182920105137e-06,
+      -0.9568231182832938,
+      1.5229146837026728,
+      -0.5660915074855071,
+      -1.8531620682438188e-10
+    ],
+    "follower": [
+      -7.476044007521461e-05,
+      0.7302238379751047,
+      -0.591039992636355,
+      -0.13918384344491505,
+      -4.318767565791859e-13
+    ]
+  },
+  "measured_joint_speed_peak_rad_s": {
+    "leader": 0.019550164454036366,
+    "follower": 0.017773482972219774
+  },
+  "dual_arm_metrics": {
+    "leader": {
+      "body_drift_from_stop_peak_m": 0.0010693916353772246,
+      "body_yaw_drift_peak_rad": 8.585062683930195e-05,
+      "body_drift_during_ARM_ONLY_peak_m": 0.0003711661862022162,
+      "odom_speed_peak": 1.0952039930466632e-05,
+      "local_arm_displacement_m": [
+        0.21299907481172414,
+        -1.6124739245224932e-08,
+        -9.912791143484867e-09
+      ],
+      "world_TCP_displacement_m": [
+        0.21267981401429004,
+        6.294753960470465e-05,
+        -1.904718798040328e-05
+      ],
+      "TCP_object_translation_residual_peak_m": 0.00017279438325786258
+    },
+    "follower": {
+      "body_drift_from_stop_peak_m": 0.0010682135780168912,
+      "body_yaw_drift_peak_rad": 8.369523067042195e-06,
+      "body_drift_during_ARM_ONLY_peak_m": 0.0003701725119240785,
+      "odom_speed_peak": 1.9963712934581093e-06,
+      "local_arm_displacement_m": [
+        -0.2112594088740834,
+        -1.902750198129129e-05,
+        -1.768556412429234e-10
+      ],
+      "world_TCP_displacement_m": [
+        0.21160639663132197,
+        7.566189040057049e-06,
+        9.42324703978592e-06
+      ],
+      "TCP_object_translation_residual_peak_m": 0.0013865539870921895
+    }
+  },
+  "evidence_checks": 71
+}

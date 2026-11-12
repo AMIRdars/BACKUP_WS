@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/home/dars5070/ros2_humble_ws/tools/amir_dual_arm_evidence.py", line 104, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+  File "/home/dars5070/ros2_humble_ws/tools/amir_dual_arm_evidence.py", line 62, in main
+    (folder/'dual_arm_evidence.json').write_text(json.dumps(summary,indent=2))
+  File "/usr/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/usr/lib/python3.10/json/encoder.py", line 201, in encode
+    chunks = list(chunks)
+  File "/usr/lib/python3.10/json/encoder.py", line 431, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 405, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.10/json/encoder.py", line 438, in _iterencode
+    o = _default(o)
+  File "/usr/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool_ is not JSON serializable

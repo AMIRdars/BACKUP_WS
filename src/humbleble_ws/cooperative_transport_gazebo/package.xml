@@ -8,6 +8,8 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <build_depend>ignition-gazebo6</build_depend>
+  <!-- Includes the DART development dependency used by the native solver setup. -->
+  <depend>ignition-physics5</depend>
   <depend>ignition-transport11</depend>
   <depend>ignition-msgs8</depend>
   <depend>rclcpp</depend>

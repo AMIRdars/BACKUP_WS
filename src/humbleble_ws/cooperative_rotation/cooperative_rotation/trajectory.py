@@ -125,5 +125,14 @@ class AccelerationLimitedTrajectory:
             progress = distance - 0.5 * self.angular_acceleration * remaining ** 2
         return math.copysign(progress, self.target_angle)
 
+    def velocity(self, elapsed: float) -> float:
+        """Return the signed derivative, including zero outside the motion."""
+        time = float(elapsed)
+        if time <= 0.0 or time >= self.duration:
+            return 0.0
+        speed = min(self.peak_speed, self.angular_acceleration * time,
+                    self.angular_acceleration * (self.duration - time))
+        return math.copysign(speed, self.target_angle)
+
     def complete(self, elapsed: float) -> bool:
         return elapsed >= self.duration

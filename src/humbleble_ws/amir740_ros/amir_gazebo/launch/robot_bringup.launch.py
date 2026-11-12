@@ -6,6 +6,10 @@
   world       world SDF ファイル名 (amir_gazebo/worlds/ 配下)。
   world_name  world SDF 内の <world name="..."> (pose_bridge 用)。
   pose_bridge  true で /world/<world_name>/pose/info を TF へブリッジ。
+  tf_frame_prefix  任意のRSP frame prefix (既定空)。controller側のframe設定は別途揃える。
+  bridge_ground_truth  既定true。falseでGazebo真値odom/TFのROS bridgeを起動しない。
+  base_controllers_file  任意のmecanum controller専用YAML。空なら従来の読込方法。
+                         指定時は対象managerのspawnerに -p で渡す。
   launch_sim  true で gz_sim 本体 + /clock ブリッジ + EGL 環境 + 終了処理を起動。
               マルチロボットでは先頭 1 台だけ true、残りは false にする。
 
@@ -117,6 +121,7 @@ def launch_setup(context, *args, **kwargs):
     xacro_file = os.path.join(amir_description_dir, "urdf", "amir_mecanum3_sim.xacro")
 
     # xacro → robot_description (namespace を渡して Ignition 側を prefix)
+    description_file = LaunchConfiguration('robot_description_file').perform(context)
     robot_description_xml = xacro.process_file(
         xacro_file,
         mappings={
@@ -127,6 +132,9 @@ def launch_setup(context, *args, **kwargs):
             "enable_wrist_ft": str(enable_wrist_ft).lower(),
         },
     ).toxml()
+    if description_file:
+        with open(description_file, encoding='utf-8') as description_stream:
+            robot_description_xml = description_stream.read()
     robot_description_content = ParameterValue(
         robot_description_xml,
         value_type=str,
@@ -142,9 +150,10 @@ def launch_setup(context, *args, **kwargs):
         parameters=[{
             "robot_description": robot_description_content,
             "use_sim_time": True,
+            "frame_prefix": LaunchConfiguration("tf_frame_prefix"),
         }],
-        # TF はフレーム prefix せず、ロボットごとの /<ns>/tf に載せる
-        # (絶対 /tf を相対 tf に remap → namespace 配下へ)。
+        # 既定は無prefix。opt-in構成ではtf_frame_prefixで一意なframeを使う。
+        # 絶対 /tf を相対 tf に remap → namespace 配下へ。
         # ns="" なら /tf のまま (従来どおり単体)。
         remappings=[("/tf", "tf"), ("/tf_static", "tf_static")],
     )
@@ -187,6 +196,7 @@ def launch_setup(context, *args, **kwargs):
     odom_bridge = Node(
         package="ros_gz_bridge", executable="parameter_bridge",
         namespace=ns, name="odom_bridge", output="screen",
+        condition=IfCondition(LaunchConfiguration("bridge_ground_truth")),
         arguments=[
             f"/{prefix}odom@nav_msgs/msg/Odometry[gz.msgs.Odometry",
             f"/{prefix}odom/tf@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V",
@@ -266,9 +276,11 @@ def launch_setup(context, *args, **kwargs):
     arm = spawner("arm_controller",
                   extra=["-t", "joint_trajectory_controller/JointTrajectoryController",
                          "-p", arm_controllers_yaml])
-    mecanum = spawner("mecanum_drive_controller")
-    mecanum_retry_1 = spawner("mecanum_drive_controller")
-    mecanum_retry_2 = spawner("mecanum_drive_controller")
+    base_parameters = LaunchConfiguration('base_controllers_file').perform(context)
+    base_extra = ['-p', base_parameters] if base_parameters else None
+    mecanum = spawner("mecanum_drive_controller", extra=base_extra)
+    mecanum_retry_1 = spawner("mecanum_drive_controller", extra=base_extra)
+    mecanum_retry_2 = spawner("mecanum_drive_controller", extra=base_extra)
     gripper = spawner("gripper_controller",
                       extra=["-t", "position_controllers/GripperActionController",
                              "-p", arm_controllers_yaml])
@@ -422,6 +434,10 @@ def generate_launch_description():
         DeclareLaunchArgument("contact_input_transport", default_value="ros", choices=["ros", "gazebo"]),
         DeclareLaunchArgument("finger_collision_boxes", default_value="9"),
         DeclareLaunchArgument("namespace", default_value=""),
+        DeclareLaunchArgument("tf_frame_prefix", default_value=""),
+        DeclareLaunchArgument("bridge_ground_truth", default_value="true"),
+        DeclareLaunchArgument('base_controllers_file', default_value=''),
+        DeclareLaunchArgument('robot_description_file', default_value=''),
         DeclareLaunchArgument("x", default_value="0.0"),
         DeclareLaunchArgument("y", default_value="0.0"),
         DeclareLaunchArgument("z", default_value="0.03"),

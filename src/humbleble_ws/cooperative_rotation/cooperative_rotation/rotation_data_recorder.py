@@ -26,6 +26,11 @@ class RotationDataRecorder(Node):
         self.declare_parameter(
             'output_directory', '~/ros2_humble_ws/rotation_measurements')
         self.declare_parameter('output_file', '')
+        self.declare_parameter('pivot_mode', False)
+        self._pivot_mode = bool(self.get_parameter('pivot_mode').value)
+        motion_topic = (
+            '/cooperative_pivot' if self._pivot_mode else
+            '/cooperative_rotation')
 
         self._target_angle = float(
             self.get_parameter('target_angle_deg').value)
@@ -48,13 +53,13 @@ class RotationDataRecorder(Node):
         self._saved_sample_count = 0
 
         self.create_subscription(
-            Float64, '/cooperative_rotation/desired_angle_deg',
+            Float64, f'{motion_topic}/desired_angle_deg',
             lambda message: setattr(self, '_desired_angle', message.data), 20)
         self.create_subscription(
-            Float64, '/cooperative_rotation/angle_deg',
+            Float64, f'{motion_topic}/angle_deg',
             lambda message: setattr(self, '_actual_angle', message.data), 20)
         self.create_subscription(
-            String, '/cooperative_rotation/state', self._on_state, 20)
+            String, f'{motion_topic}/state', self._on_state, 20)
         self.create_subscription(
             String, '/cooperative_transport/friction_grasp_status',
             self._on_grasp_status, 20)
@@ -81,12 +86,12 @@ class RotationDataRecorder(Node):
         result_qos = QoSProfile(depth=1)
         result_qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
         self.create_subscription(
-            Bool, '/cooperative_rotation/complete', self._on_complete,
+            Bool, f'{motion_topic}/complete', self._on_complete,
             result_qos)
         self._report_publisher = self.create_publisher(
-            String, '/cooperative_rotation/excel_report', result_qos)
+            String, f'{motion_topic}/excel_report', result_qos)
         self.create_service(
-            Trigger, '/cooperative_rotation/save_excel', self._on_save)
+            Trigger, f'{motion_topic}/save_excel', self._on_save)
 
         sample_rate = float(self.get_parameter('sample_rate').value)
         if not math.isfinite(sample_rate) or sample_rate <= 0.0:
@@ -145,7 +150,8 @@ class RotationDataRecorder(Node):
                 'POST_ROTATION_TRANSLATING', 'POST_ROTATION_SETTLING'):
             return '搬送（Y方向直進）'
         if self._state in ('ROTATING', 'SETTLING'):
-            return '搬送（回転）'
+            return ('搬送（指定点回転）' if self._pivot_mode else
+                    '搬送（回転）')
         if self._support_removed is True:
             return '把持完了・搬送準備'
         if self._grasp_state in (
@@ -201,7 +207,8 @@ class RotationDataRecorder(Node):
             self.get_parameter('output_directory').value)).expanduser()
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         angle = f'{self._target_angle:g}'.replace('-', 'minus_').replace('.', 'p')
-        return directory / f'rotation_{angle}deg_{timestamp}.xlsx'
+        motion = 'pivot' if self._pivot_mode else 'rotation'
+        return directory / f'{motion}_{angle}deg_{timestamp}.xlsx'
 
     def save(self) -> Optional[Path]:
         """Write all collected samples and publish the resulting path."""

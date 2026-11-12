@@ -1,4 +1,4 @@
-"""Grasp, move forward, turn in place, strafe right, then pivot around A."""
+"""Grasp, move forward, turn, move right or along world Y, then optionally pivot."""
 
 import os
 
@@ -34,8 +34,15 @@ def generate_launch_description():
             'auto_grasp': 'true',
             'auto_grasp_delay': '0.0',
             'contact_only': 'true',
-            'max_linear_speed': '0.060',
-            'max_linear_acceleration': '0.025',
+            'holding_force_tolerance': LaunchConfiguration('holding_force_tolerance'),
+            'holding_force_release_threshold': LaunchConfiguration('holding_force_release_threshold'),
+            'max_linear_speed': LaunchConfiguration('max_linear_speed'),
+            'max_linear_acceleration': LaunchConfiguration(
+                'translation_acceleration_m_s2'),
+            'enable_translation_feedforward': LaunchConfiguration(
+                'enable_translation_feedforward'),
+            'enable_rotation_feedforward': LaunchConfiguration(
+                'enable_rotation_feedforward'),
             'yaw_tolerance': '0.00872665',
             'maximum_base_speed': '0.120',
             'odometry_timeout': '1.0',
@@ -55,7 +62,8 @@ def generate_launch_description():
                 LaunchConfiguration('forward_distance_m'), value_type=float),
             'target_angle_deg': ParameterValue(
                 LaunchConfiguration('rotation_angle_deg'), value_type=float),
-            'post_rotation_translation_y_distance_m': 0.0,
+            'post_rotation_translation_y_distance_m': ParameterValue(
+                LaunchConfiguration('world_y_distance_m'), value_type=float),
             'post_rotation_translation_right_distance_m': ParameterValue(
                 LaunchConfiguration('right_distance_m'), value_type=float),
             'translation_velocity_m_s': ParameterValue(
@@ -74,17 +82,33 @@ def generate_launch_description():
             'auto_start': True,
             'require_grasp': True,
             'require_support_removed': True,
-            'pre_rotation_force_stability_duration': 0.0,
+            'pre_rotation_force_stability_duration': 2.0,
+            'pre_rotation_target_tolerance': 3.0,
             'tracking_pause_orientation_error_deg': 5.0,
             'tracking_resume_orientation_error_deg': 2.0,
             'settling_timeout': 20.0,
             'pose_timeout': 1.0,
         }],
     )
+    data_recorder = Node(
+        package='cooperative_rotation',
+        executable='rotation_data_recorder',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('record_data')),
+        parameters=[{
+            'use_sim_time': True,
+            'target_angle_deg': ParameterValue(
+                LaunchConfiguration('rotation_angle_deg'), value_type=float),
+            'sample_rate': ParameterValue(
+                LaunchConfiguration('recording_rate'), value_type=float),
+            'output_directory': LaunchConfiguration('excel_output_directory'),
+        }],
+    )
     pivot_controller = Node(
         package='cooperative_transport_control',
         executable='pivot_rotation_controller',
         output='screen',
+        condition=IfCondition(LaunchConfiguration('enable_pivot')),
         parameters=[{
             'target_angle_deg': ParameterValue(
                 LaunchConfiguration('pivot_angle_deg'), value_type=float),
@@ -111,12 +135,30 @@ def generate_launch_description():
         DeclareLaunchArgument('finger_collision_boxes', default_value='9'),
         DeclareLaunchArgument('slip_monitor_rate', default_value='50.0'),
         DeclareLaunchArgument('headless', default_value='false'),
+        DeclareLaunchArgument('holding_force_tolerance', default_value='0.5'),
+        DeclareLaunchArgument('holding_force_release_threshold', default_value='23.0'),
         DeclareLaunchArgument('forward_distance_m', default_value='0.5'),
         DeclareLaunchArgument('rotation_angle_deg', default_value='30.0'),
         DeclareLaunchArgument('right_distance_m', default_value='0.3'),
+        DeclareLaunchArgument(
+            'world_y_distance_m', default_value='0.0',
+            description='Signed world-Y distance after rotation; set right_distance_m=0 to use it.'),
         DeclareLaunchArgument('pivot_angle_deg', default_value='30.0'),
         DeclareLaunchArgument(
-            'translation_velocity_m_s', default_value='0.05'),
+            'enable_pivot', default_value='true',
+            description='Run the final pivot rotation after transport.'),
+        DeclareLaunchArgument('record_data', default_value='false'),
+        DeclareLaunchArgument('recording_rate', default_value='10.0'),
+        DeclareLaunchArgument(
+            'excel_output_directory',
+            default_value=os.path.expanduser(
+                '~/ros2_humble_ws/rotation_measurements')),
+        DeclareLaunchArgument(
+            'translation_velocity_m_s', default_value='0.10',
+            description='Cruise speed; acceleration/deceleration lower the mean speed.'),
+        DeclareLaunchArgument('max_linear_speed', default_value='0.110'),
+        DeclareLaunchArgument('enable_translation_feedforward', default_value='true'),
+        DeclareLaunchArgument('enable_rotation_feedforward', default_value='true'),
         DeclareLaunchArgument(
             'translation_acceleration_m_s2', default_value='0.025'),
         DeclareLaunchArgument(
@@ -124,6 +166,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'angular_acceleration_deg_s2', default_value='0.25'),
         simulation,
+        data_recorder,
         TimerAction(period=21.5, actions=[rotation_controller], condition=UnlessCondition(LaunchConfiguration('event_startup'))),
         TimerAction(period=30.0, actions=[pivot_controller], condition=UnlessCondition(LaunchConfiguration('event_startup'))),
         rotation_controller_if_ready,

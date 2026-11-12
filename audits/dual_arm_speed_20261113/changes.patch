@@ -1,0 +1,377 @@
+--- /dev/null
++++ b/tools/amir_dual_arm_speed_audit.py
+@@ -0,0 +1,98 @@
++#!/usr/bin/env python3
++"""Offline speed feasibility on the existing two-arm fixed-orientation path.
++
++This tool never starts ROS/Gazebo or changes controller/safety limits. Requested
++TCP peak speed is evaluated separately from the acceleration-limited profile.
++URDF velocity bounds alone do not qualify contact, torque or tracking.
++"""
++import argparse
++import hashlib
++import json
++import math
++from pathlib import Path
++import xml.etree.ElementTree as ET
++
++import numpy as np
++from amir_compliance_control.arm_translation import duration
++from amir_compliance_control.stroke_kinematics import solve_stroke_pose,stroke_pose_velocity
++from amir_compliance_control.wrench import LocalModel
++from amir_native_arm_support import SCENE
++from dual_arm_workspace import common_reach
++
++
++def path_rates(root,distance,samples=501):
++    if samples<101:raise ValueError('at least 101 path samples required')
++    u=np.linspace(0.,1.,samples)
++    shape=10*u**3-15*u**4+6*u**5
++    velocity=distance*(30*u**2-60*u**3+30*u**4)
++    arms={}
++    for robot,sign in (('leader',1.),('follower',-1.)):
++        path=Path(root)/SCENE/(robot+'.urdf');xml=path.read_text()
++        tree=ET.fromstring(xml);model=LocalModel(xml)
++        q=np.array([float(tree.find(f"ros2_control/joint[@name='{n}']/state_interface[@name='position']/param").text) for n in model.names])
++        home,sensor=model.frames(q);rates=[]
++        for x,v in zip(distance*shape,velocity):
++            q=solve_stroke_pose(model,q,home+[sign*x,0.,0.],sensor[:3,:3])
++            rates.append(stroke_pose_velocity(model,q,sign*v))
++        rates=np.array(rates)
++        acceleration=np.gradient(rates,u,axis=0,edge_order=2)
++        limits=np.array([float(tree.find(f"joint[@name='{n}']/limit").get('velocity')) for n in model.names])
++        arms[robot]={'joint_names':list(model.names),'URDF_velocity_rad_s':limits.tolist(),
++            'unit_duration_joint_speed_peak':np.max(abs(rates),axis=0).tolist(),
++            'unit_duration_joint_acceleration_peak':np.max(abs(acceleration),axis=0).tolist(),
++            'urdf_sha256':hashlib.sha256(xml.encode()).hexdigest()}
++    return arms
++
++
++def assess(root,distance,target_speed,samples=501):
++    if not all(math.isfinite(v) and v>0 for v in (distance,target_speed)):
++        raise ValueError('positive finite distance and target speed required')
++    reach=common_reach(root)
++    if distance>reach['maximum_common_verified_m']:
++        raise ValueError('distance exceeds common verified URDF reach')
++    arms=path_rates(root,distance,samples)
++    nominal_time=1.875*distance/target_speed
++    current_accel_time=duration(distance,target_speed,.0012)
++    joint_time=0.;accel_time=0.;urdf_time=0.
++    for arm in arms.values():
++        qv=np.array(arm['unit_duration_joint_speed_peak'])
++        qa=np.array(arm['unit_duration_joint_acceleration_peak'])
++        arm['requested_peak_joint_speed_rad_s']=(qv/nominal_time).tolist()
++        arm['requested_peak_joint_acceleration_rad_s2']=(qa/nominal_time**2).tolist()
++        arm['requested_URDF_velocity_ratio_peak']=float(np.max(qv/nominal_time/arm['URDF_velocity_rad_s']))
++        joint_time=max(joint_time,float(np.max(qv))/(.03*.95))
++        accel_time=max(accel_time,math.sqrt(float(np.max(qa))/(.15*.95)))
++        urdf_time=max(urdf_time,float(np.max(qv/arm['URDF_velocity_rad_s'])))
++    bounded_time=max(current_accel_time,joint_time,accel_time)
++    return {'scope':'offline same-grasp horizontal fixed-orientation arm path; no contact/load qualification',
++        'distance_m':distance,'target_TCP_peak_speed_m_s':target_speed,
++        'target_nominal_duration_s':nominal_time,
++        'target_required_TCP_peak_acceleration_m_s2':10/math.sqrt(3)*distance/nominal_time**2,
++        'launch_accepts_requested_speed':target_speed<=.005,
++        'target_respects_URDF_velocity':all(a['requested_URDF_velocity_ratio_peak']<=1 for a in arms.values()),
++        'current_acceleration_limited_duration_s':current_accel_time,
++        'current_acceleration_limited_TCP_peak_speed_m_s':1.875*distance/current_accel_time,
++        'existing_guard_bounded_duration_s':bounded_time,
++        'existing_guard_bounded_TCP_peak_speed_m_s':1.875*distance/bounded_time,
++        'URDF_velocity_only_TCP_peak_ceiling_m_s':1.875*distance/urdf_time,
++        'URDF_ceiling_is_not_a_qualified_command':True,
++        'preserved_experiment_limits':{'joint_speed_rad_s':.03,'joint_acceleration_rad_s2':.15,
++            'TCP_acceleration_m_s2':.0012,'launch_requested_speed_cap_m_s':.005},
++        'samples':samples,'arms':arms}
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--distance',type=float,default=.213)
++    parser.add_argument('--target-speed',type=float,default=1.)
++    parser.add_argument('--output',type=Path,required=True)
++    args=parser.parse_args()
++    if args.output.exists():parser.error('output already exists')
++    root=Path(__file__).resolve().parents[1]
++    result=assess(root,args.distance,args.target_speed)
++    args.output.parent.mkdir(parents=True,exist_ok=True)
++    args.output.write_text(json.dumps(result,indent=2))
++    print(json.dumps({k:v for k,v in result.items() if k!='arms'},indent=2))
++
++
++if __name__=='__main__':main()
+--- /dev/null
++++ b/tools/test_dual_arm_speed_audit.py
+@@ -0,0 +1,52 @@
++"""Speed promises must respect actual URDF and distinguish request from result."""
++from pathlib import Path
++import numpy as np
++import pytest
++from amir_dual_arm_speed_audit import assess
++from test_dual_arm_only import public_context
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++@pytest.fixture(scope='module')
++def metre_per_second():
++    return assess(ROOT,.213,1.)
++
++
++def test_one_metre_per_second_is_not_advertised_as_supported(metre_per_second):
++    result=metre_per_second
++    assert result['launch_accepts_requested_speed'] is False
++    assert result['target_respects_URDF_velocity'] is False
++    assert result['arms']['leader']['requested_peak_joint_speed_rad_s'][2]>6.
++    assert result['arms']['leader']['URDF_velocity_rad_s'][2]==1.
++    assert result['target_required_TCP_peak_acceleration_m_s2']>7.
++
++
++def test_acceleration_and_joint_caps_are_not_silently_presented_as_one_metre_per_second(metre_per_second):
++    result=metre_per_second
++    assert result['current_acceleration_limited_TCP_peak_speed_m_s']<.013
++    assert .0043<result['existing_guard_bounded_TCP_peak_speed_m_s']<.0045
++    assert result['URDF_velocity_only_TCP_peak_ceiling_m_s']<.16
++    assert result['URDF_ceiling_is_not_a_qualified_command'] is True
++
++
++def test_four_millimetres_per_second_fits_preserved_path_limits():
++    result=assess(ROOT,.213,.004)
++    assert result['launch_accepts_requested_speed'] and result['target_respects_URDF_velocity']
++    assert result['existing_guard_bounded_TCP_peak_speed_m_s']==pytest.approx(.004)
++    for arm in result['arms'].values():
++        assert max(arm['requested_peak_joint_speed_rad_s'])<.03
++        assert max(arm['requested_peak_joint_acceleration_rad_s2'])<.15
++
++
++@pytest.mark.parametrize('distance,speed',[(.214,1.),(.213,np.nan),(.213,0.)])
++def test_invalid_or_unreachable_requests_are_refused(distance,speed):
++    with pytest.raises(ValueError):assess(ROOT,distance,speed)
++
++
++def test_public_launch_still_refuses_unqualified_one_metre_per_second(tmp_path):
++    module,context=public_context()
++    context.launch_configurations.update(workspace_directory=str(ROOT),dual_arm_speed_m_s='1.0',
++        output_directory=str(tmp_path/'out'))
++    with pytest.raises(ValueError,match='0.005'):module['setup'](context)
++    assert not (tmp_path/'out').exists()
+--- a/src/humbleble_ws/cooperative_transport_bringup/README_dual_arm_only.md
++++ b/src/humbleble_ws/cooperative_transport_bringup/README_dual_arm_only.md
+@@ -17,6 +17,20 @@
+ このモードでは旧走行引数 `forward_distance_m` と `translation_velocity_m_s` は走行目標に使用しません。既定は `dual_arm_distance_m:=0.213`、要求速度上限は `dual_arm_speed_m_s:=0.003` です。実URDFの連続IKで求めた共通水平可動域を超える距離は拒否します。関節速度0.03rad/sを守るため、要求速度が高い場合は軌道を自動で減速します。小距離の回帰試験は `dual_arm_distance_m:=0.03` で実行できます。往復は行いません。
+ 
+ 213mmでは動作完了・接触継続・停止後把持保持を確認しましたが、最終ログの指反力が1サンプルで既存8N下限を下回り、独立評価は67/71項目合格です。全項目合格は未達であり、瞬間的な反力低下の原因は報告書の残課題に記録しています。
++
++速度比較は起動引数 `dual_arm_speed_m_s:=0.004` で行えます。既定の3mm/sは維持しています。5mm/s要求は関節速度に合わせて約4.37mm/sへ自動減速し、1m/s要求は起動前に拒否します。同じ213mmの姿勢固定軌道を実際のピーク1m/sにすると、計算上リーダー関節速度が約6.52rad/sとなり、該当関節のURDF上限1rad/sを超えます。URDF上限だけで求めた速度は接触搬送の合格速度ではありません。
++
++動かさずに速度目標を分析する場合:
++
++```bash
++PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 /usr/bin/python3 \
++  tools/amir_dual_arm_speed_audit.py --target-speed 1.0 \
++  --output <未作成の分析JSON保存先>
++```
++
++速度比較の実測・合否は `audits/dual_arm_speed_20261113/REPORT.md` に保存します。
++
++4mm/sのGUI試験では213mmの移動と停止後把持保持を確認し、厳密判定は67/71項目合格でした。指反力の下限条件は未達です。開始時の31点IK事前確認が受信処理を止める問題は、同じ確認を別スレッドへ移して修正しました。反映には `colcon build --packages-select amir_compliance_control` 後、`source install/setup.bash` を実行します。関節指令速度上限と実測関節速度は別々に記録しており、瞬間的な実測速度の上振れも報告書に記載しています。
+ 
+ Humble 2.53.1 JTCの既存ワークスペース修正版が必要です。未ビルドの場合のみ先に実行してください。
+ 
+--- /dev/null
++++ b/tools/test_arm_preflight.py
+@@ -0,0 +1,72 @@
++"""Long IK preflight must not block receive callbacks or accept after a stop."""
++from concurrent.futures import Future,ThreadPoolExecutor
++from pathlib import Path
++from threading import Event
++from types import SimpleNamespace
++import time
++import numpy as np
++import pytest
++from geometry_msgs.msg import Vector3Stamped
++from amir_compliance_control import arm_only_leader as leader
++from amir_compliance_control.wrench import LocalModel
++from amir_compliance_control.stroke_kinematics import verify_stroke_branch
++from amir_native_arm_support import SCENE
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++def local_endpoint():
++    q=np.array([0.,1.4,-1.6,.2,1.570796])
++    model=LocalModel((ROOT/SCENE/'leader.urdf').read_text())
++    node=SimpleNamespace(state='READY',motion=None,pending_motion=None,homed=True,
++        local_health=lambda:(True,''),q_actual=lambda:q.copy(),model=model,
++        base_pose=lambda:np.zeros(3),sim=1.,last_goal_stamp=0.,accepted=0,rejected=0,
++        last_rejection='',latched=False,emergency=False,permit=True,
++        p=lambda key:{'max_distance_m':.213,'timeout_s':.15}[key])
++    node.finish_preflight=lambda:leader.ArmOnlyLeader.finish_preflight(node)
++    return node,q
++
++
++def test_pending_ik_keeps_zero_output_and_can_process_local_state(monkeypatch):
++    entered,release=Event(),Event()
++    def blocked(*args):
++        entered.set();assert release.wait(2.)
++    monkeypatch.setattr(leader,'verify_stroke_branch',blocked)
++    node,q=local_endpoint()
++    with ThreadPoolExecutor(max_workers=1) as executor:
++        node.preflight_executor=executor
++        try:
++            msg=Vector3Stamped();msg.header.frame_id='leader/base_footprint'
++            msg.header.stamp.sec=1;msg.vector.x=.213
++            leader.ArmOnlyLeader.goal(node,msg)
++            assert entered.wait(1.)
++            assert not node.pending_motion[0].done()
++            # These main-thread receive/timer operations remain available while
++            # the branch solver is blocked; no receipt timeout is increased.
++            for _ in range(5):
++                assert node.local_health()[0]
++                np.testing.assert_array_equal(leader.ArmOnlyLeader.base_request(node,0.),np.zeros(3))
++            assert node.accepted==0 and node.state=='READY'
++            release.set();node.pending_motion[0].result(timeout=1.)
++            node.finish_preflight()
++            assert node.accepted==1 and node.state=='TRANSPORT'
++        finally:release.set()
++
++
++@pytest.mark.parametrize('changed',['stop','health','arm_position','IK_failure'])
++def test_completed_preflight_cannot_bypass_current_local_safety(changed):
++    node,q=local_endpoint();future=Future()
++    if changed=='IK_failure':future.set_exception(ValueError('unreachable branch'))
++    else:future.set_result(None)
++    node.pending_motion=(future,time.monotonic(),.213,1.,q.copy())
++    if changed=='stop':node.emergency=True
++    if changed=='health':node.local_health=lambda:(False,'stale input')
++    if changed=='arm_position':node.q_actual=lambda:q+np.array([0.,.002,0.,0.,0.])
++    node.finish_preflight()
++    assert node.accepted==0 and node.rejected==1 and node.motion is None
++
++
++def test_full_preflight_uses_real_branch_without_mutating_latched_seed():
++    node,q=local_endpoint();p,s=node.model.frames(q);original=q.copy()
++    verify_stroke_branch(node.model,q,p,s[:3,:3],.213)
++    np.testing.assert_array_equal(q,original)
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_only_leader.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_only_leader.py
+@@ -1,5 +1,7 @@
+ """Leader's own arm drives the payload; every base command remains zero."""
+ import json
++import time
++from concurrent.futures import ThreadPoolExecutor
+ from pathlib import Path
+ import numpy as np
+ import rclpy
+@@ -13,7 +15,7 @@
+ from .wrench import finite
+ from .admittance import rotation_error
+ from .arm_translation import reference
+-from .stroke_kinematics import solve_stroke_pose,stroke_pose_velocity
++from .stroke_kinematics import solve_stroke_pose,stroke_pose_velocity,verify_stroke_branch
+ from .arm_servo_response import validate_response
+ 
+ 
+@@ -29,6 +31,9 @@
+         self.motion=None;self.origin=None;self.rotation_home=None;self.base_home=None
+         self.previous_knots=None;self.previous_stamp=None;self.motion_done=False
+         self.previous_qdot=np.zeros(5)
++        self.preflight_executor=ThreadPoolExecutor(max_workers=1,thread_name_prefix='arm_preflight')
++        self.pending_motion=None
++        self.preflight_wall_s=None
+         self.arm_debug=self.create_publisher(String,'arm_compensation/debug',10)
+ 
+     def q_actual(self):
+@@ -49,7 +54,7 @@
+ 
+     def goal(self,msg):
+         try:
+-            if self.state!='READY' or self.motion is not None or not self.homed or not self.local_health()[0]:
++            if self.state!='READY' or self.motion is not None or self.pending_motion is not None or not self.homed or not self.local_health()[0]:
+                 raise ValueError('one arm trajectory requires local homed READY state')
+             value=finite([msg.vector.x,msg.vector.y,msg.vector.z],(3,))
+             if (msg.header.frame_id!='leader/base_footprint' or not 0<abs(value[0])<=self.p('max_distance_m')
+@@ -60,15 +65,40 @@
+             self.rotation_home=sensor[:3,:3].copy();self.base_home=self.base_pose()
+             # Verify the full branch before accepting a motion, never move a
+             # base to recover an unreachable five-joint arm pose.
+-            seed=q.copy()
+-            for delta in np.linspace(0,value[0],31):
+-                seed=solve_stroke_pose(self.model,seed,self.origin+[delta,0,0],self.rotation_home)
+-            self.motion=(self.sim+.05,float(value[0]));self.last_goal_stamp=stamp(msg)
++            # A full 31-pose check can exceed the 150ms receive watchdog.
++            # The worker uses only immutable model data and copied local state;
++            # acceptance remains on the ROS thread after fresh health checks.
++            future=self.preflight_executor.submit(verify_stroke_branch,self.model,q.copy(),
++                self.origin.copy(),self.rotation_home.copy(),float(value[0]))
++            self.pending_motion=(future,time.monotonic(),float(value[0]),stamp(msg),q.copy())
++        except (ValueError,np.linalg.LinAlgError) as exc:
++            self.rejected+=1;self.last_rejection=str(exc)
++
++    def finish_preflight(self):
++        if self.pending_motion is None:return
++        future,started,distance,goal_stamp,initial_q=self.pending_motion
++        if self.latched or self.emergency or not self.permit:
++            future.cancel();self.pending_motion=None
++            self.rejected+=1;self.last_rejection='arm preflight cancelled by shared/local stop'
++            return
++        if not future.done() and time.monotonic()-started<=2.:return
++        self.pending_motion=None
++        try:
++            if time.monotonic()-started>2.:
++                future.cancel();raise ValueError('arm preflight computation timeout')
++            future.result()
++            if not self.local_health()[0] or not self.homed or self.state!='READY':
++                raise ValueError('fresh local READY state required after arm preflight')
++            if np.max(abs(self.q_actual()-initial_q))>=.001:
++                raise ValueError('local arm moved during preflight')
++            self.preflight_wall_s=time.monotonic()-started
++            self.motion=(self.sim+.05,distance);self.last_goal_stamp=goal_stamp
+             self.accepted+=1;self.state='TRANSPORT';self.reason=''
+         except (ValueError,np.linalg.LinAlgError) as exc:
+             self.rejected+=1;self.last_rejection=str(exc)
+ 
+     def base_request(self,command):
++        self.finish_preflight()
+         if self.motion is None or self.latched:
+             return np.zeros(3)
+         try:
+@@ -118,6 +148,7 @@
+             self.arm_debug.publish(String(data=json.dumps({'mode':'LEADER_ARM_ONLY','p_target_m':target.tolist(),
+                 'p_actual_m':actual.tolist(),'p_home_m':self.origin.tolist(),'q_actual_rad':q.tolist(),
+                 'q_cmd_rad':knots[-1].tolist(),'qdot_rad_s':qdot.tolist(),'base_drift_xy_yaw':drift.tolist(),
++                'preflight_wall_s':self.preflight_wall_s,
+                 'arm_reference_velocity_m_s':v,'sim_time':self.sim})))
+         except (ValueError,np.linalg.LinAlgError) as exc:
+             self.trip(str(exc))
+@@ -130,6 +161,7 @@
+         super().publish_command(publisher,message)
+ 
+     def tick(self):
++        if self.latched:self.finish_preflight()
+         super().tick()
+         # Continuous zero output includes INIT/disarmed intervals.
+         msg=TwistStamped();msg.header.stamp=Time(seconds=self.sim).to_msg()
+@@ -139,4 +171,6 @@
+ def main(args=None):
+     rclpy.init(args=args);node=ArmOnlyLeader()
+     try:rclpy.spin(node)
+-    finally:node.destroy_node();rclpy.try_shutdown()
++    finally:
++        node.preflight_executor.shutdown(wait=False,cancel_futures=True)
++        node.destroy_node();rclpy.try_shutdown()
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/stroke_kinematics.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/stroke_kinematics.py
+@@ -7,6 +7,13 @@
+ import numpy as np
+ from .wrench import finite
+ from .admittance import rotation_error
++
++
++def verify_stroke_branch(model,seed,origin,rotation,distance):
++    """Pure bounded preflight; run outside the ROS receive/timer callbacks."""
++    q=np.array(seed,copy=True)
++    for delta in np.linspace(0,distance,31):
++        q=solve_stroke_pose(model,q,origin+[delta,0,0],rotation)
+ 
+ 
+ def stroke_pose_velocity(model, q, velocity_x):

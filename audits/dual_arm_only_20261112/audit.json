@@ -1,0 +1,350 @@
+{
+  "joint_names": [
+    "Joint_1",
+    "Joint_2",
+    "Joint_3",
+    "Joint_4",
+    "Joint_5"
+  ],
+  "joint_types": [
+    "revolute",
+    "revolute",
+    "revolute",
+    "revolute",
+    "revolute"
+  ],
+  "joint_lower_rad": [
+    -2.96706,
+    0.0,
+    -2.792527,
+    -2.094395,
+    -2.75762
+  ],
+  "joint_upper_rad": [
+    2.96706,
+    2.356194,
+    0.0,
+    1.308997,
+    2.75762
+  ],
+  "joint_velocity_URDF_rad_s": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    2.0
+  ],
+  "joint_effort_URDF_Nm": [
+    33.0,
+    22.0,
+    26.0,
+    13.0,
+    4.0
+  ],
+  "request_speed_existing_rad_s": 0.03,
+  "frame_base": "follower/base_footprint",
+  "tcp": "follower/tcp_link",
+  "sensor_link": "follower/gripper_base_1",
+  "initial_arm_q_rad": [
+    0.0,
+    1.4,
+    -1.6,
+    0.2,
+    1.570796
+  ],
+  "initial_FK_TCP_m": [
+    0.47498745342665516,
+    -1.7447263379971614e-06,
+    0.6569019237499536
+  ],
+  "J_xy_shape": [
+    2,
+    5
+  ],
+  "J_xy_singular_values_m": [
+    0.4765104534298594,
+    0.25155748378271237
+  ],
+  "J_xy_central_difference_error_m_per_rad": 5.4031048104710006e-11,
+  "wrist_sensor": "<sensor name=\"wrist_ft_sensor\" type=\"force_torque\"><always_on>true</always_on><update_rate>100</update_rate><topic>/follower/ft_sensor</topic><force_torque><frame>child</frame><measure_direction>child_to_parent</measure_direction></force_torque></sensor>",
+  "sensor_calibration_path": "audits/whole_body_compliance_20261019/cp9_transport/metrology_02/calibration/calibration.json",
+  "sensor_calibration_SHA256": "5ccd3fc3a6caa381771eb2a80dbb90ed43cfc145dfad8565ac8319abbc3f974a",
+  "sensor_sign": 1.0,
+  "sensor_frame": "follower/Joint_5/wrist_ft_sensor",
+  "sensor_axes_verified": [
+    "fx",
+    "fy",
+    "fz",
+    "tx",
+    "ty",
+    "tz"
+  ],
+  "sensor_calibration_passed": true,
+  "grasp_load_limits_calibrated": false,
+  "sensor_polarity_test_results": [
+    {
+      "axis": "fx",
+      "command": [
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        0.5000020911153792,
+        6.3008679914039215e-09,
+        2.0991786087165565e-10,
+        -4.207409594336742e-12,
+        1.6513540396223547e-09,
+        -6.182897806840791e-09
+      ],
+      "gain_assuming_sign_plus": 1.0000041822307584,
+      "passed": true
+    },
+    {
+      "axis": "fx",
+      "command": [
+        -0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        -0.5000020912512787,
+        -6.1994812127077865e-09,
+        -1.3203660387262062e-11,
+        4.326033455070988e-12,
+        -1.641031907584356e-09,
+        6.177693549578338e-09
+      ],
+      "gain_assuming_sign_plus": 1.0000041825025574,
+      "passed": true
+    },
+    {
+      "axis": "fy",
+      "command": [
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        6.982925988013001e-08,
+        0.5000022654174189,
+        -1.4458212405088489e-11,
+        -1.7785045536983235e-09,
+        5.4193524667844883e-11,
+        -1.2564482288044083e-07
+      ],
+      "gain_assuming_sign_plus": 1.0000045308348378,
+      "passed": true
+    },
+    {
+      "axis": "fy",
+      "command": [
+        0.0,
+        -0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        5.715571103466908e-08,
+        -0.5000022647539547,
+        -1.3912870855392612e-11,
+        1.774646701292737e-09,
+        4.426826960557406e-11,
+        1.25253812008703e-07
+      ],
+      "gain_assuming_sign_plus": 1.0000045295079094,
+      "passed": true
+    },
+    {
+      "axis": "fz",
+      "command": [
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        -1.1918932228926801e-06,
+        -5.149547494972587e-07,
+        0.4999999999561211,
+        3.998506097144944e-08,
+        -8.386516758829288e-10,
+        4.570295936926031e-09
+      ],
+      "gain_assuming_sign_plus": 0.9999999999122422,
+      "passed": true
+    },
+    {
+      "axis": "fz",
+      "command": [
+        0.0,
+        0.0,
+        -0.5,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        1.8855690678590108e-06,
+        5.169735631036419e-07,
+        -0.5000000000132965,
+        -3.997285492711444e-08,
+        1.5780109996477165e-09,
+        -4.5599276226116165e-09
+      ],
+      "gain_assuming_sign_plus": 1.000000000026593,
+      "passed": true
+    },
+    {
+      "axis": "tx",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        -1.0432674431718803e-09,
+        -3.4796810624879033e-07,
+        5.321032503502465e-11,
+        0.05000000027307087,
+        4.9646214653198406e-08,
+        1.9392910786364806e-08
+      ],
+      "gain_assuming_sign_plus": 1.0000000054614173,
+      "passed": true
+    },
+    {
+      "axis": "tx",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        -0.05,
+        0.0,
+        0.0
+      ],
+      "measured_delta": [
+        9.82997037304726e-10,
+        3.480372245189159e-07,
+        -5.243405709620674e-11,
+        -0.05000000027342431,
+        -4.960509716878114e-08,
+        -1.9440490355926604e-08
+      ],
+      "gain_assuming_sign_plus": 1.000000005468486,
+      "passed": true
+    },
+    {
+      "axis": "ty",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05,
+        0.0
+      ],
+      "measured_delta": [
+        3.212497356608984e-07,
+        9.350568562885352e-10,
+        2.4220625505222415e-12,
+        -4.957669592041414e-08,
+        0.05000000025205954,
+        5.017199598762785e-08
+      ],
+      "gain_assuming_sign_plus": 1.0000000050411908,
+      "passed": true
+    },
+    {
+      "axis": "ty",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "measured_delta": [
+        -3.212351546550858e-07,
+        -1.038227733546575e-09,
+        -7.111644606538903e-12,
+        4.958083302426808e-08,
+        -0.050000000252251375,
+        -5.012238055600056e-08
+      ],
+      "gain_assuming_sign_plus": 1.0000000050450275,
+      "passed": true
+    },
+    {
+      "axis": "tz",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.05
+      ],
+      "measured_delta": [
+        2.166254204157323e-09,
+        3.4246158258766837e-11,
+        1.8686385772070935e-11,
+        -1.4909080914282669e-13,
+        2.1384560788817453e-12,
+        0.049999999992044485
+      ],
+      "gain_assuming_sign_plus": 0.9999999998408896,
+      "passed": true
+    },
+    {
+      "axis": "tz",
+      "command": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.05
+      ],
+      "measured_delta": [
+        2.0691322596407902e-09,
+        4.3108306571402937e-11,
+        9.760547925452556e-11,
+        2.339968496745115e-14,
+        6.10464456762827e-12,
+        -0.05000000000816914
+      ],
+      "gain_assuming_sign_plus": 1.0000000001633829,
+      "passed": true
+    }
+  ],
+  "gazebo_version": "6.16.0",
+  "ros_distro": "humble",
+  "controller_package": "ros-humble-joint-trajectory-controller\t2.53.1-1jammy.20260611.085003",
+  "base_fixture_scope": "ideal Gazebo root velocity restraint after original friction grasp; not real wheel holding",
+  "Phase2": "not implemented/enabled; specification thresholds remain illustrative",
+  "source_files": {
+    "audits/whole_body_compliance_20261019/cp12_speed_release/generated_gui20/follower.urdf": "a956f6d8f5b9ae3e2f0a5198f899c2e44b9cafbac400d5a442635fe76ce29211",
+    "audits/whole_body_compliance_20261019/cp12_speed_release/generated_gui20/follower_controllers.yaml": "fcd93cc1c0ce250aa0512aa36ef18bdde3423993f24630aff12a09d8ace5910b",
+    "audits/whole_body_compliance_20261019/cp12_speed_release/generated_gui20/follower_base_controller.yaml": "1734ebf0c81082e3416585176537d4099af0d743449b1440b7705c7a45a08915",
+    "audits/whole_body_compliance_20261019/cp12_speed_release/generated_gui20/world.sdf": "20dec714b5e12a0f24489f9afdcd86367d67a3f536d7a89bfd1b6255ea006513"
+  },
+  "current_trial_URDF_matches_audited_model": true
+}

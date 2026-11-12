@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "scope": "simulation_native_forward_progressive_stroke_distance_only",
+  "calibration_source": "completed native friction + follower base fixture trials; evaluation GT is offline metrology only",
+  "artifact_sha256": {
+    "leader.urdf": "f093f73f8caf2321b7f13237300c2bb0d389805e601bc12f1991ee3269748120",
+    "leader_controllers.yaml": "a1b6f42ebf6260e864143b8fce6e174c21ef16680aee5e426d88067c24512f33",
+    "leader_base_controller.yaml": "2246c8f8e69b7fccc8ee6b022e9ac64885dc3bea70f139e8ecbf27f8ad753a9e",
+    "world.sdf": "35af2308fd6b1cca58362a52dc5d1715b78916d1c6d09b94108e1246591e2019",
+    "base_fixture_proof.json": "d69cacdaed0eb9d0f1ec2b6f062cfc7e21fba51292311d9ecf0e60ed578db5e1"
+  },
+  "samples": [
+    {
+      "case": "audits/arm_follow_resume_20261111/coherent_050_gui_retry/trial",
+      "raw_odom_distance_m": 0.5000293672701674,
+      "measured_body_gt_x_m": 0.4959850266394298,
+      "transport_checks_passed": true,
+      "target_distance_reached": false,
+      "p0_evidence_sha256": "322faf263764becda48c6dda9d754f7910db5e07e3e3e8685f08283df43147f3",
+      "scope": "completed transport and verified stop; live GUI endurance is separate"
+    },
+    {
+      "case": "audits/arm_follow_resume_20261111/paused_050_gui/trial",
+      "raw_odom_distance_m": 0.5000296500202436,
+      "measured_body_gt_x_m": 0.49597820173607543,
+      "transport_checks_passed": true,
+      "target_distance_reached": false,
+      "p0_evidence_sha256": "a5d42351e8b93b2f06291ff88ece808a051c4cdaeef704ab920de90f29f564f4",
+      "scope": "completed transport and verified stop; live GUI endurance is separate"
+    },
+    {
+      "case": "audits/arm_follow_resume_20261111/calibrated_050_smt_gui/trial",
+      "raw_odom_distance_m": 0.5041104983320583,
+      "measured_body_gt_x_m": 0.4999941744184335,
+      "transport_checks_passed": true,
+      "target_distance_reached": false,
+      "p0_evidence_sha256": "5172330ab65708126ccccf1b6ede4446a3bdb3d9ec443247e4a97a1ae490c324",
+      "scope": "completed transport and verified stop; live GUI endurance is separate"
+    }
+  ],
+  "metres_per_raw_odom_metre": 0.9917571679608245,
+  "fit_method": "min_minus_observed_range",
+  "empirical_scale_reserve": 7.731291738688473e-05,
+  "sample_scale_range": [
+    0.9918344808782114,
+    0.9919117937955982
+  ],
+  "raw_command_cap_m_s": 0.005,
+  "passed": true
+}

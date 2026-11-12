@@ -84,6 +84,8 @@ def rigid_body_commands(
     separation_target: Optional[float] = None,
     separation_kp: float = 0.0,
     separation_max_correction_speed: float = 0.0,
+    center_velocity_feedforward: Tuple[float, float] = (0.0, 0.0),
+    angular_velocity_feedforward: float = 0.0,
 ) -> Tuple[Twist2, Twist2, Pose2]:
     """
     Compute synchronized base commands from one payload goal.
@@ -94,8 +96,10 @@ def rigid_body_commands(
     """
     formation = estimate_payload_pose(robot1, robot2)
     feedback = feedback_pose or formation
-    center_vx = position_kp * (goal.x - feedback.x)
-    center_vy = position_kp * (goal.y - feedback.y)
+    center_vx = (center_velocity_feedforward[0]
+                 + position_kp * (goal.x - feedback.x))
+    center_vy = (center_velocity_feedforward[1]
+                 + position_kp * (goal.y - feedback.y))
     if alignment_error is not None:
         correction_x = alignment_kp * alignment_error[0]
         correction_y = alignment_kp * alignment_error[1]
@@ -109,11 +113,13 @@ def rigid_body_commands(
         center_vx, center_vy = center_velocity_override
     center_vx, center_vy = clamp_vector(center_vx, center_vy, max_linear_speed)
     formation_omega = clamp(
-        yaw_kp * normalize_angle(goal.yaw - formation.yaw),
+        angular_velocity_feedforward
+        + yaw_kp * normalize_angle(goal.yaw - formation.yaw),
         max_angular_speed,
     )
     feedback_omega = clamp(
-        yaw_kp * normalize_angle(goal.yaw - feedback.yaw),
+        angular_velocity_feedforward
+        + yaw_kp * normalize_angle(goal.yaw - feedback.yaw),
         max_angular_speed,
     )
 

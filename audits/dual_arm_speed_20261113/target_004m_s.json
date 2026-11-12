@@ -1,0 +1,116 @@
+{
+  "scope": "offline same-grasp horizontal fixed-orientation arm path; no contact/load qualification",
+  "distance_m": 0.213,
+  "target_TCP_peak_speed_m_s": 0.004,
+  "target_nominal_duration_s": 99.84375,
+  "target_required_TCP_peak_acceleration_m_s2": 0.0001233608086906994,
+  "launch_accepts_requested_speed": true,
+  "target_respects_URDF_velocity": true,
+  "current_acceleration_limited_duration_s": 99.84375,
+  "current_acceleration_limited_TCP_peak_speed_m_s": 0.004,
+  "existing_guard_bounded_duration_s": 99.84375,
+  "existing_guard_bounded_TCP_peak_speed_m_s": 0.004,
+  "URDF_velocity_only_TCP_peak_ceiling_m_s": 0.1534829898565447,
+  "URDF_ceiling_is_not_a_qualified_command": true,
+  "preserved_experiment_limits": {
+    "joint_speed_rad_s": 0.03,
+    "joint_acceleration_rad_s2": 0.15,
+    "TCP_acceleration_m_s2": 0.0012,
+    "launch_requested_speed_cap_m_s": 0.005
+  },
+  "samples": 501,
+  "arms": {
+    "leader": {
+      "joint_names": [
+        "Joint_1",
+        "Joint_2",
+        "Joint_3",
+        "Joint_4",
+        "Joint_5"
+      ],
+      "URDF_velocity_rad_s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "unit_duration_joint_speed_peak": [
+        2.122512877185344e-06,
+        1.521028076395769,
+        2.602079881120912,
+        1.1452721952724252,
+        4.742872761198669e-13
+      ],
+      "unit_duration_joint_acceleration_peak": [
+        8.071644951478194e-06,
+        13.435200028291632,
+        26.24908293036944,
+        12.824929095583158,
+        1.1812772982011653e-10
+      ],
+      "urdf_sha256": "f093f73f8caf2321b7f13237300c2bb0d389805e601bc12f1991ee3269748120",
+      "requested_peak_joint_speed_rad_s": [
+        2.1258344935815653e-08,
+        0.015234084020239316,
+        0.026061519936109293,
+        0.011470644835279376,
+        4.750295097288182e-15
+      ],
+      "requested_peak_joint_acceleration_rad_s2": [
+        8.096928083849394e-10,
+        0.0013477283636130037,
+        0.0026331303969865188,
+        0.0012865101127668822,
+        1.1849774597515124e-14
+      ],
+      "requested_URDF_velocity_ratio_peak": 0.026061519936109293
+    },
+    "follower": {
+      "joint_names": [
+        "Joint_1",
+        "Joint_2",
+        "Joint_3",
+        "Joint_4",
+        "Joint_5"
+      ],
+      "URDF_velocity_rad_s": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "unit_duration_joint_speed_peak": [
+        5.255590800280466e-06,
+        1.3673418515820022,
+        1.1588835910699424,
+        0.4529078983361667,
+        4.671818487622659e-13
+      ],
+      "unit_duration_joint_acceleration_peak": [
+        2.177141718748873e-05,
+        4.625770390145391,
+        4.185026690456311,
+        2.1494725356362494,
+        1.0191847366058927e-10
+      ],
+      "urdf_sha256": "a956f6d8f5b9ae3e2f0a5198f899c2e44b9cafbac400d5a442635fe76ce29211",
+      "requested_peak_joint_speed_rad_s": [
+        5.2638155120179944e-08,
+        0.013694816666861993,
+        0.011606971804143398,
+        0.004536166743899009,
+        4.679129627665887e-15
+      ],
+      "requested_peak_joint_acceleration_rad_s2": [
+        2.183961265767713e-09,
+        0.0004640259873490592,
+        0.000419813561489834,
+        0.00021562054133796883,
+        1.0223771692216996e-14
+      ],
+      "requested_URDF_velocity_ratio_peak": 0.013694816666861993
+    }
+  }
+}

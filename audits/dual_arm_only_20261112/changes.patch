@@ -1,0 +1,1936 @@
+--- a/src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py
++++ b/src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py
+@@ -32,8 +32,11 @@
+             if key in context.launch_configurations:
+                 raise ValueError('legacy round-trip route and acceleration are fixed: '+key)
+     trial=context.launch_configurations.get('arm_only_trial','micro')
+-    if trial not in ('micro','native_stroke'):raise ValueError('unsupported ARM_ONLY trial')
+-    path = root/'tools'/('native_arm_stroke_runtime.py' if mode=='ARM_ONLY' and trial=='native_stroke'
++    if trial not in ('micro','native_stroke','dual_arm'):raise ValueError('unsupported ARM_ONLY trial')
++    if trial=='dual_arm' and context.launch_configurations.get('arm_only_experiment.enabled','true')=='false':
++        trial='native_stroke'
++    path = root/'tools'/('dual_arm_only_runtime.py' if mode=='ARM_ONLY' and trial=='dual_arm'
++                        else 'native_arm_stroke_runtime.py' if mode=='ARM_ONLY' and trial=='native_stroke'
+                         else 'arm_only_micro_runtime.py' if mode == 'ARM_ONLY' else 'round_trip_runtime.py')
+     # Experiment tools stay in the workspace, not the controller import graph.
+     import sys
+@@ -54,7 +57,10 @@
+             description='Phase 1: must remain false; Phase 2 base assistance is not qualified'),
+         DeclareLaunchArgument('wrench_source_mode', default_value='sensor',
+             description='Audited Gazebo F/T sensor only; no target proxy or synthetic force'),
+-        DeclareLaunchArgument('arm_only_trial', default_value='native_stroke',choices=['micro','native_stroke']),
++        DeclareLaunchArgument('arm_only_trial', default_value='dual_arm',choices=['micro','native_stroke','dual_arm']),
++        DeclareLaunchArgument('arm_only_experiment.enabled',default_value='true',choices=['true','false']),
++        DeclareLaunchArgument('dual_arm_distance_m',default_value='0.03'),
++        DeclareLaunchArgument('dual_arm_speed_m_s',default_value='0.005'),
+         DeclareLaunchArgument('leader_base_distance_m',default_value='0.5'),
+         DeclareLaunchArgument('calibrate_leader_distance',default_value='true',choices=['true','false'],
+             description='Native 0.005m/s only: measured offline leader raw-odom distance correction'),
+--- a/src/humbleble_ws/amir_compliance_control/launch/arm_only_af.launch.py
++++ b/src/humbleble_ws/amir_compliance_control/launch/arm_only_af.launch.py
+@@ -20,6 +20,7 @@
+             or policy['controller_parameters'].get('wrench_source_mode','sensor') != 'sensor'):
+         raise ValueError('Phase 1 policy requires enable_base_assist=false and wrench_source_mode=sensor')
+     native=policy.get('native_arm_stroke') is True
++    dual=policy.get('dual_arm_only') is True
+     allowed_scopes={'simulation_micro_test_only_not_hardware_ratings'}
+     if native:allowed_scopes.add('simulation_native_stroke_only_not_hardware_ratings')
+     if policy.get('scope') not in allowed_scopes:
+@@ -31,7 +32,7 @@
+     distance_scale=float(policy.get('leader_distance_metres_per_raw_odom_metre',1.)) if native else 1.
+     if not math.isfinite(distance_scale) or distance_scale<=0:raise ValueError('invalid calibrated distance scale')
+     env = {'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1', 'MKL_NUM_THREADS': '1'}
+-    return [Node(package='amir_compliance_control', executable='leader_arm_compensation' if native else 'leader_trajectory_node', namespace='leader',
++    return [Node(package='amir_compliance_control', executable='leader_arm_only' if dual else 'leader_arm_compensation' if native else 'leader_trajectory_node', namespace='leader',
+         parameters=[{'use_sim_time': True, 'urdf_file': str(folder/'leader.urdf'),
+                      'speed_m_s': speed*distance_scale, 'max_distance_m': distance,
+                      'simulation_source_watchdog':native,
+@@ -39,8 +40,9 @@
+                      'straight_reference_acceleration_m_s2': float(policy.get('leader_reference_acceleration_m_s2', 0.))*distance_scale,
+                      'goal_tolerance_m': float(policy.get('leader_goal_tolerance_m', .00001)),
+                      'actuator_ack_required': True,
++                     **({'arm_acceleration_m_s2':.0012,'arm_hold_after_s':2.} if dual else {}),
+                      **({'arm_servo_response_file':policy['leader_servo_response_file'],
+-                         'base_distance_calibration_file':policy.get('leader_base_distance_calibration_file','')} if native else {})}], additional_env=env, output='screen'),
++                         **({} if dual else {'base_distance_calibration_file':policy.get('leader_base_distance_calibration_file','')})} if native else {})}], additional_env=env, output='screen'),
+         Node(package='amir_compliance_control', executable='follower_arm_only', namespace='follower',
+             parameters=[{**policy['controller_parameters'], 'use_sim_time': True,
+                 'urdf_file': str(folder/'follower.urdf'), 'control_mode': 'ARM_ONLY',
+--- a/src/humbleble_ws/amir_compliance_control/launch/guarded_safety.launch.py
++++ b/src/humbleble_ws/amir_compliance_control/launch/guarded_safety.launch.py
+@@ -9,6 +9,7 @@
+ def setup(context):
+     folder=Path(LaunchConfiguration('run_directory').perform(context)).resolve()
+     arm_only=LaunchConfiguration('follower_arm_only').perform(context)=='true'
++    both=LaunchConfiguration('both_bases_zero').perform(context)=='true'
+     coherent=LaunchConfiguration('coherent_sensor_history').perform(context)=='true'
+     source_watchdog=LaunchConfiguration('simulation_source_watchdog').perform(context)=='true'
+     actions=[Node(package='amir_compliance_control',executable='safety_supervisor',
+@@ -19,16 +20,16 @@
+                          'profile_file':str(folder/(robot+'_safety.json')),
+                          'coherent_sensor_history':coherent,
+                          'simulation_source_watchdog':source_watchdog,
+-                         'base_zero_only':arm_only and robot=='follower'}],
++                         'base_zero_only':both or arm_only and robot=='follower'}],
+             remappings=[('rover_twist','interlock/base_request'),
+                         ('arm_controller/joint_trajectory','interlock/arm_request')],additional_env={'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},output='screen'),
+             Node(package='amir_compliance_control',executable='actuator_interlock',namespace=robot,
+                  parameters=[{'use_sim_time':True,'urdf_file':str(folder/(robot+'.urdf')),
+                               'profile_file':str(folder/(robot+'_safety.json')),
+                               'simulation_source_watchdog':source_watchdog,
+-                              'base_zero_only':arm_only and robot=='follower'}],additional_env={'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},output='screen'),
++                              'base_zero_only':both or arm_only and robot=='follower'}],additional_env={'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},output='screen'),
+             Node(package='amir_compliance_control',executable='controller_audit',namespace=robot,
+-                 parameters=[{'request_writer_name':'follower_arm_only' if arm_only and robot=='follower' else '',
++                 parameters=[{'request_writer_name':('leader_trajectory_node' if robot=='leader' else 'follower_arm_only') if both else 'follower_arm_only' if arm_only and robot=='follower' else '',
+                               'require_gripper_active':arm_only}],
+                  additional_env={'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},output='screen')]
+     return actions
+@@ -38,4 +39,5 @@
+     return LaunchDescription([DeclareLaunchArgument('run_directory'),
+         DeclareLaunchArgument('coherent_sensor_history',default_value='false',choices=['false','true']),
+         DeclareLaunchArgument('simulation_source_watchdog',default_value='false',choices=['false','true']),
++        DeclareLaunchArgument('both_bases_zero',default_value='false',choices=['false','true']),
+         DeclareLaunchArgument('follower_arm_only',default_value='false',choices=['false','true']),OpaqueFunction(function=setup)])
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/transport.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/transport.py
+@@ -54,9 +54,10 @@
+ 
+ 
+ class TransportEndpoint(Node):
+-    def __init__(self, *, leader, node_name=None, goal_message_type=Vector3Stamped, goal_topic='transport_goal', **kwargs):
++    def __init__(self, *, leader, node_name=None, goal_message_type=Vector3Stamped, goal_topic='transport_goal', base_trajectory=True, **kwargs):
+         super().__init__(node_name or ('leader_trajectory_node' if leader else 'follower_hold'), **kwargs)
+         self.leader = leader
++        self.base_trajectory = base_trajectory
+         self.role = 'leader' if leader else 'local_stationary_hold'
+         self.robot = self.get_namespace().strip('/')
+         if self.robot != ('leader' if leader else 'follower') or not self.get_parameter('use_sim_time').value:
+@@ -338,7 +339,7 @@
+                     self.home_sent,self.home_last_send = True,self.sim
+                 if not self.homed and self.sim-self.enabled_since > 3.2 and home_error < .001:
+                     self.homed, self.state, self.reason = True, 'READY', ''
+-                if self.leader and self.state == 'TRANSPORT' and self.goal_data is not None:
++                if self.leader and self.base_trajectory and self.state == 'TRANSPORT' and self.goal_data is not None:
+                     start, distance, x0, y0, yaw = self.goal_data
+                     t = self.sim-start
+                     reference_acceleration = self.p('straight_reference_acceleration_m_s2') or self.p('acceleration_m_s2')
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/admittance.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/admittance.py
+@@ -7,7 +7,8 @@
+     def __init__(self, mass, damping, stiffness, displacement, velocity, acceleration):
+         self.mass, self.damping, self.stiffness, self.limit, self.vmax, self.amax = (
+             finite(v, (2,)) for v in (mass, damping, stiffness, displacement, velocity, acceleration))
+-        if any(np.any(v <= 0) for v in (self.mass, self.damping, self.stiffness, self.limit, self.vmax, self.amax)):
++        if (np.any(self.stiffness < 0) or any(np.any(v <= 0)
++                for v in (self.mass, self.damping, self.limit, self.vmax, self.amax))):
+             raise ValueError('positive virtual mechanics and motion bounds required')
+         self.x, self.v = np.zeros(2), np.zeros(2)
+         self.saturated = np.zeros(2, dtype=bool)
+--- a/src/humbleble_ws/amir_compliance_control/amir_compliance_control/strict_arm_only.py
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/strict_arm_only.py
+@@ -32,6 +32,8 @@
+         self.role = 'ARM_ONLY'
+         for key, value in {'control_mode': 'ARM_ONLY', 'rotation_tracking_enabled': False,
+                 'enable_base_assist': False, 'wrench_source_mode': 'sensor',
++                'force_deadband_N': 0.,
++                'joint_request_acceleration_rad_s2': 0.,
+                 'simulation_micro_test': False, 'allow_ungrasped_test': False,
+                 'simulation_fault_injection_enabled': False,
+                 'tracking_gain_s_inv': 4., 'dls_damping_m': .001,
+@@ -56,6 +58,10 @@
+             raise ValueError('Phase 1 requires enable_base_assist=false and wrench_source_mode=sensor')
+         if not self.p('simulation_micro_test'):
+             raise ValueError('uncalibrated AF controller is simulation micro-test only')
++        if not np.isfinite(self.p('force_deadband_N')) or self.p('force_deadband_N') < 0:
++            raise ValueError('finite nonnegative force deadband required')
++        if not np.isfinite(self.p('joint_request_acceleration_rad_s2')) or self.p('joint_request_acceleration_rad_s2') < 0:
++            raise ValueError('finite nonnegative joint acceleration policy required')
+         if not isinstance(self.p('arm_nullspace_pose_hold'), bool):
+             raise ValueError('boolean arm_nullspace_pose_hold required')
+         if self.p('arm_command_reference') not in ('integrated','servo_trajectory'):
+@@ -88,6 +94,7 @@
+         self.rotation_home = self.base_home = None
+         self.last_wrench = None
+         self.qdot_last = np.zeros(5)
++        self.qdot_slew = np.zeros(5)
+         self.zero_sent = False
+         self.fault_debug = {}
+         self.test_fault_pending = None
+@@ -118,6 +125,11 @@
+ 
+     def base_request(self, command):
+         return np.zeros(3)
++
++    def control_force(self):
++        value = super().control_force()
++        # Continuous dead zone, measured/tared base-frame force only.
++        return np.sign(value)*np.maximum(np.abs(value)-self.p('force_deadband_N'),0.)
+ 
+     def inject_test_fault(self, request, response, *, fault):
+         response.success = self.core is not None and not self.latched and self.test_fault_pending is None
+@@ -197,6 +209,7 @@
+             self.rotation_home = sensor[:3, :3].copy()
+             self.base_home = self.base_pose()
+             self.q_request, self.qdot_last = q.copy(), np.zeros(5)
++            self.qdot_slew[:] = 0.
+             self.q_nominal = q.copy()
+             self.q_start_request = q.copy()
+             self.core, self.last_step_stamp = self.make_core(), self.force_stamp
+@@ -282,6 +295,10 @@
+                         qdot, secondary_debug = nullspace_pose_velocity(self.model, q, qdot, desired_secondary,
+                             damping=damping, angular_weight=self.p('nullspace_angular_weight_m'),
+                             speed=self.p('joint_request_speed_rad_s'))
++                    acceleration=self.p('joint_request_acceleration_rad_s2')
++                    if acceleration:
++                        qdot=np.clip(qdot,self.qdot_slew-acceleration*dt,self.qdot_slew+acceleration*dt)
++                    self.qdot_slew=qdot.copy()
+                     # Integrate the velocity request, while the measured FK
+                     # feedback closes tracking. Bound both per-cycle motion
+                     # and lookahead relative to the actual JTC state.
+--- a/src/humbleble_ws/amir_compliance_control/setup.py
++++ b/src/humbleble_ws/amir_compliance_control/setup.py
+@@ -10,6 +10,7 @@
+       install_requires=['setuptools', 'numpy'], zip_safe=True,
+       maintainer='dars5070', maintainer_email='dars5070@todo.todo', license='Apache-2.0',
+       entry_points={'console_scripts': [
++          'leader_arm_only = amir_compliance_control.arm_only_leader:main',
+           'leader_arm_compensation = amir_compliance_control.compensating_leader:main',
+           'follower_arm_only = amir_compliance_control.strict_arm_only:main',
+           'follower_compensation_probe = amir_compliance_control.rotation_compensation_probe:main',
+--- a/tools/amir_af_trial.py
++++ b/tools/amir_af_trial.py
+@@ -116,6 +116,7 @@
+     p.add_argument('--pause-gui-after-stop',action='store_true',help='native GUI: pause physics after verified stop for final-state review; not live hold endurance')
+     p.add_argument('--start-delay-s',type=float,default=0.,help='stationary wall-time observation before AF-2 goal (0..60 s)')
+     p.add_argument('--native-arm-stroke',action='store_true',help='CP13 native grasp then fixed follower base; leader arm compensates half base travel')
++    p.add_argument('--dual-arm-only',action='store_true',help='physical base approach then both bases zero; leader arm translation only')
+     p.add_argument('--leader-base-distance-calibration',type=Path,help='native only: offline measured leader odometry distance certificate')
+     p.add_argument('--prefer-smt-cores',action='store_true',help='native only: runner/children use measured SMT CPU subset; watchdog limits unchanged')
+     p.add_argument('--follower-base-fixture',action='store_true',help='Gazebo test only: lock follower base to ground AFTER native grasp')
+@@ -153,6 +154,9 @@
+                    help='AF-1 only: one isolated pulse from rest, paired with --af1-force-sign')
+     p.add_argument('--af1-force-sign',type=int,choices=[-1,1])
+     a=p.parse_args()
++    if a.dual_arm_only and (not a.native_arm_stroke or a.follower_base_fixture or a.leader_base_distance_calibration
++            or a.progressive_stroke or not 0<a.distance<=.03):
++        raise ValueError('dual arm experiment: native, <=0.03m, no base fixture/calibration/progressive base stroke')
+     if a.follower_base_fixture and not a.native_arm_stroke:raise ValueError('post-grasp base fixture requires native arm stroke')
+     if a.progressive_stroke and not a.native_arm_stroke:raise ValueError('progressive stroke requires native arm stroke')
+     if a.keep_gui_open and (not a.gui or a.stage!='AF-2'):
+@@ -189,9 +193,12 @@
+         raise ValueError('speed-fraction injection requires moving AF-3; saturation boundary is tested separately')
+     if not np.isfinite(a.require_speed_fraction) or not 0<=a.require_speed_fraction<=1 or (a.require_speed_fraction and a.stage!='AF-2'):
+         raise ValueError('speed fraction must be in [0,1] and is an AF-2 check')
+-    for v in (a.virtual_mass_kg,a.virtual_damping_ns_m,a.virtual_stiffness_n_m):
++    for v in (a.virtual_mass_kg,a.virtual_damping_ns_m):
+         if v is not None and (not np.isfinite(v) or v<=0 or a.stage=='AF-0'):
+             raise ValueError('virtual mechanics overrides must be finite positive AF experiment values')
++    if a.virtual_stiffness_n_m is not None and (not np.isfinite(a.virtual_stiffness_n_m)
++            or a.virtual_stiffness_n_m<0 or a.stage=='AF-0'):
++        raise ValueError('nonnegative finite virtual stiffness required')
+     if a.arm_horizon is not None and (not np.isfinite(a.arm_horizon) or not .02<=a.arm_horizon<=.1):
+         raise ValueError('AF arm horizon must remain in [0.02,0.1] seconds')
+     if a.wrench_cutoff_hz is not None and (not np.isfinite(a.wrench_cutoff_hz) or a.wrench_cutoff_hz<=0):
+@@ -219,6 +226,9 @@
+     if a.native_arm_stroke:
+         sources += [Path(__file__).with_name(name) for name in ('amir_native_arm_support.py',
+             'native_arm_stroke_runtime.py','cp9_transport_preparation.py','amir_cp9_grasp_preparation.py')]
++        if a.dual_arm_only:
++            sources += [ROOT/'tools/dual_arm_only_runtime.py',ROOT/'tools/dual_arm_preparation.py',ROOT/'tools/dual_arm_single_probe.py']
++            sources += [ROOT/'src/humbleble_ws/cooperative_transport_bringup/config/compliance_dual_arm_gui.config']
+         sources += list((ROOT/'src/vendor/joint_trajectory_controller').rglob('*.cpp'))
+         sources += [ROOT/'src/vendor/joint_trajectory_controller/AMIR_PATCH.json']
+         if a.follower_base_fixture:
+@@ -370,6 +380,7 @@
+     base_fixture_lock=n.create_publisher(Empty,'/experiment/follower/base_fixture/lock',1) if a.follower_base_fixture else None
+     attach={r:n.create_publisher(Empty,f'/{r}/grasp/attach',1) for r in ('leader','follower')}
+     report={'passed':False,'stage':a.stage,'fault':a.fault,'native_arm_stroke':a.native_arm_stroke,
++            'dual_arm_only':a.dual_arm_only,
+             'grasp_fixture':'native friction contact' if a.native_arm_stroke else 'fixed constraint',
+             'follower_base_fixture':a.follower_base_fixture}
+     constraint_stop_client=n.create_client(Trigger,'/transport/safety/stop')
+@@ -389,6 +400,14 @@
+                     for i,x in enumerate(v):row[prefix+'_'+str(i)]=float(x)
+                 elif isinstance(v,(int,float,bool,str)):row[prefix]=v
+         for k,v in adm.items(): fields('adm_'+k,v)
++        if a.dual_arm_only:
++            stages={'startup':'INIT','servo_probe':'INIT','servo_probe_readiness':'INIT',
++                    'BASE_APPROACH':'BASE_APPROACH','BASE_STOP':'BASE_STOP','pre_grasp':'BASE_STOP',
++                    'DUAL_GRASP':'DUAL_GRASP','explicit_monitor_handoff':'DUAL_GRASP',
++                    'home':'SETTLE_AND_BIAS','SETTLE_AND_BIAS':'SETTLE_AND_BIAS','tare':'SETTLE_AND_BIAS',
++                    'baseline':'ARM_ONLY','stationary_before_goal':'ARM_ONLY','leader_translation':'ARM_ONLY','HOLD':'HOLD'}
++            record.experiment_state=stages.get(phase[0],getattr(record,'experiment_state','INIT'))
++            row['experiment_state']='ABORT' if report.get('error') else record.experiment_state
+         if a.native_arm_stroke:
+             for k,v in native_leader_debug.items():fields('leader_comp_'+k,v)
+         for k in ('reference_positions','feedback_positions','feedback_velocities','output_positions','error_positions'):
+@@ -442,6 +461,10 @@
+                 fields(r+'_gt_position',[poses[r].translation.x,poses[r].translation.y,poses[r].translation.z])
+                 row[r+'_gt_receipt_sim_time']=pose_receipt_sim[r]
+                 row[r+'_gt_source_stamp_s']=pose_source_stamp[r]
++                if a.dual_arm_only:
++                    row[r+'_gt_yaw_rad']=2*np.arctan2(poses[r].rotation.z,poses[r].rotation.w)
++                    if row.get(r+'_fk_valid'):
++                        fields(r+'_tcp_world_evaluation',(pose_matrix(poses[r])@np.r_[row[r+'_p_actual_0'],row[r+'_p_actual_1'],row[r+'_p_actual_2'],1.])[:3])
+         if 'cooperative_payload' in poses:
+             payload=poses['cooperative_payload']
+             fields('payload_model_gt_position',[payload.translation.x,payload.translation.y,payload.translation.z])
+@@ -457,7 +480,7 @@
+         if a.native_arm_stroke and adm.get('enabled') and all(r in poses for r in ('leader','follower')):
+             xy={r:np.array([poses[r].translation.x,poses[r].translation.y]) for r in ('leader','follower')}
+             if not native_base_home:native_base_home.update({r:v.copy() for r,v in xy.items()})
+-            drift=float(np.linalg.norm(xy['follower']-native_base_home['follower']))
++            drift=float(max(np.linalg.norm(xy[r]-native_base_home[r]) for r in ('leader','follower')) if a.dual_arm_only else np.linalg.norm(xy['follower']-native_base_home['follower']))
+             separation=float(np.linalg.norm(xy['leader']-xy['follower']))
+             clearance=separation-sum(native_base_radii.values())
+             row['follower_gt_drift_since_grasp_m']=drift
+@@ -573,7 +596,9 @@
+                 return bool(value)
+             wait(discovered,10.)
+         result={'nodes':n.get_node_names_and_namespaces(),'topics':n.get_topic_names_and_types(), 'controller_states':{}}
+-        for topic in ('/follower/base_cmd','/follower/rover_twist','/follower/mecanum_drive_controller/reference_unstamped','/follower/arm_controller/joint_trajectory'):
++        topics=('/follower/base_cmd','/follower/rover_twist','/follower/mecanum_drive_controller/reference_unstamped','/follower/arm_controller/joint_trajectory')
++        if a.dual_arm_only:topics+=tuple(t.replace('/follower/','/leader/') for t in topics)
++        for topic in topics:
+             result[topic]=[{'node':x.node_namespace+'/'+x.node_name,'types':x.topic_type} for x in n.get_publishers_info_by_topic(topic)]
+         for name in (expected_node,'wrench_preprocessor'):
+             result['/follower/'+name+'/subscriptions']=observed_subscriptions[name]
+@@ -633,14 +658,17 @@
+                 (out/'leader_base_distance_calibration.json').write_text(json.dumps(measured,indent=2))
+             native_base_radii.update({r:p['xy_radius_bound_m'] for r,p in
+                 json.loads((folder/'base_collision_envelopes.json').read_text()).items()})
+-            plan=stroke_plan((folder/'follower.urdf').read_text(),a.distance)
++            if a.dual_arm_only:
++                from dual_arm_only_runtime import arm_plan
++                plan=arm_plan(ROOT,a.distance)
++            else:plan=stroke_plan((folder/'follower.urdf').read_text(),a.distance)
+             (out/'stroke_plan.json').write_text(json.dumps(plan,indent=2))
+         start('scene',['ros2','launch','cooperative_transport_bringup',
+             ('compliance_native_arm_scene.launch.py' if a.follower_base_fixture else 'compliance_round_trip_scene.launch.py') if a.native_arm_stroke else 'compliance_cp6_fixture.launch.py',
+             'run_directory:='+str(folder)]+([] if a.native_arm_stroke else ['headless:=true']))
+         if a.gui:
+             from ament_index_python.packages import get_package_share_directory
+-            gui_config=Path(get_package_share_directory('cooperative_transport_bringup'))/'config/compliance_contact_gui.config'
++            gui_config=Path(get_package_share_directory('cooperative_transport_bringup'))/'config'/('compliance_dual_arm_gui.config' if a.dual_arm_only else 'compliance_contact_gui.config')
+             if not gui_config.is_file():raise ValueError('existing side-view GUI config missing: '+str(gui_config))
+             gui_process[0]=start('gui',['ign','gazebo','-g','--gui-config',str(gui_config),'--force-version','6'])
+         wait(lambda:sim[0]>0 and all((r,k) in latest for r in ('leader','follower') for k in ('q','ft','odom')),110.)
+@@ -652,7 +680,7 @@
+         for r in ('leader','follower'):models[r]=LocalModel((folder/(r+'.urdf')).read_text())
+         start('evaluation',['ros2','run','ros_gz_bridge','parameter_bridge',
+             '/world/cooperative_transport/remove@ros_gz_interfaces/srv/DeleteEntity',
+-            *(['/world/cooperative_transport/set_pose@ros_gz_interfaces/srv/SetEntityPose'] if a.native_arm_stroke else []),
++            *(['/world/cooperative_transport/set_pose@ros_gz_interfaces/srv/SetEntityPose'] if a.native_arm_stroke and not a.dual_arm_only else []),
+             *(['/experiment/follower/base_fixture/lock@std_msgs/msg/Empty]gz.msgs.Empty',
+                 '/experiment/follower/base_fixture/state@std_msgs/msg/String[gz.msgs.StringMsg'] if a.follower_base_fixture else []),
+             '/world/cooperative_transport/pose/info@tf2_msgs/msg/TFMessage[gz.msgs.Pose_V',
+@@ -661,13 +689,17 @@
+             ensure_grippers()
+             measure_servo(node=n,folder=folder,out=out,latest=latest,jtc_samples=native_jtc_samples,sim=sim,
+                 wait=wait,simwait=simwait,phase=phase,event=event)
++            if a.dual_arm_only:
++                from dual_arm_single_probe import ungrasped_arm_probe
++                ungrasped_arm_probe(node=n,folder=folder,out=out,latest=latest,sim=sim,wait=wait,phase=phase,poses=poses)
+             from cp9_transport_preparation import prepare
+             def native_wait(predicate,timeout=40.,check_fault=False):return wait(predicate,timeout,check_fault)
+             def native_simwait(seconds,check_fault=False):return simwait(seconds,check_fault)
+             def native_service(name,**_):return call(name,True)
+             prepare(node=n,robots=('leader','follower'),generated=folder,output=out,start=start,wait=native_wait,
+                 sim_wait=native_simwait,wall_wait=wallwait,service=native_service,poses=poses,now=sim,
+-                phase=phase,prep=native_prep,monitor=native_monitor,report=report,grip_maintenance=True)
++                phase=phase,prep=native_prep,monitor=native_monitor,report=report,grip_maintenance=True,
++                physical_base_approach=a.dual_arm_only)
+             if a.follower_base_fixture:
+                 phase[0]='lock_follower_base_after_grasp';last_lock=[float('-inf')]
+                 def locked():
+@@ -679,6 +711,7 @@
+                 report['base_fixture_locked_after_native_grasp']=True
+         start('safety',['ros2','launch','amir_compliance_control','guarded_safety.launch.py','run_directory:='+str(folder),
+                         'follower_arm_only:='+str(a.stage!='AF-0').lower(),
++                        'both_bases_zero:='+str(a.dual_arm_only).lower(),
+                         'coherent_sensor_history:='+str(a.native_arm_stroke).lower(),
+                         'simulation_source_watchdog:='+str(a.native_arm_stroke).lower()])
+         wait(lambda:len(grasp)==2,45.)
+@@ -732,6 +765,11 @@
+             policy['native_wrench_limits_source']='cooperative_transport_control/config/friction_transport.yaml'
+             policy['native_absolute_wrench_limits']={k:native_wrench_limits[k] for k in ('planar_force_stop','vertical_force_stop','torque_stop','fault_duration')}
+             (out/'servo_response_used.json').write_bytes((out/'follower_servo_response.json').read_bytes())
++            if a.dual_arm_only:
++                policy['dual_arm_only']=True
++                policy['controller_parameters'].update(virtual_stiffness=[0.,0.],force_deadband_N=.003,
++                    joint_request_acceleration_rad_s2=.15,
++                    arm_displacement_stop_m=.05,displacement_limit_m=[.05,.012])
+         if a.arm_nullspace_pose_hold is not None:
+             policy['controller_parameters']['arm_nullspace_pose_hold']=a.arm_nullspace_pose_hold
+         if a.leader_acceleration is not None:policy['leader_acceleration_m_s2']=a.leader_acceleration
+@@ -776,7 +814,7 @@
+             c=n.create_client(DeleteEntity,'/world/cooperative_transport/remove');wait(c.service_is_ready)
+             req=DeleteEntity.Request();req.entity.name='grasp_support';req.entity.type=Entity.MODEL
+             f=c.call_async(req);wait(f.done);assert f.result().success;n.destroy_client(c)
+-            phase[0]='static_grasp';simwait(10. if a.native_arm_stroke else 5.)
++            phase[0]='SETTLE_AND_BIAS' if a.dual_arm_only else 'static_grasp';simwait(10. if a.native_arm_stroke else 5.)
+             constraint_home['_active']=True
+         phase[0]='tare';simwait(1.);call('/follower/tare_wrench',True);wait(lambda:filter_state[0]=='READY',10.,True);simwait(.2)
+         call('/follower/admittance/enable');wait(lambda:adm.get('enabled'),5.,True)
+@@ -813,7 +851,7 @@
+                 (out/'waypoints.json').write_text(json.dumps(report['completed_waypoints'],indent=2))
+                 print('STROKE_WAYPOINT '+json.dumps(checkpoint),flush=True)
+                 previous=d
+-            phase[0]='hold';simwait(1.)
++            phase[0]='HOLD' if a.dual_arm_only else 'hold';simwait(2. if a.dual_arm_only else 1.)
+             report['leader_completed']=True
+             report['leader_odom_peak_m_s']=odom_peak.get('leader',0.)
+             report['leader_command_peak_m_s']=max(abs(e['value'][0]) for e in events if e['robot']=='leader' and e['kind']=='base_cmd')
+@@ -830,9 +868,15 @@
+                 report['payload_model_gt_last_receipt_age_sim_s']=report['payload_model_gt_last_age_sim_s']
+                 report['payload_model_gt_source_time_available']=payload_rows[-1]['payload_model_gt_source_stamp_s']>0
+                 report['payload_model_gt_age_basis']='receipt in evaluator clock; zero TF source stamp is not reconstructed'
+-            payload_distance=a.distance*(.5 if a.native_arm_stroke else 1.)
++            payload_distance=a.distance*(.5 if a.native_arm_stroke and not a.dual_arm_only else 1.)
++            leader_motion=report['leader_odom_distance_m']
++            if a.dual_arm_only:
++                leader_motion=movement[-1]['leader_p_actual_0']-movement[0]['leader_p_actual_0']
++                report['leader_actual_arm_displacement_m']=leader_motion
++                report['both_bases_max_abs_command']={r:max((abs(v) for e in events if e['robot']==r and e['kind']=='base_cmd' for v in e['value']),default=float('inf')) for r in ('leader','follower')}
++                if any(report['both_bases_max_abs_command'].values()):raise RuntimeError('dual arm nonzero base command')
+             if (not payload_rows or not 0<=report['payload_model_gt_last_age_sim_s']<=.1
+-                    or not .9*a.distance<=report['leader_odom_distance_m']*(1 if a.direction=='forward' else -1)<=1.1*a.distance
++                    or not .9*a.distance<=leader_motion*(1 if a.direction=='forward' else -1)<=1.1*a.distance
+                     or not translation_progress(payload_distance,a.direction,payload_distance*(1 if a.direction=='forward' else -1),
+                                                 report['payload_model_gt_displacement_xyz_m'])):
+                 raise RuntimeError('signed leader/payload straight translation not demonstrated with fresh evaluation data')
+@@ -895,6 +939,8 @@
+             if not all(grasp.get(r)=='attached' for r in ('leader','follower')):raise RuntimeError('grasp lost on stop')
+             report['grasp_held']=True
+         zeros=[e for e in events if e['robot']=='follower' and e['kind'] in ('base_cmd','rover_twist','base_final_reference')]
++        if a.dual_arm_only:
++            zeros=[e for e in zeros if e['sim_time']>=report['physical_base_approach']['sim_stopped_s']]
+         report['follower_zero_command_samples']=len(zeros)
+         report['follower_max_abs_base_cmd']=max([abs(x) for e in zeros for x in e['value']],default=0.)
+         if a.stage=='AF-0':
+--- a/tools/cp9_transport_preparation.py
++++ b/tools/cp9_transport_preparation.py
+@@ -11,7 +11,7 @@
+ 
+ 
+ def prepare(*, node, robots, generated, output, start, wait, sim_wait, wall_wait,
+-            service, poses, now, phase, prep, monitor, report, grip_maintenance=False):
++            service, poses, now, phase, prep, monitor, report, grip_maintenance=False, physical_base_approach=False):
+     """Only initialize the fixture. No pose RPC is made after this function."""
+     contacts = start('contacts', ['ros2', 'run', 'cooperative_transport_gazebo', 'finger_contact_aggregator',
+         '--ros-args', '-p', 'use_sim_time:=true', '-p', 'robot_names:=[leader,follower]',
+@@ -35,27 +35,32 @@
+         all(v['state'] == 'READY_TO_CLOSE' for v in prep.values()), 25.)
+     if any(v['state'] == 'FAULT' for v in prep.values()):
+         raise RuntimeError('preparation home failed; support retained')
+-    phase[0] = 'fixture_initialization'
+-    placer = node.create_client(SetEntityPose, '/world/cooperative_transport/set_pose')
+-    wait(placer.service_is_ready, 10.)
+-    staging = json.loads((generated/'scene_staging.json').read_text())
+-    for robot in robots:
+-        request = SetEntityPose.Request()
+-        request.entity.name, request.entity.type = robot, Entity.MODEL
+-        request.pose.position.x = staging['robots'][robot]['staged_x_m']
+-        request.pose.position.y, request.pose.position.z = poses[robot].translation.y, poses[robot].translation.z
+-        request.pose.orientation = poses[robot].rotation
+-        future = placer.call_async(request); wait(future.done, 10.)
+-        if not future.result().success:
+-            raise RuntimeError('initial fixture placement rejected')
+-        with (output/'fixture_placement.jsonl').open('a') as log:
+-            log.write(json.dumps({'robot': robot, 'sim_time': now[0], 'phase': phase[0],
+-                'states': {r: v['state'] for r, v in prep.items()},
+-                'x': request.pose.position.x, 'success': True})+'\n')
+-    node.destroy_client(placer)
++    if physical_base_approach:
++        from dual_arm_preparation import physical_approach
++        physical_approach(node=node,robots=robots,generated=generated,output=output,poses=poses,
++                         now=now,phase=phase,wait=wait,sim_wait=sim_wait,report=report)
++    else:
++        phase[0] = 'fixture_initialization'
++        placer = node.create_client(SetEntityPose, '/world/cooperative_transport/set_pose')
++        wait(placer.service_is_ready, 10.)
++        staging = json.loads((generated/'scene_staging.json').read_text())
++        for robot in robots:
++            request = SetEntityPose.Request()
++            request.entity.name, request.entity.type = robot, Entity.MODEL
++            request.pose.position.x = staging['robots'][robot]['staged_x_m']
++            request.pose.position.y, request.pose.position.z = poses[robot].translation.y, poses[robot].translation.z
++            request.pose.orientation = poses[robot].rotation
++            future = placer.call_async(request); wait(future.done, 10.)
++            if not future.result().success:
++                raise RuntimeError('initial fixture placement rejected')
++            with (output/'fixture_placement.jsonl').open('a') as log:
++                log.write(json.dumps({'robot': robot, 'sim_time': now[0], 'phase': phase[0],
++                    'states': {r: v['state'] for r, v in prep.items()},
++                    'x': request.pose.position.x, 'success': True})+'\n')
++        node.destroy_client(placer)
+     phase[0] = 'pre_grasp'
+     sim_wait(1., check_fault=False)
+-    phase[0] = 'closing'
++    phase[0] = 'DUAL_GRASP' if physical_base_approach else 'closing'
+     for robot in robots:
+         service('/'+robot+'/grasp/close')
+     wait(lambda: any(v['state'] == 'FAULT' for v in prep.values()) or
+--- /dev/null
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_only_leader.py
+@@ -0,0 +1,139 @@
++"""Leader's own arm drives the payload; every base command remains zero."""
++import json
++from pathlib import Path
++import numpy as np
++import rclpy
++from builtin_interfaces.msg import Duration
++from geometry_msgs.msg import TwistStamped
++from rclpy.time import Time
++from std_msgs.msg import String
++from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
++from .transport import TransportEndpoint
++from .safety import stamp
++from .wrench import finite
++from .admittance import rotation_error
++from .arm_translation import reference
++from .stroke_kinematics import solve_stroke_pose
++from .arm_servo_response import validate_response
++
++
++class ArmOnlyLeader(TransportEndpoint):
++    def __init__(self,**kwargs):
++        super().__init__(leader=True,node_name='leader_trajectory_node',base_trajectory=False,**kwargs)
++        self.declare_parameter('arm_servo_response_file','')
++        self.declare_parameter('arm_acceleration_m_s2',.0012)
++        self.declare_parameter('arm_hold_after_s',2.)
++        path=Path(self.p('urdf_file'))
++        cert=json.loads(Path(self.p('arm_servo_response_file')).read_text())
++        self.tau=validate_response(cert,path.read_text(),path.parent)
++        self.motion=None;self.origin=None;self.rotation_home=None;self.base_home=None
++        self.previous_knots=None;self.previous_stamp=None;self.motion_done=False
++        self.previous_qdot=np.zeros(5)
++        self.arm_debug=self.create_publisher(String,'arm_compensation/debug',10)
++
++    def q_actual(self):
++        values=dict(zip(self.joints.name,self.joints.position))
++        return finite([values[name] for name in self.model.names],(5,))
++
++    def local_health(self):
++        good,reason=super().local_health()
++        if good and self.p('actuator_ack_required') and (
++                self.gate.get('base_zero_only') is not True or self.actuator.get('base_zero_only') is not True
++                or self.actuator.get('request_writer_name')!=self.get_name()):
++            return False,'leader ARM_ONLY zero lock and sole writer audit required'
++        return good,reason
++
++    def base_pose(self):
++        pose=self.encoder.pose.pose
++        return np.array([pose.position.x,pose.position.y,2*np.arctan2(pose.orientation.z,pose.orientation.w)])
++
++    def goal(self,msg):
++        try:
++            if self.state!='READY' or self.motion is not None or not self.homed or not self.local_health()[0]:
++                raise ValueError('one arm trajectory requires local homed READY state')
++            value=finite([msg.vector.x,msg.vector.y,msg.vector.z],(3,))
++            if (msg.header.frame_id!='leader/base_footprint' or not 0<abs(value[0])<=self.p('max_distance_m')
++                    or np.any(value[1:]!=0) or stamp(msg)<=self.last_goal_stamp
++                    or not -.02<=self.sim-stamp(msg)<=self.p('timeout_s')):
++                raise ValueError('fresh bounded local arm translation required')
++            q=self.q_actual();self.origin,sensor=self.model.frames(q)
++            self.rotation_home=sensor[:3,:3].copy();self.base_home=self.base_pose()
++            # Verify the full branch before accepting a motion, never move a
++            # base to recover an unreachable five-joint arm pose.
++            seed=q.copy()
++            for delta in np.linspace(0,value[0],31):
++                seed=solve_stroke_pose(self.model,seed,self.origin+[delta,0,0],self.rotation_home)
++            self.motion=(self.sim+.05,float(value[0]));self.last_goal_stamp=stamp(msg)
++            self.accepted+=1;self.state='TRANSPORT';self.reason=''
++        except (ValueError,np.linalg.LinAlgError) as exc:
++            self.rejected+=1;self.last_rejection=str(exc)
++
++    def base_request(self,command):
++        if self.motion is None or self.latched:
++            return np.zeros(3)
++        try:
++            drift=self.base_pose()-self.base_home
++            drift[2]=np.arctan2(np.sin(drift[2]),np.cos(drift[2]))
++            twist=self.encoder.twist.twist
++            if np.linalg.norm(drift[:2])>=.001 or abs(drift[2])>=.002 or max(
++                    abs(twist.linear.x),abs(twist.linear.y),abs(twist.angular.z))>=.001:
++                raise ValueError('leader ARM_ONLY measured base drift/speed')
++            start,distance=self.motion
++            x,v,total=reference(self.sim-start,distance,self.p('speed_m_s'),self.p('arm_acceleration_m_s2'))
++            q=self.q_actual();actual,sensor=self.model.frames(q)
++            target=self.origin+[x,0,0]
++            if np.linalg.norm(actual-target)>.005 or np.linalg.norm(rotation_error(sensor[:3,:3],self.rotation_home))>.01:
++                raise ValueError('leader arm-only measured tracking/orientation')
++            desired=solve_stroke_pose(self.model,q,target,self.rotation_home)
++            ahead,_,_=reference(self.sim-start+.08,distance,self.p('speed_m_s'),self.p('arm_acceleration_m_s2'))
++            future=solve_stroke_pose(self.model,desired,self.origin+[ahead,0,0],self.rotation_home)
++            qdot=(future-desired)/.08
++            knots=np.vstack((desired+self.tau*qdot,future+self.tau*qdot))
++            if np.max(abs(qdot))>.03 or np.any(knots<=self.model.lower+.01) or np.any(knots>=self.model.upper-.01):
++                raise ValueError('leader arm-only joint speed/position bound')
++            if self.previous_stamp is not None:
++                dt=self.sim-self.previous_stamp
++                if dt==0:return np.zeros(3)
++                if not 0<dt<=.05:raise ValueError('leader arm-only dt abnormal')
++                if np.max(abs(knots-self.previous_knots))/dt>.03+1e-6:
++                    raise ValueError('leader arm-only trajectory knot rate')
++                if np.max(abs(qdot-self.previous_qdot))/dt>.15+1e-6:
++                    raise ValueError('leader arm-only joint acceleration experiment bound')
++            msg=JointTrajectory(joint_names=list(self.model.names))
++            msg.header.stamp=Time(seconds=self.sim-.004).to_msg();msg.header.frame_id='leader/base_footprint'
++            for knot,seconds in zip(knots,(.004,.084)):
++                point=JointTrajectoryPoint(positions=knot.tolist())
++                point.time_from_start=Duration(sec=0,nanosec=round(seconds*1e9));msg.points.append(point)
++            self.publish_command(self.arm_pub,msg)
++            self.previous_stamp,self.previous_knots=self.sim,knots
++            self.previous_qdot=qdot.copy()
++            if (not self.motion_done and self.sim-start>=total+self.p('arm_hold_after_s')
++                    and np.linalg.norm(actual-(self.origin+[distance,0,0]))<.0001):
++                self.completed+=1;self.state='READY';self.motion_done=True
++            if not self.motion_done and self.sim-start>total+self.p('arm_hold_after_s')+3:
++                raise ValueError('leader arm-only measured arrival timeout')
++            self.arm_debug.publish(String(data=json.dumps({'mode':'LEADER_ARM_ONLY','p_target_m':target.tolist(),
++                'p_actual_m':actual.tolist(),'p_home_m':self.origin.tolist(),'q_actual_rad':q.tolist(),
++                'q_cmd_rad':knots[-1].tolist(),'qdot_rad_s':qdot.tolist(),'base_drift_xy_yaw':drift.tolist(),
++                'arm_reference_velocity_m_s':v,'sim_time':self.sim})))
++        except (ValueError,np.linalg.LinAlgError) as exc:
++            self.trip(str(exc))
++        return np.zeros(3)
++
++    def publish_command(self,publisher,message):
++        if publisher is self.base_pub:
++            message.twist.linear.x=message.twist.linear.y=message.twist.linear.z=0.
++            message.twist.angular.x=message.twist.angular.y=message.twist.angular.z=0.
++        super().publish_command(publisher,message)
++
++    def tick(self):
++        super().tick()
++        # Continuous zero output includes INIT/disarmed intervals.
++        msg=TwistStamped();msg.header.stamp=Time(seconds=self.sim).to_msg()
++        msg.header.frame_id='leader/base_footprint';self.publish_command(self.base_pub,msg)
++
++
++def main(args=None):
++    rclpy.init(args=args);node=ArmOnlyLeader()
++    try:rclpy.spin(node)
++    finally:node.destroy_node();rclpy.try_shutdown()
+--- /dev/null
++++ b/src/humbleble_ws/amir_compliance_control/amir_compliance_control/arm_translation.py
+@@ -0,0 +1,19 @@
++"""Bounded quintic arm translation, independent of base/peer/ground truth."""
++import math
++import numpy as np
++
++
++def duration(distance, speed, acceleration):
++    if not all(math.isfinite(v) and v > 0 for v in (distance,speed,acceleration)):
++        raise ValueError('positive finite arm trajectory bounds required')
++    return max(1.875*distance/speed, math.sqrt((10/math.sqrt(3))*distance/acceleration))
++
++
++def reference(t, distance, speed, acceleration):
++    if not math.isfinite(t) or not math.isfinite(distance) or distance == 0:
++        raise ValueError('finite time and nonzero distance required')
++    total = duration(abs(distance),speed,acceleration)
++    u = float(np.clip(t/total,0.,1.))
++    s = 10*u**3-15*u**4+6*u**5
++    v = (30*u**2-60*u**3+30*u**4)/total
++    return distance*s, distance*v, total
+--- /dev/null
++++ b/src/humbleble_ws/cooperative_transport_bringup/config/compliance_dual_arm_gui.config
+@@ -0,0 +1,54 @@
++<?xml version="1.0"?>
++<!-- Display only: no change to world physics, robot state or control inputs. -->
++<window>
++  <width>1200</width>
++  <height>800</height>
++  <dialog_on_exit>false</dialog_on_exit>
++</window>
++<plugin filename="MinimalScene" name="3D View">
++  <ignition-gui>
++    <title>3D View</title>
++    <property type="bool" key="showTitleBar">false</property>
++    <property type="string" key="state">docked</property>
++  </ignition-gui>
++  <engine>ogre2</engine>
++  <scene>scene</scene>
++  <ambient_light>0.4 0.4 0.4</ambient_light>
++  <background_color>0.8 0.8 0.8</background_color>
++  <!-- Display-only close side view for 30 mm arm transport, both bases stopped. -->
++  <camera_pose>0 -2.4 1.2 0 0.25 1.5707963267948966</camera_pose>
++</plugin>
++<plugin filename="GzSceneManager" name="Scene Manager">
++  <ignition-gui>
++    <property type="string" key="state">floating</property>
++    <property type="bool" key="showTitleBar">false</property>
++    <property type="double" key="width">5</property>
++    <property type="double" key="height">5</property>
++  </ignition-gui>
++</plugin>
++<plugin filename="InteractiveViewControl" name="Interactive view control">
++  <ignition-gui>
++    <property type="string" key="state">floating</property>
++    <property type="bool" key="showTitleBar">false</property>
++    <property type="double" key="width">5</property>
++    <property type="double" key="height">5</property>
++  </ignition-gui>
++</plugin>
++<plugin filename="WorldStats" name="World stats">
++  <ignition-gui>
++    <title>World stats</title>
++    <property type="bool" key="showTitleBar">false</property>
++    <property type="bool" key="resizable">false</property>
++    <property type="double" key="height">110</property>
++    <property type="double" key="width">290</property>
++    <property type="string" key="state">floating</property>
++    <anchors target="3D View">
++      <line own="right" target="right"/>
++      <line own="bottom" target="bottom"/>
++    </anchors>
++  </ignition-gui>
++  <sim_time>true</sim_time>
++  <real_time>true</real_time>
++  <real_time_factor>true</real_time_factor>
++  <iterations>true</iterations>
++</plugin>
+--- /dev/null
++++ b/src/humbleble_ws/cooperative_transport_bringup/README_dual_arm_only.md
+@@ -0,0 +1,47 @@
++# 接近後、両台車停止・両アーム協調追従
++
++`compliance_round_trip.launch.py` の既定 `ARM_ONLY / dual_arm` は、車輪で接近後に両台車を停止し、リーダーアームの30 mm水平移動へフォロワーアームが自身のF/Tから追従するGazebo実験です。
++
++```bash
++cd ~/ros2_humble_ws
++source /opt/ros/humble/setup.bash
++colcon build --packages-select amir_compliance_control cooperative_transport_bringup
++source install/setup.bash
++
++ros2 launch cooperative_transport_bringup compliance_round_trip.launch.py \
++  headless:=false gui_nvidia_offload:=true \
++  forward_distance_m:=1.0 \
++  translation_velocity_m_s:=0.1 record_data:=true
++```
++
++このモードでは旧走行引数 `forward_distance_m` と `translation_velocity_m_s` は走行目標に使用しません。アーム試験値は `dual_arm_distance_m:=0.03`、`dual_arm_speed_m_s:=0.005` です。初期試験の許可範囲は距離30 mm以下、速度5 mm/s以下です。往復は行いません。
++
++Humble 2.53.1 JTCの既存ワークスペース修正版が必要です。未ビルドの場合のみ先に実行してください。
++
++```bash
++colcon build --packages-select joint_trajectory_controller \
++  --allow-overriding joint_trajectory_controller --cmake-args -DBUILD_TESTING=ON
++source install/setup.bash
++```
++
++INITで把持前10 mmアーム単体試験を実施して復帰し、BASE_APPROACH → BASE_STOP → DUAL_GRASP → SETTLE_AND_BIAS → ARM_ONLY → HOLDを進みます。異常時は共有停止し、グリッパを開きません。把持後に両台車へ出す最終速度はゼロに限定します。世界固定治具は使用しません。台車の物理的な微小ずれはwheel odomとは別に記録します。
++
++フォロワーは既存 `StrictArmOnly` を流用します。自身のWrist F/TをTCP参照点・台車座標軸へ変換し、静止荷重をtare後、`M=2 kg, D=34.6 Ns/m, K=0`の速度型アドミッタンスと2×5 DLSを使用します。3 mN死域は過去の静止ログに基づく暫定実験設定です。両機のアームAPI、関節名、Gazebo物理設定を継承しています。
++
++終了後は停止・把持確認して物理を一時停止し、GUIを残します。GUIを閉じるかCtrl+Cで終了します。長時間の動的把持耐久試験にはなりません。出力先は起動ログの`Dual arm output`です。
++
++```bash
++# 記録された試験を再評価（GUI保持中）
++PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 /usr/bin/python3 \
++  tools/amir_dual_arm_evidence.py --case <出力先>/trial --held
++
++# GUIを閉じた試験は --held を付けずに再評価
++# この試験だけのGazeboウィンドウを動画化する手順
++PYTHONNOUSERSITE=1 /usr/bin/python3 tools/amir_gazebo_window_video.py \
++  --case <出力先>/trial --output <新規保存先>.avi \
++  --include-preparation --duration-s 360 --fps 2
++```
++
++以前のモードは `arm_only_trial:=native_stroke` または `arm_only_trial:=micro` で選択できます。`arm_only_experiment.enabled:=false` は旧native_strokeを選択します。`control_mode:=WHOLE_BODY`は既存アーカイブの検証経路を使用します。今回、台車追従・回転は動かしません。
++
++監査表、実測値、成功・失敗ログ、差分、残課題はワークスペースの `audits/dual_arm_only_20261112/REPORT.md` を参照してください。力・トルクの実験停止境界は既存設定を継承しており、実機の校正済み安全定格ではありません。
+--- /dev/null
++++ b/tools/dual_arm_only_runtime.py
+@@ -0,0 +1,85 @@
++"""Public approach -> stop both bases -> native grasp -> local arm following."""
++from datetime import datetime
++import json
++import math
++from pathlib import Path
++from uuid import uuid4
++from launch.actions import ExecuteProcess, LogInfo, RegisterEventHandler, EmitEvent
++from launch.event_handlers import OnProcessExit
++from launch.events import Shutdown
++from amir_native_arm_support import SCENE
++from amir_compliance_control.wrench import LocalModel
++from amir_compliance_control.stroke_kinematics import solve_stroke_pose
++import xml.etree.ElementTree as ET
++import numpy as np
++
++
++def arm_plan(root,distance):
++    proof={}
++    for robot,sign in (('leader',1.),('follower',-1.)):
++        path=root/SCENE/(robot+'.urdf');tree=ET.parse(path);model=LocalModel(path.read_text())
++        q=np.array([float(tree.find(f"ros2_control/joint[@name='{n}']/state_interface[@name='position']/param").text) for n in model.names])
++        home,sensor=model.frames(q);samples=[]
++        for value in np.linspace(0,distance,61):
++            q=solve_stroke_pose(model,q,home+[sign*value,0.,0.],sensor[:3,:3])
++            samples.append({'distance_m':float(value),'q_rad':q.tolist(),
++                'joint_margin_rad':float(np.min(np.minimum(q-model.lower,model.upper-q))),
++                'sigma_xy_m':float(np.linalg.svd(model.jacobian(q)[:2],compute_uv=False)[-1])})
++        proof[robot]={'local_direction_x':sign,'home_TCP_m':home.tolist(),'samples':samples}
++    return proof
++
++
++def setup(context):
++    config=context.launch_configurations
++    root=Path(config['workspace_directory']).expanduser().resolve()
++    distance=float(config['dual_arm_distance_m']);speed=float(config['dual_arm_speed_m_s'])
++    if not math.isfinite(distance) or not 0<distance<=.03:
++        raise ValueError('initial dual-arm experiment requires 0 < arm distance <=0.03 m')
++    if not math.isfinite(speed) or not 0<speed<=.005:
++        raise ValueError('initial dual-arm experiment requires 0 < arm speed <=0.005 m/s')
++    if config.get('enable_base_assist','false')!='false':raise ValueError('dual arm requires enable_base_assist=false')
++    domain=int(config['ros_domain_id'])
++    if not 0<=domain<=232:raise ValueError('invalid ROS domain')
++    delay=float(config['start_delay_s'])
++    if not math.isfinite(delay) or not 0<=delay<=60:raise ValueError('start delay must be 0..60 s')
++    proof=arm_plan(root,distance)
++    tag=datetime.now().strftime('%Y%m%d_%H%M%S')+'_'+uuid4().hex[:8]
++    out=Path(config['output_directory']).expanduser() if config['output_directory'] else root/('audits/dual_arm_only_'+tag)
++    if not out.is_absolute():out=root/out
++    if out.exists():raise ValueError('output already exists: '+str(out))
++    out.mkdir(parents=True);(out/'arm_plan.json').write_text(json.dumps(proof,indent=2))
++    (out/'launch_policy.json').write_text(json.dumps({'mode':'DUAL_ARM_ONLY','leader_arm_distance_m':distance,
++        'leader_arm_speed_m_s':speed,'base_fixture':False,'physical_base_approach':True,
++        'both_base_commands_after_approach':[0.,0.,0.],'follower_force_source':'own Gazebo wrist F/T',
++        'follower_stiffness_N_m':0.,'force_deadband_N':.003,
++        'deadband_basis':'previous native stationary measured absolute XY max 0.00287245N; experimental only',
++        'legacy_forward_distance_m':config['forward_distance_m'],
++        'legacy_translation_velocity_m_s':config['translation_velocity_m_s'],
++        'legacy_route_used':False,'gui_review_mode':config['gui_review_mode']},indent=2))
++    env={'ROS_DOMAIN_ID':str(domain),'ROS_LOCALHOST_ONLY':'1','IGN_PARTITION':'amir_cp9_dual_arm_'+tag,
++         'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','PYTHONNOUSERSITE':'1'}
++    if config['headless']=='false' and config['gui_nvidia_offload']=='true':
++        env.update(__NV_PRIME_RENDER_OFFLOAD='1',__GLX_VENDOR_LIBRARY_NAME='nvidia')
++    cmd=['/usr/bin/python3','-u',str(root/'tools/amir_af_trial.py'),'--stage','AF-2',
++         '--native-arm-stroke','--dual-arm-only','--profile','pose_hold_micro',
++         '--virtual-mass-kg','2','--virtual-damping-ns-m','34.6','--virtual-stiffness-n-m','0',
++         '--arm-horizon','.08','--control-on-wrench','--wrench-on-measurement','--wrench-cutoff-hz','8',
++         '--distance',str(distance),'--speed',str(speed),'--start-delay-s',str(delay),
++         '--output',str(out/'trial'),'--prefer-smt-cores']
++    if config['headless']=='false':
++        cmd+=['--gui']
++        if config['keep_gui_open']=='true':
++            cmd+=['--keep-gui-open']
++            if config['gui_review_mode']=='paused':cmd+=['--pause-gui-after-stop']
++    process=ExecuteProcess(name='dual_arm_only',cwd=str(root),cmd=cmd,additional_env=env,
++                           output='screen',sigterm_timeout='120',sigkill_timeout='20')
++    def completed(event,ctx):
++        path=out/'trial/result.json'
++        result=json.loads(path.read_text()) if path.is_file() else {'passed':False,'error':'missing trial result'}
++        (out/'result.json').write_text(json.dumps(result,indent=2))
++        if ctx.is_shutdown:return []
++        if event.returncode or not result.get('passed'):raise RuntimeError('dual arm experiment failed; '+str(path))
++        return [EmitEvent(event=Shutdown(reason='dual arm experiment stopped; grip retained'))]
++    return [LogInfo(msg='Physical base approach -> BOTH BASES ZERO -> native grasp -> leader ARM translation.'),
++        LogInfo(msg=f'Legacy 1m/0.1m/s arguments do not move bases after grasp; arm {distance}m at <= {speed}m/s.'),
++        LogInfo(msg='Dual arm output: '+str(out)),RegisterEventHandler(OnProcessExit(target_action=process,on_exit=completed)),process]
+--- /dev/null
++++ b/tools/dual_arm_preparation.py
+@@ -0,0 +1,55 @@
++"""Experiment-only physical base approach; retires before dual arm control."""
++import json
++import math
++from geometry_msgs.msg import Twist
++
++
++def physical_approach(*,node,robots,generated,output,poses,now,phase,wait,sim_wait,report):
++    staging=json.loads((generated/'scene_staging.json').read_text())['robots']
++    phase[0]='BASE_APPROACH'
++    publishers={}
++    for robot in robots:
++        if node.get_publishers_info_by_topic('/'+robot+'/rover_twist'):
++            raise RuntimeError('approach requires exclusive rover_twist writer: '+robot)
++        publishers[robot]=node.create_publisher(Twist,'/'+robot+'/rover_twist',1)
++    started=now[0];last=[started];velocities={r:0. for r in robots};stable=[None];samples=[]
++    previous={r:poses[r].translation.x for r in robots};peak={r:0. for r in robots}
++    def step():
++        dt=now[0]-last[0]
++        if dt<=0:return False
++        if dt>.1:raise RuntimeError('physical approach dt abnormal')
++        all_stopped=True
++        for robot in robots:
++            x=poses[robot].translation.x;q=poses[robot].rotation
++            yaw=2*math.atan2(q.z,q.w)
++            error=staging[robot]['staged_x_m']-x
++            desired=max(-.015,min(.015,error*math.cos(yaw)))
++            if abs(error)<.00015:desired=0.
++            bound=.005*dt
++            velocities[robot]=max(velocities[robot]-bound,min(velocities[robot]+bound,desired))
++            message=Twist();message.linear.x=velocities[robot];publishers[robot].publish(message)
++            measured_speed=abs(x-previous[robot])/dt;previous[robot]=x
++            peak[robot]=max(peak[robot],abs(velocities[robot]))
++            all_stopped &= abs(error)<.0002 and abs(velocities[robot])<1e-12 and measured_speed<.0001
++            samples.append({'state':phase[0],'sim_time':now[0],'robot':robot,'world_x_m':x,
++                            'target_x_m':staging[robot]['staged_x_m'],'cmd_vx':velocities[robot],
++                            'measured_speed_m_s':measured_speed})
++        last[0]=now[0]
++        stable[0]=now[0] if all_stopped and stable[0] is None else stable[0] if all_stopped else None
++        return stable[0] is not None and now[0]-stable[0]>=.5
++    try:
++        wait(step,120.)
++        phase[0]='BASE_STOP'
++        for publisher in publishers.values():publisher.publish(Twist())
++        sim_wait(.5,check_fault=False)
++        report['physical_base_approach']={'passed':True,'sim_start_s':started,'sim_stopped_s':now[0],
++            'stop_before_grasp':True,'peak_command_m_s':peak,
++            'final_world_x_m':{r:poses[r].translation.x for r in robots},
++            'position_input_scope':'own base world pose during preparation only; publishers retired before ARM_ONLY',
++            'pose_service_calls':0,'sample_count':len(samples)}
++    finally:
++        for publisher in publishers.values():publisher.publish(Twist())
++        sim_wait(.1,check_fault=False)
++        for publisher in publishers.values():node.destroy_publisher(publisher)
++        (output/'physical_approach.json').write_text(json.dumps({'result':report.get('physical_base_approach'),
++                                                               'samples':samples},indent=2))
+--- /dev/null
++++ b/tools/dual_arm_single_probe.py
+@@ -0,0 +1,65 @@
++"""Before grasp, qualify a 10 mm leader Cartesian arm path and return."""
++import json
++import time
++import numpy as np
++from rclpy.time import Time
++from builtin_interfaces.msg import Duration
++from trajectory_msgs.msg import JointTrajectory,JointTrajectoryPoint
++from amir_compliance_control.wrench import LocalModel
++from amir_compliance_control.stroke_kinematics import solve_stroke_pose
++from amir_compliance_control.arm_translation import reference,duration
++
++
++def ungrasped_arm_probe(*,node,folder,out,latest,sim,wait,phase,poses):
++    model=LocalModel((folder/'leader.urdf').read_text())
++    message=latest['leader','q'];mapping=dict(zip(message.name,message.position))
++    home_q=np.array([mapping[name] for name in model.names]);home,sensor=model.frames(home_q)
++    period=duration(.01,.003,.0012);samples=[];q=home_q.copy()
++    target_topic='/leader/arm_controller/joint_trajectory'
++    if node.get_publishers_info_by_topic(target_topic):raise RuntimeError('single arm probe writer conflict')
++    pub=node.create_publisher(JointTrajectory,target_topic,1)
++    phase[0]='leader_ungrasped_cartesian_probe'
++    body_home={r:np.array([poses[r].translation.x,poses[r].translation.y]) for r in ('leader','follower')}
++    msg=JointTrajectory(joint_names=list(model.names))
++    for t in np.linspace(0,2*period+1.,251):
++        if t<=period:x=reference(t,.01,.003,.0012)[0]
++        elif t<period+1.:x=.01
++        else:x=.01-reference(t-period-1.,.01,.003,.0012)[0]
++        q=solve_stroke_pose(model,q,home+[x,0,0],sensor[:3,:3])
++        seconds=float(t)+.004
++        point=JointTrajectoryPoint(positions=q.tolist())
++        sec,ns=divmod(round(seconds*1e9),1000000000)
++        point.time_from_start=Duration(sec=sec,nanosec=ns);msg.points.append(point)
++    try:
++        def fresh_ready():
++            m=latest['leader','q'];age=sim[0]-m.header.stamp.sec-m.header.stamp.nanosec*1e-9
++            return pub.get_subscription_count()>=1 and -.02<=age<=.02
++        # Offline IK planning must not consume a command epoch. Drain feedback
++        # after planning, then stamp the trajectory from the refreshed clock.
++        wait(fresh_ready,5.)
++        started=sim[0];msg.header.stamp=Time(seconds=started+.1).to_msg()
++        pub.publish(msg)
++        last_coherent=[time.monotonic()]
++        def done():
++            m=latest['leader','q'];state=dict(zip(m.name,m.position));velocity=dict(zip(m.name,m.velocity))
++            actual=model.frames([state[name] for name in model.names])[0]
++            if max(abs(velocity[name]) for name in model.names)>.03+1e-6:
++                raise RuntimeError('single arm probe measured velocity')
++            age=sim[0]-m.header.stamp.sec-m.header.stamp.nanosec*1e-9
++            if not -.02<=age<=.05:
++                if time.monotonic()-last_coherent[0]>.15:
++                    raise RuntimeError('single arm probe state stale: '+str(age))
++                return False
++            last_coherent[0]=time.monotonic()
++            drift={r:float(np.linalg.norm(np.array([poses[r].translation.x,poses[r].translation.y])-body_home[r])) for r in body_home}
++            if max(drift.values())>=.001:raise RuntimeError('single arm probe base drift')
++            samples.append({'sim_time':sim[0],'p_actual_m':actual.tolist(),'body_drift_m':drift})
++            return sim[0]-started>2*period+1.5 and np.linalg.norm(actual-home)<.0001
++        wait(done,80.)
++        peak=float(max(sample['p_actual_m'][0]-home[0] for sample in samples))
++        passed=bool(.0095<peak<.0105)
++        (out/'leader_ungrasped_cartesian_probe.json').write_text(json.dumps({'passed':passed,
++            'ungrasped':True,'payload_contact':False,'scope':'arm/controller Cartesian qualification only; not single-arm object handling',
++            'requested_distance_m':.01,'measured_peak_x_m':peak,'returned_home':True,'samples':samples},indent=2))
++        if not passed:raise RuntimeError('leader Cartesian probe did not reach measured 10mm')
++    finally:node.destroy_publisher(pub)
+--- /dev/null
++++ b/tools/amir_dual_arm_evidence.py
+@@ -0,0 +1,146 @@
++#!/usr/bin/env python3
++"""Measured acceptance for physical approach and both-bases-stopped arm transport."""
++import argparse
++import csv
++import json
++import xml.etree.ElementTree as ET
++from pathlib import Path
++import numpy as np
++import matplotlib
++matplotlib.use('Agg')
++import matplotlib.pyplot as plt
++from amir_p0_evidence import evaluate
++
++
++def main():
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--case',type=Path,required=True);parser.add_argument('--held',action='store_true')
++    args=parser.parse_args();folder=args.case.resolve()
++    result=json.loads((folder/('held_result.json' if args.held else 'result.json')).read_text())
++    if not result.get('dual_arm_only'):raise ValueError('dual arm result required')
++    summary,rows=evaluate(folder,'held_result.json' if args.held else 'result.json')
++    active=[r for r in rows if r.get('admittance_enabled')=='True' and r.get('adm_p_actual_m_0')]
++    motion=[r for r in active if r['phase']=='leader_translation']
++    def values(key,size,selected=active):
++        return np.array([[float(r[key+'_'+str(i)]) for i in range(size)] for r in selected])
++    checks=summary['checks'];metrics={}
++    checks['physical_approach_stop_before_grasp']=result['physical_base_approach']['passed'] is True and result['physical_base_approach']['stop_before_grasp'] is True
++    checks['no_pose_service_placement']=result['physical_base_approach']['pose_service_calls']==0 and not (folder/'fixture_placement.jsonl').exists()
++    checks['no_world_base_fixture']=not result.get('follower_base_fixture') and not (folder/'generated/base_fixture_proof.json').exists()
++    checks['velocity_admittance_K_zero']=json.loads((folder/'experiment_policy.json').read_text())['controller_parameters']['virtual_stiffness']==[0.,0.]
++    checks['base_assist_disabled']=all(r.get('adm_enable_base_assist')=='False' for r in active)
++    events=[json.loads(line) for line in (folder/'events.jsonl').read_text().splitlines()]
++    stopped_at=result['physical_base_approach']['sim_stopped_s']
++    after=[r for r in rows if float(r['sim_time'])>=stopped_at and r.get('leader_gt_position_0')]
++    graph=json.loads((folder/'graph.json').read_text())
++    object_path=values('payload_model_gt_position',3,motion)
++    for robot in ('leader','follower'):
++        for kind in ('base_cmd','rover_twist','base_final_reference'):
++            samples=[e for e in events if e['sim_time']>=stopped_at and e['robot']==robot and e['kind']==kind]
++            checks[robot+'_'+kind+'_zero_after_BASE_STOP']=bool(samples) and all(v==0. for e in samples for v in e['value'])
++        body=values(robot+'_gt_position',3,after)
++        drift=float(np.max(np.linalg.norm(body[:,:2]-body[0,:2],axis=1)))
++        yaw=np.array([float(r[robot+'_gt_yaw_rad']) for r in after])
++        yaw_drift=float(np.max(abs(np.arctan2(np.sin(yaw-yaw[0]),np.cos(yaw-yaw[0])))))
++        odom_speed=float(np.max(abs(values(robot+'_odom_twist',3))))
++        active_body=values(robot+'_gt_position',3)
++        active_drift=float(np.max(np.linalg.norm(active_body[:,:2]-active_body[0,:2],axis=1)))
++        arm=values(robot+'_p_actual',3,motion);delta=arm[-1]-arm[0]
++        world_tcp=values(robot+'_tcp_world_evaluation',3,motion)
++        metrics[robot]={'body_drift_from_stop_peak_m':drift,'body_yaw_drift_peak_rad':yaw_drift,
++            'body_drift_during_ARM_ONLY_peak_m':active_drift,
++            'odom_speed_peak':odom_speed,'local_arm_displacement_m':delta.tolist(),
++            'world_TCP_displacement_m':(world_tcp[-1]-world_tcp[0]).tolist()}
++        grasp_translation_residual=float(np.max(np.linalg.norm(
++            (world_tcp-world_tcp[0])-(object_path-object_path[0]),axis=1)))
++        metrics[robot]['TCP_object_translation_residual_peak_m']=grasp_translation_residual
++        checks[robot+'_grasp_translation_residual_below_existing_2mm']=grasp_translation_residual<.002
++        for suffix in ('base_cmd','rover_twist','mecanum_drive_controller/reference_unstamped','arm_controller/joint_trajectory'):
++            checks[robot+'_single_writer_'+suffix]=len(graph['/'+robot+'/'+suffix])==1
++        # The inherited 1 mm guard is latched when admittance is enabled.
++        # BASE_STOP precedes grip seating; section 1.2 of the current request
++        # gives a separate provisional 10 mm bound from that earlier epoch.
++        # Neither control guard nor measured displacement is changed here.
++        checks[robot+'_body_drift_from_BASE_STOP_below_spec_10mm']=drift<.01
++        checks[robot+'_body_drift_from_ARM_ONLY_below_existing_1mm_guard']=active_drift<.001
++        checks[robot+'_body_yaw_drift_below_existing_2mrad_guard']=yaw_drift<.002
++        checks[robot+'_actual_arm_translation_matches_requested']=.9*result['requested_distance_m']<=abs(delta[0])<=1.1*result['requested_distance_m']
++        checks[robot+'_actual_odom_speed_below_existing_guard']=odom_speed<.001
++        for key in ('base_zero_only',):
++            checks[robot+'_final_'+key]=result['final_interlock_debug'][robot].get(key) is True
++        for side in ('left','right'):
++            checks[robot+'_'+side+'_contact_through_motion']=all(r.get(robot+'_native_'+side+'_contact')=='True' for r in motion)
++    checks['opposed_local_arm_directions']=metrics['leader']['local_arm_displacement_m'][0]>0 and metrics['follower']['local_arm_displacement_m'][0]<0
++    checks['matching_world_TCP_direction']=all(v['world_TCP_displacement_m'][0]>0 for v in metrics.values())
++    checks['leader_goal_reached']=result.get('leader_completed') is True
++    orientation=values('payload_model_gt_orientation_xyzw',4,motion)
++    dots=np.clip(abs(orientation@orientation[0]),0.,1.)
++    rotation_peak=float(np.max(2*np.arccos(dots)))
++    checks['object_orientation_change_below_existing_0_01rad']=rotation_peak<.01
++    checks={k:bool(v) for k,v in checks.items()}
++    summary.update(passed=all(checks.values()),checks=checks,dual_arm_metrics=metrics,
++                   base_fixture=False,physical_approach=result['physical_base_approach'])
++    summary['object_rotation_peak_rad']=rotation_peak
++    (folder/'dual_arm_evidence.json').write_text(json.dumps(summary,indent=2))
++    # The original CSV retains source timestamps and every acquisition channel.
++    # A compact shared-time view is provided without fabricating simultaneity.
++    selected=[r for r in rows if r.get('leader_p_actual_0') and r.get('follower_p_actual_0')]
++    fields=['sim_time','phase','experiment_state','stop_reason','follower_reason','admittance_enabled']
++    prefixes=['leader_gt_position','follower_gt_position','leader_odom_twist','follower_odom_twist',
++        'leader_base_final_reference','follower_base_final_reference','leader_q_actual','follower_q_actual',
++        'leader_qdot_actual','follower_qdot_actual','leader_p_actual','follower_p_actual','leader_comp_p_target_m',
++        'adm_p_ref_xy_m','wrench_filtered','adm_delta_p_dot_adm_m_s','payload_model_gt_position',
++        'leader_tcp_world_evaluation','follower_tcp_world_evaluation']
++    fields += sorted({k for r in selected for k in r if any(k.startswith(prefix+'_') for prefix in prefixes)})
++    with (folder/'dual_arm_timeseries.csv').open('w') as stream:
++        writer=csv.DictWriter(stream,fieldnames=fields,extrasaction='ignore');writer.writeheader();writer.writerows(selected)
++    def val(key):return np.array([float(r.get(key) or 'nan') for r in active])
++    t=val('sim_time');t-=t[0]
++    fig,axes=plt.subplots(8,1,figsize=(12,22),sharex=True,constrained_layout=True)
++    for robot in ('leader','follower'):
++        xy=values(robot+'_gt_position',3)
++        axes[0].plot(t,np.linalg.norm(xy[:,:2]-xy[0,:2],axis=1)*1e6,label=robot+' physical body GT (evaluation)')
++        for i,axis in enumerate(('vx','vy','wz')):
++            axes[1].plot(t,val(robot+'_base_final_reference_'+str(i)),label=robot+' final '+axis)
++            axes[1].plot(t,val(robot+'_odom_twist_'+str(i)),'--',label=robot+' odom '+axis)
++        sign=1 if robot=='leader' else -1
++        x=val(robot+'_p_actual_0');axes[2].plot(t,sign*(x-x[0])*1000,label=robot+' measured TCP projected world x')
++        for i in range(5):
++            q=val(robot+'_q_actual_'+str(i));axes[5].plot(t,q-q[0],label=robot+' Joint_'+str(i+1))
++            axes[6].plot(t,val(robot+'_qdot_actual_'+str(i)),label=robot+' Joint_'+str(i+1))
++        tree=ET.parse(folder/'generated'/(robot+'.urdf'))
++        limits=[tree.find(f"joint[@name='Joint_{i}']/limit") for i in range(1,6)]
++        lower=np.array([float(limit.get('lower')) for limit in limits])
++        upper=np.array([float(limit.get('upper')) for limit in limits])
++        q=values(robot+'_q_actual',5)
++        axes[7].plot(t,np.min(np.minimum(q-lower,upper-q),axis=1),label=robot+' measured minimum joint margin')
++    x=val('leader_comp_p_target_m_0');axes[2].plot(t,(x-x[0])*1000,'--',label='leader own-arm reference')
++    x=val('adm_p_ref_xy_m_0');axes[2].plot(t,-(x-x[0])*1000,':',label='follower local F/T integrated reference')
++    for i,axis in enumerate(('Fx','Fy')):
++        axes[3].plot(t,val('wrench_filtered_'+str(i)),label=axis+' incremental force [N]')
++    axv=axes[3].twinx();axv.plot(t,val('adm_delta_p_dot_adm_m_s_0'),color='k',alpha=.4,label='v_adm_x');axv.set_ylabel('Admittance velocity [m/s]')
++    for key,label in [('payload_model_gt_position_0','object'),('leader_tcp_world_evaluation_0','leader grasp TCP'),('follower_tcp_world_evaluation_0','follower grasp TCP')]:
++        x=val(key);axes[4].plot(t,(x-x[0])*1000,label=label+' world x change (evaluation only)')
++    labels=['Body drift [um]','Final base command [m/s; rad/s]','Arm TCP travel [mm]',
++            'Incremental F/T [N]','World displacement [mm]','Joint change [rad]','Measured joint speed [rad/s]','Joint margin [rad]']
++    for ax,label in zip(axes,labels):ax.set_ylabel(label);ax.grid(alpha=.25);ax.legend(fontsize=7)
++    axes[-1].set_xlabel('Simulation time from first active admittance sample [s]')
++    fig.suptitle('Dual ARM_ONLY: physical approach, both bases stopped, native friction contact\nMeasured acceptance passed='+str(summary['passed'])+'; no world base restraint fixture')
++    for suffix in ('png','pdf'):fig.savefig(folder/('dual_arm_measured.'+suffix),dpi=140)
++    plt.close(fig)
++    states={'INIT':0,'BASE_APPROACH':1,'BASE_STOP':2,'DUAL_GRASP':3,'SETTLE_AND_BIAS':4,'ARM_ONLY':5,'HOLD':6,'ABORT':7}
++    complete=[r for r in rows if r.get('experiment_state')]
++    timeline=[]
++    for row in complete:
++        if not timeline or row['experiment_state']!=timeline[-1]['state']:
++            timeline.append({'state':row['experiment_state'],'sim_time_s':float(row['sim_time'])})
++    (folder/'experiment_fsm.json').write_text(json.dumps(timeline,indent=2))
++    fig,ax=plt.subplots(figsize=(13,5),constrained_layout=True)
++    ax.step([float(r['sim_time']) for r in complete],[states[r['experiment_state']] for r in complete],where='post')
++    ax.set_yticks(list(states.values()),list(states));ax.set_xlabel('Simulation time [s]');ax.grid(alpha=.25)
++    ax.set_title('Observed experiment states: physical approach and grasp before ARM_ONLY')
++    fig.savefig(folder/'dual_arm_fsm.png',dpi=140);plt.close(fig)
++    print(json.dumps(summary,indent=2));return 0 if summary['passed'] else 1
++
++
++if __name__=='__main__':raise SystemExit(main())
+--- /dev/null
++++ b/tools/test_dual_arm_only.py
+@@ -0,0 +1,79 @@
++"""Physical model feasibility, velocity admittance and final output guards."""
++from pathlib import Path
++import runpy
++import numpy as np
++import pytest
++from launch import LaunchContext
++from launch.actions import DeclareLaunchArgument,ExecuteProcess
++from launch.utilities import perform_substitutions
++from amir_compliance_control.admittance import PlanarAdmittance
++from amir_compliance_control.arm_translation import reference,duration
++from dual_arm_only_runtime import arm_plan
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++def test_quintic_arm_path_respects_speed_acceleration_and_stops_smoothly():
++    for distance in (.005,.03,-.03):
++        total=duration(abs(distance),.005,.0012)
++        times=np.linspace(0,total,20001)
++        data=np.array([reference(t,distance,.005,.0012)[:2] for t in times])
++        assert np.max(abs(data[:,1]))<=.005+1e-12
++        assert np.max(abs(np.diff(data[:,1])/np.diff(times)))<=.0012+1e-9
++        np.testing.assert_allclose(data[[0,-1],0],[0,distance],atol=1e-14)
++        np.testing.assert_allclose(data[[0,-1],1],0,atol=1e-14)
++
++
++def test_zero_stiffness_stops_velocity_and_preserves_offset():
++    core=PlanarAdmittance([2.,2.],[34.6,34.6],[0.,0.],[.05,.05],[.01,.01],[.02,.02])
++    for _ in range(100):core.step([.1,0.],.01)
++    assert core.x[0]>.001 and core.v[0]>0
++    for _ in range(100):core.step([0.,0.],.01)
++    assert abs(core.v[0])<1e-9 and core.x[0]>.001
++    previous=core.x.copy()
++    for _ in range(50):core.step([0.,0.],.01)
++    np.testing.assert_allclose(core.x,previous,atol=1e-9)
++    with pytest.raises(ValueError):PlanarAdmittance([2.,2.],[34.6,34.6],[-1.,0.],[.05,.05],[.01,.01],[.02,.02])
++
++
++def test_both_arm_branches_reachable_for_actual_opposed_model():
++    plan=arm_plan(ROOT,.03)
++    assert plan['leader']['local_direction_x']==1.
++    assert plan['follower']['local_direction_x']==-1.
++    for proof in plan.values():
++        assert min(s['joint_margin_rad'] for s in proof['samples'])>.8
++        assert min(s['sigma_xy_m'] for s in proof['samples'])>.1
++
++
++def public_context():
++    module=runpy.run_path(str(ROOT/'src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py'))
++    ctx=LaunchContext()
++    for action in module['generate_launch_description']().entities:
++        if isinstance(action,DeclareLaunchArgument):action.execute(ctx)
++    return module,ctx
++
++
++def test_original_command_selects_both_bases_stopped_not_one_metre_base_trip(tmp_path):
++    module,ctx=public_context()
++    ctx.launch_configurations.update(workspace_directory=str(ROOT),output_directory=str(tmp_path/'out'),
++        forward_distance_m='1.0',translation_velocity_m_s='0.1')
++    process=next(a for a in module['setup'](ctx) if isinstance(a,ExecuteProcess))
++    argv=[perform_substitutions(ctx,v) for v in process.cmd]
++    assert '--dual-arm-only' in argv and '--follower-base-fixture' not in argv
++    assert argv[argv.index('--distance')+1]=='0.03'
++    assert argv[argv.index('--speed')+1]=='0.005'
++    assert argv[argv.index('--virtual-stiffness-n-m')+1]=='0'
++
++
++@pytest.mark.parametrize('robot',['leader','follower'])
++def test_nonzero_base_command_rejected_for_each_robot(tmp_path,robot):
++    from test_cp7_safety import GuardRig
++    from geometry_msgs.msg import Twist
++    rig=GuardRig(tmp_path)
++    try:
++        rig.start();guard=rig.guards[robot];guard.base_zero_only=True
++        msg=Twist();msg.linear.x=.000001;guard.base(msg)
++        assert guard.fault=='ARM_ONLY rejected nonzero final base request'
++        rig.pump(.3)
++        assert rig.output=={'leader':0.,'follower':0.}
++    finally:rig.close()
+--- /dev/null
++++ b/tools/amir_p0_evidence.py
+@@ -0,0 +1,207 @@
++#!/usr/bin/env python3
++"""Export P0 measured-state checks and standalone figures (evaluation only)."""
++import argparse
++import csv
++import json
++from pathlib import Path
++
++import numpy as np
++import matplotlib
++matplotlib.use('Agg')
++import matplotlib.pyplot as plt
++
++
++def evaluate(folder, result_name='result.json'):
++    result=json.loads((folder/result_name).read_text())
++    rows=list(csv.DictReader((folder/'timeseries.csv').open()))
++    graph=json.loads((folder/'graph.json').read_text())
++    active=[r for r in rows if r.get('admittance_enabled')=='True' and r.get('adm_p_actual_m_0')]
++    if not active:raise ValueError('no actual arm feedback: '+str(folder))
++    def array(key,size):
++        return np.array([[float(r[key+'_'+str(i)]) for i in range(size)] for r in active])
++    actual,home,ref=array('adm_p_actual_m',3),array('adm_p_home_m',3),array('adm_p_ref_xy_m',2)
++    drift=array('adm_base_drift_xy_yaw',3)
++    checks={'result_passed':result.get('passed') is True,
++        'safe_stop_verified':result.get('safe_stop_verified') is True,
++        'base_cmd_all_zero':result.get('follower_max_abs_base_cmd')==0.,
++        'home_latched_once':np.max(np.ptp(home,axis=0))<1e-12,
++        'e_arm_is_actual_minus_home':np.max(abs(array('adm_e_arm_m',3)-(actual-home)))<1e-12,
++        'e_track_is_reference_minus_actual':np.max(abs(array('adm_e_track_xy_m',2)-(ref-actual[:,:2])))<1e-12,
++        'adm_is_reference_minus_home':np.max(abs(array('adm_delta_p_adm_m',2)-(ref-home[:,:2])))<1e-12,
++        'base_odom_drift_below_existing_1mm_guard':np.max(np.linalg.norm(drift[:,:2],axis=1))<.001,
++        'all_active_ARM_ONLY':all(r.get('adm_mode')=='ARM_ONLY' for r in active),
++        'all_active_rotation_tracking_disabled':all(r.get('adm_rotation_tracking_enabled')=='False' for r in active)}
++    for suffix,node in [('base_cmd','follower_arm_only'),('rover_twist','actuator_interlock'),
++        ('mecanum_drive_controller/reference_unstamped','rover_twist_relay_ign'),
++        ('arm_controller/joint_trajectory','actuator_interlock')]:
++        writers=graph['/follower/'+suffix]
++        checks['single_writer:'+suffix]=len(writers)==1 and writers[0]['node']=='/follower/'+node
++    for name in ('follower_arm_only','wrench_preprocessor'):
++        topics=[t[0] for t in graph['/follower/'+name+'/subscriptions']]
++        checks['local_only:'+name]=not any(t.startswith(('/leader/','/world/','/experiment/')) or 'goal' in t for t in topics)
++    events=[json.loads(s) for s in (folder/'events.jsonl').read_text().splitlines()]
++    final=[e for e in events if e['robot']=='follower' and e['kind']=='base_final_reference']
++    if result.get('dual_arm_only'):
++        final=[e for e in final if e['sim_time']>=result['physical_base_approach']['sim_stopped_s']]
++    checks['actual_final_reference_all_zero']=bool(final) and all(v==0. for e in final for v in e['value'])
++    if result.get('stage') in ('AF-2','AF-3'):
++        checks['grasp_held_after_stop']=result.get('grasp_held_after_stop') is True
++        checks['gripper_hold_verified']=result.get('gripper_hold_verified') is True
++    wrench=list(csv.DictReader((folder/'wrench_samples.csv').open()))
++    force=[sum(float(r['wrench_'+str(i)])**2 for i in range(3))**.5 for r in wrench
++           if r['kind']=='filtered' and (r.get('admittance_enabled')=='True' or r['phase']=='fault_injected')]
++    controls=[json.loads(s)['value'] for s in (folder/'control_samples.jsonl').read_text().splitlines()]
++    force += [np.linalg.norm(v['wrench_at_fault'][:3]) for v in controls if v.get('wrench_at_fault')]
++    dt=[v['dt_control_s'] for v in controls if v.get('enabled') and 'dt_control_s' in v]
++    if dt:checks['source_dt_inside_existing_guard']=min(dt)>0 and max(dt)<=.05
++    summary={'folder':str(folder),'result_source':result_name,'passed':all(checks.values()),
++        'checks':{k:bool(v) for k,v in checks.items()},
++        'stage':result.get('stage'),'error':result.get('error'),'fault':result.get('fault'),
++        'endpoint_stop_reasons':{r:v.get('reason') for r,v in result.get('final_endpoints',{}).items()},
++        'leader_distance_m':result.get('leader_odom_distance_m'),
++        'leader_peak_speed_m_s':result.get('leader_odom_peak_m_s'),
++        'arm_actual_displacement_peak_m':float(np.max(np.linalg.norm(actual[:,:2]-home[:,:2],axis=1))),
++        'track_error_peak_m':float(np.max(np.linalg.norm(array('adm_e_track_xy_m',2),axis=1))),
++        'base_odom_drift_peak_m':float(np.max(np.linalg.norm(drift[:,:2],axis=1))),
++        'base_odom_speed_peak_m_s':max(np.hypot(float(r['follower_odom_twist_0']),float(r['follower_odom_twist_1'])) for r in active),
++        'force_increment_peak_N':max(force,default=None),
++        'dt_control_range_s':[min(dt),max(dt)] if dt else None,
++        'stop_latency_wall_s':result.get('stop_latency_wall_s'),
++        'scope':('native friction grasp, half-stroke leader arm compensation' if result.get('native_arm_stroke')
++                 else 'simulation micro fixed grasp')+'; experimental boundaries, not calibrated load ratings'}
++    if result.get('native_arm_stroke'):
++        leader=np.array([float(r['leader_p_actual_0']) for r in active])
++        leader_gt=array('leader_gt_position',3)
++        leader_world_delta=leader_gt[-1]-leader_gt[0]
++        gt=np.array([[float(r['follower_gt_position_'+str(i)]) for i in range(3)] for r in active])
++        summary.update(leader_arm_actual_retraction_m=float(leader[0]-leader[-1]),
++            leader_world_base_displacement_xyz_m=leader_world_delta.tolist(),
++            leader_world_base_distance_xy_m=float(np.linalg.norm(leader_world_delta[:2])),
++            follower_world_base_drift_peak_m=float(np.max(np.linalg.norm(gt[:,:2]-gt[0,:2],axis=1))),
++            object_world_displacement_xyz_m=result.get('payload_model_gt_displacement_xyz_m'),
++            follower_base_fixture=result.get('follower_base_fixture',False),
++            follower_joint_actual_change_rad=(array('follower_q_actual',5)[-1]-array('follower_q_actual',5)[0]).tolist(),
++            minimum_joint_margin_rad=min(float(r['adm_min_joint_margin_rad']) for r in active),
++            minimum_task_singular_value_m=min(float(r['adm_min_task_singular_value_m']) for r in active),
++            maximum_height_error_m=float(np.max(abs(actual[:,2]-home[:,2]))),
++            maximum_orientation_error_rad=float(np.max(np.linalg.norm(array('adm_orientation_error_rad',3),axis=1))))
++        checks['body_world_drift_below_existing_1mm_guard']=summary['follower_world_base_drift_peak_m']<.001
++        if result.get('dual_arm_only'):
++            checks['leader_world_base_drift_below_1mm']=float(np.max(np.linalg.norm(leader_gt[:,:2]-leader_gt[0,:2],axis=1)))<.001
++            summary['scope']='native friction grasp; both bases stopped; leader arm drives payload; no base restraint fixture'
++        else:
++            checks['leader_world_travel_in_existing_distance_band']=(
++                .9*result['requested_distance_m']<=leader_world_delta[0]<=1.1*result['requested_distance_m'])
++        if result.get('leader_base_distance_calibrated'):
++            summary['leader_calibrated_distance_m']=result['leader_odom_distance_m']*result['leader_distance_metres_per_raw_odom_metre']
++            summary['leader_distance_metres_per_raw_odom_metre']=result['leader_distance_metres_per_raw_odom_metre']
++            checks['calibrated_leader_actual_world_x_reaches_requested_distance']=leader_world_delta[0]>=result['requested_distance_m']
++        if result.get('follower_base_fixture'):
++            checks['base_fixture_locked_after_grasp']=all(r.get('follower_base_fixture_state')=='locked' for r in active)
++            anchors=[i for i,r in enumerate(rows) if r.get('phase')=='lock_follower_base_after_grasp' and r.get('follower_gt_position_0')]
++            if not anchors:raise ValueError('missing post-grasp fixture anchor measurements')
++            after=[r for r in rows[anchors[0]:] if r.get('follower_gt_position_0')]
++            body=np.array([[float(r['follower_gt_position_'+str(i)]) for i in range(2)] for r in after])
++            summary['follower_world_base_drift_from_grasp_peak_m']=float(np.max(np.linalg.norm(body-body[0],axis=1)))
++            checks['body_world_drift_from_grasp_below_1mm']=summary['follower_world_base_drift_from_grasp_peak_m']<.001
++        for robot in ('leader','follower'):
++            for side in ('left','right'):
++                forces=np.array([float(r[robot+'_native_'+side+'_force_N']) for r in active])
++                checks[f'native_contact:{robot}/{side}']=all(r.get(robot+'_native_'+side+'_contact')=='True' for r in active)
++                checks[f'native_force_band:{robot}/{side}']=bool(np.min(forces)>=8. and np.max(forces)<=26.)
++                summary[f'{robot}_{side}_normal_force_range_N']=[float(np.min(forces)),float(np.max(forces))]
++        summary['checks']={k:bool(v) for k,v in checks.items()};summary['passed']=all(checks.values())
++    (folder/'p0_evidence.json').write_text(json.dumps(summary,indent=2))
++    return summary,rows
++
++
++def plot(folder,summary,rows):
++    selected=[r for r in rows if r.get('adm_p_actual_m_0')]
++    def val(key):return np.array([float(r.get(key) or 'nan') for r in selected])
++    def norm(key,size):return np.linalg.norm(np.column_stack([val(key+'_'+str(i)) for i in range(size)]),axis=1)
++    absolute=val('sim_time');t=absolute-absolute[0]
++    fig,axes=plt.subplots(5,2,figsize=(15,17),sharex=True,constrained_layout=True)
++    ax=axes[0,0];lead=val('leader_odom_pose_0');ax.plot(t,(lead-lead[0])*1000,label='leader raw wheel odom x')
++    if summary.get('leader_distance_metres_per_raw_odom_metre'):
++        ax.plot(t,(lead-lead[0])*summary['leader_distance_metres_per_raw_odom_metre']*1000,'--',label='leader calibrated own-odom estimate')
++    ax.plot(t,-val('adm_e_arm_m_0')*1000,label='follower measured FK projected to world x')
++    ax.plot(t,-val('adm_delta_p_adm_m_0')*1000,':',label='admittance projected to world x')
++    if 'native friction' in summary['scope']:
++        arm=val('leader_p_actual_0');ax.plot(t,(arm[0]-arm)*1000,'-.',label='leader measured own-arm retraction')
++        body=val('leader_gt_position_0');ax.plot(t,(body-body[0])*1000,':',label='leader body GT (evaluation only)')
++    if np.isfinite(val('payload_model_gt_position_0')).any():
++        p=val('payload_model_gt_position_0');ax.plot(t,(p-p[0])*1000,'--',label='object GT (evaluation only)')
++    ax.set_ylabel('Travel [mm]')
++    ax=axes[0,1]
++    for i in (0,1):ax.plot(t,val('wrench_filtered_'+str(i)),label=['Fx','Fy'][i]+' in base_footprint')
++    forces=norm('wrench_filtered',3);ax.plot(t,forces,label='force norm')
++    policy=json.loads((folder/'experiment_policy.json').read_text())
++    limit=policy['controller_parameters']['force_increment_stop_N']
++    if limit<max(1.,float(np.nanmax(forces))*2):ax.axhline(limit,color='r',linestyle=':',label='experimental guard, not rating')
++    else:ax.text(.02,.95,f'Existing guard: {limit:g} N (not a load rating)',transform=ax.transAxes,va='top',fontsize=7)
++    ax.set_ylabel('Incremental F/T [N]')
++    ax=axes[1,0]
++    for i in (0,1):ax.plot(t,val('adm_e_track_xy_m_'+str(i))*1e6,label=['e_track x','e_track y'][i])
++    ax.set_ylabel('Tracking error [um]')
++    ax=axes[1,1]
++    for key,label in [('base_cmd','request'),('rover_twist','interlock'),('base_final_reference','final controller input')]:
++        for i in range(3):ax.plot(t,val('follower_'+key+'_'+str(i)),label=label+' '+['vx [m/s]','vy [m/s]','wz [rad/s]'][i],alpha=.7)
++    ax.set_ylabel('Follower base commands')
++    ax=axes[2,0]
++    for i in (0,1):ax.plot(t,val('adm_base_drift_xy_yaw_'+str(i))*1e6,label='odom '+['x','y'][i])
++    if any(r.get('follower_gt_drift_since_grasp_m') for r in selected):
++        ax.plot(t,val('follower_gt_drift_since_grasp_m')*1e6,label='body world GT drift (evaluation only)')
++    ax.set_ylabel('Measured base drift [um]')
++    ax=axes[2,1]
++    for i in range(5):
++        q=val('follower_q_actual_'+str(i));line=ax.plot(t,(q-q[0])*1000,label=f'Joint_{i+1} actual')[0]
++        ax.plot(t,(val('follower_q_cmd_'+str(i))-q[0])*1000,'--',color=line.get_color(),alpha=.7)
++    ax.set_ylabel('Joint change [mrad]; dashed = command')
++    ax=axes[3,0];ax.plot(t,val('adm_min_joint_margin_rad'),label='min measured joint margin');ax.axhline(.01,color='r',linestyle=':');ax.set_ylabel('Joint margin [rad]')
++    ax=axes[3,1];ax.plot(t,val('adm_min_task_singular_value_m'),label='sigma_min(J_xy)');ax.axhline(.001,color='r',linestyle=':');ax.set_ylabel('Task singular value [m]')
++    ax=axes[4,0]
++    for i in range(5):ax.plot(t,val('follower_reaction_torque_Nm_'+str(i)),label=f'Joint_{i+1} load')
++    ax.set_ylabel('Transmitted joint load [Nm]')
++    ax=axes[4,1]
++    if 'native friction' in summary['scope']:
++        z=val('leader_p_actual_2');ax.plot(t,(z-z[0])*1000,label='leader measured height change')
++        ax.plot(t,val('adm_e_arm_m_2')*1000,label='follower measured height change')
++        ax.set_ylabel('Measured FK height change [mm]')
++    else:
++        for robot in ('leader','follower'):ax.plot(t,val(robot+'_constraint_error_m')*1000,label=robot+' constraint error')
++        ax.plot(t,val('adm_e_arm_m_2')*1000,label='follower height deviation');ax.set_ylabel('Grasp/height error [mm]')
++    stops=[i for i,r in enumerate(selected) if r.get('follower_state')=='SAFE_STOP']
++    for ax in axes.flat:
++        if stops:ax.axvline(t[stops[0]],color='k',linestyle=':',alpha=.6,label='safe stop')
++        ax.grid(alpha=.25);ax.legend(fontsize=6,loc='best')
++    for ax in axes[-1]:ax.set_xlabel('Simulation time from first arm sample [s]')
++    grasp='native friction grasp' if 'native friction' in summary['scope'] else 'fixed grasp'
++    fig.suptitle(f'{folder.name}: ARM_ONLY {summary["stage"]}, passed={summary["passed"]}; {grasp} simulation')
++    for suffix in ('png','pdf'):fig.savefig(folder/('p0_measured.'+suffix),dpi=140)
++    plt.close(fig)
++    if 'native friction' in summary['scope']:
++        fig,axes=plt.subplots(2,1,figsize=(11,7),sharex=True,constrained_layout=True)
++        for robot,ax in zip(('leader','follower'),axes):
++            for side in ('left','right'):
++                ax.plot(t,val(robot+'_native_'+side+'_force_N'),label=side+' finger measured normal force')
++                lost=val(robot+'_native_'+side+'_force_N').copy()
++                lost[:]=[float(r.get(robot+'_native_'+side+'_contact')!='True') for r in selected]
++                missing=lost>0
++                if missing.any():ax.scatter(t[missing],np.zeros(np.count_nonzero(missing)),marker='x',color='r',label=side+' contact absent')
++            ax.axhline(8.,color='r',linestyle=':',label='inherited simulation monitor 8 / 26 N')
++            ax.axhline(26.,color='r',linestyle=':');ax.set_ylabel(robot+' grip [N]');ax.legend(fontsize=8);ax.grid(alpha=.25)
++        axes[-1].set_xlabel('Simulation time from first arm sample [s]')
++        fig.suptitle('Native friction contact: measured finger forces and contact monitoring')
++        for suffix in ('png','pdf'):fig.savefig(folder/('native_grip.'+suffix),dpi=140)
++        plt.close(fig)
++
++
++def main():
++    parser=argparse.ArgumentParser();parser.add_argument('--case',type=Path,required=True)
++    parser.add_argument('--held',action='store_true');a=parser.parse_args()
++    folder=a.case.resolve();summary,rows=evaluate(folder,'held_result.json' if a.held else 'result.json')
++    plot(folder,summary,rows)
++    print(json.dumps(summary,indent=2));return 0 if summary['passed'] else 1
++
++
++if __name__=='__main__':raise SystemExit(main())
+--- /dev/null
++++ b/tools/amir_gazebo_window_video.py
+@@ -0,0 +1,104 @@
++#!/usr/bin/env python3
++"""Record only the Gazebo window owned by one isolated trial, without desktop input."""
++import argparse
++import json
++from pathlib import Path
++import re
++import struct
++import subprocess
++import time
++import cv2
++import numpy as np
++
++
++def window(partition):
++    tree = subprocess.check_output(['xwininfo', '-root', '-tree'], text=True)
++    for wid in re.findall(r'(0x[0-9a-fA-F]+) "Gazebo":', tree):
++        value = subprocess.check_output(['xprop', '-id', wid, '_NET_WM_PID'], text=True)
++        match = re.search(r'= (\d+)', value)
++        if not match:
++            continue
++        try:
++            if ('IGN_PARTITION='+partition).encode() in Path('/proc/'+match[1]+'/environ').read_bytes().split(b'\0'):
++                return wid, int(match[1])
++        except OSError:
++            continue
++    return None
++
++
++def capture(wid):
++    data = subprocess.check_output(['xwd', '-silent', '-id', wid])
++    header = struct.unpack('>25I', data[:100])
++    if header[7] != 0 or header[11] not in (24, 32):
++        raise ValueError('unsupported owned window XWD format')
++    offset = header[0]+header[19]*12
++    pixels = np.frombuffer(data[offset:], dtype=np.uint8).reshape(header[5], header[12])
++    return pixels[:, :header[4]*(header[11]//8)].reshape(header[5], header[4], header[11]//8)[:, :, :3].copy()
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--case', type=Path, required=True)
++    parser.add_argument('--output', type=Path, required=True)
++    parser.add_argument('--duration-s', type=float, default=300.)
++    parser.add_argument('--fps', type=float, default=2.)
++    parser.add_argument('--include-preparation',action='store_true')
++    parser.add_argument('--title',default='ARM_ONLY: base assist OFF')
++    args = parser.parse_args()
++    if not 0 < args.duration_s <= 1800 or not 0 < args.fps <= 10:
++        parser.error('duration must be (0,1800] s and frame rate (0,10] Hz')
++    if args.output.exists():
++        parser.error('video output already exists')
++    partition = json.loads((args.case/'command.json').read_text())['env']['IGN_PARTITION']
++    deadline = time.monotonic()+args.duration_s
++    owned = None
++    while time.monotonic() < deadline:
++        owned = window(partition)
++        if owned and (args.include_preparation or (args.case/'graph.json').exists()):
++            break
++        time.sleep(.5)
++    else:
++        raise RuntimeError('no audited owned Gazebo window found')
++    wid, pid = owned
++    frame = capture(wid)
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    height, width = frame.shape[:2]
++    writer = cv2.VideoWriter(str(args.output), cv2.VideoWriter_fourcc(*'MJPG'), args.fps, (width, height))
++    if not writer.isOpened():
++        raise RuntimeError('OpenCV MJPG video writer unavailable')
++    records = []; paused_since = None; started = time.monotonic()
++    try:
++        cv2.imwrite(str(args.output.with_suffix('.first.png')), frame)
++        while time.monotonic() < deadline:
++            tick = time.monotonic()
++            if not Path('/proc/'+str(pid)).exists():
++                break
++            frame = capture(wid)
++            sample = {'frame': len(records), 'wall_elapsed_s': tick-started}
++            source = args.case/'control_samples.jsonl'
++            if source.exists() and source.stat().st_size:
++                with source.open('rb') as stream:
++                    stream.seek(max(0, source.stat().st_size-16000))
++                    value = json.loads(stream.read().splitlines()[-1])['value']
++                sample.update(sim_time=value['sim_time'], mode=value.get('phase_mode'))
++            text = args.title+' | wall +%.2fs | sim %s | %s' % (
++                sample['wall_elapsed_s'], sample.get('sim_time','initializing'), sample.get('mode','INIT'))
++            cv2.putText(frame, text, (12, 28), cv2.FONT_HERSHEY_SIMPLEX, .5, (255,255,255), 2)
++            writer.write(frame); records.append(sample)
++            if (args.case/'paused_review_proof.json').exists():
++                paused_since = paused_since or tick
++                if tick-paused_since >= 3.:
++                    break
++            time.sleep(max(0., 1/args.fps-(time.monotonic()-tick)))
++        cv2.imwrite(str(args.output.with_suffix('.last.png')), frame)
++    finally:
++        writer.release()
++        args.output.with_suffix('.json').write_text(json.dumps({
++            'partition':partition, 'window':wid, 'pid':pid, 'fps':args.fps, 'frames':records,
++            'source':'owned window XGetImage only; no desktop capture or input events',
++            'time_axis':'wall time; exact wall/simulation frame samples provided, no realtime-physics claim'}, indent=2))
++    print(args.output)
++
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/tools/test_native_arm_stroke.py
+@@ -0,0 +1,125 @@
++"""Real-URDF half-stroke feasibility, residuals and preserved native assets."""
++import json
++from pathlib import Path
++import numpy as np
++import pytest
++from amir_native_arm_support import stroke_plan,SCENE,copy_native,validate_native_scene,base_envelope,wait_native_keep_ready,servo_probe_ready
++import xml.etree.ElementTree as ET
++from amir_compliance_control.wrench import LocalModel
++from amir_compliance_control.admittance import rotation_error
++from amir_compliance_control.stroke_kinematics import solve_stroke_pose
++from launch import LaunchContext
++from launch.actions import DeclareLaunchArgument,ExecuteProcess
++from launch.utilities import perform_substitutions
++import runpy
++
++ROOT=Path(__file__).resolve().parents[1]
++
++
++def test_native_motion_requires_same_version_isolated_controller(tmp_path):
++    from amir_native_arm_support import controller_isolation_evidence
++    with pytest.raises(ValueError,match='isolation patch'):
++        controller_isolation_evidence(tmp_path)
++    proof=controller_isolation_evidence()
++    assert proof['provenance']['version']=='2.53.1'
++    assert len(proof['library_sha256'])==64
++
++
++def model():
++    xml=(ROOT/SCENE/'follower.urdf').read_text()
++    return xml,LocalModel(xml)
++
++
++def test_half_metre_base_path_with_quarter_metre_arm_stays_in_joint_and_task_margin():
++    xml,m=model();plan=stroke_plan(xml,.5)
++    home,frame=m.frames(plan['samples'][0]['q_rad'])
++    for sample in plan['samples']:
++        p,s=m.frames(sample['q_rad']);target=home-[sample['arm_retraction_m'],0.,0.]
++        assert np.linalg.norm(p-target)<1e-6
++        assert np.linalg.norm(rotation_error(s[:3,:3],frame[:3,:3]))<1e-5
++        assert sample['min_joint_margin_rad']>.069
++        assert sample['sigma_min_xy_m']>.1
++    q=np.array([s['q_rad'] for s in plan['samples']]);dt=(.5/100)/.005
++    assert np.max(np.abs(np.diff(q,axis=0)/dt))<.03
++    assert plan['nominal_payload_distance_m']==.25
++
++
++def test_uncompensated_half_metre_pose_is_not_falsely_accepted():
++    _,m=model();q=np.array([0.,1.4,-1.6,.2,1.570796]);p,t=m.frames(q)
++    with pytest.raises(ValueError):solve_stroke_pose(m,q,p-[.5,0.,0.],t[:3,:3])
++
++
++@pytest.mark.parametrize('d',[0.,-.5,.51,float('nan')])
++def test_unverified_distance_refused(d):
++    xml,_=model()
++    with pytest.raises(ValueError):stroke_plan(xml,d)
++
++
++@pytest.mark.parametrize('headless,review',[('true','paused'),('false','paused'),('false','live')])
++def test_public_native_branch_retains_grasp_then_uses_explicit_half_metre_base_stroke(tmp_path,headless,review):
++    module=runpy.run_path(str(ROOT/'src/humbleble_ws/cooperative_transport_bringup/launch/compliance_round_trip.launch.py'))
++    ctx=LaunchContext()
++    for action in module['generate_launch_description']().entities:
++        if isinstance(action,DeclareLaunchArgument):action.execute(ctx)
++    ctx.launch_configurations.update(workspace_directory=str(ROOT),output_directory=str(tmp_path/'out'),
++        arm_only_trial='native_stroke',
++        forward_distance_m='1.0',translation_velocity_m_s='0.1',headless=headless,gui_review_mode=review)
++    process=next(x for x in module['setup'](ctx) if isinstance(x,ExecuteProcess))
++    argv=[perform_substitutions(ctx,x) for x in process.cmd]
++    assert '--native-arm-stroke' in argv
++    assert '--follower-base-fixture' in argv
++    assert argv[argv.index('--distance')+1]=='0.5'
++    assert argv[argv.index('--speed')+1]=='0.005'
++    assert ('--pause-gui-after-stop' in argv)==(headless=='false' and review=='paused')
++    policy=json.loads((tmp_path/'out/launch_policy.json').read_text())
++    assert policy['nominal_payload_distance_m']==.25
++    assert not policy['legacy_motion_arguments_used_for_transport']
++
++
++def test_real_base_mesh_envelope_is_separate_from_arm_reach():
++    xml,_=model();envelope=base_envelope(xml)
++    assert .2<envelope['xy_radius_bound_m']<.3
++    assert len(envelope['meshes'])==5
++
++
++def test_base_fixture_changes_only_one_explicit_world_plugin(tmp_path):
++    copy_native(ROOT,tmp_path,True);validate_native_scene(tmp_path)
++    assert (tmp_path/'follower.urdf').read_bytes()==(ROOT/SCENE/'follower.urdf').read_bytes()
++    world=ET.parse(tmp_path/'world.sdf')
++    assert not world.findall('.//joint')
++    plugin=world.find("world/plugin[@name='amir_follower::BaseHoldFixture']")
++    assert plugin is not None and plugin.findtext('robot')=='follower'
++    assert json.loads((tmp_path/'base_fixture_proof.json').read_text())['initially_locked'] is False
++    world.find('world/gravity').text='0 0 -1';world.write(tmp_path/'world.sdf')
++    with pytest.raises(ValueError,match='unexpected native world change'):validate_native_scene(tmp_path)
++
++
++def test_maintenance_handoff_waits_for_monitor_ack_before_arming():
++    now=[1.];monitor={r:{'state':'HOLDING','healthy':True,'maintenance_ready':False} for r in ('leader','follower')}
++    keep={r:{'enabled':True} for r in monitor};states={r:{'local_ready':True} for r in monitor};walls={r:1. for r in monitor}
++    def wait(predicate,timeout,healthy):
++        assert not predicate()  # a successful enable service alone is insufficient
++        for m in monitor.values():m['maintenance_ready']=True
++        for _ in range(30):
++            for r in walls:walls[r]=now[0]
++            if predicate():return
++            now[0]+=.05
++        pytest.fail('readiness ACK never became stable')
++    wait_native_keep_ready(wait,monitor,keep,{'ready':True},states,walls,clock=lambda:now[0])
++    assert now[0]>=2.
++
++
++def test_servo_probe_waits_for_both_controllers_and_safe_initial_position():
++    from types import SimpleNamespace
++    homes={r:np.array([0.,1.4,-1.6,.2,1.570796]) for r in ('leader','follower')}
++    names=[f'Joint_{i}' for i in range(1,6)]
++    latest={(r,'q'):SimpleNamespace(name=names,position=q.copy(),velocity=[0.]*5) for r,q in homes.items()}
++    jtc={r:[{}] for r in homes};counts={r:1 for r in homes}
++    pubs={r:SimpleNamespace(get_subscription_count=lambda r=r:counts[r]) for r in homes}
++    assert servo_probe_ready(latest,jtc,homes,pubs)
++    counts['follower']=2;assert servo_probe_ready(latest,jtc,homes,pubs)  # recorder + controller readers
++    counts['follower']=0;assert not servo_probe_ready(latest,jtc,homes,pubs)
++    counts['follower']=1;latest['follower','q'].position=np.zeros(5)
++    assert not servo_probe_ready(latest,jtc,homes,pubs)
++    latest['follower','q'].position=homes['follower'];jtc['follower']=[]
++    assert not servo_probe_ready(latest,jtc,homes,pubs)
+--- /dev/null
++++ b/src/humbleble_ws/amir_compliance_control/test/test_strict_arm_only.py
+@@ -0,0 +1,298 @@
++"""AF mathematical, measured feedback, ownership and fail-closed tests."""
++import numpy as np
++import pytest
++from rclpy.parameter import Parameter
++from std_srvs.srv import Trigger
++from geometry_msgs.msg import WrenchStamped
++from amir_compliance_control.strict_arm_only import StrictArmOnly
++from amir_compliance_control.arm_only_dls import xy_velocity_dls
++from amir_compliance_control.wrench import LocalModel
++from test_admittance import ArmRig, model_xml
++
++
++def test_xy_dls_matches_task_and_preserves_direction():
++    m = LocalModel(model_xml()); q = np.zeros(5)
++    for v in ([.001, 0.], [-.001, 0.], [0., .001], [0., -.001]):
++        d, s, margin, lam = xy_velocity_dls(m, q, v, damping=.0001, singular_stop=.001, margin=.01, speed=.03)
++        np.testing.assert_allclose(m.jacobian(q)[:2]@d, v, atol=1e-8)
++        assert s > .001 and margin > .01
++
++
++class AFRig(ArmRig):
++    def __init__(self, path, pose_hold=False, command_reference='integrated', control_on_wrench=False, velocity_mode=False):
++        super().__init__(path)
++        response_file=''
++        if command_reference=='servo_trajectory':
++            # Synthetic response proof for the mock plant only. Actual Gazebo
++            # trials require a separately measured, passing ungrasped probe.
++            import json,hashlib
++            from pathlib import Path
++            from amir_compliance_control.arm_servo_response import model_digest
++            response_file=str(path/'mock_servo_response.json')
++            names=[f'Joint_{i}' for i in range(1,6)]
++            cert={'scope':'simulation_position_servo_response_only','passed':True,'ungrasped':True,
++                'joint_names':names,'normalized_urdf_sha256':model_digest(self.file.read_text(),self.file.parent),
++                'position_proportional_gain':.1,'controller_update_rate_hz':250,
++                'joint_compensation_s':[.04,.04,.04,.04,0.],
++                'joint_response':{n:{'samples':100 if i<4 else 0,'velocity_gain_s_inv':25. if i<4 else None}
++                                  for i,n in enumerate(names)},
++                'plugin_library_sha256':hashlib.sha256(Path('/opt/ros/humble/lib/libgz_hardware_plugins.so').read_bytes()).hexdigest()}
++            Path(response_file).write_text(json.dumps(cert))
++        old = self.ends['follower']; self.executor.remove_node(old); self.nodes.remove(old); old.destroy_node()
++        end = StrictArmOnly(namespace='/follower', parameter_overrides=[
++            Parameter('use_sim_time', value=True), Parameter('urdf_file', value=str(self.file)),
++            Parameter('simulation_micro_test', value=True), Parameter('force_increment_stop_N', value=.5),
++            Parameter('arm_nullspace_pose_hold', value=pose_hold),
++            Parameter('arm_command_reference', value=command_reference),
++            Parameter('arm_servo_response_file', value=response_file),
++            Parameter('control_on_wrench', value=control_on_wrench),
++            Parameter('virtual_stiffness',value=[0.,0.] if velocity_mode else [150.,150.]),
++            Parameter('force_deadband_N',value=.003 if velocity_mode else 0.),
++            Parameter('joint_request_acceleration_rad_s2',value=.15 if velocity_mode else 0.),
++            Parameter('torque_increment_stop_Nm', value=.05)])
++        self.ends['follower'] = end; self.nodes.append(end); self.executor.add_node(end)
++
++
++@pytest.fixture(params=[(False,'integrated'),(True,'integrated'),(True,'servo_trajectory')])
++def rig(tmp_path, request):
++    r = AFRig(tmp_path, pose_hold=request.param[0],command_reference=request.param[1])
++    yield r
++    r.close()
++
++
++def test_measured_feedback_and_three_different_errors(rig):
++    rig.start(); end = rig.ends['follower']
++    assert end.enable(Trigger.Request(), Trigger.Response()).success
++    home = end.reference.copy(); rig.pump(.2)
++    d = end.measurements
++    assert end.p('enable_base_assist') is False
++    assert end.p('wrench_source_mode') == 'sensor'
++    assert d['r_arm_xy_m'] == pytest.approx(np.linalg.norm(d['e_arm_m'][:2]))
++    np.testing.assert_allclose(d['ik_residual_xy_m_s'],
++        end.model.jacobian(end.measured_q())[:2]@d['qdot_dls_rad_s']-d['v_ee_cmd_xy_m_s'])
++    np.testing.assert_allclose(d['e_arm_m'], [0., 0., 0.])  # mock plant deliberately held
++    np.testing.assert_allclose(d['e_track_xy_m'], d['delta_p_adm_m'])
++    assert np.linalg.norm(d['qdot_cmd_rad_s']) > 0 and np.linalg.norm(d['delta_p_adm_m']) > 0
++    if end.p('arm_command_reference')=='servo_trajectory':
++        np.testing.assert_allclose(np.array(d['q_cmd_rad'])-d['q_start_cmd_rad'],
++            np.array(d['qdot_dls_rad_s'])*end.p('arm_command_horizon_s'),atol=1e-10)
++        assert d['trajectory_points']==2
++    np.testing.assert_array_equal(end.reference, home)
++    np.testing.assert_array_equal(end.base_request(1.), [0., 0., 0.])
++    assert rig.output['follower'] == 0.
++    assert not any('leader' in s.topic_name or 'ground_truth' in s.topic_name or 'goal' in s.topic_name for s in end.subscriptions)
++    assert not end.set_parameters([Parameter('control_mode', value='ARM_FIRST_BASE')])[0].successful
++
++
++@pytest.mark.parametrize('fault', ['dropout', 'force', 'drift', 'singularity', 'saturation', 'joint_limit', 'grasp'])
++def test_local_fault_stops_both_without_restart(rig, fault):
++    rig.start(); end = rig.ends['follower']; assert end.enable(Trigger.Request(), Trigger.Response()).success
++    rig.pump(.08)
++    if fault == 'dropout': rig.dropout = True
++    if fault == 'force': rig.force = [.6, 0.]
++    if fault == 'drift': rig.pose['follower'] += .002
++    if fault == 'singularity': end.model.jacobian = lambda q: np.zeros((6, 5))
++    if fault == 'saturation': end.core.x[0] = end.core.limit[0]; rig.force = [.4, 0.]
++    if fault == 'joint_limit': end.model.lower[:] = -.001
++    if fault == 'grasp': end.grasp_wall = 0.; end.tick()
++    rig.pump(.3)
++    assert end.state == 'SAFE_STOP' and end.core is None and rig.stop_calls > 0
++    assert all(e.state == 'SAFE_STOP' for e in rig.ends.values())
++    assert all(v == 0. for v in rig.output.values())
++    assert not end.enable(Trigger.Request(), Trigger.Response()).success
++
++
++def test_second_command_writer_blocks_prepare(rig):
++    from geometry_msgs.msg import TwistStamped
++    rig.driver.create_publisher(TwistStamped, '/follower/base_cmd', 1)
++    rig.pump(.3)
++    result = rig.ends['follower'].prepare(Trigger.Request(), Trigger.Response())
++    assert not result.success and 'publisher' in result.message
++
++
++def test_base_lock_rejects_nonzero_at_final_writer(tmp_path):
++    from test_cp7_safety import GuardRig
++    from geometry_msgs.msg import Twist
++    r = GuardRig(tmp_path)
++    try:
++        r.start(); guard = r.guards['follower']; guard.base_zero_only = True
++        cmd = Twist(); cmd.linear.x = .001; guard.base(cmd)
++        assert guard.fault == 'ARM_ONLY rejected nonzero final base request'
++        r.pump(.3)
++        assert r.output == {'leader': 0., 'follower': 0.}
++    finally:r.close()
++
++
++def test_prearm_zero_is_discarded_but_active_stale_zero_and_motion_trip(tmp_path):
++    from test_cp7_safety import GuardRig
++    from geometry_msgs.msg import TwistStamped
++    from rclpy.time import Time
++    r = GuardRig(tmp_path)
++    try:
++        r.start(); gate = r.gates['follower']; gate.base_zero_only = True
++        msg = TwistStamped(); msg.header.frame_id = 'follower/base_footprint'
++        msg.header.stamp = Time(seconds=gate.armed_sim).to_msg()
++        gate.base_command(msg); assert not gate.fault
++        msg.twist.linear.y = .000001; gate.base_command(msg)
++        assert 'ARM_ONLY rejected nonzero' in gate.fault
++    finally:r.close()
++
++
++@pytest.mark.parametrize('component', ['linear.z', 'angular.x', 'angular.y'])
++def test_nonfinite_unused_axis_cannot_bypass_prearm_zero_lock(tmp_path, component):
++    from test_cp7_safety import GuardRig
++    from geometry_msgs.msg import TwistStamped
++    from rclpy.time import Time
++    r = GuardRig(tmp_path)
++    try:
++        r.start(); gate = r.gates['follower']; gate.base_zero_only = True
++        msg = TwistStamped(); msg.header.frame_id = 'follower/base_footprint'
++        msg.header.stamp = Time(seconds=gate.armed_sim).to_msg()
++        group,axis=component.split('.');setattr(getattr(msg.twist,group),axis,float('nan'))
++        gate.base_command(msg)
++        assert 'nonfinite' in gate.fault
++        r.pump(.2);assert r.output == {'leader':0., 'follower':0.}
++    finally:r.close()
++
++
++def test_postarm_stale_zero_still_trips(tmp_path):
++    from test_cp7_safety import GuardRig
++    from geometry_msgs.msg import TwistStamped
++    from rclpy.time import Time
++    r = GuardRig(tmp_path)
++    try:
++        r.start(); gate = r.gates['follower']; gate.base_zero_only = True
++        msg = TwistStamped(); msg.header.frame_id = 'follower/base_footprint'
++        msg.header.stamp = Time(seconds=gate.armed_sim+.001).to_msg()
++        assert gate.sim-gate.armed_sim > gate.p('command_timeout_s')+.001
++        gate.base_command(msg);assert 'stale' in gate.fault
++    finally:r.close()
++
++
++@pytest.mark.parametrize('mode,rotation', [('ARM_FIRST_BASE','false'),('WHOLE_BODY','false'),('ARM_ONLY','true')])
++def test_af_launch_rejects_future_base_or_rotation_modes(mode,rotation):
++    from pathlib import Path
++    from launch import LaunchContext
++    import runpy
++    setup=runpy.run_path(str(Path(__file__).resolve().parents[1]/'launch/arm_only_af.launch.py'))['setup']
++    context=LaunchContext();context.launch_configurations.update(control_mode=mode,rotation_tracking_enabled=rotation)
++    with pytest.raises(ValueError,match='ARM_ONLY'):setup(context)
++
++
++@pytest.mark.parametrize('name,value', [('enable_base_assist',True),('wrench_source_mode','target_proxy'),
++                                     ('wrench_source_mode','test_injection')])
++def test_controller_rejects_unimplemented_assist_and_non_sensor_source(tmp_path,name,value):
++    import rclpy
++    path=tmp_path/'model.urdf';path.write_text(model_xml())
++    rclpy.init()
++    try:
++        with pytest.raises(ValueError,match='Phase 1 requires'):
++            StrictArmOnly(namespace='/follower',parameter_overrides=[
++                Parameter('use_sim_time',value=True),Parameter('urdf_file',value=str(path)),
++                Parameter(name,value=value)])
++    finally:rclpy.shutdown()
++
++
++def test_small_straight_reference_keeps_feedback_acceleration_reserve(tmp_path):
++    from test_leader_only import Rig
++    r = Rig(tmp_path)
++    try:
++        r.start();leader=r.ends['leader']
++        result=leader.set_parameters([Parameter('straight_reference_acceleration_m_s2',value=.00001)])
++        assert result[0].successful
++        r.goal(.0001);r.pump(3.7)
++        assert leader.completed==1 and leader.state=='READY'
++        assert abs(r.pose['leader']-.0001)<=leader.p('goal_tolerance_m')
++        history=np.asarray(r.command_history);dt=np.diff(history[:,0]);dv=np.diff(history[:,1])
++        assert np.max(np.abs(dv[dt>0]/dt[dt>0]))<=leader.p('acceleration_m_s2')+1e-9
++    finally:r.close()
++
++
++def test_wrench_driven_steps_are_unique_and_wall_watchdog_still_stops(tmp_path):
++    r=AFRig(tmp_path,pose_hold=True,command_reference='servo_trajectory',control_on_wrench=True)
++    try:
++        r.start();end=r.ends['follower'];assert end.enable(Trigger.Request(),Trigger.Response()).success
++        observed=[];step=end.core.step
++        def record(force,dt):
++            observed.append(end.force_stamp)
++            return step(force,dt)
++        end.core.step=record
++        r.pump(.2)
++        assert len(observed)>3 and len(observed)==len(set(observed))
++        assert end.measurements['control_on_wrench'] is True
++        r.dropout=True;r.pump(.3)
++        assert all(e.state=='SAFE_STOP' for e in r.ends.values())
++        assert end.core is None and r.stop_calls>0 and r.output=={'leader':0.,'follower':0.}
++    finally:r.close()
++
++
++def test_velocity_admittance_local_force_deadband_and_dropout_stop_both(tmp_path):
++    r=AFRig(tmp_path,pose_hold=True,command_reference='servo_trajectory',control_on_wrench=True,velocity_mode=True)
++    try:
++        r.start();end=r.ends['follower'];assert end.enable(Trigger.Request(),Trigger.Response()).success
++        r.pump(.2)
++        np.testing.assert_array_equal(end.core.stiffness,[0.,0.])
++        np.testing.assert_allclose(end.control_force(),[.097,0.])
++        assert end.core.x[0]>0 and end.core.v[0]>0
++        assert r.output=={'leader':0.,'follower':0.}
++        r.dropout=True;r.pump(.3)
++        assert all(e.state=='SAFE_STOP' for e in r.ends.values())
++        assert end.core is None and r.stop_calls>0
++    finally:r.close()
++
++
++@pytest.mark.parametrize('required,state,ready', [
++    (False,None,True), (True,None,False), (True,'inactive',False), (True,'active',True)])
++def test_gripper_readiness_is_required_only_for_explicit_af_policy(required,state,ready):
++    import json
++    import time
++    import rclpy
++    from types import SimpleNamespace
++    from amir_compliance_control.interlock import ControllerAudit
++    rclpy.init();node=ControllerAudit(namespace='/follower',parameter_overrides=[
++        Parameter('require_gripper_active',value=required)])
++    try:
++        node.timer.cancel();node.controller_wall=time.monotonic()
++        node.controllers={k:'active' for k in ('joint_state_broadcaster','mecanum_drive_controller','arm_controller')}
++        if state is not None:node.controllers['gripper_controller']=state
++        names={'rover_twist':'actuator_interlock','arm_controller/joint_trajectory':'actuator_interlock',
++            'interlock/base_request':'safety_gate','interlock/arm_request':'safety_gate',
++            'mecanum_drive_controller/reference_unstamped':'rover_twist_relay_ign'}
++        node.get_publishers_info_by_topic=lambda topic: ([SimpleNamespace(node_name=names[topic.removeprefix('/follower/')],
++            node_namespace='/follower')] if topic.removeprefix('/follower/') in names else [])
++        result=[];node.pub=SimpleNamespace(publish=lambda msg:result.append(json.loads(msg.data)))
++        node.tick();assert result[-1]['ready'] is ready
++        assert ('gripper_controller' in result[-1]['required_controllers']) is required
++    finally:node.destroy_node();rclpy.shutdown()
++
++
++def test_streaming_knots_pass_unchanged_gate_and_preserve_bounds(tmp_path):
++    from amir_compliance_control.safety import stamp
++    r=AFRig(tmp_path,pose_hold=True,command_reference='servo_trajectory',control_on_wrench=True)
++    received=[]
++    try:
++        r.driver.create_subscription(__import__('trajectory_msgs.msg',fromlist=['JointTrajectory']).JointTrajectory,
++            '/follower/arm_joint_cmd',lambda msg:received.append(msg),10)
++        r.start();end=r.ends['follower'];assert end.enable(Trigger.Request(),Trigger.Response()).success
++        r.pump(.25)
++        active=[m for m in received if len(m.points)==2]
++        assert len(active)>5 and not end.latched,(end.reason,end.fault_debug)
++        for msg in active:
++            first,last=msg.points[0],msg.points[-1]
++            t=lambda p:p.time_from_start.sec+p.time_from_start.nanosec*1e-9
++            assert t(first)==pytest.approx(end.servo_period)
++            assert t(last)-t(first)==pytest.approx(end.p('arm_command_horizon_s'))
++            assert not first.velocities and not last.velocities
++            assert np.max(np.abs(np.array(last.positions)-first.positions)/(t(last)-t(first)))<=.030000001
++            for a,b in zip(msg.points,msg.points[1:]):
++                assert np.max(np.abs(np.array(b.positions)-a.positions)/(t(b)-t(a)))<=.030000001
++        for before,after in zip(active,active[1:]):
++            dt=stamp(after)-stamp(before)
++            if dt>0:
++                for i in range(len(after.points)):
++                    assert np.max(np.abs(np.array(after.points[i].positions)-before.points[i].positions)/dt)<=.030000001
++        r.dropout=True;r.pump(.3)
++        assert all(e.state=='SAFE_STOP' for e in r.ends.values()) and r.output=={'leader':0.,'follower':0.}
++    finally:r.close()
++
++

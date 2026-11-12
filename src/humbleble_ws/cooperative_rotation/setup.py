@@ -26,6 +26,8 @@ setup(
             'cooperative_rotation.rotation_controller:main',
             'rotation_data_recorder = '
             'cooperative_rotation.rotation_data_recorder:main',
+            'distributed_data_recorder = '
+            'cooperative_rotation.distributed_data_recorder:main',
         ],
     },
 )

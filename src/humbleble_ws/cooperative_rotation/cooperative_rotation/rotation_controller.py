@@ -8,7 +8,7 @@ from typing import Dict, Optional, Tuple
 import numpy as np
 import rclpy
 from controller_manager_msgs.srv import ListControllers
-from geometry_msgs.msg import Pose, PoseStamped, WrenchStamped
+from geometry_msgs.msg import Pose, PoseStamped, TwistStamped, WrenchStamped
 from nav_msgs.msg import Odometry
 from rclpy.duration import Duration
 from rclpy.node import Node
@@ -187,6 +187,8 @@ class CooperativeRotationController(Node):
 
         self._goal_publisher = self.create_publisher(
             PoseStamped, '/cooperative_transport/goal', 20)
+        self._velocity_publisher = self.create_publisher(
+            TwistStamped, '/cooperative_transport/goal_velocity', 1)
         self._enable_publisher = self.create_publisher(
             Bool, '/cooperative_transport/enable', 20)
         self._object_target_publisher = self.create_publisher(
@@ -461,6 +463,9 @@ class CooperativeRotationController(Node):
                 return 'waiting for pre-rotation force settling'
             if min(window) < minimum:
                 return 'waiting for all fingers above minimum normal force'
+            if any(not math.isfinite(force)
+                   or abs(force - target) > target_tolerance for force in window):
+                return 'waiting for each finger force near target'
             if max(window) - min(window) > variation_limit:
                 return 'waiting for grasp-force variation to settle'
             latest_forces.append(window[-1])
@@ -669,7 +674,8 @@ class CooperativeRotationController(Node):
 
     def _command_angle(
             self, angle: float,
-            transport_angle: Optional[float] = None) -> None:
+            transport_angle: Optional[float] = None,
+            angular_velocity: float = 0.0) -> None:
         assert self._object_initial is not None
         assert self._axis_point is not None
         target = rotate_transform_about_axis(
@@ -680,17 +686,31 @@ class CooperativeRotationController(Node):
             transport_target = rotate_transform_about_axis(
                 self._object_initial, self._axis_point, self._axis,
                 transport_angle)
-        self._command_transform(target, transport_target)
+        center_velocity = angular_velocity * np.cross(
+            self._axis, target[:3, 3] - self._axis_point)
+        self._command_transform(
+            target, transport_target, center_velocity,
+            angular_velocity * float(self._axis[2]))
 
     def _command_transform(
             self, target: np.ndarray,
-            transport_target: Optional[np.ndarray] = None) -> None:
+            transport_target: Optional[np.ndarray] = None,
+            linear_velocity: Optional[np.ndarray] = None,
+            angular_velocity: float = 0.0) -> None:
         """Command a rigid payload target and its matching TCP targets."""
         self._object_target = target
         self._publish_pose(self._object_target_publisher, target)
         if transport_target is None:
             transport_target = target
         self._publish_pose(self._goal_publisher, transport_target)
+        velocity = TwistStamped()
+        velocity.header.stamp = self.get_clock().now().to_msg()
+        velocity.header.frame_id = self._world_frame
+        velocity.twist.angular.z = angular_velocity
+        if linear_velocity is not None:
+            velocity.twist.linear.x = float(linear_velocity[0])
+            velocity.twist.linear.y = float(linear_velocity[1])
+        self._velocity_publisher.publish(velocity)
         for name in self._names:
             gripper_target = target @ self._object_to_gripper[name]
             self._publish_pose(
@@ -768,7 +788,15 @@ class CooperativeRotationController(Node):
                     target[:3, 3] += ratio * (
                         self._translation_target[:3, 3]
                         - self._object_initial[:3, 3])
-                self._command_transform(target)
+                velocity = np.zeros(3)
+                if (abs(total_distance) > 1.0e-12
+                        and not self._translation_tracking_governor.paused):
+                    velocity = (
+                        (self._translation_target[:3, 3]
+                         - self._object_initial[:3, 3]) / total_distance
+                        * self._translation_trajectory.velocity(
+                            self._translation_elapsed))
+                self._command_transform(target, linear_velocity=velocity)
                 current = self._current_object()
                 if current is not None:
                     position_error, orientation_error = self._tracking_errors(
@@ -790,7 +818,7 @@ class CooperativeRotationController(Node):
                     self._translation_settling_started = trajectory_now
                     self._translation_within_tolerance_since = None
                     self._status_detail = (
-                        'holding 1 m translation target before rotation')
+                        'holding translation target before rotation')
 
         elif self._state == 'TRANSLATION_SETTLING':
             if reason is not None:
@@ -821,7 +849,7 @@ class CooperativeRotationController(Node):
                         self._translation_within_tolerance_since = None
                     if self._translation_within_tolerance_since is None:
                         self._status_detail = (
-                            'waiting for 1 m translation target to settle')
+                            'waiting for translation target to settle')
                     elif (settling_now
                           - self._translation_within_tolerance_since >= float(
                               self.get_parameter(
@@ -854,8 +882,9 @@ class CooperativeRotationController(Node):
                 if current is not None and self._object_target is not None:
                     _, prior_orientation_error = self._tracking_errors(
                         current, self._object_target)
-                if self._tracking_governor.allow_progress(
-                        prior_orientation_error):
+                progressing = self._tracking_governor.allow_progress(
+                    prior_orientation_error)
+                if progressing:
                     self._trajectory_elapsed += trajectory_dt
                     self._status_detail = 'synchronized rotation in progress'
                 else:
@@ -863,7 +892,10 @@ class CooperativeRotationController(Node):
                         'reference paused while tracking catches up')
                 self._theta_desired = self._trajectory.sample(
                     self._trajectory_elapsed)
-                self._command_angle(self._theta_desired)
+                self._command_angle(
+                    self._theta_desired,
+                    angular_velocity=(self._trajectory.velocity(
+                        self._trajectory_elapsed) if progressing else 0.0))
                 current = self._current_object()
                 if current is not None and self._object_initial is not None:
                     self._theta_actual = signed_axis_rotation(
@@ -982,7 +1014,15 @@ class CooperativeRotationController(Node):
                     target[:3, 3] += ratio * (
                         self._post_rotation_translation_target[:3, 3]
                         - self._object_initial[:3, 3])
-                self._command_transform(target)
+                velocity = np.zeros(3)
+                if (abs(total_distance) > 1.0e-12
+                        and not self._translation_tracking_governor.paused):
+                    velocity = (
+                        (self._post_rotation_translation_target[:3, 3]
+                         - self._object_initial[:3, 3]) / total_distance
+                        * self._post_rotation_translation_trajectory.velocity(
+                            self._post_rotation_translation_elapsed))
+                self._command_transform(target, linear_velocity=velocity)
                 current = self._current_object()
                 if current is not None:
                     position_error, orientation_error = self._tracking_errors(

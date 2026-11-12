@@ -1,0 +1,6352 @@
+{
+  "controllers_ready": true,
+  "controllers": {
+    "leader": {
+      "controller": [
+        {
+          "name": "joint_state_broadcaster",
+          "state": "active",
+          "type": "joint_state_broadcaster/JointStateBroadcaster",
+          "claimed_interfaces": [],
+          "required_command_interfaces": [],
+          "required_state_interfaces": [
+            "Gripper/position",
+            "Gripper/velocity",
+            "Joint_1/position",
+            "Joint_1/velocity",
+            "Joint_2/position",
+            "Joint_2/velocity",
+            "Joint_3/position",
+            "Joint_3/velocity",
+            "Joint_4/position",
+            "Joint_4/velocity",
+            "Joint_5/position",
+            "Joint_5/velocity",
+            "back_left_joint/position",
+            "back_left_joint/velocity",
+            "back_right_joint/position",
+            "back_right_joint/velocity",
+            "front_left_joint/position",
+            "front_left_joint/velocity",
+            "front_right_joint/position",
+            "front_right_joint/velocity",
+            "left_inner_back_joint_mimic/position",
+            "left_inner_back_joint_mimic/velocity",
+            "left_inner_front_joint_mimic/position",
+            "left_inner_front_joint_mimic/velocity",
+            "left_outer_back_joint_mimic/position",
+            "left_outer_back_joint_mimic/velocity",
+            "right_inner_front_joint_mimic/position",
+            "right_inner_front_joint_mimic/velocity",
+            "right_outer_back_joint_mimic/position",
+            "right_outer_back_joint_mimic/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "arm_controller",
+          "state": "active",
+          "type": "joint_trajectory_controller/JointTrajectoryController",
+          "claimed_interfaces": [
+            "Joint_1/position",
+            "Joint_2/position",
+            "Joint_3/position",
+            "Joint_4/position",
+            "Joint_5/position"
+          ],
+          "required_command_interfaces": [
+            "Joint_1/position",
+            "Joint_2/position",
+            "Joint_3/position",
+            "Joint_4/position",
+            "Joint_5/position"
+          ],
+          "required_state_interfaces": [
+            "Joint_1/position",
+            "Joint_1/velocity",
+            "Joint_2/position",
+            "Joint_2/velocity",
+            "Joint_3/position",
+            "Joint_3/velocity",
+            "Joint_4/position",
+            "Joint_4/velocity",
+            "Joint_5/position",
+            "Joint_5/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "gripper_controller",
+          "state": "active",
+          "type": "position_controllers/GripperActionController",
+          "claimed_interfaces": [
+            "Gripper/position"
+          ],
+          "required_command_interfaces": [
+            "Gripper/position"
+          ],
+          "required_state_interfaces": [
+            "Gripper/position",
+            "Gripper/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "mecanum_drive_controller",
+          "state": "active",
+          "type": "mecanum_drive_controller/MecanumDriveController",
+          "claimed_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "required_command_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "required_state_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "is_chainable": true,
+          "is_chained": false,
+          "reference_interfaces": [
+            "linear/x/velocity",
+            "linear/y/velocity",
+            "angular/z/velocity"
+          ],
+          "chain_connections": []
+        }
+      ]
+    },
+    "follower": {
+      "controller": [
+        {
+          "name": "joint_state_broadcaster",
+          "state": "active",
+          "type": "joint_state_broadcaster/JointStateBroadcaster",
+          "claimed_interfaces": [],
+          "required_command_interfaces": [],
+          "required_state_interfaces": [
+            "Gripper/position",
+            "Gripper/velocity",
+            "Joint_1/position",
+            "Joint_1/velocity",
+            "Joint_2/position",
+            "Joint_2/velocity",
+            "Joint_3/position",
+            "Joint_3/velocity",
+            "Joint_4/position",
+            "Joint_4/velocity",
+            "Joint_5/position",
+            "Joint_5/velocity",
+            "back_left_joint/position",
+            "back_left_joint/velocity",
+            "back_right_joint/position",
+            "back_right_joint/velocity",
+            "front_left_joint/position",
+            "front_left_joint/velocity",
+            "front_right_joint/position",
+            "front_right_joint/velocity",
+            "left_inner_back_joint_mimic/position",
+            "left_inner_back_joint_mimic/velocity",
+            "left_inner_front_joint_mimic/position",
+            "left_inner_front_joint_mimic/velocity",
+            "left_outer_back_joint_mimic/position",
+            "left_outer_back_joint_mimic/velocity",
+            "right_inner_front_joint_mimic/position",
+            "right_inner_front_joint_mimic/velocity",
+            "right_outer_back_joint_mimic/position",
+            "right_outer_back_joint_mimic/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "arm_controller",
+          "state": "active",
+          "type": "joint_trajectory_controller/JointTrajectoryController",
+          "claimed_interfaces": [
+            "Joint_1/position",
+            "Joint_2/position",
+            "Joint_3/position",
+            "Joint_4/position",
+            "Joint_5/position"
+          ],
+          "required_command_interfaces": [
+            "Joint_1/position",
+            "Joint_2/position",
+            "Joint_3/position",
+            "Joint_4/position",
+            "Joint_5/position"
+          ],
+          "required_state_interfaces": [
+            "Joint_1/position",
+            "Joint_1/velocity",
+            "Joint_2/position",
+            "Joint_2/velocity",
+            "Joint_3/position",
+            "Joint_3/velocity",
+            "Joint_4/position",
+            "Joint_4/velocity",
+            "Joint_5/position",
+            "Joint_5/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "gripper_controller",
+          "state": "active",
+          "type": "position_controllers/GripperActionController",
+          "claimed_interfaces": [
+            "Gripper/position"
+          ],
+          "required_command_interfaces": [
+            "Gripper/position"
+          ],
+          "required_state_interfaces": [
+            "Gripper/position",
+            "Gripper/velocity"
+          ],
+          "is_chainable": false,
+          "is_chained": false,
+          "reference_interfaces": [],
+          "chain_connections": []
+        },
+        {
+          "name": "mecanum_drive_controller",
+          "state": "active",
+          "type": "mecanum_drive_controller/MecanumDriveController",
+          "claimed_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "required_command_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "required_state_interfaces": [
+            "front_left_joint/velocity",
+            "front_right_joint/velocity",
+            "back_right_joint/velocity",
+            "back_left_joint/velocity"
+          ],
+          "is_chainable": true,
+          "is_chained": false,
+          "reference_interfaces": [
+            "linear/x/velocity",
+            "linear/y/velocity",
+            "angular/z/velocity"
+          ],
+          "chain_connections": []
+        }
+      ]
+    }
+  },
+  "counts": {
+    "/clock": 8726,
+    "/leader/tf_static": 1,
+    "/leader/ft_sensor": 3491,
+    "/leader/joint_load/Joint_1": 3491,
+    "/leader/joint_load/Joint_2": 3491,
+    "/leader/joint_load/Joint_3": 3491,
+    "/leader/joint_load/Joint_4": 3491,
+    "/leader/joint_states": 7958,
+    "/leader/tf": 613,
+    "/follower/tf_static": 1,
+    "/follower/ft_sensor": 3491,
+    "/follower/joint_load/Joint_1": 3491,
+    "/follower/joint_load/Joint_2": 3491,
+    "/follower/joint_load/Joint_3": 3491,
+    "/follower/joint_load/Joint_4": 3491,
+    "/leader/mecanum_drive_controller/odometry": 7486,
+    "/follower/joint_states": 7000,
+    "/follower/tf": 7018,
+    "/follower/mecanum_drive_controller/odometry": 6479
+  },
+  "first": {
+    "/clock": {
+      "clock": {
+        "sec": 0,
+        "nanosec": 8000000
+      }
+    },
+    "/leader/tf_static": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/back_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/back_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/link0_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.413
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_footprint"
+          },
+          "child_frame_id": "leader/base_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.7071080798594737,
+              "w": 0.7071054825112364
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_lrf_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.2,
+              "z": 0.1959
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/tcp_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0795,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "/leader/ft_sensor": {
+      "header": {
+        "stamp": {
+          "sec": 0,
+          "nanosec": 252000000
+        },
+        "frame_id": "leader/Joint_5/wrist_ft_sensor"
+      },
+      "wrench": {
+        "force": {
+          "x": 4.617595415241012e-16,
+          "y": -4.442922999379006e-16,
+          "z": 1.3668616676121944e-16
+        },
+        "torque": {
+          "x": 2.333107130284588e-18,
+          "y": 1.1810724982089907e-18,
+          "z": -7.480889005572553e-18
+        }
+      }
+    },
+    "/leader/joint_load/Joint_1": {
+      "header": {
+        "stamp": {
+          "sec": 0,
+          "nanosec": 252000000
+        },
+        "frame_id": "leader/Joint_1/joint_load_Joint_1"
+      },
+      "wrench": {
+        "force": {
+          "x": 1.5373134269498848e-16,
+          "y": -9.042169024887351e-15,
+          "z": 2.522284315362516e-15
+        },
+        "torque": {
+          "x": -3.1807467458184452e-15,
+          "y": 1.0834164355065213e-16,
+          "z": -1.5676520047765837e-16
+        }
+      }
+    },
+    "/leader/joint_load/Joint_2": {
+      "header": {
+        "stamp": {
+          "sec": 0,
+          "nanosec": 252000000
+        },
+        "frame_id": "leader/Joint_2/joint_load_Joint_2"
+      },
+      "wrench": {
+        "force": {
+          "x": 2.74996105896742e-16,
+          "y": -5.664344328584205e-15,
+          "z": 6.018166322986911e-15
+        },
+        "torque": {
+          "x": -3.758841355348741e-15,
+          "y": -1.3061921205546286e-16,
+          "z": -1.1212605758011132e-16
+        }
+      }
+    },
+    "/leader/joint_load/Joint_3": {
+      "header": {
+        "stamp": {
+          "sec": 0,
+          "nanosec": 252000000
+        },
+        "frame_id": "leader/Joint_3/joint_load_Joint_3"
+      },
+      "wrench": {
+        "force": {
+          "x": 4.1544391157199403e-16,
+          "y": -2.8339116724171527e-15,
+          "z": -2.424232634890858e-15
+        },
+        "torque": {
+          "x": -4.4706338752622126e-15,
+          "y": 7.387051066756706e-18,
+          "z": -1.3175867177315977e-16
+        }
+      }
+    },
+    "/leader/joint_load/Joint_4": {
+      "header": {
+        "stamp": {
+          "sec": 0,
+          "nanosec": 252000000
+        },
+        "frame_id": "leader/Joint_4/joint_load_Joint_4"
+      },
+      "wrench": {
+        "force": {
+          "x": 2.672246956806873e-16,
+          "y": -1.011677988367157e-15,
+          "z": -8.088555508605079e-16
+        },
+        "torque": {
+          "x": -4.143806359349948e-16,
+          "y": -2.609505158456781e-19,
+          "z": -8.510106691481959e-18
+        }
+      }
+    },
+    "/leader/joint_states": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 80000000
+        },
+        "frame_id": "base_link"
+      },
+      "name": [
+        "front_left_joint",
+        "left_inner_front_joint_mimic",
+        "right_inner_front_joint_mimic",
+        "left_outer_back_joint_mimic",
+        "right_outer_back_joint_mimic",
+        "left_inner_back_joint_mimic",
+        "Gripper",
+        "Joint_4",
+        "back_left_joint",
+        "Joint_3",
+        "Joint_5",
+        "Joint_1",
+        "front_right_joint",
+        "Joint_2",
+        "back_right_joint"
+      ],
+      "position": [
+        -4.440380456973861e-13,
+        -1.0000000032972076,
+        -1.0000000032831333,
+        -1.0000000032878875,
+        -1.000000003292387,
+        -1.0000000032852878,
+        -1.0000000032995293,
+        0.19999999841310015,
+        4.4923195784552797e-13,
+        -1.6089908008844827,
+        1.5707959999169403,
+        -3.2760396092527987e-16,
+        -4.3910317459969894e-13,
+        1.3955300678952547,
+        4.540066313958806e-13
+      ],
+      "velocity": [
+        -6.862916207520338e-17,
+        -1.1648496592396669e-09,
+        -1.1648342779186697e-09,
+        -1.1648417110116765e-09,
+        -1.164840304509429e-09,
+        -1.1648422795256139e-09,
+        -1.1648303574432078e-09,
+        -5.477420924558539e-10,
+        -1.3389911708541793e-17,
+        -2.5615051257393356e-10,
+        -2.94329810654386e-11,
+        -3.2420345000510964e-17,
+        -2.415436817865685e-17,
+        -2.0059673165079964e-10,
+        -9.456257794002388e-19
+      ],
+      "effort": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "/leader/tf": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/inner_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.018367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/link0_1"
+          },
+          "child_frame_id": "leader/link1_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": -0.001523,
+              "z": -0.097
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -1.6380198046263993e-16,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/link1_1"
+          },
+          "child_frame_id": "leader/link2_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.097
+            },
+            "rotation": {
+              "x": 0.6425066833801805,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.766280080526566
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/link2_1"
+          },
+          "child_frame_id": "leader/link3_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -0.7204808076220665,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.6934748775898482
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/link3_1"
+          },
+          "child_frame_id": "leader/link4_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.09983341585734219,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.9950041653572385
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/link4_1"
+          },
+          "child_frame_id": "leader/gripper_base_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0405,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.7071066656177283,
+              "z": 0.0,
+              "w": 0.7071068967553479
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/back_left_arm"
+          },
+          "child_frame_id": "leader/back_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5882748185914105e-13,
+              "y": -0.7071067811865476,
+              "z": 1.5882748185914102e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/back_right_arm"
+          },
+          "child_frame_id": "leader/back_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.605155838818442e-13,
+              "y": 0.7071067811865475,
+              "z": -1.6051558388184426e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/front_left_arm"
+          },
+          "child_frame_id": "leader/front_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.569911566087219e-13,
+              "y": 0.7071067811865476,
+              "z": -1.5699115660872187e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/front_right_arm"
+          },
+          "child_frame_id": "leader/front_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5524641619999384e-13,
+              "y": -0.7071067811865475,
+              "z": 1.5524641619999387e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/inner_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.017633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/inner_link_left_1"
+          },
+          "child_frame_id": "leader/finger_left_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/outer_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.037633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/inner_link_right_1"
+          },
+          "child_frame_id": "leader/finger_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 80000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/outer_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.038367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255400520076,
+              "w": 0.8775825610994336
+            }
+          }
+        }
+      ]
+    },
+    "/follower/tf_static": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/back_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/back_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/link0_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.413
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_footprint"
+          },
+          "child_frame_id": "follower/base_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.7071080798594737,
+              "w": 0.7071054825112364
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_lrf_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.2,
+              "z": 0.1959
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/tcp_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0795,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "/follower/ft_sensor": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 708000000
+        },
+        "frame_id": "follower/Joint_5/wrist_ft_sensor"
+      },
+      "wrench": {
+        "force": {
+          "x": 2.055343522397262e-15,
+          "y": 9.309836878085356e-16,
+          "z": 1.7892051187232925e-16
+        },
+        "torque": {
+          "x": 7.39593927193284e-18,
+          "y": -5.503752904317204e-18,
+          "z": -3.964743052682719e-17
+        }
+      }
+    },
+    "/follower/joint_load/Joint_1": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 708000000
+        },
+        "frame_id": "follower/Joint_1/joint_load_Joint_1"
+      },
+      "wrench": {
+        "force": {
+          "x": -1.968663035352435e-16,
+          "y": 1.2562924710403077e-14,
+          "z": -1.3357565103994879e-14
+        },
+        "torque": {
+          "x": 3.295690168857819e-15,
+          "y": 3.318329359968843e-17,
+          "z": -2.3229208738634634e-16
+        }
+      }
+    },
+    "/follower/joint_load/Joint_2": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 708000000
+        },
+        "frame_id": "follower/Joint_2/joint_load_Joint_2"
+      },
+      "wrench": {
+        "force": {
+          "x": 6.197548037702632e-17,
+          "y": -1.1628075801239505e-14,
+          "z": -1.3664876873513352e-14
+        },
+        "torque": {
+          "x": 4.416934714790938e-15,
+          "y": -2.0599514734692485e-16,
+          "z": -8.107729302054631e-17
+        }
+      }
+    },
+    "/follower/joint_load/Joint_3": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 708000000
+        },
+        "frame_id": "follower/Joint_3/joint_load_Joint_3"
+      },
+      "wrench": {
+        "force": {
+          "x": 4.475629045558606e-16,
+          "y": 7.778495903708032e-15,
+          "z": -7.55393235379664e-15
+        },
+        "torque": {
+          "x": 6.2419037200390865e-15,
+          "y": -2.8778483893929655e-18,
+          "z": -1.7204738444261424e-16
+        }
+      }
+    },
+    "/follower/joint_load/Joint_4": {
+      "header": {
+        "stamp": {
+          "sec": 3,
+          "nanosec": 708000000
+        },
+        "frame_id": "follower/Joint_4/joint_load_Joint_4"
+      },
+      "wrench": {
+        "force": {
+          "x": 3.443367591534792e-16,
+          "y": 1.9295919485440325e-15,
+          "z": -4.561665620883428e-15
+        },
+        "torque": {
+          "x": 7.434201318411645e-16,
+          "y": -5.516837712883123e-18,
+          "z": -1.5530375501395724e-17
+        }
+      }
+    },
+    "/leader/mecanum_drive_controller/odometry": {
+      "header": {
+        "stamp": {
+          "sec": 4,
+          "nanosec": 964000000
+        },
+        "frame_id": "leader/odom"
+      },
+      "child_frame_id": "leader/base_footprint",
+      "pose": {
+        "pose": {
+          "position": {
+            "x": 2.728981096721768e-20,
+            "y": -3.345257736653455e-22,
+            "z": 0.0
+          },
+          "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 4.020991462969285e-21,
+            "w": 1.0
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      },
+      "twist": {
+        "twist": {
+          "linear": {
+            "x": 6.822452741804421e-18,
+            "y": -8.363144341633636e-20,
+            "z": 0.0
+          },
+          "angular": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 2.0104957314846422e-18
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      }
+    },
+    "/follower/joint_states": {
+      "header": {
+        "stamp": {
+          "sec": 6,
+          "nanosec": 904000000
+        },
+        "frame_id": "base_link"
+      },
+      "name": [
+        "front_left_joint",
+        "left_inner_front_joint_mimic",
+        "right_inner_front_joint_mimic",
+        "left_outer_back_joint_mimic",
+        "right_outer_back_joint_mimic",
+        "left_inner_back_joint_mimic",
+        "Gripper",
+        "Joint_4",
+        "back_left_joint",
+        "Joint_3",
+        "Joint_5",
+        "Joint_1",
+        "front_right_joint",
+        "Joint_2",
+        "back_right_joint"
+      ],
+      "position": [
+        -4.44150755135939e-13,
+        -1.0000000037258712,
+        -1.0000000037117969,
+        -1.000000003716551,
+        -1.0000000037210506,
+        -1.0000000037139514,
+        -1.0000000037281929,
+        0.19999999821153103,
+        4.4915847773636896e-13,
+        -1.608990800978738,
+        1.5707959999061134,
+        -2.524544413576765e-16,
+        -4.3922556471194175e-13,
+        1.3955300678214273,
+        4.539665146763696e-13
+      ],
+      "velocity": [
+        9.814810833296787e-17,
+        -1.164850037134206e-09,
+        -1.1648353643584722e-09,
+        -1.1648411542942542e-09,
+        -1.1648411772653886e-09,
+        -1.164842414967284e-09,
+        -1.1648307850236058e-09,
+        -5.477414010774705e-10,
+        -1.94662237570173e-17,
+        -2.56150544734633e-10,
+        -2.943298006817116e-11,
+        -8.237529469308304e-17,
+        1.0502582533121194e-16,
+        -2.0059684012481573e-10,
+        3.9099179162135385e-17
+      ],
+      "effort": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "/follower/tf": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/inner_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.018367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/link0_1"
+          },
+          "child_frame_id": "follower/link1_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": -0.001523,
+              "z": -0.097
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -1.2622722067883824e-16,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/link1_1"
+          },
+          "child_frame_id": "follower/link2_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.097
+            },
+            "rotation": {
+              "x": 0.6425066833518943,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.7662800805502833
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/link2_1"
+          },
+          "child_frame_id": "follower/link3_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -0.7204808076547483,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.6934748775558935
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/link3_1"
+          },
+          "child_frame_id": "follower/link4_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.09983341575706112,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.9950041653673002
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/link4_1"
+          },
+          "child_frame_id": "follower/gripper_base_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0405,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.7071066656139005,
+              "z": 0.0,
+              "w": 0.7071068967591757
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/back_left_arm"
+          },
+          "child_frame_id": "follower/back_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5880150271740673e-13,
+              "y": -0.7071067811865476,
+              "z": 1.5880150271740668e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/back_right_arm"
+          },
+          "child_frame_id": "follower/back_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.6050140047964162e-13,
+              "y": 0.7071067811865475,
+              "z": -1.6050140047964167e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/front_left_arm"
+          },
+          "child_frame_id": "follower/front_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5703100541287415e-13,
+              "y": 0.7071067811865476,
+              "z": -1.570310054128741e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/front_right_arm"
+          },
+          "child_frame_id": "follower/front_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5528968763915237e-13,
+              "y": -0.7071067811865475,
+              "z": 1.552896876391524e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/inner_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.017633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/inner_link_left_1"
+          },
+          "child_frame_id": "follower/finger_left_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/outer_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.037633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/inner_link_right_1"
+          },
+          "child_frame_id": "follower/finger_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 6,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/outer_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.038367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.47942554024010153,
+              "w": 0.8775825609966773
+            }
+          }
+        }
+      ]
+    },
+    "/follower/mecanum_drive_controller/odometry": {
+      "header": {
+        "stamp": {
+          "sec": 8,
+          "nanosec": 992000000
+        },
+        "frame_id": "follower/odom"
+      },
+      "child_frame_id": "follower/base_footprint",
+      "pose": {
+        "pose": {
+          "position": {
+            "x": 7.009650764721396e-21,
+            "y": 5.474013785643316e-21,
+            "z": 0.0
+          },
+          "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 2.5359229204292107e-20,
+            "w": 1.0
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      },
+      "twist": {
+        "twist": {
+          "linear": {
+            "x": 1.7524126911803488e-18,
+            "y": 1.368503446410829e-18,
+            "z": 0.0
+          },
+          "angular": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.2679614602146053e-17
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      }
+    }
+  },
+  "latest": {
+    "/clock": {
+      "clock": {
+        "sec": 34,
+        "nanosec": 908000000
+      }
+    },
+    "/leader/tf_static": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/back_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/back_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/link0_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.413
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_footprint"
+          },
+          "child_frame_id": "leader/base_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.7071080798594737,
+              "w": 0.7071054825112364
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_lrf_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.2,
+              "z": 0.1959
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/base_link"
+          },
+          "child_frame_id": "leader/front_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 0,
+              "nanosec": 144000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/tcp_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0795,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "/leader/ft_sensor": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "leader/Joint_5/wrist_ft_sensor"
+      },
+      "wrench": {
+        "force": {
+          "x": 2.216181988475348,
+          "y": 0.02985771867148438,
+          "z": -8.186367709658451e-07
+        },
+        "torque": {
+          "x": 8.327836550351162e-05,
+          "y": -0.006182782185983737,
+          "z": -0.053451783566898184
+        }
+      }
+    },
+    "/leader/joint_load/Joint_1": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "leader/Joint_1/joint_load_Joint_1"
+      },
+      "wrench": {
+        "force": {
+          "x": -1.9937821782796096e-06,
+          "y": 0.0005183637575753383,
+          "z": -46.93912343796703
+        },
+        "torque": {
+          "x": -3.2946465908638256,
+          "y": -0.006183771258380871,
+          "z": 7.176873499450433e-08
+        }
+      }
+    },
+    "/leader/joint_load/Joint_2": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "leader/Joint_2/joint_load_Joint_2"
+      },
+      "wrench": {
+        "force": {
+          "x": -1.3567829091344013e-06,
+          "y": -31.43894991716196,
+          "z": -5.567668331020746
+        },
+        "torque": {
+          "x": -3.526999803884879,
+          "y": -0.0010781570865995066,
+          "z": 0.006088888793907016
+        }
+      }
+    },
+    "/leader/joint_load/Joint_3": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "leader/Joint_3/joint_load_Joint_3"
+      },
+      "wrench": {
+        "force": {
+          "x": -5.802821030842679e-07,
+          "y": 2.8917917618750946,
+          "z": -13.340083027325596
+        },
+        "torque": {
+          "x": -2.624592367649018,
+          "y": -0.006042995821662732,
+          "z": -0.0013098541322903636
+        }
+      }
+    },
+    "/leader/joint_load/Joint_4": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "leader/Joint_4/joint_load_Joint_4"
+      },
+      "wrench": {
+        "force": {
+          "x": -2.0307722487652786e-07,
+          "y": 0.06437413534613175,
+          "z": -4.778154716018904
+        },
+        "torque": {
+          "x": -0.1505635440881221,
+          "y": -0.006182782186336393,
+          "z": -8.329171119371136e-05
+        }
+      }
+    },
+    "/leader/joint_states": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 908000000
+        },
+        "frame_id": "base_link"
+      },
+      "name": [
+        "front_left_joint",
+        "left_inner_front_joint_mimic",
+        "right_inner_front_joint_mimic",
+        "left_outer_back_joint_mimic",
+        "right_outer_back_joint_mimic",
+        "left_inner_back_joint_mimic",
+        "Gripper",
+        "Joint_4",
+        "back_left_joint",
+        "Joint_3",
+        "Joint_5",
+        "Joint_1",
+        "front_right_joint",
+        "Joint_2",
+        "back_right_joint"
+      ],
+      "position": [
+        -4.430798120101642e-13,
+        -1.000000007159874,
+        -1.0000000071457995,
+        -1.0000000071505537,
+        -1.0000000071550532,
+        -1.000000007147954,
+        -1.000000007152877,
+        0.19999999817647568,
+        4.483995387195736e-13,
+        -1.6089908009862062,
+        1.5707959999042316,
+        -3.3680758269711424e-16,
+        -4.3926855266245127e-13,
+        1.3955300678158697,
+        4.5388722088604167e-13
+      ],
+      "velocity": [
+        -5.1113141259852067e-17,
+        -5.263076485858105e-15,
+        -1.654378419955096e-14,
+        -2.3516663235834216e-14,
+        -2.1898707273071267e-14,
+        -2.3780801804888617e-14,
+        -2.362409103602446e-14,
+        -2.449197017836218e-15,
+        -4.402497173331e-18,
+        -2.5199130847154572e-14,
+        -2.5901998201338383e-14,
+        -6.337410238726011e-17,
+        -9.462209235824891e-17,
+        -2.6990922622747752e-14,
+        -2.139457491318739e-17
+      ],
+      "effort": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "/leader/tf": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/inner_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.018367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/link0_1"
+          },
+          "child_frame_id": "leader/link1_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": -0.001523,
+              "z": -0.097
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -1.682770431437826e-16,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/link1_1"
+          },
+          "child_frame_id": "leader/link2_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.097
+            },
+            "rotation": {
+              "x": 0.6425066833497649,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.7662800805520688
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/link2_1"
+          },
+          "child_frame_id": "leader/link3_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -0.7204808076573377,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.6934748775532033
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/link3_1"
+          },
+          "child_frame_id": "leader/link4_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.31,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.09983341573962101,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 0.99500416536905
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/link4_1"
+          },
+          "child_frame_id": "leader/gripper_base_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0405,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.7071066656132351,
+              "z": 0.0,
+              "w": 0.7071068967598411
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/back_left_arm"
+          },
+          "child_frame_id": "leader/back_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5853318348083642e-13,
+              "y": -0.7071067811865476,
+              "z": 1.5853318348083636e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/back_right_arm"
+          },
+          "child_frame_id": "leader/back_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.604733961477162e-13,
+              "y": 0.7071067811865475,
+              "z": -1.6047339614771623e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/front_left_arm"
+          },
+          "child_frame_id": "leader/front_left_wheel_1",
+          "transform": {
+            "translation": {
+              "x": 0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.566522975547263e-13,
+              "y": 0.7071067811865476,
+              "z": -1.5665229755472628e-13,
+              "w": 0.7071067811865475
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/front_right_arm"
+          },
+          "child_frame_id": "leader/front_right_wheel_1",
+          "transform": {
+            "translation": {
+              "x": -0.03,
+              "y": -0.1,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": -1.5530475235896335e-13,
+              "y": -0.7071067811865475,
+              "z": 1.5530475235896337e-13,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/inner_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.017633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/inner_link_left_1"
+          },
+          "child_frame_id": "leader/finger_left_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/outer_link_left_1",
+          "transform": {
+            "translation": {
+              "x": -0.037633,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/inner_link_right_1"
+          },
+          "child_frame_id": "leader/finger_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.04,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "leader/gripper_base_1"
+          },
+          "child_frame_id": "leader/outer_link_right_1",
+          "transform": {
+            "translation": {
+              "x": 0.038367,
+              "y": 0.020522,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.4794255417428231,
+              "w": 0.8775825601757367
+            }
+          }
+        }
+      ]
+    },
+    "/follower/tf_static": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/back_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/back_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": -0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/link0_1",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.413
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_footprint"
+          },
+          "child_frame_id": "follower/base_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -0.7071080798594737,
+              "w": 0.7071054825112364
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_left_arm",
+          "transform": {
+            "translation": {
+              "x": -0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_lrf_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.2,
+              "z": 0.1959
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.7071067811865475,
+              "w": 0.7071067811865476
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/base_link"
+          },
+          "child_frame_id": "follower/front_right_arm",
+          "transform": {
+            "translation": {
+              "x": 0.085,
+              "y": 0.02,
+              "z": 0.076
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.0,
+              "w": 6.123233995736766e-17
+            }
+          }
+        },
+        {
+          "header": {
+            "stamp": {
+              "sec": 3,
+              "nanosec": 628000000
+            },
+            "frame_id": "follower/gripper_base_1"
+          },
+          "child_frame_id": "follower/tcp_link",
+          "transform": {
+            "translation": {
+              "x": 0.0,
+              "y": 0.0795,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "/follower/ft_sensor": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "follower/Joint_5/wrist_ft_sensor"
+      },
+      "wrench": {
+        "force": {
+          "x": 2.216181988285242,
+          "y": 0.029857722038529943,
+          "z": -8.186397082875763e-07
+        },
+        "torque": {
+          "x": 8.327837488153347e-05,
+          "y": -0.006182782185312258,
+          "z": -0.053451783558917214
+        }
+      }
+    },
+    "/follower/joint_load/Joint_1": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "follower/Joint_1/joint_load_Joint_1"
+      },
+      "wrench": {
+        "force": {
+          "x": -1.9924313618315775e-06,
+          "y": 0.0005183651667469478,
+          "z": -46.939123434436304
+        },
+        "torque": {
+          "x": -3.2946465926475166,
+          "y": -0.006183770920645071,
+          "z": 7.162926567207433e-08
+        }
+      }
+    },
+    "/follower/joint_load/Joint_2": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "follower/Joint_2/joint_load_Joint_2"
+      },
+      "wrench": {
+        "force": {
+          "x": -1.3557479047708566e-06,
+          "y": -31.43894991300072,
+          "z": -5.567668340955135
+        },
+        "torque": {
+          "x": -3.5269998055300964,
+          "y": -0.0010781571910806048,
+          "z": 0.006088888552205204
+        }
+      }
+    },
+    "/follower/joint_load/Joint_3": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "follower/Joint_3/joint_load_Joint_3"
+      },
+      "wrench": {
+        "force": {
+          "x": -5.79753093732097e-07,
+          "y": 2.8917917711499577,
+          "z": -13.340083024334238
+        },
+        "torque": {
+          "x": -2.624592367173506,
+          "y": -0.006042995813984322,
+          "z": -0.0013098542451379814
+        }
+      }
+    },
+    "/follower/joint_load/Joint_4": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 900000000
+        },
+        "frame_id": "follower/Joint_4/joint_load_Joint_4"
+      },
+      "wrench": {
+        "force": {
+          "x": -2.0287965088813557e-07,
+          "y": 0.06437414260539187,
+          "z": -4.778154715604709
+        },
+        "torque": {
+          "x": -0.15056354407183126,
+          "y": -0.00618278218561908,
+          "z": -8.32917270288728e-05
+        }
+      }
+    },
+    "/leader/mecanum_drive_controller/odometry": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 904000000
+        },
+        "frame_id": "leader/odom"
+      },
+      "child_frame_id": "leader/base_footprint",
+      "pose": {
+        "pose": {
+          "position": {
+            "x": -5.522797747037887e-18,
+            "y": -3.342357661488709e-17,
+            "z": 0.0
+          },
+          "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -1.678515962455551e-17,
+            "w": 1.0
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      },
+      "twist": {
+        "twist": {
+          "linear": {
+            "x": 4.129589975259724e-18,
+            "y": -2.2511425741070733e-18,
+            "z": 0.0
+          },
+          "angular": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": -1.6107471282577526e-18
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      }
+    },
+    "/follower/joint_states": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 904000000
+        },
+        "frame_id": "base_link"
+      },
+      "name": [
+        "front_left_joint",
+        "left_inner_front_joint_mimic",
+        "right_inner_front_joint_mimic",
+        "left_outer_back_joint_mimic",
+        "right_outer_back_joint_mimic",
+        "left_inner_back_joint_mimic",
+        "Gripper",
+        "Joint_4",
+        "back_left_joint",
+        "Joint_3",
+        "Joint_5",
+        "Joint_1",
+        "front_right_joint",
+        "Joint_2",
+        "back_right_joint"
+      ],
+      "position": [
+        -4.442042539431728e-13,
+        -1.0000000073229536,
+        -1.0000000073088793,
+        -1.0000000073136335,
+        -1.000000007318133,
+        -1.0000000073110338,
+        -1.0000000073159565,
+        0.19999999736581703,
+        4.487744030991285e-13,
+        -1.6089908013652765,
+        1.5707959998606886,
+        -2.3782438275330327e-16,
+        -4.399698291809728e-13,
+        1.3955300675189555,
+        4.5434656073289847e-13
+      ],
+      "velocity": [
+        6.056259190738291e-17,
+        -3.0441865535938547e-15,
+        1.2318221745332124e-14,
+        4.632501195730353e-15,
+        5.887551163115813e-15,
+        4.52601879470281e-15,
+        5.215525980570103e-15,
+        -2.5649030579000438e-15,
+        -4.4240981771758594e-17,
+        -2.258320981296913e-14,
+        -2.6009285816308746e-14,
+        6.108085605568171e-17,
+        7.468454154896703e-17,
+        -2.1367859417505592e-14,
+        -3.470783151946347e-17
+      ],
+      "effort": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "/follower/tf": {
+      "transforms": [
+        {
+          "header": {
+            "stamp": {
+              "sec": 34,
+              "nanosec": 904000000
+            },
+            "frame_id": "follower/odom"
+          },
+          "child_frame_id": "follower/base_footprint",
+          "transform": {
+            "translation": {
+              "x": -1.410166116931596e-17,
+              "y": -2.560888311043523e-17,
+              "z": 0.0
+            },
+            "rotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.04873353422318e-18,
+              "w": 1.0
+            }
+          }
+        }
+      ]
+    },
+    "/follower/mecanum_drive_controller/odometry": {
+      "header": {
+        "stamp": {
+          "sec": 34,
+          "nanosec": 904000000
+        },
+        "frame_id": "follower/odom"
+      },
+      "child_frame_id": "follower/base_footprint",
+      "pose": {
+        "pose": {
+          "position": {
+            "x": -1.410166116931596e-17,
+            "y": -2.560888311043523e-17,
+            "z": 0.0
+          },
+          "orientation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.04873353422318e-18,
+            "w": 1.0
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      },
+      "twist": {
+        "twist": {
+          "linear": {
+            "x": 1.0696680831374295e-18,
+            "y": 8.718718839649088e-20,
+            "z": 0.0
+          },
+          "angular": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.8726954082654403e-18
+          }
+        },
+        "covariance": [
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1
+        ]
+      }
+    }
+  },
+  "tf_edges": {
+    "/leader/tf_static": {
+      "leader/back_left_arm": "leader/base_link",
+      "leader/back_right_arm": "leader/base_link",
+      "leader/link0_1": "leader/base_link",
+      "leader/base_link": "leader/base_footprint",
+      "leader/front_left_arm": "leader/base_link",
+      "leader/front_lrf_link": "leader/base_link",
+      "leader/front_right_arm": "leader/base_link",
+      "leader/tcp_link": "leader/gripper_base_1"
+    },
+    "/leader/tf": {
+      "leader/inner_link_right_1": "leader/gripper_base_1",
+      "leader/link1_1": "leader/link0_1",
+      "leader/link2_1": "leader/link1_1",
+      "leader/link3_1": "leader/link2_1",
+      "leader/link4_1": "leader/link3_1",
+      "leader/gripper_base_1": "leader/link4_1",
+      "leader/back_left_wheel_1": "leader/back_left_arm",
+      "leader/back_right_wheel_1": "leader/back_right_arm",
+      "leader/front_left_wheel_1": "leader/front_left_arm",
+      "leader/front_right_wheel_1": "leader/front_right_arm",
+      "leader/inner_link_left_1": "leader/gripper_base_1",
+      "leader/finger_left_1": "leader/inner_link_left_1",
+      "leader/outer_link_left_1": "leader/gripper_base_1",
+      "leader/finger_right_1": "leader/inner_link_right_1",
+      "leader/outer_link_right_1": "leader/gripper_base_1"
+    },
+    "/follower/tf_static": {
+      "follower/back_left_arm": "follower/base_link",
+      "follower/back_right_arm": "follower/base_link",
+      "follower/link0_1": "follower/base_link",
+      "follower/base_link": "follower/base_footprint",
+      "follower/front_left_arm": "follower/base_link",
+      "follower/front_lrf_link": "follower/base_link",
+      "follower/front_right_arm": "follower/base_link",
+      "follower/tcp_link": "follower/gripper_base_1"
+    },
+    "/follower/tf": {
+      "follower/inner_link_right_1": "follower/gripper_base_1",
+      "follower/link1_1": "follower/link0_1",
+      "follower/link2_1": "follower/link1_1",
+      "follower/link3_1": "follower/link2_1",
+      "follower/link4_1": "follower/link3_1",
+      "follower/gripper_base_1": "follower/link4_1",
+      "follower/back_left_wheel_1": "follower/back_left_arm",
+      "follower/back_right_wheel_1": "follower/back_right_arm",
+      "follower/front_left_wheel_1": "follower/front_left_arm",
+      "follower/front_right_wheel_1": "follower/front_right_arm",
+      "follower/inner_link_left_1": "follower/gripper_base_1",
+      "follower/finger_left_1": "follower/inner_link_left_1",
+      "follower/outer_link_left_1": "follower/gripper_base_1",
+      "follower/finger_right_1": "follower/inner_link_right_1",
+      "follower/outer_link_right_1": "follower/gripper_base_1",
+      "follower/base_footprint": "follower/odom"
+    }
+  },
+  "nodes": {
+    "/checkpoint_graph_audit": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/follower/ft_sensor",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_1",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_2",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_3",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_4",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/follower/mecanum_drive_controller/odometry",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/follower/odom",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/follower/tf",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/follower/tf_static",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/leader/ft_sensor",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_1",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_2",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_3",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_4",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/leader/mecanum_drive_controller/odometry",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/leader/odom",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/leader/tf",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/leader/tf_static",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": [
+        [
+          "/follower/controller_manager/list_controllers",
+          [
+            "controller_manager_msgs/srv/ListControllers"
+          ]
+        ],
+        [
+          "/leader/controller_manager/list_controllers",
+          [
+            "controller_manager_msgs/srv/ListControllers"
+          ]
+        ]
+      ]
+    },
+    "/compliance_clock_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/gz_ros2_control": {
+      "subscriptions": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/controller_manager": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/joint_state_broadcaster": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/dynamic_joint_states",
+          [
+            "control_msgs/msg/DynamicJointState"
+          ]
+        ],
+        [
+          "/leader/joint_state_broadcaster/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/leader/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/arm_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/leader/arm_controller/joint_trajectory",
+          [
+            "trajectory_msgs/msg/JointTrajectory"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/arm_controller/controller_state",
+          [
+            "control_msgs/msg/JointTrajectoryControllerState"
+          ]
+        ],
+        [
+          "/leader/arm_controller/follow_joint_trajectory/_action/feedback",
+          [
+            "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+          ]
+        ],
+        [
+          "/leader/arm_controller/follow_joint_trajectory/_action/status",
+          [
+            "action_msgs/msg/GoalStatusArray"
+          ]
+        ],
+        [
+          "/leader/arm_controller/state",
+          [
+            "control_msgs/msg/JointTrajectoryControllerState"
+          ]
+        ],
+        [
+          "/leader/arm_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/gz_ros2_control": {
+      "subscriptions": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/controller_manager": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/mecanum_drive_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/leader/mecanum_drive_controller/reference_unstamped",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/mecanum_drive_controller/controller_state",
+          [
+            "control_msgs/msg/MecanumDriveControllerState"
+          ]
+        ],
+        [
+          "/leader/mecanum_drive_controller/odometry",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/leader/mecanum_drive_controller/tf_odometry",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/leader/mecanum_drive_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/gripper_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/gripper_controller/gripper_cmd/_action/feedback",
+          [
+            "control_msgs/action/GripperCommand_FeedbackMessage"
+          ]
+        ],
+        [
+          "/leader/gripper_controller/gripper_cmd/_action/status",
+          [
+            "action_msgs/msg/GoalStatusArray"
+          ]
+        ],
+        [
+          "/leader/gripper_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/joint_state_broadcaster": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/dynamic_joint_states",
+          [
+            "control_msgs/msg/DynamicJointState"
+          ]
+        ],
+        [
+          "/follower/joint_state_broadcaster/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/follower/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/arm_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/follower/arm_controller/joint_trajectory",
+          [
+            "trajectory_msgs/msg/JointTrajectory"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/arm_controller/controller_state",
+          [
+            "control_msgs/msg/JointTrajectoryControllerState"
+          ]
+        ],
+        [
+          "/follower/arm_controller/follow_joint_trajectory/_action/feedback",
+          [
+            "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+          ]
+        ],
+        [
+          "/follower/arm_controller/follow_joint_trajectory/_action/status",
+          [
+            "action_msgs/msg/GoalStatusArray"
+          ]
+        ],
+        [
+          "/follower/arm_controller/state",
+          [
+            "control_msgs/msg/JointTrajectoryControllerState"
+          ]
+        ],
+        [
+          "/follower/arm_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/mecanum_drive_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/follower/mecanum_drive_controller/reference_unstamped",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/mecanum_drive_controller/controller_state",
+          [
+            "control_msgs/msg/MecanumDriveControllerState"
+          ]
+        ],
+        [
+          "/follower/mecanum_drive_controller/odometry",
+          [
+            "nav_msgs/msg/Odometry"
+          ]
+        ],
+        [
+          "/follower/mecanum_drive_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/follower/tf",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/gripper_controller": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/gripper_controller/gripper_cmd/_action/feedback",
+          [
+            "control_msgs/action/GripperCommand_FeedbackMessage"
+          ]
+        ],
+        [
+          "/follower/gripper_controller/gripper_cmd/_action/status",
+          [
+            "action_msgs/msg/GoalStatusArray"
+          ]
+        ],
+        [
+          "/follower/gripper_controller/transition_event",
+          [
+            "lifecycle_msgs/msg/TransitionEvent"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/cp9_metrology_joint_load_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/joint_load/Joint_1",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_2",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_3",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/joint_load/Joint_4",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_1",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_2",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_3",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/joint_load/Joint_4",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/cp9_identification_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/experiment/follower/calibration_wrench",
+          [
+            "geometry_msgs/msg/Wrench"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/_ros2cli_daemon_103_191ff87a820b4c1e891564ab2a10a0ca": {
+      "subscriptions": [],
+      "publishers": [
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/robot_state_publisher": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/follower/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/robot_description",
+          [
+            "std_msgs/msg/String"
+          ]
+        ],
+        [
+          "/follower/tf",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/follower/tf_static",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/wrist_ft_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/ft_sensor",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/finger_ft_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/finger_left_wrench",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/follower/finger_right_wrench",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/finger_contact_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/finger_left_contact",
+          [
+            "ros_gz_interfaces/msg/Contacts"
+          ]
+        ],
+        [
+          "/follower/finger_right_contact",
+          [
+            "ros_gz_interfaces/msg/Contacts"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/follower/rover_twist_relay_ign": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/follower/rover_twist",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/follower/mecanum_drive_controller/reference_unstamped",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/robot_state_publisher": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/leader/joint_states",
+          [
+            "sensor_msgs/msg/JointState"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/robot_description",
+          [
+            "std_msgs/msg/String"
+          ]
+        ],
+        [
+          "/leader/tf",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/leader/tf_static",
+          [
+            "tf2_msgs/msg/TFMessage"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/wrist_ft_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/ft_sensor",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/finger_ft_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/finger_left_wrench",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/leader/finger_right_wrench",
+          [
+            "geometry_msgs/msg/WrenchStamped"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/finger_contact_bridge": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/finger_left_contact",
+          [
+            "ros_gz_interfaces/msg/Contacts"
+          ]
+        ],
+        [
+          "/leader/finger_right_contact",
+          [
+            "ros_gz_interfaces/msg/Contacts"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    },
+    "/leader/rover_twist_relay_ign": {
+      "subscriptions": [
+        [
+          "/clock",
+          [
+            "rosgraph_msgs/msg/Clock"
+          ]
+        ],
+        [
+          "/leader/rover_twist",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ]
+      ],
+      "publishers": [
+        [
+          "/leader/mecanum_drive_controller/reference_unstamped",
+          [
+            "geometry_msgs/msg/Twist"
+          ]
+        ],
+        [
+          "/parameter_events",
+          [
+            "rcl_interfaces/msg/ParameterEvent"
+          ]
+        ],
+        [
+          "/rosout",
+          [
+            "rcl_interfaces/msg/Log"
+          ]
+        ]
+      ],
+      "clients": []
+    }
+  },
+  "topics": {
+    "/clock": {
+      "types": [
+        "rosgraph_msgs/msg/Clock"
+      ],
+      "publishers": [
+        {
+          "node_name": "compliance_clock_bridge",
+          "node_namespace": "/",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "compliance_clock_bridge",
+          "node_namespace": "/",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "cp9_identification_bridge",
+          "node_namespace": "/",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/follower",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/leader",
+          "topic_type": "rosgraph_msgs/msg/Clock"
+        }
+      ]
+    },
+    "/experiment/follower/calibration_wrench": {
+      "types": [
+        "geometry_msgs/msg/Wrench"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "cp9_identification_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/Wrench"
+        }
+      ]
+    },
+    "/follower/arm_controller/controller_state": {
+      "types": [
+        "control_msgs/msg/JointTrajectoryControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/msg/JointTrajectoryControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/arm_controller/follow_joint_trajectory/_action/feedback": {
+      "types": [
+        "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/arm_controller/follow_joint_trajectory/_action/status": {
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "action_msgs/msg/GoalStatusArray"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/arm_controller/joint_trajectory": {
+      "types": [
+        "trajectory_msgs/msg/JointTrajectory"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "trajectory_msgs/msg/JointTrajectory"
+        }
+      ]
+    },
+    "/follower/arm_controller/state": {
+      "types": [
+        "control_msgs/msg/JointTrajectoryControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/msg/JointTrajectoryControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/arm_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/dynamic_joint_states": {
+      "types": [
+        "control_msgs/msg/DynamicJointState"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/msg/DynamicJointState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/finger_left_contact": {
+      "types": [
+        "ros_gz_interfaces/msg/Contacts"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/finger_left_wrench": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/finger_right_contact": {
+      "types": [
+        "ros_gz_interfaces/msg/Contacts"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/finger_right_wrench": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/ft_sensor": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/follower/gripper_controller/gripper_cmd/_action/feedback": {
+      "types": [
+        "control_msgs/action/GripperCommand_FeedbackMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/action/GripperCommand_FeedbackMessage"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/gripper_controller/gripper_cmd/_action/status": {
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "action_msgs/msg/GoalStatusArray"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/gripper_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/joint_load/Joint_1": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/follower/joint_load/Joint_2": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/follower/joint_load/Joint_3": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/follower/joint_load/Joint_4": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/follower/joint_state_broadcaster/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/joint_states": {
+      "types": [
+        "sensor_msgs/msg/JointState"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "sensor_msgs/msg/JointState"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "sensor_msgs/msg/JointState"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "sensor_msgs/msg/JointState"
+        }
+      ]
+    },
+    "/follower/mecanum_drive_controller/controller_state": {
+      "types": [
+        "control_msgs/msg/MecanumDriveControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "control_msgs/msg/MecanumDriveControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/mecanum_drive_controller/odometry": {
+      "types": [
+        "nav_msgs/msg/Odometry"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ]
+    },
+    "/follower/mecanum_drive_controller/reference_unstamped": {
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "publishers": [
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ]
+    },
+    "/follower/mecanum_drive_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/odom": {
+      "types": [
+        "nav_msgs/msg/Odometry"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ]
+    },
+    "/follower/robot_description": {
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "publishers": [
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "std_msgs/msg/String"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/follower/rover_twist": {
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/follower",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ]
+    },
+    "/follower/tf": {
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ]
+    },
+    "/follower/tf_static": {
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ]
+    },
+    "/leader/arm_controller/controller_state": {
+      "types": [
+        "control_msgs/msg/JointTrajectoryControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/msg/JointTrajectoryControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/arm_controller/follow_joint_trajectory/_action/feedback": {
+      "types": [
+        "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/action/FollowJointTrajectory_FeedbackMessage"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/arm_controller/follow_joint_trajectory/_action/status": {
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "action_msgs/msg/GoalStatusArray"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/arm_controller/joint_trajectory": {
+      "types": [
+        "trajectory_msgs/msg/JointTrajectory"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "trajectory_msgs/msg/JointTrajectory"
+        }
+      ]
+    },
+    "/leader/arm_controller/state": {
+      "types": [
+        "control_msgs/msg/JointTrajectoryControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/msg/JointTrajectoryControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/arm_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/dynamic_joint_states": {
+      "types": [
+        "control_msgs/msg/DynamicJointState"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/msg/DynamicJointState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/finger_left_contact": {
+      "types": [
+        "ros_gz_interfaces/msg/Contacts"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/finger_left_wrench": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/finger_right_contact": {
+      "types": [
+        "ros_gz_interfaces/msg/Contacts"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "ros_gz_interfaces/msg/Contacts"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/finger_right_wrench": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/ft_sensor": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/leader/gripper_controller/gripper_cmd/_action/feedback": {
+      "types": [
+        "control_msgs/action/GripperCommand_FeedbackMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/action/GripperCommand_FeedbackMessage"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/gripper_controller/gripper_cmd/_action/status": {
+      "types": [
+        "action_msgs/msg/GoalStatusArray"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "action_msgs/msg/GoalStatusArray"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/gripper_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/joint_load/Joint_1": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/leader/joint_load/Joint_2": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/leader/joint_load/Joint_3": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/leader/joint_load/Joint_4": {
+      "types": [
+        "geometry_msgs/msg/WrenchStamped"
+      ],
+      "publishers": [
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "geometry_msgs/msg/WrenchStamped"
+        }
+      ]
+    },
+    "/leader/joint_state_broadcaster/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/joint_states": {
+      "types": [
+        "sensor_msgs/msg/JointState"
+      ],
+      "publishers": [
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "sensor_msgs/msg/JointState"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "sensor_msgs/msg/JointState"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "sensor_msgs/msg/JointState"
+        }
+      ]
+    },
+    "/leader/mecanum_drive_controller/controller_state": {
+      "types": [
+        "control_msgs/msg/MecanumDriveControllerState"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "control_msgs/msg/MecanumDriveControllerState"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/mecanum_drive_controller/odometry": {
+      "types": [
+        "nav_msgs/msg/Odometry"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ]
+    },
+    "/leader/mecanum_drive_controller/reference_unstamped": {
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "publishers": [
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ]
+    },
+    "/leader/mecanum_drive_controller/tf_odometry": {
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/mecanum_drive_controller/transition_event": {
+      "types": [
+        "lifecycle_msgs/msg/TransitionEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "lifecycle_msgs/msg/TransitionEvent"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/odom": {
+      "types": [
+        "nav_msgs/msg/Odometry"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "nav_msgs/msg/Odometry"
+        }
+      ]
+    },
+    "/leader/robot_description": {
+      "types": [
+        "std_msgs/msg/String"
+      ],
+      "publishers": [
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "std_msgs/msg/String"
+        }
+      ],
+      "subscriptions": []
+    },
+    "/leader/rover_twist": {
+      "types": [
+        "geometry_msgs/msg/Twist"
+      ],
+      "publishers": [],
+      "subscriptions": [
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/leader",
+          "topic_type": "geometry_msgs/msg/Twist"
+        }
+      ]
+    },
+    "/leader/tf": {
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ]
+    },
+    "/leader/tf_static": {
+      "types": [
+        "tf2_msgs/msg/TFMessage"
+      ],
+      "publishers": [
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "tf2_msgs/msg/TFMessage"
+        }
+      ]
+    },
+    "/parameter_events": {
+      "types": [
+        "rcl_interfaces/msg/ParameterEvent"
+      ],
+      "publishers": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "compliance_clock_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "cp9_identification_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "_ros2cli_daemon_103_191ff87a820b4c1e891564ab2a10a0ca",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        }
+      ],
+      "subscriptions": [
+        {
+          "node_name": "compliance_clock_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "cp9_identification_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/ParameterEvent"
+        }
+      ]
+    },
+    "/rosout": {
+      "types": [
+        "rcl_interfaces/msg/Log"
+      ],
+      "publishers": [
+        {
+          "node_name": "checkpoint_graph_audit",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "compliance_clock_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "gz_ros2_control",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "controller_manager",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "joint_state_broadcaster",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "arm_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "mecanum_drive_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "gripper_controller",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "cp9_metrology_joint_load_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "cp9_identification_bridge",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "_ros2cli_daemon_103_191ff87a820b4c1e891564ab2a10a0ca",
+          "node_namespace": "/",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/follower",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "robot_state_publisher",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "wrist_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "finger_ft_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "finger_contact_bridge",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        },
+        {
+          "node_name": "rover_twist_relay_ign",
+          "node_namespace": "/leader",
+          "topic_type": "rcl_interfaces/msg/Log"
+        }
+      ],
+      "subscriptions": []
+    }
+  },
+  "launch_returncode_before_shutdown": null
+}

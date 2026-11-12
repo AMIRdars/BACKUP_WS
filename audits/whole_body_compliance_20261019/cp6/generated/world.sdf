@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.8">
+  <world name="cooperative_transport">
+    <gravity>0 0 -9.81</gravity>
+    <physics name="2ms" type="ignored">
+      <max_step_size>0.002</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>500</real_time_update_rate>
+    </physics>
+
+    <plugin filename="ignition-gazebo-physics-system" name="ignition::gazebo::systems::Physics" />
+    <plugin filename="ignition-gazebo-user-commands-system" name="ignition::gazebo::systems::UserCommands" />
+    <plugin filename="ignition-gazebo-scene-broadcaster-system" name="ignition::gazebo::systems::SceneBroadcaster" />
+    <plugin filename="ignition-gazebo-contact-system" name="ignition::gazebo::systems::Contact" />
+    <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows><pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <surface><friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction></surface>
+        </collision>
+        <visual name="visual"><geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry></visual>
+      </link>
+    </model>
+
+    
+    <model name="grasp_support">
+      <static>true</static>
+      
+      <pose>0 0 0.3209509618749768 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry><box><size>0.22 0.16 0.6419019237499536</size></box></geometry>
+          <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.22 0.16 0.6419019237499536</size></box></geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.4 0.4 0.4 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  <plugin filename="/home/dars5070/ros2_humble_ws/install/cooperative_transport_gazebo/lib/libcooperative_dart_weld_parameters-system.so" name="cooperative_transport::DartWeldParameters"><constraint_force_mixing>0.1</constraint_force_mixing></plugin><plugin filename="ignition-gazebo-forcetorque-system" name="ignition::gazebo::systems::ForceTorque" /><plugin filename="/home/dars5070/ros2_humble_ws/install/amir_follower_gazebo/lib/libamir_calibration_wrench-system.so" name="amir_follower::CalibrationWrench"><model>follower</model><link>gripper_base_1</link><base>base_footprint</base><offset>0 0.0795 0</offset><topic>/experiment/follower/calibration_wrench</topic></plugin><plugin filename="/home/dars5070/ros2_humble_ws/install/amir_follower_gazebo/lib/libamir_grasp_heartbeat-system.so" name="amir_follower::GraspHeartbeat"><payload>cooperative_payload</payload><robot1>leader</robot1><robot2>follower</robot2><parent_link1>grasp_r1_link</parent_link1><parent_link2>grasp_r2_link</parent_link2><child_link>gripper_base_1</child_link><manage_joints>true</manage_joints></plugin><model name="cooperative_payload">
+    <static>false</static>
+    <self_collide>false</self_collide>
+    <allow_auto_disable>false</allow_auto_disable>
+
+    <link name="payload_link">
+      <inertial>
+        <mass>0.5</mass>
+        
+        <inertia>
+          <ixx>0.0003041875</ixx>
+          <iyy>0.0602666875</iyy>
+          <izz>0.0600375</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="payload_visual">
+        <geometry><box><size>1.20 0.03 0.08</size></box></geometry>
+        <material>
+          <ambient>0.55 0.35 0.18 1</ambient>
+          <diffuse>0.65 0.42 0.20 1</diffuse>
+        </material>
+      </visual>
+      <collision name="payload_collision">
+        
+        <geometry><box><size>1.20 0.03 0.08</size></box></geometry>
+        <surface>
+          <friction><ode><mu>1.5</mu><mu2>1.5</mu2></ode></friction>
+          <contact><ode><kp>1000000</kp><kd>100</kd><max_vel>0.05</max_vel><min_depth>0.001</min_depth></ode></contact>
+        </surface>
+      </collision>
+    </link>
+
+    
+    <link name="grasp_r1_link">
+      <pose>-0.6795 0 0 0 0 0</pose>
+      <inertial><mass>0.01</mass><inertia><ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz></inertia></inertial>
+    </link>
+    <joint name="payload_to_grasp_r1" type="fixed">
+      <parent>payload_link</parent><child>grasp_r1_link</child>
+    </joint>
+
+    <link name="grasp_r2_link">
+      <pose>0.6795 0 0 0 0 0</pose>
+      <inertial><mass>0.01</mass><inertia><ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz></inertia></inertial>
+    </link>
+    <joint name="payload_to_grasp_r2" type="fixed">
+      <parent>payload_link</parent><child>grasp_r2_link</child>
+    </joint>
+
+    
+    <pose>0 0 0.6569019237499536 1.5707963267948966 0 0</pose></model>
+</world>
+</sdf>

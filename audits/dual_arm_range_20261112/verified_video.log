@@ -1,0 +1,17 @@
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  3 (X_GetWindowAttributes)
+  Resource id in failed request:  0x220a339
+  Serial number of failed request:  135
+  Current serial number in output stream:  136
+Traceback (most recent call last):
+  File "/home/dars5070/ros2_humble_ws/tools/amir_gazebo_window_video.py", line 104, in <module>
+    main()
+  File "/home/dars5070/ros2_humble_ws/tools/amir_gazebo_window_video.py", line 76, in main
+    frame = capture(wid)
+  File "/home/dars5070/ros2_humble_ws/tools/amir_gazebo_window_video.py", line 30, in capture
+    data = subprocess.check_output(['xwd', '-silent', '-id', wid])
+  File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['xwd', '-silent', '-id', '0x4000022']' returned non-zero exit status 1.

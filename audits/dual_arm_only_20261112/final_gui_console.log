@@ -1,0 +1,106 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-11-12-22-16-53-266116-dars5070-Katana-15-HX-B14WGK-19763
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Physical base approach -> BOTH BASES ZERO -> native grasp -> leader ARM translation.
+[INFO] [launch.user]: Legacy 1m/0.1m/s arguments do not move bases after grasp; arm 0.03m at <= 0.005m/s.
+[INFO] [launch.user]: Dual arm output: /home/dars5070/ros2_humble_ws/audits/dual_arm_only_20261112/final_gui
+[INFO] [dual_arm_only-1]: process started with pid [19790]
+[dual_arm_only-1] {
+[dual_arm_only-1]   "passed": false,
+[dual_arm_only-1]   "stage": "AF-2",
+[dual_arm_only-1]   "fault": "none",
+[dual_arm_only-1]   "native_arm_stroke": true,
+[dual_arm_only-1]   "dual_arm_only": true,
+[dual_arm_only-1]   "grasp_fixture": "native friction contact",
+[dual_arm_only-1]   "follower_base_fixture": false,
+[dual_arm_only-1]   "error": "single arm probe state stale",
+[dual_arm_only-1]   "cancelled": false,
+[dual_arm_only-1]   "post_stop_controllers": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "joint_state_broadcaster": "active",
+[dual_arm_only-1]       "arm_controller": "active",
+[dual_arm_only-1]       "gripper_controller": "active",
+[dual_arm_only-1]       "mecanum_drive_controller": "active"
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "joint_state_broadcaster": "active",
+[dual_arm_only-1]       "arm_controller": "active",
+[dual_arm_only-1]       "gripper_controller": "active",
+[dual_arm_only-1]       "mecanum_drive_controller": "active"
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "post_stop_joint_span_rad": {
+[dual_arm_only-1]     "leader": [
+[dual_arm_only-1]       2.542893349528605e-10,
+[dual_arm_only-1]       2.542894783630345e-10,
+[dual_arm_only-1]       2.542894783630345e-10,
+[dual_arm_only-1]       2.5428933958515643e-10,
+[dual_arm_only-1]       2.542894783630345e-10
+[dual_arm_only-1]     ],
+[dual_arm_only-1]     "follower": [
+[dual_arm_only-1]       2.1973071512869538e-10,
+[dual_arm_only-1]       2.1973067809710756e-10,
+[dual_arm_only-1]       2.1973067809710756e-10,
+[dual_arm_only-1]       2.197307613638344e-10,
+[dual_arm_only-1]       2.1973067809710756e-10
+[dual_arm_only-1]     ]
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "post_stop_odom_twist": {
+[dual_arm_only-1]     "leader": [
+[dual_arm_only-1]       1.6184967949347204e-18,
+[dual_arm_only-1]       -1.742767484196703e-18,
+[dual_arm_only-1]       -4.119542277300332e-18
+[dual_arm_only-1]     ],
+[dual_arm_only-1]     "follower": [
+[dual_arm_only-1]       2.9065664747279193e-18,
+[dual_arm_only-1]       -6.639096059100672e-19,
+[dual_arm_only-1]       6.051307364646783e-19
+[dual_arm_only-1]     ]
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "safe_stop_verified": false,
+[dual_arm_only-1]   "base_stop_evidence": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "odom_fresh": true,
+[dual_arm_only-1]       "odom_age_sim_s": -8.881784197001252e-16,
+[dual_arm_only-1]       "wheel_velocity_peak_rad_s": 7.4907108392972e-17,
+[dual_arm_only-1]       "wheel_sample_age_sim_s": -8.881784197001252e-16,
+[dual_arm_only-1]       "ground_truth_position_span_m": 0.0,
+[dual_arm_only-1]       "ground_truth_receipt_age_sim_s": 0.0,
+[dual_arm_only-1]       "base_controller_inactive": false,
+[dual_arm_only-1]       "ground_truth_span_bound_m": 0.001,
+[dual_arm_only-1]       "stopped": true
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "odom_fresh": true,
+[dual_arm_only-1]       "odom_age_sim_s": -8.881784197001252e-16,
+[dual_arm_only-1]       "wheel_velocity_peak_rad_s": 6.253079320864017e-17,
+[dual_arm_only-1]       "wheel_sample_age_sim_s": -8.881784197001252e-16,
+[dual_arm_only-1]       "ground_truth_position_span_m": 0.0,
+[dual_arm_only-1]       "ground_truth_receipt_age_sim_s": 0.0,
+[dual_arm_only-1]       "base_controller_inactive": false,
+[dual_arm_only-1]       "ground_truth_span_bound_m": 0.001,
+[dual_arm_only-1]       "stopped": true
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "grasp_held_after_stop": false,
+[dual_arm_only-1]   "last_native_monitor": {},
+[dual_arm_only-1]   "last_native_maintenance": {},
+[dual_arm_only-1]   "native_stop_grasp_basis": "fresh bilateral finger contact and 8..26N inherited grip band; latched FAULT/detached does not mean physical release",
+[dual_arm_only-1]   "gripper_hold_verified": true,
+[dual_arm_only-1]   "final_safety": {},
+[dual_arm_only-1]   "final_endpoints": {},
+[dual_arm_only-1]   "final_grasp": {},
+[dual_arm_only-1]   "rows": 1299,
+[dual_arm_only-1]   "final_gate_debug": {},
+[dual_arm_only-1]   "final_interlock_debug": {},
+[dual_arm_only-1]   "leader_odom_peak_m_s": 4.424646575846192e-13,
+[dual_arm_only-1]   "leader_command_peak_m_s": 0.0,
+[dual_arm_only-1]   "leader_velocity_cap_m_s": 0.005,
+[dual_arm_only-1]   "required_speed_fraction": 0.0,
+[dual_arm_only-1]   "requested_distance_m": 0.03,
+[dual_arm_only-1]   "direction": "forward",
+[dual_arm_only-1]   "signed_leader_goal_m": 0.03,
+[dual_arm_only-1]   "cleanup_escalations": [],
+[dual_arm_only-1]   "remaining_owned_pids": []
+[dual_arm_only-1] }
+[ERROR] [dual_arm_only-1]: process has died [pid 19790, exit code 1, cmd '/usr/bin/python3 -u /home/dars5070/ros2_humble_ws/tools/amir_af_trial.py --stage AF-2 --native-arm-stroke --dual-arm-only --profile pose_hold_micro --virtual-mass-kg 2 --virtual-damping-ns-m 34.6 --virtual-stiffness-n-m 0 --arm-horizon .08 --control-on-wrench --wrench-on-measurement --wrench-cutoff-hz 8 --distance 0.03 --speed 0.005 --start-delay-s 5.0 --output /home/dars5070/ros2_humble_ws/audits/dual_arm_only_20261112/final_gui/trial --prefer-smt-cores --gui --keep-gui-open --pause-gui-after-stop'].
+[ERROR] [launch]: Caught exception in launch (see debug for traceback): dual arm experiment failed; /home/dars5070/ros2_humble_ws/audits/dual_arm_only_20261112/final_gui/trial/result.json

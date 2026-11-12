@@ -1,0 +1,194 @@
+{
+  "folder": "/home/dars5070/ros2_humble_ws/audits/dual_arm_range_20261112/range_100/trial",
+  "result_source": "result.json",
+  "passed": false,
+  "checks": {
+    "result_passed": true,
+    "safe_stop_verified": true,
+    "base_cmd_all_zero": true,
+    "home_latched_once": true,
+    "e_arm_is_actual_minus_home": true,
+    "e_track_is_reference_minus_actual": true,
+    "adm_is_reference_minus_home": true,
+    "base_odom_drift_below_existing_1mm_guard": true,
+    "all_active_ARM_ONLY": true,
+    "all_active_rotation_tracking_disabled": true,
+    "single_writer:base_cmd": true,
+    "single_writer:rover_twist": true,
+    "single_writer:mecanum_drive_controller/reference_unstamped": true,
+    "single_writer:arm_controller/joint_trajectory": true,
+    "local_only:follower_arm_only": true,
+    "local_only:wrench_preprocessor": true,
+    "actual_final_reference_all_zero": true,
+    "grasp_held_after_stop": true,
+    "gripper_hold_verified": true,
+    "source_dt_inside_existing_guard": true,
+    "body_world_drift_below_existing_1mm_guard": true,
+    "leader_world_base_drift_below_1mm": true,
+    "native_contact:leader/left": true,
+    "native_force_band:leader/left": true,
+    "native_contact:leader/right": true,
+    "native_force_band:leader/right": true,
+    "native_contact:follower/left": true,
+    "native_force_band:follower/left": true,
+    "native_contact:follower/right": true,
+    "native_force_band:follower/right": true,
+    "physical_approach_stop_before_grasp": true,
+    "no_pose_service_placement": true,
+    "no_world_base_fixture": true,
+    "velocity_admittance_K_zero": true,
+    "base_assist_disabled": true,
+    "leader_base_cmd_zero_after_BASE_STOP": true,
+    "leader_rover_twist_zero_after_BASE_STOP": true,
+    "leader_base_final_reference_zero_after_BASE_STOP": true,
+    "leader_grasp_translation_residual_below_existing_2mm": false,
+    "leader_single_writer_base_cmd": true,
+    "leader_single_writer_rover_twist": true,
+    "leader_single_writer_mecanum_drive_controller/reference_unstamped": true,
+    "leader_single_writer_arm_controller/joint_trajectory": true,
+    "leader_body_drift_from_BASE_STOP_below_spec_10mm": true,
+    "leader_body_drift_from_ARM_ONLY_below_existing_1mm_guard": true,
+    "leader_body_yaw_drift_below_existing_2mrad_guard": true,
+    "leader_actual_arm_translation_matches_requested": true,
+    "leader_actual_odom_speed_below_existing_guard": true,
+    "leader_final_base_zero_only": true,
+    "leader_left_contact_through_motion": true,
+    "leader_right_contact_through_motion": true,
+    "follower_base_cmd_zero_after_BASE_STOP": true,
+    "follower_rover_twist_zero_after_BASE_STOP": true,
+    "follower_base_final_reference_zero_after_BASE_STOP": true,
+    "follower_grasp_translation_residual_below_existing_2mm": true,
+    "follower_single_writer_base_cmd": true,
+    "follower_single_writer_rover_twist": true,
+    "follower_single_writer_mecanum_drive_controller/reference_unstamped": true,
+    "follower_single_writer_arm_controller/joint_trajectory": true,
+    "follower_body_drift_from_BASE_STOP_below_spec_10mm": true,
+    "follower_body_drift_from_ARM_ONLY_below_existing_1mm_guard": true,
+    "follower_body_yaw_drift_below_existing_2mrad_guard": true,
+    "follower_actual_arm_translation_matches_requested": true,
+    "follower_actual_odom_speed_below_existing_guard": true,
+    "follower_final_base_zero_only": true,
+    "follower_left_contact_through_motion": true,
+    "follower_right_contact_through_motion": true,
+    "opposed_local_arm_directions": true,
+    "matching_world_TCP_direction": true,
+    "leader_goal_reached": true,
+    "object_orientation_change_below_existing_0_01rad": true
+  },
+  "stage": "AF-2",
+  "error": null,
+  "fault": "none",
+  "endpoint_stop_reasons": {
+    "follower": "shared emergency stop",
+    "leader": "shared emergency stop"
+  },
+  "leader_distance_m": -1.083473646912303e-08,
+  "leader_peak_speed_m_s": 0.014999999995358842,
+  "arm_actual_displacement_peak_m": 0.09659418648676639,
+  "track_error_peak_m": 9.821510750629434e-06,
+  "base_odom_drift_peak_m": 1.2420044218009359e-08,
+  "base_odom_speed_peak_m_s": 2.3995301732179265e-06,
+  "force_increment_peak_N": 4.290415395821121,
+  "dt_control_range_s": [
+    0.007999999999981355,
+    0.012000000000000455
+  ],
+  "stop_latency_wall_s": null,
+  "scope": "native friction grasp; both bases stopped; leader arm drives payload; no base restraint fixture",
+  "leader_arm_actual_retraction_m": -0.09999994977799809,
+  "leader_world_base_displacement_xyz_m": [
+    -0.0005807615586421733,
+    1.413286336318982e-06,
+    -6.736836051240917e-07
+  ],
+  "leader_world_base_distance_xy_m": 0.0005807632782595288,
+  "follower_world_base_drift_peak_m": 0.0005800652185838134,
+  "object_world_displacement_xyz_m": [
+    0.09718033480082736,
+    4.787042755346526e-05,
+    -1.039041854877798e-05
+  ],
+  "follower_base_fixture": false,
+  "follower_joint_actual_change_rad": [
+    3.7804214678377904e-06,
+    0.3118673197785333,
+    -0.3165792898829507,
+    0.004717326129137195,
+    1.5317620993826608e-07
+  ],
+  "minimum_joint_margin_rad": 0.6442473865398146,
+  "minimum_task_singular_value_m": 0.2515574837507507,
+  "maximum_height_error_m": 9.053445904072532e-06,
+  "maximum_orientation_error_rad": 6.416859795693764e-05,
+  "leader_left_normal_force_range_N": [
+    16.150679857067267,
+    17.678557650078382
+  ],
+  "leader_right_normal_force_range_N": [
+    19.570933108982274,
+    20.630302433911126
+  ],
+  "follower_left_normal_force_range_N": [
+    16.32798301469613,
+    18.480897524767013
+  ],
+  "follower_right_normal_force_range_N": [
+    18.823574456652832,
+    21.344266231744758
+  ],
+  "dual_arm_metrics": {
+    "leader": {
+      "body_drift_from_stop_peak_m": 0.0012827912683893033,
+      "body_yaw_drift_peak_rad": 4.146605179215093e-05,
+      "body_drift_during_ARM_ONLY_peak_m": 0.0005807632782595288,
+      "odom_speed_peak": 4.764770553193557e-06,
+      "local_arm_displacement_m": [
+        0.09999905602916165,
+        -1.0729401929071253e-08,
+        -1.6563967975002925e-09
+      ],
+      "world_TCP_displacement_m": [
+        0.0994286526949667,
+        -1.9691369570722913e-05,
+        -8.139670796714071e-06
+      ],
+      "TCP_object_translation_residual_peak_m": 0.002249634712694398
+    },
+    "follower": {
+      "body_drift_from_stop_peak_m": 0.0012834158109856148,
+      "body_yaw_drift_peak_rad": 3.151897025466255e-05,
+      "body_drift_during_ARM_ONLY_peak_m": 0.0005800652185838134,
+      "odom_speed_peak": 2.370644265131459e-06,
+      "local_arm_displacement_m": [
+        -0.09659413103086711,
+        5.767233375673275e-06,
+        4.209632642471206e-12
+      ],
+      "world_TCP_displacement_m": [
+        0.09717747714360958,
+        1.6089528217439067e-06,
+        5.626376733403049e-06
+      ],
+      "TCP_object_translation_residual_peak_m": 8.485345494926336e-05
+    }
+  },
+  "base_fixture": false,
+  "physical_approach": {
+    "passed": true,
+    "sim_start_s": 39.712,
+    "sim_stopped_s": 56.092,
+    "stop_before_grasp": true,
+    "peak_command_m_s": {
+      "leader": 0.015,
+      "follower": 0.015
+    },
+    "final_world_x_m": {
+      "leader": -1.0648412752691798,
+      "follower": 1.0648408878850595
+    },
+    "position_input_scope": "own base world pose during preparation only; publishers retired before ARM_ONLY",
+    "pose_service_calls": 0,
+    "sample_count": 7936
+  },
+  "object_rotation_peak_rad": 0.00034024024716576166
+}

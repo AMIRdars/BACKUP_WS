@@ -8,6 +8,7 @@
 
 #include "coop_transport_bt/cooperative_motion_bt_node.hpp"
 #include "coop_transport_bt/transport_safety_nodes.hpp"
+#include "coop_transport_bt/follower_compliant_carry.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -22,6 +23,7 @@ int main(int argc, char ** argv)
   factory.registerNodeType<coop_transport_bt::CooperativeMotionBTNode>("CooperativeMotion");
   factory.registerNodeType<coop_transport_bt::CheckTransportSafe>("CheckTransportSafe");
   factory.registerNodeType<coop_transport_bt::EmergencyStop>("EmergencyStop");
+  factory.registerNodeType<coop_transport_bt::FollowerCompliantCarry>("FollowerCompliantCarry");
   auto blackboard = BT::Blackboard::create();
   blackboard->set<rclcpp::Node::SharedPtr>("node", node);
   const auto xml_path = node->get_parameter("bt_xml_path").as_string();

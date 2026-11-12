@@ -36,6 +36,15 @@ def test_holds_position_inside_force_deadband():
     assert math.isclose(_next(-0.3, (47.0, 53.0)), -0.3)
 
 
+def test_mean_in_band_cannot_stall_a_finger_below_the_completion_band():
+    # Mean 46 is within 50 +/- 5, but the 44 N finger cannot pass the gate.
+    assert _next(-0.3, (44.0, 48.0)) == pytest.approx(-0.296)
+
+
+def test_lower_finger_correction_still_respects_the_upper_force_guard():
+    assert _next(-0.3, (44.0, 56.0)) < -0.3
+
+
 def test_rejects_missing_finger_force():
     with pytest.raises(ValueError):
         next_gripper_position(
@@ -101,3 +110,14 @@ def test_holding_target_mode_opens_above_target():
         minimum_position=-1.0, maximum_position=0.15,
         maintain_target=True, force_tolerance=1.0)
     assert position == pytest.approx(-0.502)
+
+
+def test_twenty_newton_band_accepts_the_shared_actuator_finger_imbalance():
+    position = holding_recovery_position(
+        -0.665, -0.664, (19.8, 22.7), target_force=20.0,
+        minimum_force=8.0, release_force=23.0,
+        position_gain=0.0001, maximum_step=0.002,
+        minimum_position=-1.0, maximum_position=0.261799,
+        maintain_target=True, force_tolerance=1.5)
+    # Opening on this healthy 2.9 N imbalance caused repeated contact loss.
+    assert position == -0.664

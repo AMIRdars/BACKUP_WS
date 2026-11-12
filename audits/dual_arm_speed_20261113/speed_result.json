@@ -1,0 +1,89 @@
+{
+  "motion_completed": true,
+  "strict_acceptance_passed": false,
+  "strict_checks_passed": 67,
+  "strict_checks_total": 71,
+  "failed_checks": [
+    "native_force_band:leader/left",
+    "native_force_band:leader/right",
+    "native_force_band:follower/left",
+    "native_force_band:follower/right"
+  ],
+  "requested_speed_m_s": 0.004,
+  "baseline_requested_speed_m_s": 0.003,
+  "measured": {
+    "leader": {
+      "FK_source_speed_peak_m_s": 0.004000308204113784,
+      "FK_source_speed_p99_5_m_s": 0.003999710344154672,
+      "joint_speed_actual_peak_rad_s": 0.03423595753001745,
+      "joint_source_samples": 20607
+    },
+    "follower": {
+      "FK_source_speed_peak_m_s": 0.004890451650569079,
+      "FK_source_speed_p99_5_m_s": 0.004481161094376827,
+      "joint_speed_actual_peak_rad_s": 0.017820427735869605,
+      "joint_source_samples": 20700
+    }
+  },
+  "baseline_measured": {
+    "leader": {
+      "FK_source_speed_peak_m_s": 0.0030001281849481,
+      "FK_source_speed_p99_5_m_s": 0.0029998192306222283,
+      "joint_speed_actual_peak_rad_s": 0.019550164454036366,
+      "joint_source_samples": 15493
+    },
+    "follower": {
+      "FK_source_speed_peak_m_s": 0.0035912793024420707,
+      "FK_source_speed_p99_5_m_s": 0.0032306212248178565,
+      "joint_speed_actual_peak_rad_s": 0.017773482972219774,
+      "joint_source_samples": 15490
+    }
+  },
+  "dual_arm_metrics": {
+    "leader": {
+      "body_drift_from_stop_peak_m": 0.0010708327718438524,
+      "body_yaw_drift_peak_rad": 2.4448117369933685e-05,
+      "body_drift_during_ARM_ONLY_peak_m": 0.00036627609531311907,
+      "odom_speed_peak": 8.275506961074074e-06,
+      "local_arm_displacement_m": [
+        0.21299916895001814,
+        -1.6124076324752674e-08,
+        -9.79847714077664e-09
+      ],
+      "world_TCP_displacement_m": [
+        0.2126510688703157,
+        2.425569636423067e-05,
+        -1.8988279892218074e-05
+      ],
+      "TCP_object_translation_residual_peak_m": 0.0011921172394477213
+    },
+    "follower": {
+      "body_drift_from_stop_peak_m": 0.0010720438582133124,
+      "body_yaw_drift_peak_rad": 9.029479031319453e-05,
+      "body_drift_during_ARM_ONLY_peak_m": 0.00036550178359302,
+      "odom_speed_peak": 1.0110070489104e-06,
+      "local_arm_displacement_m": [
+        -0.211124686998308,
+        -1.1078849694971357e-05,
+        -7.375211552584915e-13
+      ],
+      "world_TCP_displacement_m": [
+        0.21149999831927668,
+        -2.2159477861550618e-05,
+        9.411684790627817e-06
+      ],
+      "TCP_object_translation_residual_peak_m": 7.402998108802907e-05
+    }
+  },
+  "leader_actual_displacement_m": 0.21299916895001814,
+  "payload_displacement_xyz_m": [
+    0.21148053458871818,
+    2.3162567143423516e-05,
+    -4.996944288682137e-06
+  ],
+  "safe_stop_verified": true,
+  "grasp_held_after_stop": true,
+  "leader_joint_reference_speed_peak_rad_s": 0.026061548558189027,
+  "async_preflight_wall_s": 0.2974703759991826,
+  "p99_5_speed_ratio": 1.3333171223537508
+}

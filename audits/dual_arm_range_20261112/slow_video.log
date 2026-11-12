@@ -1,0 +1,36 @@
+X Error of failed request:  BadMatch (invalid parameter attributes)
+  Major opcode of failed request:  73 (X_GetImage)
+  Serial number of failed request:  140
+  Current serial number in output stream:  140
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  3 (X_GetWindowAttributes)
+  Resource id in failed request:  0x3c00022
+  Serial number of failed request:  7
+  Current serial number in output stream:  8
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  3 (X_GetWindowAttributes)
+  Resource id in failed request:  0x3c00022
+  Serial number of failed request:  7
+  Current serial number in output stream:  8
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  3 (X_GetWindowAttributes)
+  Resource id in failed request:  0x3c00022
+  Serial number of failed request:  7
+  Current serial number in output stream:  8
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  3 (X_GetWindowAttributes)
+  Resource id in failed request:  0x3c00022
+  Serial number of failed request:  7
+  Current serial number in output stream:  8
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+  File "/home/dars5070/ros2_humble_ws/tools/amir_gazebo_window_video.py", line 76, in main
+    frame = capture(wid)
+  File "<stdin>", line 7, in capture
+  File "/home/dars5070/ros2_humble_ws/tools/amir_gazebo_window_video.py", line 30, in capture
+    data = subprocess.check_output(['xwd', '-silent', '-id', wid])
+  File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['xwd', '-silent', '-id', '0x3c00022']' returned non-zero exit status 1.

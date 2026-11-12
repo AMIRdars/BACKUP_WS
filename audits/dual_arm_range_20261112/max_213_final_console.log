@@ -1,0 +1,656 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-11-12-23-20-27-103375-dars5070-Katana-15-HX-B14WGK-59592
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Physical base approach -> BOTH BASES ZERO -> native grasp -> leader ARM translation.
+[INFO] [launch.user]: Legacy 1m/0.1m/s arguments do not move bases after grasp; arm 0.213m at <= 0.004374273787108695m/s.
+[INFO] [launch.user]: Dual arm output: /home/dars5070/ros2_humble_ws/audits/dual_arm_range_20261112/max_213_final
+[INFO] [dual_arm_only-1]: process started with pid [59635]
+[dual_arm_only-1] STROKE_WAYPOINT {"leader_target_total_m": 0.213, "leader_odom_x_m": 0.11014429887649221, "follower_arm_actual_m": [-0.21134342213393142, 4.1993332364747055e-05, -1.690053652581014e-10], "grasp_held": true, "sim_time_s": 190.512}
+[dual_arm_only-1] GUI_PAUSED_REVIEW_READY: measured stop/grip verified, physics paused; Ctrl+C closes the scene. /home/dars5070/ros2_humble_ws/audits/dual_arm_range_20261112/max_213_final/trial
+[dual_arm_only-1] {
+[dual_arm_only-1]   "passed": true,
+[dual_arm_only-1]   "stage": "AF-2",
+[dual_arm_only-1]   "fault": "none",
+[dual_arm_only-1]   "native_arm_stroke": true,
+[dual_arm_only-1]   "dual_arm_only": true,
+[dual_arm_only-1]   "grasp_fixture": "native friction contact",
+[dual_arm_only-1]   "follower_base_fixture": false,
+[dual_arm_only-1]   "physical_base_approach": {
+[dual_arm_only-1]     "passed": true,
+[dual_arm_only-1]     "sim_start_s": 39.2,
+[dual_arm_only-1]     "sim_stopped_s": 55.616,
+[dual_arm_only-1]     "stop_before_grasp": true,
+[dual_arm_only-1]     "peak_command_m_s": {
+[dual_arm_only-1]       "leader": 0.015,
+[dual_arm_only-1]       "follower": 0.015
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "final_world_x_m": {
+[dual_arm_only-1]       "leader": -1.0648425999282676,
+[dual_arm_only-1]       "follower": 1.0648426563012543
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "position_input_scope": "own base world pose during preparation only; publishers retired before ARM_ONLY",
+[dual_arm_only-1]     "pose_service_calls": 0,
+[dual_arm_only-1]     "sample_count": 7938
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "preparation_final": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "state": "HOLDING",
+[dual_arm_only-1]       "reason": "",
+[dual_arm_only-1]       "sim_time": 75.724,
+[dual_arm_only-1]       "q": -0.6538451177787052,
+[dual_arm_only-1]       "local_ready": true,
+[dual_arm_only-1]       "command": -0.6538450886395374,
+[dual_arm_only-1]       "arm_q": {
+[dual_arm_only-1]         "Joint_4": 0.19999999988224573,
+[dual_arm_only-1]         "Joint_3": -1.6000000000157328,
+[dual_arm_only-1]         "Joint_5": 1.5707959999975276,
+[dual_arm_only-1]         "Joint_1": -3.584987422929239e-15,
+[dual_arm_only-1]         "Joint_2": 1.3999999999887085
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "home_from_actual_urdf": {
+[dual_arm_only-1]         "Joint_1": 0.0,
+[dual_arm_only-1]         "Joint_2": 1.4,
+[dual_arm_only-1]         "Joint_3": -1.6,
+[dual_arm_only-1]         "Joint_4": 0.2,
+[dual_arm_only-1]         "Joint_5": 1.570796
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "own_sensors": {
+[dual_arm_only-1]         "left_force": 17.11849600476861,
+[dual_arm_only-1]         "right_force": 19.963305617205943,
+[dual_arm_only-1]         "left_contact": true,
+[dual_arm_only-1]         "right_contact": true
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "mimic_healthy": true,
+[dual_arm_only-1]       "measured_mimics": {
+[dual_arm_only-1]         "left_inner_back_joint_mimic": -0.6538451208808699,
+[dual_arm_only-1]         "right_outer_back_joint_mimic": -0.6538451202783628,
+[dual_arm_only-1]         "left_outer_back_joint_mimic": -0.6538451202707843,
+[dual_arm_only-1]         "right_inner_front_joint_mimic": -0.6538451187546818,
+[dual_arm_only-1]         "left_inner_front_joint_mimic": -0.6538451188303306
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "sent_gripper_goals": 205,
+[dual_arm_only-1]       "accepted_gripper_goals": 204,
+[dual_arm_only-1]       "source_sha256": "170f58141bb3fa4c182bd142e58842ab0b39970ae618e6bc9f222454b0c4f3b4",
+[dual_arm_only-1]       "base_arm_deactivation_response": null,
+[dual_arm_only-1]       "first_fault_context": {},
+[dual_arm_only-1]       "simulation_only": true,
+[dual_arm_only-1]       "normal_force_target_N": 20.0,
+[dual_arm_only-1]       "force_limits_hardware_verified": false
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "state": "HOLDING",
+[dual_arm_only-1]       "reason": "",
+[dual_arm_only-1]       "sim_time": 75.708,
+[dual_arm_only-1]       "q": -0.6558593868237735,
+[dual_arm_only-1]       "local_ready": true,
+[dual_arm_only-1]       "command": -0.6558593786094123,
+[dual_arm_only-1]       "arm_q": {
+[dual_arm_only-1]         "Joint_4": 0.19999999985726943,
+[dual_arm_only-1]         "Joint_3": -1.6000000000162438,
+[dual_arm_only-1]         "Joint_5": 1.5707959999975638,
+[dual_arm_only-1]         "Joint_1": -1.3564475544610581e-15,
+[dual_arm_only-1]         "Joint_2": 1.3999999999884096
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "home_from_actual_urdf": {
+[dual_arm_only-1]         "Joint_1": 0.0,
+[dual_arm_only-1]         "Joint_2": 1.4,
+[dual_arm_only-1]         "Joint_3": -1.6,
+[dual_arm_only-1]         "Joint_4": 0.2,
+[dual_arm_only-1]         "Joint_5": 1.570796
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "own_sensors": {
+[dual_arm_only-1]         "left_contact": true,
+[dual_arm_only-1]         "left_force": 17.22663098567098,
+[dual_arm_only-1]         "right_contact": true,
+[dual_arm_only-1]         "right_force": 20.18548372360382
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "mimic_healthy": true,
+[dual_arm_only-1]       "measured_mimics": {
+[dual_arm_only-1]         "left_inner_back_joint_mimic": -0.6558593875557465,
+[dual_arm_only-1]         "right_outer_back_joint_mimic": -0.6558593869841687,
+[dual_arm_only-1]         "left_outer_back_joint_mimic": -0.6558593869764134,
+[dual_arm_only-1]         "right_inner_front_joint_mimic": -0.6558593854036808,
+[dual_arm_only-1]         "left_inner_front_joint_mimic": -0.6558593856677404
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "sent_gripper_goals": 202,
+[dual_arm_only-1]       "accepted_gripper_goals": 202,
+[dual_arm_only-1]       "source_sha256": "170f58141bb3fa4c182bd142e58842ab0b39970ae618e6bc9f222454b0c4f3b4",
+[dual_arm_only-1]       "base_arm_deactivation_response": null,
+[dual_arm_only-1]       "first_fault_context": {},
+[dual_arm_only-1]       "simulation_only": true,
+[dual_arm_only-1]       "normal_force_target_N": 20.0,
+[dual_arm_only-1]       "force_limits_hardware_verified": false
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "premature_takeover_rejected": {
+[dual_arm_only-1]     "leader": true,
+[dual_arm_only-1]     "follower": true
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "handoff": {
+[dual_arm_only-1]     "preparation_processes_exited": true,
+[dual_arm_only-1]     "preparation_arm_writers_absent": true,
+[dual_arm_only-1]     "monitor_healthy": true,
+[dual_arm_only-1]     "replacement_monitor_holding_before_preparation_retirement": true,
+[dual_arm_only-1]     "no_gripper_open_or_reclose": true,
+[dual_arm_only-1]     "sim_time": 75.804
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "completed_waypoints": [
+[dual_arm_only-1]     {
+[dual_arm_only-1]       "leader_target_total_m": 0.213,
+[dual_arm_only-1]       "leader_odom_x_m": 0.11014429887649221,
+[dual_arm_only-1]       "follower_arm_actual_m": [
+[dual_arm_only-1]         -0.21134342213393142,
+[dual_arm_only-1]         4.1993332364747055e-05,
+[dual_arm_only-1]         -1.690053652581014e-10
+[dual_arm_only-1]       ],
+[dual_arm_only-1]       "grasp_held": true,
+[dual_arm_only-1]       "sim_time_s": 190.512
+[dual_arm_only-1]     }
+[dual_arm_only-1]   ],
+[dual_arm_only-1]   "leader_completed": true,
+[dual_arm_only-1]   "leader_odom_peak_m_s": 0.014999999995358872,
+[dual_arm_only-1]   "leader_command_peak_m_s": 0.0,
+[dual_arm_only-1]   "leader_velocity_cap_m_s": 0.004374273787108695,
+[dual_arm_only-1]   "required_speed_fraction": 0.0,
+[dual_arm_only-1]   "leader_odom_distance_m": -2.1189515524155933e-07,
+[dual_arm_only-1]   "payload_model_gt_displacement_xyz_m": [
+[dual_arm_only-1]     0.21281703429302887,
+[dual_arm_only-1]     -8.794050754832337e-05,
+[dual_arm_only-1]     -4.924473284484421e-06
+[dual_arm_only-1]   ],
+[dual_arm_only-1]   "payload_model_gt_last_age_sim_s": 0.003999999999990678,
+[dual_arm_only-1]   "payload_model_gt_last_receipt_age_sim_s": 0.003999999999990678,
+[dual_arm_only-1]   "payload_model_gt_source_time_available": false,
+[dual_arm_only-1]   "payload_model_gt_age_basis": "receipt in evaluator clock; zero TF source stamp is not reconstructed",
+[dual_arm_only-1]   "leader_actual_arm_displacement_m": 0.21299906156560627,
+[dual_arm_only-1]   "both_bases_max_abs_command": {
+[dual_arm_only-1]     "leader": 0.0,
+[dual_arm_only-1]     "follower": 0.0
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "follower_measured_arm_xy_max_m": 0.211344057099203,
+[dual_arm_only-1]   "follower_zero_command_samples": 51525,
+[dual_arm_only-1]   "follower_max_abs_base_cmd": 0.0,
+[dual_arm_only-1]   "cancelled": false,
+[dual_arm_only-1]   "post_stop_controllers": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "joint_state_broadcaster": "active",
+[dual_arm_only-1]       "arm_controller": "inactive",
+[dual_arm_only-1]       "gripper_controller": "active",
+[dual_arm_only-1]       "mecanum_drive_controller": "inactive"
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "joint_state_broadcaster": "active",
+[dual_arm_only-1]       "arm_controller": "inactive",
+[dual_arm_only-1]       "gripper_controller": "active",
+[dual_arm_only-1]       "mecanum_drive_controller": "inactive"
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "post_stop_joint_span_rad": {
+[dual_arm_only-1]     "leader": [
+[dual_arm_only-1]       1.1515412917922213e-17,
+[dual_arm_only-1]       1.1185846693351209e-10,
+[dual_arm_only-1]       1.5328971425532245e-10,
+[dual_arm_only-1]       4.1719488974578667e-10,
+[dual_arm_only-1]       6.000533403494046e-12
+[dual_arm_only-1]     ],
+[dual_arm_only-1]     "follower": [
+[dual_arm_only-1]       2.1412992906588713e-18,
+[dual_arm_only-1]       2.4513724383723456e-12,
+[dual_arm_only-1]       5.312017492542509e-11,
+[dual_arm_only-1]       5.425040278117521e-10,
+[dual_arm_only-1]       6.064482249712455e-12
+[dual_arm_only-1]     ]
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "post_stop_odom_twist": {
+[dual_arm_only-1]     "leader": [
+[dual_arm_only-1]       2.8932899213201555e-13,
+[dual_arm_only-1]       3.8346905768655527e-16,
+[dual_arm_only-1]       3.2049280676262e-14
+[dual_arm_only-1]     ],
+[dual_arm_only-1]     "follower": [
+[dual_arm_only-1]       8.179352017276762e-13,
+[dual_arm_only-1]       8.718859404359478e-16,
+[dual_arm_only-1]       -2.855405332915345e-14
+[dual_arm_only-1]     ]
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "safe_stop_verified": true,
+[dual_arm_only-1]   "base_stop_evidence": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "odom_fresh": false,
+[dual_arm_only-1]       "odom_age_sim_s": 0.6960000000000104,
+[dual_arm_only-1]       "wheel_velocity_peak_rad_s": 6.05949943157767e-15,
+[dual_arm_only-1]       "wheel_sample_age_sim_s": 0.00400000000001044,
+[dual_arm_only-1]       "ground_truth_position_span_m": 0.0,
+[dual_arm_only-1]       "ground_truth_receipt_age_sim_s": 0.004000000000019099,
+[dual_arm_only-1]       "base_controller_inactive": true,
+[dual_arm_only-1]       "ground_truth_span_bound_m": 0.001,
+[dual_arm_only-1]       "stopped": true
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "odom_fresh": false,
+[dual_arm_only-1]       "odom_age_sim_s": 0.6960000000000104,
+[dual_arm_only-1]       "wheel_velocity_peak_rad_s": 6.140940550397285e-15,
+[dual_arm_only-1]       "wheel_sample_age_sim_s": 0.00400000000001044,
+[dual_arm_only-1]       "ground_truth_position_span_m": 0.0,
+[dual_arm_only-1]       "ground_truth_receipt_age_sim_s": 0.004000000000019099,
+[dual_arm_only-1]       "base_controller_inactive": true,
+[dual_arm_only-1]       "ground_truth_span_bound_m": 0.001,
+[dual_arm_only-1]       "stopped": true
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "grasp_held_after_stop": true,
+[dual_arm_only-1]   "last_native_monitor": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "state": "FAULT",
+[dual_arm_only-1]       "reason": "shared emergency stop",
+[dual_arm_only-1]       "sim_time": 193.27200000000002,
+[dual_arm_only-1]       "ever_permitted": true,
+[dual_arm_only-1]       "own_forces_N": {
+[dual_arm_only-1]         "left": 17.102673590409207,
+[dual_arm_only-1]         "right": 19.946694679173554
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "own_contacts": {
+[dual_arm_only-1]         "left": true,
+[dual_arm_only-1]         "right": true
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "positions": {
+[dual_arm_only-1]         "front_left_joint": 1.4492698824713754,
+[dual_arm_only-1]         "left_inner_front_joint_mimic": -0.6538450946968047,
+[dual_arm_only-1]         "right_inner_front_joint_mimic": -0.6538450946299228,
+[dual_arm_only-1]         "left_outer_back_joint_mimic": -0.6538450962009675,
+[dual_arm_only-1]         "right_outer_back_joint_mimic": -0.6538450962087368,
+[dual_arm_only-1]         "left_inner_back_joint_mimic": -0.6538450968643389,
+[dual_arm_only-1]         "Gripper": -0.6538450962048199,
+[dual_arm_only-1]         "Joint_4": -0.3660911501522239,
+[dual_arm_only-1]         "back_left_joint": 1.4492642786888634,
+[dual_arm_only-1]         "Joint_3": -0.07708611689870445,
+[dual_arm_only-1]         "Joint_5": 1.570795999835304,
+[dual_arm_only-1]         "Joint_1": 1.1113278396558044e-06,
+[dual_arm_only-1]         "front_right_joint": 1.4492701804775376,
+[dual_arm_only-1]         "Joint_2": 0.4431772996653205,
+[dual_arm_only-1]         "back_right_joint": 1.4492640202958595
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "healthy": true,
+[dual_arm_only-1]       "readiness": "NOT_READY",
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.58,
+[dual_arm_only-1]         "reason": "shared emergency stop",
+[dual_arm_only-1]         "source_ages_s": {
+[dual_arm_only-1]           "left": 0.008000000000009777,
+[dual_arm_only-1]           "right": 0.008000000000009777,
+[dual_arm_only-1]           "left_contact": 0.008000000000009777,
+[dual_arm_only-1]           "right_contact": 0.008000000000009777,
+[dual_arm_only-1]           "joints": 0.004000000000019099
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "receipt_ages_wall_s": {
+[dual_arm_only-1]           "left": 0.013042754999332828,
+[dual_arm_only-1]           "right": 0.012960127000042121,
+[dual_arm_only-1]           "left_contact": 0.021725550999690313,
+[dual_arm_only-1]           "right_contact": 0.021230994999314134,
+[dual_arm_only-1]           "joints": 0.005252123999525793
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "clock_age_wall_s": 0.0028398479998941184,
+[dual_arm_only-1]         "maintenance_heartbeat_age_wall_s": 0.006262681999942288,
+[dual_arm_only-1]         "maintenance_ready": true,
+[dual_arm_only-1]         "joint_model_ok": true,
+[dual_arm_only-1]         "forces_N": {
+[dual_arm_only-1]           "left": 17.102751579031597,
+[dual_arm_only-1]           "right": 19.946752854210636
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "contacts": {
+[dual_arm_only-1]           "left": true,
+[dual_arm_only-1]           "right": true
+[dual_arm_only-1]         }
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "base_arm_deactivation_response": true,
+[dual_arm_only-1]       "arm_motion_publisher_count": 0,
+[dual_arm_only-1]       "maintenance_required": true,
+[dual_arm_only-1]       "maintenance_ready": false,
+[dual_arm_only-1]       "maintenance_heartbeat_age_wall_s": 0.0037204959999144194,
+[dual_arm_only-1]       "source_sha256": "bcc4479edac87ca36433c2e4bbb77dbd4b818488c87711601e4ebd9dd4794c99",
+[dual_arm_only-1]       "simulation_only": true
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "state": "FAULT",
+[dual_arm_only-1]       "reason": "shared emergency stop",
+[dual_arm_only-1]       "sim_time": 193.27200000000002,
+[dual_arm_only-1]       "ever_permitted": true,
+[dual_arm_only-1]       "own_forces_N": {
+[dual_arm_only-1]         "left": 17.38838647613099,
+[dual_arm_only-1]         "right": 20.34788290714847
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "own_contacts": {
+[dual_arm_only-1]         "left": true,
+[dual_arm_only-1]         "right": true
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "positions": {
+[dual_arm_only-1]         "front_left_joint": 1.4492691657529455,
+[dual_arm_only-1]         "left_inner_front_joint_mimic": -0.6558593849030644,
+[dual_arm_only-1]         "right_inner_front_joint_mimic": -0.655859384639071,
+[dual_arm_only-1]         "left_outer_back_joint_mimic": -0.6558593862153307,
+[dual_arm_only-1]         "right_outer_back_joint_mimic": -0.6558593862231465,
+[dual_arm_only-1]         "left_inner_back_joint_mimic": -0.655859386848832,
+[dual_arm_only-1]         "Gripper": -0.6558593862192384,
+[dual_arm_only-1]         "Joint_4": 0.06121335366253826,
+[dual_arm_only-1]         "back_left_joint": 1.4492703894505632,
+[dual_arm_only-1]         "Joint_3": -2.1906896959681097,
+[dual_arm_only-1]         "Joint_5": 1.5707959999756624,
+[dual_arm_only-1]         "Joint_1": 0.0001554772023050456,
+[dual_arm_only-1]         "front_right_joint": 1.449269306751438,
+[dual_arm_only-1]         "Joint_2": 2.1294763418688096,
+[dual_arm_only-1]         "back_right_joint": 1.449270019374757
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "healthy": true,
+[dual_arm_only-1]       "readiness": "NOT_READY",
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.58,
+[dual_arm_only-1]         "reason": "shared emergency stop",
+[dual_arm_only-1]         "source_ages_s": {
+[dual_arm_only-1]           "left": 0.008000000000009777,
+[dual_arm_only-1]           "right": 0.008000000000009777,
+[dual_arm_only-1]           "left_contact": 0.008000000000009777,
+[dual_arm_only-1]           "right_contact": 0.008000000000009777,
+[dual_arm_only-1]           "joints": 0.004000000000019099
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "receipt_ages_wall_s": {
+[dual_arm_only-1]           "left": 0.013003892000597261,
+[dual_arm_only-1]           "right": 0.012920075000693032,
+[dual_arm_only-1]           "left_contact": 0.021672661000593507,
+[dual_arm_only-1]           "right_contact": 0.02162574300018605,
+[dual_arm_only-1]           "joints": 0.005348081000192906
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "clock_age_wall_s": 0.009875825000563054,
+[dual_arm_only-1]         "maintenance_heartbeat_age_wall_s": 0.00032543199995416217,
+[dual_arm_only-1]         "maintenance_ready": true,
+[dual_arm_only-1]         "joint_model_ok": true,
+[dual_arm_only-1]         "forces_N": {
+[dual_arm_only-1]           "left": 17.3884162147042,
+[dual_arm_only-1]           "right": 20.347960561869666
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "contacts": {
+[dual_arm_only-1]           "left": true,
+[dual_arm_only-1]           "right": true
+[dual_arm_only-1]         }
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "base_arm_deactivation_response": true,
+[dual_arm_only-1]       "arm_motion_publisher_count": 0,
+[dual_arm_only-1]       "maintenance_required": true,
+[dual_arm_only-1]       "maintenance_ready": false,
+[dual_arm_only-1]       "maintenance_heartbeat_age_wall_s": 0.010880587999963609,
+[dual_arm_only-1]       "source_sha256": "bcc4479edac87ca36433c2e4bbb77dbd4b818488c87711601e4ebd9dd4794c99",
+[dual_arm_only-1]       "simulation_only": true
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "last_native_maintenance": {
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "state": "FAULT",
+[dual_arm_only-1]       "reason": "shared safety permit revoked",
+[dual_arm_only-1]       "tick_gap_wall_s": 0.020176254000034533,
+[dual_arm_only-1]       "enabled": false,
+[dual_arm_only-1]       "sim_time": 193.27200000000002,
+[dual_arm_only-1]       "sent_goals": 0,
+[dual_arm_only-1]       "accepted_goals": 0,
+[dual_arm_only-1]       "last_command_rad": -0.655859386179162,
+[dual_arm_only-1]       "last_command_sim_s": null,
+[dual_arm_only-1]       "initial_held_position_rad": -0.655859386179162,
+[dual_arm_only-1]       "low_force_since_sim_s": null,
+[dual_arm_only-1]       "hold_safe_force_imbalance": true,
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.58,
+[dual_arm_only-1]         "monitor_sim_time": 192.57600000000002,
+[dual_arm_only-1]         "monitor_receipt_age_wall_s": 0.009603342999980669,
+[dual_arm_only-1]         "monitor_healthy": true,
+[dual_arm_only-1]         "clock_receipt_age_wall_s": 0.0006029539999872213,
+[dual_arm_only-1]         "permit_receipt_age_wall_s": 3.744999958144035e-06
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "source_sha256": "6d49f9c4ff2c14c5d06660b8acd1d5d4895552c2729fe0e0ad00267ce167db04",
+[dual_arm_only-1]       "simulation_only": true
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "state": "FAULT",
+[dual_arm_only-1]       "reason": "shared emergency stop",
+[dual_arm_only-1]       "tick_gap_wall_s": 0.020014562000142178,
+[dual_arm_only-1]       "enabled": false,
+[dual_arm_only-1]       "sim_time": 193.27200000000002,
+[dual_arm_only-1]       "sent_goals": 0,
+[dual_arm_only-1]       "accepted_goals": 0,
+[dual_arm_only-1]       "last_command_rad": -0.6538450966194949,
+[dual_arm_only-1]       "last_command_sim_s": null,
+[dual_arm_only-1]       "initial_held_position_rad": -0.6538450966194949,
+[dual_arm_only-1]       "low_force_since_sim_s": null,
+[dual_arm_only-1]       "hold_safe_force_imbalance": true,
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.58,
+[dual_arm_only-1]         "monitor_sim_time": 192.58,
+[dual_arm_only-1]         "monitor_receipt_age_wall_s": 0.0025854329996946035,
+[dual_arm_only-1]         "monitor_healthy": true,
+[dual_arm_only-1]         "clock_receipt_age_wall_s": 0.006742667000253277,
+[dual_arm_only-1]         "permit_receipt_age_wall_s": 0.01715106600022409
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "source_sha256": "6d49f9c4ff2c14c5d06660b8acd1d5d4895552c2729fe0e0ad00267ce167db04",
+[dual_arm_only-1]       "simulation_only": true
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "native_stop_grasp_basis": "fresh bilateral finger contact and 8..26N inherited grip band; latched FAULT/detached does not mean physical release",
+[dual_arm_only-1]   "gripper_hold_verified": true,
+[dual_arm_only-1]   "final_safety": {
+[dual_arm_only-1]     "armed": false,
+[dual_arm_only-1]     "pending_arm": false,
+[dual_arm_only-1]     "fault": "requested stop",
+[dual_arm_only-1]     "ready": false,
+[dual_arm_only-1]     "reason": "leader: local grasp detached"
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "final_endpoints": {
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "state": "SAFE_STOP",
+[dual_arm_only-1]       "reason": "shared emergency stop",
+[dual_arm_only-1]       "local_ready": false,
+[dual_arm_only-1]       "local_reason": "local actuator acknowledgement not ready",
+[dual_arm_only-1]       "role": "ARM_ONLY",
+[dual_arm_only-1]       "prepared": true,
+[dual_arm_only-1]       "homed": true,
+[dual_arm_only-1]       "accepted_goals": 0,
+[dual_arm_only-1]       "rejected_goals": 0,
+[dual_arm_only-1]       "completed_goals": 0,
+[dual_arm_only-1]       "last_rejection": "",
+[dual_arm_only-1]       "command_vx": 0.0,
+[dual_arm_only-1]       "command_vy": 0.0,
+[dual_arm_only-1]       "command_wz": 0.0,
+[dual_arm_only-1]       "sim_time": 193.272
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "state": "SAFE_STOP",
+[dual_arm_only-1]       "reason": "shared emergency stop",
+[dual_arm_only-1]       "local_ready": false,
+[dual_arm_only-1]       "local_reason": "local actuator acknowledgement not ready",
+[dual_arm_only-1]       "role": "leader",
+[dual_arm_only-1]       "prepared": true,
+[dual_arm_only-1]       "homed": true,
+[dual_arm_only-1]       "accepted_goals": 1,
+[dual_arm_only-1]       "rejected_goals": 0,
+[dual_arm_only-1]       "completed_goals": 1,
+[dual_arm_only-1]       "last_rejection": "",
+[dual_arm_only-1]       "command_vx": 0.0,
+[dual_arm_only-1]       "command_vy": 0.0,
+[dual_arm_only-1]       "command_wz": 0.0,
+[dual_arm_only-1]       "sim_time": 193.272
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "final_grasp": {
+[dual_arm_only-1]     "leader": "detached",
+[dual_arm_only-1]     "follower": "detached"
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "rows": 17456,
+[dual_arm_only-1]   "final_gate_debug": {
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "sim_time": 193.276,
+[dual_arm_only-1]       "coherent_sensor_history": true,
+[dual_arm_only-1]       "simulation_source_watchdog": true,
+[dual_arm_only-1]       "coherent_sample_stamps_s": {
+[dual_arm_only-1]         "Joint_1": 192.572,
+[dual_arm_only-1]         "encoder": 192.576,
+[dual_arm_only-1]         "Joint_5": 192.572,
+[dual_arm_only-1]         "Joint_4": 192.572,
+[dual_arm_only-1]         "joints": 192.576,
+[dual_arm_only-1]         "Joint_3": 192.572,
+[dual_arm_only-1]         "Joint_2": 192.572
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "active": false,
+[dual_arm_only-1]       "fault": "local grasp detached",
+[dual_arm_only-1]       "reason": "local grasp heartbeat missing/detached",
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.584,
+[dual_arm_only-1]         "reason": "local grasp detached",
+[dual_arm_only-1]         "sample_stamps_s": {
+[dual_arm_only-1]           "Joint_1": 192.58,
+[dual_arm_only-1]           "Joint_2": 192.58,
+[dual_arm_only-1]           "Joint_3": 192.58,
+[dual_arm_only-1]           "Joint_4": 192.58,
+[dual_arm_only-1]           "Joint_5": 192.58,
+[dual_arm_only-1]           "joints": 192.58,
+[dual_arm_only-1]           "encoder": 192.58
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "sample_wall_ages_s": {
+[dual_arm_only-1]           "Joint_1": 0.0042684860000008484,
+[dual_arm_only-1]           "Joint_2": 0.0041506150000714115,
+[dual_arm_only-1]           "Joint_3": 0.004045812000185833,
+[dual_arm_only-1]           "Joint_4": 0.003952032000597683,
+[dual_arm_only-1]           "Joint_5": 0.0038665430001856294,
+[dual_arm_only-1]           "joints": 0.0045438779998221435,
+[dual_arm_only-1]           "encoder": 0.004357937999884598
+[dual_arm_only-1]         }
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "tick_gap_wall_s": 0.0198472940001011,
+[dual_arm_only-1]       "reaction_torque_Nm": [
+[dual_arm_only-1]         3.993146272234844e-05,
+[dual_arm_only-1]         0.4243008095710092,
+[dual_arm_only-1]         3.746040822284209,
+[dual_arm_only-1]         0.46105509681973034,
+[dual_arm_only-1]         0.0056477252412216366
+[dual_arm_only-1]       ],
+[dual_arm_only-1]       "peak_reaction_torque_Nm": [
+[dual_arm_only-1]         0.0676586382505325,
+[dual_arm_only-1]         4.8087980222315085,
+[dual_arm_only-1]         4.10479649040497,
+[dual_arm_only-1]         0.6356438441582003,
+[dual_arm_only-1]         0.0345315747351987
+[dual_arm_only-1]       ],
+[dual_arm_only-1]       "effort_limit_Nm": [
+[dual_arm_only-1]         33.0,
+[dual_arm_only-1]         22.0,
+[dual_arm_only-1]         26.0,
+[dual_arm_only-1]         13.0,
+[dual_arm_only-1]         4.0
+[dual_arm_only-1]       ]
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "sim_time": 193.272,
+[dual_arm_only-1]       "coherent_sensor_history": true,
+[dual_arm_only-1]       "simulation_source_watchdog": true,
+[dual_arm_only-1]       "coherent_sample_stamps_s": {
+[dual_arm_only-1]         "Joint_1": 192.58,
+[dual_arm_only-1]         "Joint_5": 192.58,
+[dual_arm_only-1]         "joints": 192.58,
+[dual_arm_only-1]         "encoder": 192.58,
+[dual_arm_only-1]         "Joint_4": 192.58,
+[dual_arm_only-1]         "Joint_2": 192.58,
+[dual_arm_only-1]         "Joint_3": 192.58
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "active": false,
+[dual_arm_only-1]       "fault": "local grasp detached",
+[dual_arm_only-1]       "reason": "local grasp heartbeat missing/detached",
+[dual_arm_only-1]       "first_fault_context": {
+[dual_arm_only-1]         "sim_time": 192.584,
+[dual_arm_only-1]         "reason": "local grasp detached",
+[dual_arm_only-1]         "sample_stamps_s": {
+[dual_arm_only-1]           "Joint_2": 192.58,
+[dual_arm_only-1]           "Joint_5": 192.58,
+[dual_arm_only-1]           "Joint_1": 192.58,
+[dual_arm_only-1]           "Joint_3": 192.58,
+[dual_arm_only-1]           "Joint_4": 192.58,
+[dual_arm_only-1]           "joints": 192.584,
+[dual_arm_only-1]           "encoder": 192.58
+[dual_arm_only-1]         },
+[dual_arm_only-1]         "sample_wall_ages_s": {
+[dual_arm_only-1]           "Joint_2": 0.01279741100006504,
+[dual_arm_only-1]           "Joint_5": 0.012528027000371367,
+[dual_arm_only-1]           "Joint_1": 0.01293002200054616,
+[dual_arm_only-1]           "Joint_3": 0.012700913000116998,
+[dual_arm_only-1]           "Joint_4": 0.01261503800014907,
+[dual_arm_only-1]           "joints": 9.098700047616148e-05,
+[dual_arm_only-1]           "encoder": 0.013259172999823932
+[dual_arm_only-1]         }
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "tick_gap_wall_s": 0.019989458000054583,
+[dual_arm_only-1]       "reaction_torque_Nm": [
+[dual_arm_only-1]         0.0003619980662964009,
+[dual_arm_only-1]         9.985300735218061,
+[dual_arm_only-1]         3.3891109183052683,
+[dual_arm_only-1]         0.3829051937846277,
+[dual_arm_only-1]         0.005608773498052961
+[dual_arm_only-1]       ],
+[dual_arm_only-1]       "peak_reaction_torque_Nm": [
+[dual_arm_only-1]         0.12753422793742195,
+[dual_arm_only-1]         14.204964725605288,
+[dual_arm_only-1]         5.430945642213428,
+[dual_arm_only-1]         0.5734762310599043,
+[dual_arm_only-1]         0.03534402350958863
+[dual_arm_only-1]       ],
+[dual_arm_only-1]       "effort_limit_Nm": [
+[dual_arm_only-1]         33.0,
+[dual_arm_only-1]         22.0,
+[dual_arm_only-1]         26.0,
+[dual_arm_only-1]         13.0,
+[dual_arm_only-1]         4.0
+[dual_arm_only-1]       ]
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "final_interlock_debug": {
+[dual_arm_only-1]     "leader": {
+[dual_arm_only-1]       "robot": "leader",
+[dual_arm_only-1]       "ready": false,
+[dual_arm_only-1]       "fault": "local safety gate not ready",
+[dual_arm_only-1]       "reason": "local safety gate not ready",
+[dual_arm_only-1]       "active": false,
+[dual_arm_only-1]       "sequence": 13979,
+[dual_arm_only-1]       "base_zero_only": true,
+[dual_arm_only-1]       "request_writer_name": "leader_trajectory_node",
+[dual_arm_only-1]       "ages_wall_s": {
+[dual_arm_only-1]         "joint": 0.012948790999871562,
+[dual_arm_only-1]         "clock": 0.010769008999886864,
+[dual_arm_only-1]         "base": 0.008891317999768944,
+[dual_arm_only-1]         "relay": 0.019503382000038982,
+[dual_arm_only-1]         "gate": 0.00897052399977838,
+[dual_arm_only-1]         "audit": 0.01515307799945731
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "arm_deliveries": 11220
+[dual_arm_only-1]     },
+[dual_arm_only-1]     "follower": {
+[dual_arm_only-1]       "robot": "follower",
+[dual_arm_only-1]       "ready": false,
+[dual_arm_only-1]       "fault": "local safety gate not ready",
+[dual_arm_only-1]       "reason": "local safety gate not ready",
+[dual_arm_only-1]       "active": false,
+[dual_arm_only-1]       "sequence": 13977,
+[dual_arm_only-1]       "base_zero_only": true,
+[dual_arm_only-1]       "request_writer_name": "follower_arm_only",
+[dual_arm_only-1]       "ages_wall_s": {
+[dual_arm_only-1]         "joint": 0.002674553999895579,
+[dual_arm_only-1]         "clock": 0.0020666529999289196,
+[dual_arm_only-1]         "base": 0.01920151700051065,
+[dual_arm_only-1]         "relay": 0.018910363000031793,
+[dual_arm_only-1]         "gate": 0.019350389999999607,
+[dual_arm_only-1]         "audit": 0.044962869999835675
+[dual_arm_only-1]       },
+[dual_arm_only-1]       "arm_deliveries": 9989
+[dual_arm_only-1]     }
+[dual_arm_only-1]   },
+[dual_arm_only-1]   "requested_distance_m": 0.213,
+[dual_arm_only-1]   "direction": "forward",
+[dual_arm_only-1]   "signed_leader_goal_m": 0.213,
+[dual_arm_only-1]   "gui_review_physics_paused": true,
+[dual_arm_only-1]   "gui_hold_closed_by_signal": "SIGINT",
+[dual_arm_only-1]   "gui_hold_monitor_completed": true,
+[dual_arm_only-1]   "cleanup_escalations": [],
+[dual_arm_only-1]   "remaining_owned_pids": []
+[dual_arm_only-1] }
+[INFO] [dual_arm_only-1]: process has finished cleanly [pid 59635]

@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 from statistics import fmean
 from tempfile import NamedTemporaryFile
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 from openpyxl import Workbook
 from openpyxl.chart import Reference, ScatterChart, Series
@@ -38,6 +38,7 @@ SEQUENCE_COLORS = {
     '把持完了・搬送準備': '#E2F0D9',
     '搬送（直進）': '#DDEBF7',
     '搬送（回転）': '#E4DFEC',
+    '搬送（指定点回転）': '#E4DFEC',
     '搬送（Y方向直進）': '#FFF2CC',
     '搬送完了': '#FFF2CC',
     '異常終了': '#F4CCCC',
@@ -170,23 +171,67 @@ def _sequence_segments(samples: List[RotationSample]):
     return segments
 
 
-def _draw_dashed_vertical(
-        draw: ImageDraw.ImageDraw, x: int, top: int, bottom: int) -> None:
-    for y in range(top, bottom, 12):
-        draw.line((x, y, x, min(y + 6, bottom)), fill='#C00000', width=2)
+def _sequence_graph_width(segments, left: int, right: int) -> int:
+    """Keep every sequence legend entry on one readable row."""
+    sequences = dict.fromkeys(sequence for _, _, sequence in segments)
+    font = _font(16)
+    legend_width = sum(34 + font.getlength(sequence) for sequence in sequences)
+    legend_width += 24 * max(0, len(sequences) - 1)
+    return max(1500, left + right + math.ceil(legend_width))
+
+
+def _draw_normal_force_axis_label(
+        image: Image.Image, top: int, bottom: int) -> None:
+    """Place the English force label vertically inside the left margin."""
+    label = 'Normal force [N]'
+    font = _font(18)
+    bounds = font.getbbox(label)
+    label_image = Image.new(
+        'RGBA', (bounds[2] - bounds[0] + 8, bounds[3] - bounds[1] + 8))
+    ImageDraw.Draw(label_image).text(
+        (4 - bounds[0], 4 - bounds[1]), label,
+        font=font, fill='#222222')
+    vertical = label_image.rotate(90, expand=True)
+    image.paste(vertical, (40, (top + bottom - vertical.height) // 2), vertical)
+
+
+def _draw_sequence_graph_footer(
+        draw: ImageDraw.ImageDraw, segments, duration: float,
+        left: int, plot_width: int, bottom: int) -> None:
+    """Draw time directly below the plot and a single-row sequence legend."""
+    font = _font(16)
+    for value in range(
+            0, int(duration) + 1, RIGHT_FINGER_TIME_TICK_SECONDS):
+        x = left + round(plot_width * value / duration)
+        draw.line((x, bottom + 2, x, bottom + 8), fill='#444444')
+        draw.text((x, 490), str(value), font=font,
+                  fill='#333333', anchor='ma')
+    draw.text((left + plot_width // 2, 530), 'time[s]',
+              font=_font(18), fill='#222222', anchor='ma')
+
+    sequences = list(dict.fromkeys(sequence for _, _, sequence in segments))
+    widths = [34 + font.getlength(sequence) for sequence in sequences]
+    legend_width = sum(widths) + 24 * max(0, len(sequences) - 1)
+    x = left + (plot_width - legend_width) / 2
+    for sequence, item_width in zip(sequences, widths):
+        color = SEQUENCE_COLORS.get(sequence, '#E7E6E6')
+        draw.line((x, 594, x + 26, 594), fill=color, width=3)
+        draw.text((x + 34, 594), sequence, font=font,
+                  fill='#222222', anchor='lm')
+        x += item_width + 24
 
 
 def _draw_sequence_force_graph(
-        samples: List[RotationSample], path: Path) -> None:
+        samples: List[RotationSample], path: Path,
+        target_normal_force: float = 17.0) -> None:
     """Render a self-contained sequence/force chart for embedding in Excel."""
-    width, height = 1400, 700
-    left, right, top, bottom = 110, 150, 85, 470
-    timeline_top, timeline_bottom = 550, 600
+    left, right, top, bottom = 120, 150, 85, 470
+    segments = _sequence_segments(samples)
+    width, height = _sequence_graph_width(segments, left, right), 640
     image = Image.new('RGB', (width, height), 'white')
     draw = ImageDraw.Draw(image)
     title_font = _font(25)
-    label_font = _font(18)
-    small_font = _font(15)
+    small_font = _font(16)
     draw.text((width // 2, 20), '把持力とシーケンス推移',
               font=title_font, fill='#222222', anchor='ma')
 
@@ -194,7 +239,7 @@ def _draw_sequence_force_graph(
     plot_width = width - left - right
 
     def x_at(elapsed: float) -> int:
-        return left + int(plot_width * elapsed / duration)
+        return left + round(plot_width * elapsed / duration)
 
     raw_maximum = max(
         (abs(force[0]) for sample in samples for force in sample.forces.values()),
@@ -202,21 +247,16 @@ def _draw_sequence_force_graph(
     maximum_force = max(25.0, math.ceil(raw_maximum / 5.0) * 5.0)
 
     def y_at(force: float) -> int:
-        return bottom - int(
+        return bottom - round(
             (bottom - top) * max(0.0, min(maximum_force, force))
             / maximum_force)
 
-    segments = _sequence_segments(samples)
-    for start, end, sequence in segments:
+    for index, (start, end, sequence) in enumerate(segments):
         x_start, x_end = x_at(start), max(x_at(end), x_at(start) + 1)
+        if index == 0:
+            x_start = left
         color = SEQUENCE_COLORS.get(sequence, '#E7E6E6')
         draw.rectangle((x_start, top, x_end, bottom), fill=color)
-        draw.rectangle((x_start, timeline_top, x_end, timeline_bottom),
-                       fill=color, outline='#666666', width=1)
-        label = sequence.replace('・', '・\n') if x_end - x_start < 130 else sequence
-        draw.multiline_text(((x_start + x_end) // 2, (timeline_top + timeline_bottom) // 2),
-                            label, font=small_font, fill='#222222',
-                            anchor='mm', align='center', spacing=1)
 
     for value in range(0, int(maximum_force) + 1, 5):
         y = y_at(float(value))
@@ -225,17 +265,14 @@ def _draw_sequence_force_graph(
                   fill='#333333', anchor='rm')
     draw.line((left, top, left, bottom), fill='#333333', width=2)
     draw.line((left, bottom, width - right, bottom), fill='#333333', width=2)
-    draw.text((32, (top + bottom) // 2), '法線力 [N]', font=label_font,
-              fill='#222222', anchor='mm')
+    _draw_normal_force_axis_label(image, top, bottom)
 
-    for force, color, text in ((17.0, '#548235', '目標 17 N'),
-                               (8.0, '#C00000', '下限 8 N')):
-        y = y_at(force)
-        for x in range(left, width - right, 12):
-            draw.line((x, y, min(x + 6, width - right), y), fill=color, width=2)
-        if color != '#C00000':
-            draw.text((width - right + 10, y), text, font=small_font,
-                      fill=color, anchor='lm')
+    y = y_at(target_normal_force)
+    for x in range(left, width - right, 12):
+        draw.line((x, y, min(x + 6, width - right), y),
+                  fill='#548235', width=2)
+    draw.text((width - right + 10, y), f'目標 {target_normal_force:g} N',
+              font=small_font, fill='#548235', anchor='lm')
 
     smoothed = {point: None for point in FORCE_POINTS}
     previous = {point: None for point in FORCE_POINTS}
@@ -265,31 +302,20 @@ def _draw_sequence_force_graph(
         draw.text((legend_x + 31, y), FORCE_LABELS[point], font=small_font,
                   fill='#222222', anchor='lm')
 
-    for start, _, sequence in segments[1:]:
-        x = x_at(start)
-        _draw_dashed_vertical(draw, x, top, bottom)
-
-    draw.text((left, 525), 'シーケンス', font=label_font, fill='#222222')
-    for value in range(0, int(duration) + 1, 5):
-        x = x_at(float(value))
-        draw.text((x, 620), str(value), font=small_font,
-                  fill='#333333', anchor='ma')
-    draw.text((left + plot_width // 2, 670), 'シミュレーション開始からの時刻 [s]',
-              font=label_font, fill='#222222', anchor='ma')
+    _draw_sequence_graph_footer(draw, segments, duration, left, plot_width, bottom)
     image.save(path, format='PNG')
 
 
 def _draw_right_finger_sequence_graph(
         samples: List[RotationSample], path: Path) -> None:
     """Render a sequence chart containing only both AMIR right fingers."""
-    width, height = 1400, 700
-    left, right, top, bottom = 110, 70, 85, 470
-    timeline_top, timeline_bottom = 550, 600
+    left, right, top, bottom = 120, 70, 85, 470
+    segments = _sequence_segments(samples)
+    width, height = _sequence_graph_width(segments, left, right), 640
     image = Image.new('RGB', (width, height), 'white')
     draw = ImageDraw.Draw(image)
-    title_font = _font(25)
-    label_font = _font(18)
-    small_font = _font(15)
+    title_font = _font(26)
+    small_font = _font(16)
     draw.text((width // 2, 20), 'AMIR右指の把持力とシーケンス推移',
               font=title_font, fill='#222222', anchor='ma')
 
@@ -297,7 +323,7 @@ def _draw_right_finger_sequence_graph(
     plot_width = width - left - right
 
     def x_at(elapsed: float) -> int:
-        return left + int(plot_width * elapsed / duration)
+        return left + round(plot_width * elapsed / duration)
 
     raw_maximum = max(
         (abs(sample.forces[point][0])
@@ -307,22 +333,16 @@ def _draw_right_finger_sequence_graph(
     maximum_force = max(25.0, math.ceil(raw_maximum / 5.0) * 5.0)
 
     def y_at(force: float) -> int:
-        return bottom - int(
+        return bottom - round(
             (bottom - top) * max(0.0, min(maximum_force, force))
             / maximum_force)
 
-    segments = _sequence_segments(samples)
-    for start, end, sequence in segments:
+    for index, (start, end, sequence) in enumerate(segments):
         x_start, x_end = x_at(start), max(x_at(end), x_at(start) + 1)
+        if index == 0:
+            x_start = left
         color = SEQUENCE_COLORS.get(sequence, '#E7E6E6')
         draw.rectangle((x_start, top, x_end, bottom), fill=color)
-        draw.rectangle((x_start, timeline_top, x_end, timeline_bottom),
-                       fill=color, outline='#666666', width=1)
-        label = sequence.replace('・', '・\n') if x_end - x_start < 130 else sequence
-        draw.multiline_text(
-            ((x_start + x_end) // 2, (timeline_top + timeline_bottom) // 2),
-            label, font=small_font, fill='#222222', anchor='mm',
-            align='center', spacing=1)
 
     for value in range(0, int(maximum_force) + 1, 5):
         y = y_at(float(value))
@@ -331,8 +351,7 @@ def _draw_right_finger_sequence_graph(
                   fill='#333333', anchor='rm')
     draw.line((left, top, left, bottom), fill='#333333', width=2)
     draw.line((left, bottom, width - right, bottom), fill='#333333', width=2)
-    draw.text((32, (top + bottom) // 2), '法線力 [N]', font=label_font,
-              fill='#222222', anchor='mm')
+    _draw_normal_force_axis_label(image, top, bottom)
 
     smoothed = {point: None for point in RIGHT_FINGER_POINTS}
     previous = {point: None for point in RIGHT_FINGER_POINTS}
@@ -355,33 +374,23 @@ def _draw_right_finger_sequence_graph(
                           fill=RIGHT_FINGER_COLORS[point], width=2)
             previous[point] = (x, y)
 
-    legend_x = left + 8
+    legend_x = left + 10
     for index, point in enumerate(RIGHT_FINGER_POINTS):
-        y = top + 12 + index * 22
-        draw.line((legend_x, y, legend_x + 24, y),
+        y = top + 15 + index * 25
+        draw.line((legend_x, y, legend_x + 26, y),
                   fill=RIGHT_FINGER_COLORS[point], width=3)
-        draw.text((legend_x + 31, y), FORCE_LABELS[point], font=small_font,
+        draw.text((legend_x + 34, y), FORCE_LABELS[point], font=small_font,
                   fill='#222222', anchor='lm')
 
-    for start, _, sequence in segments[1:]:
-        x = x_at(start)
-        _draw_dashed_vertical(draw, x, top, bottom)
-
-    draw.text((left, 525), 'シーケンス', font=label_font, fill='#222222')
-    for value in range(
-            0, int(duration) + 1, RIGHT_FINGER_TIME_TICK_SECONDS):
-        x = x_at(float(value))
-        draw.text((x, 625), str(value), font=small_font,
-                  fill='#333333', anchor='ma')
-    draw.text((left + plot_width // 2, 670),
-              'シミュレーション開始からの時刻 [s]',
-              font=label_font, fill='#222222', anchor='ma')
+    _draw_sequence_graph_footer(draw, segments, duration, left, plot_width, bottom)
     image.save(path, format='PNG')
 
 
 def write_rotation_workbook(
         path: Path, samples: List[RotationSample],
-        generated_at: Optional[datetime] = None) -> Path:
+        generated_at: Optional[datetime] = None,
+        target_normal_force: float = 17.0,
+        customize: Optional[Callable[[Workbook], None]] = None) -> Path:
     """Write measurements, summary statistics, and charts to an XLSX file."""
     if not samples:
         raise ValueError('At least one rotation sample is required.')
@@ -608,10 +617,11 @@ def write_rotation_workbook(
                 prefix='cooperative_rotation_sequence_', suffix='.png',
                 delete=False) as temporary:
             preview_path = Path(temporary.name)
-        _draw_sequence_force_graph(samples, preview_path)
+        _draw_sequence_force_graph(
+            samples, preview_path, target_normal_force)
         preview = ExcelImage(str(preview_path))
+        preview.height = 950 * preview.height / preview.width
         preview.width = 950
-        preview.height = 475
         summary.add_image(preview, 'F68')
 
         with NamedTemporaryFile(
@@ -620,10 +630,13 @@ def write_rotation_workbook(
             right_finger_preview_path = Path(temporary.name)
         _draw_right_finger_sequence_graph(samples, right_finger_preview_path)
         right_finger_preview = ExcelImage(str(right_finger_preview_path))
-        right_finger_preview.width = 1120
-        right_finger_preview.height = 560
+        right_finger_preview.height = (
+            1200 * right_finger_preview.height / right_finger_preview.width)
+        right_finger_preview.width = 1200
         right_finger_sheet.add_image(right_finger_preview, 'A1')
         right_finger_sheet.sheet_view.showGridLines = False
+        if customize is not None:
+            customize(workbook)
         workbook.save(output)
     finally:
         if preview_path is not None:

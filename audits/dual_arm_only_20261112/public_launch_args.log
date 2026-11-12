@@ -1,0 +1,101 @@
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'workspace_directory':
+        no description given
+        (default: '/home/dars5070/ros2_humble_ws')
+
+    'headless':
+        One of: ['true', 'false']
+        (default: 'false')
+
+    'gui_nvidia_offload':
+        One of: ['true', 'false']
+        (default: 'true')
+
+    'control_mode':
+        One of: ['ARM_ONLY', 'WHOLE_BODY']
+        (default: 'ARM_ONLY')
+
+    'enable_base_assist':
+        Phase 1: must remain false; Phase 2 base assistance is not qualified. Valid choices are: ['false', 'true']
+        (default: 'false')
+
+    'wrench_source_mode':
+        Audited Gazebo F/T sensor only; no target proxy or synthetic force
+        (default: 'sensor')
+
+    'arm_only_trial':
+        One of: ['micro', 'native_stroke', 'dual_arm']
+        (default: 'dual_arm')
+
+    'arm_only_experiment.enabled':
+        One of: ['true', 'false']
+        (default: 'true')
+
+    'dual_arm_distance_m':
+        no description given
+        (default: '0.03')
+
+    'dual_arm_speed_m_s':
+        no description given
+        (default: '0.005')
+
+    'leader_base_distance_m':
+        no description given
+        (default: '0.5')
+
+    'calibrate_leader_distance':
+        Native 0.005m/s only: measured offline leader raw-odom distance correction. Valid choices are: ['true', 'false']
+        (default: 'true')
+
+    'native_cpu_policy':
+        Native runner/children only: observed SMT cores, or inherited CPU affinity. Valid choices are: ['smt', 'inherit']
+        (default: 'smt')
+
+    'arm_only_speed_m_s':
+        no description given
+        (default: '0.005')
+
+    'arm_only_direction':
+        One of: ['forward', 'backward']
+        (default: 'forward')
+
+    'arm_only_distance_m':
+        ARM_ONLY micro distance; maximum 0.01 m
+        (default: '0.0093')
+
+    'backward_distance_m':
+        Previous backward test distance; requires arm_only_direction:=backward
+        (default: '')
+
+    'keep_gui_open':
+        After verified stop/hold, keep GUI visible until Ctrl+C. Valid choices are: ['true', 'false']
+        (default: 'true')
+
+    'gui_review_mode':
+        Native only: pause after verified stop for review, or keep live physics/hold monitoring. Valid choices are: ['paused', 'live']
+        (default: 'paused')
+
+    'start_delay_s':
+        Wall seconds of stationary observation before the one leader goal
+        (default: '10.0')
+
+    'forward_distance_m':
+        no description given
+        (default: '1.0')
+
+    'translation_velocity_m_s':
+        no description given
+        (default: '0.005')
+
+    'record_data':
+        One of: ['true']
+        (default: 'true')
+
+    'output_directory':
+        no description given
+        (default: '')
+
+    'ros_domain_id':
+        no description given
+        (default: '93')

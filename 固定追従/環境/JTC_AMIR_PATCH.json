@@ -1,0 +1,7 @@
+{
+  "upstream": "https://github.com/ros-controls/ros2_controllers/tree/2.53.1/joint_trajectory_controller",
+  "version": "2.53.1",
+  "upstream_archive_sha256": "dffbf136f54cfe20d074309bf67cee03d113ecc4f968702d7b5f0d393288deec",
+  "patch": "sort_to_local_joint_order scratch vector is call-local instead of function-static; existing API, parameters and controller type unchanged",
+  "reason": "two concurrent controller managers can race in the shared static vector; archived follower JTC reference equals leader command although follower final topic differs"
+}

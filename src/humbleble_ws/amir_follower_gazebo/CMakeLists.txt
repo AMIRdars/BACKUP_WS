@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.8)
+project(amir_follower_gazebo)
+find_package(ament_cmake REQUIRED)
+find_package(ignition-gazebo6 REQUIRED)
+find_package(ignition-transport11 REQUIRED)
+find_package(ignition-msgs8 REQUIRED)
+add_library(amir_calibration_wrench-system SHARED src/calibration_wrench.cpp)
+target_compile_features(amir_calibration_wrench-system PUBLIC cxx_std_17)
+target_link_libraries(amir_calibration_wrench-system ignition-gazebo6::core
+  ignition-transport11::core ignition-msgs8::core)
+install(TARGETS amir_calibration_wrench-system LIBRARY DESTINATION lib)
+add_library(amir_grasp_heartbeat-system SHARED src/grasp_heartbeat.cpp)
+target_compile_features(amir_grasp_heartbeat-system PUBLIC cxx_std_17)
+target_link_libraries(amir_grasp_heartbeat-system ignition-gazebo6::core
+  ignition-transport11::core ignition-msgs8::core)
+install(TARGETS amir_grasp_heartbeat-system LIBRARY DESTINATION lib)
+add_library(amir_base_hold_fixture-system SHARED src/base_hold_fixture.cpp)
+target_compile_features(amir_base_hold_fixture-system PUBLIC cxx_std_17)
+target_link_libraries(amir_base_hold_fixture-system ignition-gazebo6::core
+  ignition-transport11::core ignition-msgs8::core)
+install(TARGETS amir_base_hold_fixture-system LIBRARY DESTINATION lib)
+ament_package()
