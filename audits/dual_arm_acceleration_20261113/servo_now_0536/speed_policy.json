@@ -1,0 +1,31 @@
+{
+  "joint_speed_rad_s": 0.75,
+  "joint_acceleration_rad_s2": 0.5,
+  "tcp_acceleration_m_s2": 0.05,
+  "URDF_velocity_rad_s": {
+    "leader": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.0
+    ],
+    "follower": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      2.0
+    ]
+  },
+  "follower_acceleration_limit_m_s2": [
+    0.1,
+    0.02
+  ],
+  "scope": "explicit Gazebo exploration; contact and tracking must be measured separately",
+  "requested_speed_m_s": 0.0536,
+  "selected_speed_m_s": 0.0536,
+  "actual_profile_peak_speed_m_s": 0.0536,
+  "trajectory_start_delay_s": 0.0,
+  "servo_streaming_model_enabled": true
+}

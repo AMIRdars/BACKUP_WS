@@ -65,7 +65,9 @@ def test_slow_endpoint_velocity_avoids_ik_tolerance_acceleration_spikes():
 def test_lower_virtual_impedance_preserves_pole_and_existing_actuator_caps(tmp_path):
     module,ctx=public_context()
     ctx.launch_configurations.update(workspace_directory=str(ROOT),dual_arm_distance_m='.1',
-        dual_arm_admittance_scale='.25',headless='true',output_directory=str(tmp_path/'out'))
+        dual_arm_admittance_scale='.25',dual_arm_speed_m_s='.003',
+        dual_arm_joint_speed_rad_s='.03',dual_arm_joint_acceleration_rad_s2='.15',
+        dual_arm_acceleration_m_s2='.0012',headless='true',output_directory=str(tmp_path/'out'))
     process=next(a for a in module['setup'](ctx) if isinstance(a,ExecuteProcess))
     argv=[perform_substitutions(ctx,v) for v in process.cmd]
     mass=float(argv[argv.index('--virtual-mass-kg')+1]);damping=float(argv[argv.index('--virtual-damping-ns-m')+1])

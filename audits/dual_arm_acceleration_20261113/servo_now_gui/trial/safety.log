@@ -1,0 +1,247 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-11-13-23-19-21-624494-dars5070-Katana-15-HX-B14WGK-141194
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [safety_supervisor-1]: process started with pid [141197]
+[INFO] [safety_gate-2]: process started with pid [141199]
+[INFO] [actuator_interlock-3]: process started with pid [141201]
+[INFO] [controller_audit-4]: process started with pid [141204]
+[INFO] [safety_gate-5]: process started with pid [141208]
+[INFO] [actuator_interlock-6]: process started with pid [141212]
+[INFO] [controller_audit-7]: process started with pid [141215]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [controller_audit-7]: sending signal 'SIGINT' to process[controller_audit-7]
+[INFO] [actuator_interlock-6]: sending signal 'SIGINT' to process[actuator_interlock-6]
+[INFO] [safety_gate-5]: sending signal 'SIGINT' to process[safety_gate-5]
+[INFO] [controller_audit-4]: sending signal 'SIGINT' to process[controller_audit-4]
+[INFO] [actuator_interlock-3]: sending signal 'SIGINT' to process[actuator_interlock-3]
+[INFO] [safety_gate-2]: sending signal 'SIGINT' to process[safety_gate-2]
+[INFO] [safety_supervisor-1]: sending signal 'SIGINT' to process[safety_supervisor-1]
+[controller_audit-7] Traceback (most recent call last):
+[controller_audit-7]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 290, in run
+[controller_audit-7]     try:rclpy.spin(node)
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[controller_audit-7]     executor.spin_once()
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[controller_audit-7]     self._spin_once_impl(timeout_sec)
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[controller_audit-7]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[controller_audit-7]     return next(self._cb_iter)
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[controller_audit-7]     wait_set.wait(timeout_nsec)
+[controller_audit-7] KeyboardInterrupt
+[controller_audit-7] 
+[controller_audit-7] During handling of the above exception, another exception occurred:
+[controller_audit-7] 
+[controller_audit-7] Traceback (most recent call last):
+[controller_audit-7]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/controller_audit", line 33, in <module>
+[controller_audit-7]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'controller_audit')())
+[controller_audit-7]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 295, in audit_main
+[controller_audit-7]     def audit_main():run(ControllerAudit)
+[controller_audit-7]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 291, in run
+[controller_audit-7]     finally:node.destroy_node();rclpy.try_shutdown()
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1689, in destroy_node
+[controller_audit-7]     self.destroy_client(self._clients[0])
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1599, in destroy_client
+[controller_audit-7]     client.destroy()
+[controller_audit-7]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/client.py", line 187, in destroy
+[controller_audit-7]     self.__client.destroy_when_not_in_use()
+[controller_audit-7] KeyboardInterrupt
+[actuator_interlock-6] Traceback (most recent call last):
+[actuator_interlock-6]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 290, in run
+[actuator_interlock-6]     try:rclpy.spin(node)
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[actuator_interlock-6]     executor.spin_once()
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[actuator_interlock-6]     self._spin_once_impl(timeout_sec)
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[actuator_interlock-6]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[actuator_interlock-6]     return next(self._cb_iter)
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[actuator_interlock-6]     wait_set.wait(timeout_nsec)
+[actuator_interlock-6] KeyboardInterrupt
+[actuator_interlock-6] 
+[actuator_interlock-6] During handling of the above exception, another exception occurred:
+[actuator_interlock-6] 
+[actuator_interlock-6] Traceback (most recent call last):
+[actuator_interlock-6]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/actuator_interlock", line 33, in <module>
+[actuator_interlock-6]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'actuator_interlock')())
+[actuator_interlock-6]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 294, in interlock_main
+[actuator_interlock-6]     def interlock_main():run(ActuatorInterlock)
+[actuator_interlock-6]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 291, in run
+[actuator_interlock-6]     finally:node.destroy_node();rclpy.try_shutdown()
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[actuator_interlock-6]     self.destroy_subscription(self._subscriptions[0])
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[actuator_interlock-6]     subscription.destroy()
+[actuator_interlock-6]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[actuator_interlock-6]     self.handle.destroy_when_not_in_use()
+[actuator_interlock-6] KeyboardInterrupt
+[controller_audit-4] Traceback (most recent call last):
+[controller_audit-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 290, in run
+[controller_audit-4]     try:rclpy.spin(node)
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[controller_audit-4]     executor.spin_once()
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[controller_audit-4]     self._spin_once_impl(timeout_sec)
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[controller_audit-4]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[controller_audit-4]     return next(self._cb_iter)
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[controller_audit-4]     wait_set.wait(timeout_nsec)
+[controller_audit-4] KeyboardInterrupt
+[controller_audit-4] 
+[controller_audit-4] During handling of the above exception, another exception occurred:
+[controller_audit-4] 
+[controller_audit-4] Traceback (most recent call last):
+[controller_audit-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/controller_audit", line 33, in <module>
+[controller_audit-4]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'controller_audit')())
+[controller_audit-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 295, in audit_main
+[controller_audit-4]     def audit_main():run(ControllerAudit)
+[controller_audit-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 291, in run
+[controller_audit-4]     finally:node.destroy_node();rclpy.try_shutdown()
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1691, in destroy_node
+[controller_audit-4]     self.destroy_service(self._services[0])
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1615, in destroy_service
+[controller_audit-4]     service.destroy()
+[controller_audit-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/service.py", line 93, in destroy
+[controller_audit-4]     self.__service.destroy_when_not_in_use()
+[controller_audit-4] KeyboardInterrupt
+[actuator_interlock-3] Traceback (most recent call last):
+[actuator_interlock-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 290, in run
+[actuator_interlock-3]     try:rclpy.spin(node)
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[actuator_interlock-3]     executor.spin_once()
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[actuator_interlock-3]     self._spin_once_impl(timeout_sec)
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[safety_gate-5] Traceback (most recent call last):
+[safety_gate-5]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 546, in run
+[safety_gate-5]     rclpy.spin(node)
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[safety_gate-5]     executor.spin_once()
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[safety_gate-5]     self._spin_once_impl(timeout_sec)
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 771, in _spin_once_impl
+[safety_gate-5]     handler()
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[safety_gate-5]     self._handler.send(None)
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 443, in handler
+[safety_gate-5]     async def handler(entity, gc, is_shutdown, work_tracker):
+[safety_gate-5] KeyboardInterrupt
+[safety_gate-5] 
+[safety_gate-5] During handling of the above exception, another exception occurred:
+[safety_gate-5] 
+[safety_gate-5] Traceback (most recent call last):
+[safety_gate-5]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_gate", line 33, in <module>
+[safety_gate-5]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'safety_gate')())
+[safety_gate-5]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 553, in gate_main
+[safety_gate-5]     run(RobotSafetyGate, args)
+[safety_gate-5]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 548, in run
+[safety_gate-5]     node.destroy_node()
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[actuator_interlock-3]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[actuator_interlock-3]     return next(self._cb_iter)
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[actuator_interlock-3]     wait_set.wait(timeout_nsec)
+[actuator_interlock-3] KeyboardInterrupt
+[actuator_interlock-3] 
+[actuator_interlock-3] During handling of the above exception, another exception occurred:
+[actuator_interlock-3] 
+[actuator_interlock-3] Traceback (most recent call last):
+[actuator_interlock-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/actuator_interlock", line 33, in <module>
+[actuator_interlock-3]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'actuator_interlock')())
+[actuator_interlock-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 294, in interlock_main
+[actuator_interlock-3]     def interlock_main():run(ActuatorInterlock)
+[actuator_interlock-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/interlock.py", line 291, in run
+[actuator_interlock-3]     finally:node.destroy_node();rclpy.try_shutdown()
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[actuator_interlock-3]     self.destroy_subscription(self._subscriptions[0])
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[actuator_interlock-3]     subscription.destroy()
+[actuator_interlock-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[actuator_interlock-3]     self.handle.destroy_when_not_in_use()
+[actuator_interlock-3] KeyboardInterrupt
+[safety_gate-2] Traceback (most recent call last):
+[safety_gate-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 546, in run
+[safety_gate-2]     rclpy.spin(node)
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[safety_gate-2]     executor.spin_once()
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[safety_gate-2]     self._spin_once_impl(timeout_sec)
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[safety_gate-2]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[safety_gate-2]     return next(self._cb_iter)
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 572, in _wait_for_ready_callbacks
+[safety_gate-2]     context_stack.enter_context(sub.handle)
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 73, in handle
+[safety_gate-2]     @property
+[safety_gate-2] KeyboardInterrupt
+[safety_gate-2] 
+[safety_gate-2] During handling of the above exception, another exception occurred:
+[safety_gate-2] 
+[safety_gate-2] Traceback (most recent call last):
+[safety_gate-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_gate", line 33, in <module>
+[safety_supervisor-1] Traceback (most recent call last):
+[safety_supervisor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 546, in run
+[safety_gate-2]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'safety_gate')())
+[safety_gate-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 553, in gate_main
+[safety_gate-5]     self.destroy_subscription(self._subscriptions[0])
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[safety_gate-2]     run(RobotSafetyGate, args)
+[safety_gate-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 548, in run
+[safety_gate-2]     node.destroy_node()
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[safety_supervisor-1]     rclpy.spin(node)
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[safety_supervisor-1]     executor.spin_once()
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[safety_supervisor-1]     self._spin_once_impl(timeout_sec)
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[safety_supervisor-1]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[safety_gate-5]     subscription.destroy()
+[safety_gate-5]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[safety_gate-5]     self.handle.destroy_when_not_in_use()
+[safety_gate-5] KeyboardInterrupt
+[safety_gate-2]     self.destroy_subscription(self._subscriptions[0])
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[safety_supervisor-1]     return next(self._cb_iter)
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 568, in _wait_for_ready_callbacks
+[safety_supervisor-1]     with ExitStack() as context_stack:
+[safety_supervisor-1]   File "/usr/lib/python3.10/contextlib.py", line 576, in __exit__
+[safety_supervisor-1]     raise exc_details[1]
+[safety_supervisor-1]   File "/usr/lib/python3.10/contextlib.py", line 561, in __exit__
+[safety_supervisor-1]     if cb(*exc_details):
+[safety_supervisor-1] KeyboardInterrupt
+[safety_supervisor-1] 
+[safety_supervisor-1] During handling of the above exception, another exception occurred:
+[safety_supervisor-1] 
+[safety_supervisor-1] Traceback (most recent call last):
+[safety_supervisor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_supervisor", line 33, in <module>
+[safety_supervisor-1]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'safety_supervisor')())
+[safety_supervisor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 557, in supervisor_main
+[safety_supervisor-1]     run(SafetySupervisor, args)
+[safety_supervisor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/safety.py", line 548, in run
+[safety_supervisor-1]     node.destroy_node()
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1689, in destroy_node
+[safety_gate-2]     subscription.destroy()
+[safety_gate-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[safety_gate-2]     self.handle.destroy_when_not_in_use()
+[safety_gate-2] KeyboardInterrupt
+[safety_supervisor-1]     self.destroy_client(self._clients[0])
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1599, in destroy_client
+[safety_supervisor-1]     client.destroy()
+[safety_supervisor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/client.py", line 187, in destroy
+[safety_supervisor-1]     self.__client.destroy_when_not_in_use()
+[safety_supervisor-1] KeyboardInterrupt
+[ERROR] [controller_audit-7]: process has died [pid 141215, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/controller_audit --ros-args -r __ns:=/follower --params-file /tmp/launch_params_orjizb30'].
+[ERROR] [controller_audit-4]: process has died [pid 141204, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/controller_audit --ros-args -r __ns:=/leader --params-file /tmp/launch_params_zhmpw4bn'].
+[ERROR] [safety_gate-5]: process has died [pid 141208, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_gate --ros-args -r __ns:=/follower --params-file /tmp/launch_params_rpu53x8y -r rover_twist:=interlock/base_request -r arm_controller/joint_trajectory:=interlock/arm_request'].
+[ERROR] [safety_gate-2]: process has died [pid 141199, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_gate --ros-args -r __ns:=/leader --params-file /tmp/launch_params_wee0qd66 -r rover_twist:=interlock/base_request -r arm_controller/joint_trajectory:=interlock/arm_request'].
+[ERROR] [safety_supervisor-1]: process has died [pid 141197, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/safety_supervisor --ros-args --params-file /tmp/launch_params_r8ueq5a3'].
+[ERROR] [actuator_interlock-6]: process has died [pid 141212, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/actuator_interlock --ros-args -r __ns:=/follower --params-file /tmp/launch_params_zzdmrzy7'].
+[ERROR] [actuator_interlock-3]: process has died [pid 141201, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/actuator_interlock --ros-args -r __ns:=/leader --params-file /tmp/launch_params_hnwq8ji5'].

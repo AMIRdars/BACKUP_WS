@@ -1,0 +1,5 @@
+{"passed": false, "scope": "intentional cancellation during measured fast arm motion", "full_transport_completion_expected": false, "trigger": null, "contacts_continuous": true, "safe_stop_verified": true, "grasp_held_after_stop": true, "gripper_hold_verified": true, "original_trial_passed": false, "original_trial_error": "single-writer violation"}
+Traceback (most recent call last):
+  File "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/moving_stop_probe.py", line 86, in <module>
+    if not report['passed']:raise RuntimeError('moving-stop/grip proof failed')
+RuntimeError: moving-stop/grip proof failed

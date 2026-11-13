@@ -1,0 +1,61 @@
+{
+  "requested_speed_m_s": 0.0536,
+  "previous_requested_speed_m_s": 0.003,
+  "requested_speed_ratio": 17.866666666666667,
+  "measured": {
+    "leader": {
+      "source_samples": 1023,
+      "source_duration_s": 9.548000000000002,
+      "TCP_displacement_mm": [
+        213.00013105914638,
+        -1.6119522682310268e-05,
+        -6.092788940037508e-05
+      ],
+      "FK_interval_speed_peak_mm_s": 53.600124379408385,
+      "FK_interval_speed_p99_5_mm_s": 53.59441367424584,
+      "actual_joint_speed_peak_rad_s": 0.34925119906323066,
+      "actual_URDF_joint_velocity_ratio_peak": 0.34925119906323066,
+      "active_base_GT_drift_peak_mm": 0.4020788789178473
+    },
+    "follower": {
+      "source_samples": 1023,
+      "source_duration_s": 9.551999999999992,
+      "TCP_displacement_mm": [
+        -210.88776523637281,
+        -0.010851052573433922,
+        -3.7754784854016066e-06
+      ],
+      "FK_interval_speed_peak_mm_s": 57.14418049348721,
+      "FK_interval_speed_p99_5_mm_s": 54.25180719963463,
+      "actual_joint_speed_peak_rad_s": 0.19696052325911823,
+      "actual_URDF_joint_velocity_ratio_peak": 0.19696052325911823,
+      "active_base_GT_drift_peak_mm": 0.4020934885965408
+    }
+  },
+  "strict_passed": true,
+  "strict_checks": 71,
+  "moving_stop_passed": true,
+  "moving_stop_actual_speed_m_s": 0.05091473064320549,
+  "URDF_xacro_unchanged_files": 42,
+  "tested_source_matches": 82,
+  "tests": [
+    {
+      "file": "tests_final_current.xml",
+      "passed": 85
+    },
+    {
+      "file": "regression_servo_gate.xml",
+      "passed": 76
+    }
+  ],
+  "servo_gate": {
+    "follower": {
+      "servo_streaming_model_enabled": true,
+      "servo_reference_URDF_velocity_ratio_peak": 0.2153674636421965
+    },
+    "leader": {
+      "servo_streaming_model_enabled": true,
+      "servo_reference_URDF_velocity_ratio_peak": 0.384172029663693
+    }
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/release_gui/trial",
+  "source_csv_sha256": "97bdfde3734ad7ea55d2152cace8ccde6e40635a09161a1607869b1cef84c143",
+  "result_source": "held_result.json",
+  "procedure_passed": true,
+  "leader_completed": true,
+  "error": null,
+  "scope": "leader_translation",
+  "scope_sim_time_s": [
+    99.36,
+    109.46
+  ],
+  "plot_epoch_sim_time_s": 94.208,
+  "TCP_orientation_source": "measured JointState q + generated URDF full TCP FK in own base_footprint",
+  "base_orientation_available": "recorded planar yaw only; roll/pitch and full quaternion were not saved",
+  "arms": {
+    "leader": {
+      "URDF_sha256": "f093f73f8caf2321b7f13237300c2bb0d389805e601bc12f1991ee3269748120",
+      "joint_names": [
+        "Joint_1",
+        "Joint_2",
+        "Joint_3",
+        "Joint_4",
+        "Joint_5"
+      ],
+      "distinct_joint_samples": 6972,
+      "scope_joint_stamp_s": [
+        99.36,
+        109.46
+      ],
+      "joint_stamp_minus_observer_sim_range_s": [
+        -0.007999999999995566,
+        0.0040000000000048885
+      ],
+      "joint_stamp_ahead_of_observer_count": 114,
+      "joint_start_deg": [
+        -3.950220421652584e-15,
+        80.21409131766063,
+        -91.67324722183909,
+        11.459155895438235,
+        89.99998127519412
+      ],
+      "joint_end_deg": [
+        6.367449035500733e-05,
+        25.391352912453,
+        -4.415072337101535,
+        -20.976266998113566,
+        89.9999812733244
+      ],
+      "joint_change_deg": [
+        6.367449035895755e-05,
+        -54.82273840520764,
+        87.25817488473757,
+        -32.4354228935518,
+        -1.869720875045143e-09
+      ],
+      "joint_min_deg": [
+        -3.950220421652584e-15,
+        25.391352912453,
+        -91.67324722209997,
+        -20.976266998113566,
+        89.9999812733244
+      ],
+      "joint_max_deg": [
+        6.367449035772432e-05,
+        80.21409131766063,
+        -4.415072309992741,
+        11.459155895441418,
+        89.99998127524476
+      ],
+      "minimum_URDF_margin_deg": 4.415072309992741,
+      "minimum_URDF_margin_joint": "Joint_3",
+      "TCP_displacement_mm": [
+        212.99945036578788,
+        -1.6117967152939632e-05,
+        -2.388599285030324e-05
+      ],
+      "TCP_rotation_change_from_first_active_peak_deg": 7.917946639011484e-05,
+      "FK_vs_logged_TCP_position_max_residual_m": 4.577566798534483e-16,
+      "base_GT_yaw_change_peak_deg": 0.0019329777642774204,
+      "base_GT_xy_drift_peak_mm": 0.3199725761918204
+    },
+    "follower": {
+      "URDF_sha256": "a956f6d8f5b9ae3e2f0a5198f899c2e44b9cafbac400d5a442635fe76ce29211",
+      "joint_names": [
+        "Joint_1",
+        "Joint_2",
+        "Joint_3",
+        "Joint_4",
+        "Joint_5"
+      ],
+      "distinct_joint_samples": 6972,
+      "scope_joint_stamp_s": [
+        99.36,
+        109.46
+      ],
+      "joint_stamp_minus_observer_sim_range_s": [
+        -0.007999999999995566,
+        0.0040000000000048885
+      ],
+      "joint_stamp_ahead_of_observer_count": 32,
+      "joint_start_deg": [
+        5.588914422345855e-16,
+        80.21409131764808,
+        -91.67324722186034,
+        11.45915589444327,
+        89.99998127589241
+      ],
+      "joint_end_deg": [
+        -0.07384932050558304,
+        122.47850867891232,
+        -125.73538971097324,
+        3.256881808212137,
+        89.99998127593896
+      ],
+      "joint_change_deg": [
+        -0.07384932050558361,
+        42.264417361264236,
+        -34.06214248911289,
+        -8.202274086231132,
+        4.655059831790003e-11
+      ],
+      "joint_min_deg": [
+        -0.07384965885874974,
+        80.21409131764808,
+        -125.7355161814428,
+        3.2567349140203103,
+        89.99998125889452
+      ],
+      "joint_max_deg": [
+        5.588914422345855e-16,
+        122.47878207650334,
+        -91.67324722186034,
+        12.325424021815492,
+        89.99998132912431
+      ],
+      "minimum_URDF_margin_deg": 12.521189837544146,
+      "minimum_URDF_margin_joint": "Joint_2",
+      "TCP_displacement_mm": [
+        -213.47616615327337,
+        -0.33824456855847373,
+        -4.960429289546653e-05
+      ],
+      "TCP_rotation_change_from_first_active_peak_deg": 0.07384965886329767,
+      "FK_vs_logged_TCP_position_max_residual_m": 5.551115149595563e-16,
+      "base_GT_yaw_change_peak_deg": 0.0006308000945318045,
+      "base_GT_xy_drift_peak_mm": 0.27764210921355476
+    }
+  },
+  "artifacts": [
+    "joints.png",
+    "tcp_base.png",
+    "arm_shapes.png",
+    "index.html"
+  ],
+  "object_rotation_change_peak_deg": 0.03015031126439763,
+  "strict_acceptance_passed": true,
+  "failed_checks": []
+}

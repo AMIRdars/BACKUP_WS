@@ -1,0 +1,84 @@
+{
+  "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_050_retry/trial",
+  "motion_completed": true,
+  "error": null,
+  "safe_stop_verified": true,
+  "grasp_held_after_stop": true,
+  "endpoint_stop_reasons": {
+    "follower": "shared emergency stop",
+    "leader": "shared emergency stop"
+  },
+  "active_rows": 1248,
+  "active_final_base_commands_zero": true,
+  "contacts_continuous": true,
+  "contacts": {
+    "leader": {
+      "left": true,
+      "right": true
+    },
+    "follower": {
+      "left": true,
+      "right": true
+    }
+  },
+  "normal_force_ranges_N": {
+    "leader": {
+      "left": [
+        13.928070255551342,
+        17.526931228493332
+      ],
+      "right": [
+        16.77424013654669,
+        20.470528836674127
+      ]
+    },
+    "follower": {
+      "left": [
+        13.75764592075993,
+        18.464188823012325
+      ],
+      "right": [
+        16.65064253009798,
+        21.32522511073232
+      ]
+    }
+  },
+  "arms": {
+    "leader": {
+      "source_samples": 1018,
+      "source_duration_s": 10.096000000000004,
+      "TCP_displacement_mm": [
+        212.9993803559629,
+        -1.6117983960693816e-05,
+        -2.5161805972118145e-05
+      ],
+      "FK_interval_speed_peak_mm_s": 52.912613678281765,
+      "FK_interval_speed_p99_5_mm_s": 51.48199872422015,
+      "actual_joint_speed_peak_rad_s": 0.3522187980611412,
+      "actual_URDF_joint_velocity_ratio_peak": 0.3522187980611412,
+      "active_base_GT_drift_peak_mm": 0.325979821587064
+    },
+    "follower": {
+      "source_samples": 1019,
+      "source_duration_s": 10.096000000000004,
+      "TCP_displacement_mm": [
+        -214.79671345828848,
+        -0.10300845792816332,
+        -4.677786846762899e-05
+      ],
+      "FK_interval_speed_peak_mm_s": 53.14887287579704,
+      "FK_interval_speed_p99_5_mm_s": 52.238053007221865,
+      "actual_joint_speed_peak_rad_s": 0.19049688918750457,
+      "actual_URDF_joint_velocity_ratio_peak": 0.19049688918750457,
+      "active_base_GT_drift_peak_mm": 0.28493869712411996
+    }
+  },
+  "strict_acceptance_passed": true,
+  "strict_pass_count": 71,
+  "strict_check_count": 71,
+  "failed_checks": [],
+  "non_force_band_checks_passed": true,
+  "filtered_increment_force_peak_N": 4.806019007703015,
+  "tracking_error_peak_mm": 0.4405704849449865,
+  "transport_and_grasp_passed": true
+}

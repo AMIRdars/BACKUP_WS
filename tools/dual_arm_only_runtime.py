@@ -9,6 +9,7 @@ from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 from amir_native_arm_support import SCENE
 from dual_arm_workspace import common_reach,trajectory_rate_proof
+from dual_arm_speed_policy import select_speed
 from amir_compliance_control.wrench import LocalModel
 from amir_compliance_control.stroke_kinematics import solve_stroke_pose
 import xml.etree.ElementTree as ET
@@ -37,17 +38,15 @@ def setup(context):
     reach=common_reach(root)
     if not math.isfinite(distance) or not 0<distance<=reach['maximum_common_verified_m']:
         raise ValueError('dual-arm distance exceeds common verified horizontal URDF reach: '+str(reach['maximum_common_verified_m']))
-    if not math.isfinite(speed) or not 0<speed<=.005:
-        raise ValueError('initial dual-arm experiment requires 0 < arm speed <=0.005 m/s')
     requested_speed=speed
     impedance=float(config.get('dual_arm_admittance_scale','1.0'))
     if not math.isfinite(impedance) or not .25<=impedance<=1.:
         raise ValueError('dual_arm_admittance_scale must be in [0.25,1] for bounded simulation comparison')
-    rate=trajectory_rate_proof(root,distance,speed)
-    # Slow the Cartesian profile instead of increasing the 0.03 rad/s bound.
-    if rate['peak_joint_speed_rad_s']>.03*.95:
-        speed*=.03*.95/rate['peak_joint_speed_rad_s']
-        rate=trajectory_rate_proof(root,distance,speed)
+    speed_policy,rate=select_speed(root,distance,speed,
+        float(config.get('dual_arm_joint_speed_rad_s','.03')),
+        float(config.get('dual_arm_joint_acceleration_rad_s2','.15')),
+        float(config.get('dual_arm_acceleration_m_s2','.0012')))
+    speed=speed_policy['selected_speed_m_s']
     if config.get('enable_base_assist','false')!='false':raise ValueError('dual arm requires enable_base_assist=false')
     domain=int(config['ros_domain_id'])
     if not 0<=domain<=232:raise ValueError('invalid ROS domain')
@@ -61,6 +60,7 @@ def setup(context):
     out.mkdir(parents=True);(out/'arm_plan.json').write_text(json.dumps(proof,indent=2))
     (out/'workspace_reach.json').write_text(json.dumps(reach,indent=2))
     (out/'trajectory_rate_proof.json').write_text(json.dumps(rate,indent=2))
+    (out/'speed_policy.json').write_text(json.dumps(speed_policy,indent=2))
     (out/'launch_policy.json').write_text(json.dumps({'mode':'DUAL_ARM_ONLY','leader_arm_distance_m':distance,
         'leader_arm_speed_m_s':speed,'requested_arm_speed_m_s':requested_speed,
         'base_fixture':False,'physical_base_approach':True,
@@ -81,6 +81,9 @@ def setup(context):
          '--virtual-mass-kg',str(2*impedance),'--virtual-damping-ns-m',str(34.6*impedance),'--virtual-stiffness-n-m','0',
          '--arm-horizon','.08','--control-on-wrench','--wrench-on-measurement','--wrench-cutoff-hz','8',
          '--distance',str(distance),'--speed',str(speed),'--start-delay-s',str(delay),
+         '--dual-arm-joint-speed',str(speed_policy['joint_speed_rad_s']),
+         '--dual-arm-joint-acceleration',str(speed_policy['joint_acceleration_rad_s2']),
+         '--dual-arm-acceleration',str(speed_policy['tcp_acceleration_m_s2']),
          '--output',str(out/'trial')]
     if config.get('native_cpu_policy','smt')=='smt':cmd+=['--prefer-smt-cores']
     if config['headless']=='false':

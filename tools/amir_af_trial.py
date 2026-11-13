@@ -117,6 +117,9 @@ def main():
     p.add_argument('--start-delay-s',type=float,default=0.,help='stationary wall-time observation before AF-2 goal (0..60 s)')
     p.add_argument('--native-arm-stroke',action='store_true',help='CP13 native grasp then fixed follower base; leader arm compensates half base travel')
     p.add_argument('--dual-arm-only',action='store_true',help='physical base approach then both bases zero; leader arm translation only')
+    p.add_argument('--dual-arm-joint-speed',type=float,default=.03)
+    p.add_argument('--dual-arm-joint-acceleration',type=float,default=.15)
+    p.add_argument('--dual-arm-acceleration',type=float,default=.0012)
     p.add_argument('--leader-base-distance-calibration',type=Path,help='native only: offline measured leader odometry distance certificate')
     p.add_argument('--prefer-smt-cores',action='store_true',help='native only: runner/children use measured SMT CPU subset; watchdog limits unchanged')
     p.add_argument('--follower-base-fixture',action='store_true',help='Gazebo test only: lock follower base to ground AFTER native grasp')
@@ -161,6 +164,12 @@ def main():
         from dual_arm_workspace import common_reach
         if not 0<a.distance<=common_reach(ROOT)['maximum_common_verified_m']:
             raise ValueError('dual arm distance exceeds actual common URDF horizontal reach')
+        from dual_arm_speed_policy import select_speed
+        dual_speed_policy,dual_rate=select_speed(ROOT,a.distance,a.speed,a.dual_arm_joint_speed,
+            a.dual_arm_joint_acceleration,a.dual_arm_acceleration)
+        a.speed=dual_speed_policy['selected_speed_m_s']
+    elif (a.dual_arm_joint_speed,a.dual_arm_joint_acceleration,a.dual_arm_acceleration)!=(.03,.15,.0012):
+        raise ValueError('dual arm speed policy requires --dual-arm-only')
     if a.follower_base_fixture and not a.native_arm_stroke:raise ValueError('post-grasp base fixture requires native arm stroke')
     if a.progressive_stroke and not a.native_arm_stroke:raise ValueError('progressive stroke requires native arm stroke')
     if a.keep_gui_open and (not a.gui or a.stage!='AF-2'):
@@ -179,7 +188,7 @@ def main():
             or (a.af1_force_axis is not None and a.stage!='AF-1')):
         raise ValueError('isolated force axis/sign must be paired and require AF-1')
     if a.native_arm_stroke:
-        if a.stage!='AF-2' or a.direction!='forward' or not (0<a.distance<=.5 and 0<a.speed<=.005):
+        if a.stage!='AF-2' or a.direction!='forward' or not (0<a.distance<=.5 and 0<a.speed<=(.2 if a.dual_arm_only else .005)):
             raise ValueError('native compensated stroke: AF-2 forward, <=0.5m base and <=0.005m/s only')
         if not os.getenv('IGN_PARTITION','').startswith('amir_cp9_'):raise ValueError('native preparation requires isolated amir_cp9_ partition')
         from amir_native_arm_support import controller_isolation_evidence,verify_loaded_controller
@@ -234,6 +243,7 @@ def main():
             'native_arm_stroke_runtime.py','cp9_transport_preparation.py','amir_cp9_grasp_preparation.py')]
         if a.dual_arm_only:
             sources += [ROOT/'tools/dual_arm_only_runtime.py',ROOT/'tools/dual_arm_preparation.py',ROOT/'tools/dual_arm_single_probe.py',ROOT/'tools/dual_arm_workspace.py']
+            sources += [ROOT/'tools/dual_arm_speed_policy.py']
             sources += [ROOT/'src/humbleble_ws/cooperative_transport_bringup/config/compliance_dual_arm_gui.config']
         sources += list((ROOT/'src/vendor/joint_trajectory_controller').rglob('*.cpp'))
         sources += [ROOT/'src/vendor/joint_trajectory_controller/AMIR_PATCH.json']
@@ -736,7 +746,10 @@ def main():
                         'follower_arm_only:='+str(a.stage!='AF-0').lower(),
                         'both_bases_zero:='+str(a.dual_arm_only).lower(),
                         'coherent_sensor_history:='+str(a.native_arm_stroke).lower(),
-                        'simulation_source_watchdog:='+str(a.native_arm_stroke).lower()])
+                        'simulation_source_watchdog:='+str(a.native_arm_stroke).lower(),
+                        *(['leader_servo_response_file:='+str(out/'leader_servo_response.json'),
+                           'follower_servo_response_file:='+str(out/'follower_servo_response.json')]
+                          if a.dual_arm_only and a.speed>.008 else [])])
         wait(lambda:len(grasp)==2,45.)
         if a.stage!='AF-0':ensure_grippers()
         policy={'scope':'simulation_micro_test_only_not_hardware_ratings','force_source':str(SEED/'calibration/calibration.json'),
@@ -790,8 +803,14 @@ def main():
             (out/'servo_response_used.json').write_bytes((out/'follower_servo_response.json').read_bytes())
             if a.dual_arm_only:
                 policy['dual_arm_only']=True
+                policy['dual_arm_speed_policy']=dual_speed_policy
+                (out/'trajectory_rate_proof.json').write_text(json.dumps(dual_rate,indent=2))
                 policy['controller_parameters'].update(virtual_stiffness=[0.,0.],force_deadband_N=.003,
-                    joint_request_acceleration_rad_s2=.15,
+                    arm_trajectory_start_delay_s=dual_speed_policy['trajectory_start_delay_s'],
+                    joint_request_speed_rad_s=a.dual_arm_joint_speed,
+                    joint_request_acceleration_rad_s2=a.dual_arm_joint_acceleration,
+                    velocity_limit_m_s=[max(.01,2*a.speed),.01],
+                    acceleration_limit_m_s2=dual_speed_policy['follower_acceleration_limit_m_s2'],
                     arm_displacement_stop_m=.26,displacement_limit_m=[.26,.012])
         if a.arm_nullspace_pose_hold is not None:
             policy['controller_parameters']['arm_nullspace_pose_hold']=a.arm_nullspace_pose_hold
@@ -867,7 +886,7 @@ def main():
                 goal.publish(g);wait(lambda:state['leader'].get('accepted_goals')==index,5.,True)
                 if a.dual_arm_only:
                     from dual_arm_workspace import wait_for_arm_completion
-                    wait_for_arm_completion(wait,sim,lambda:state['leader'].get('completed_goals')==index,d-previous,a.speed)
+                    wait_for_arm_completion(wait,sim,lambda:state['leader'].get('completed_goals')==index,d-previous,a.speed,a.dual_arm_acceleration)
                 else:
                     wait(lambda:state['leader'].get('completed_goals')==index,max(60.,(d-previous)/a.speed*4+30),True)
                 simwait(2. if a.progressive_stroke else 0.)

@@ -1,0 +1,1392 @@
+[
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/baseline_005/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "leader": "shared emergency stop",
+      "follower": "shared emergency stop"
+    },
+    "active_rows": 11045,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          16.42704074177708,
+          18.51173952461531
+        ],
+        "right": [
+          19.324832548703323,
+          21.425436759942013
+        ]
+      },
+      "follower": {
+        "left": [
+          16.421045886442954,
+          18.48483298546512
+        ],
+        "right": [
+          18.86358888259485,
+          21.400864345903372
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 10766,
+        "source_duration_s": 93.424,
+        "TCP_displacement_mm": [
+          212.99916813680474,
+          -1.612304307173373e-05,
+          -1.0025386298906369e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 4.374618183916805,
+        "FK_interval_speed_p99_5_mm_s": 4.374022049362106,
+        "actual_joint_speed_peak_rad_s": 0.028511996472228476,
+        "actual_URDF_joint_velocity_ratio_peak": 0.028511996472228476,
+        "active_base_GT_drift_peak_mm": 0.3583196356178197
+      },
+      "follower": {
+        "source_samples": 10767,
+        "source_duration_s": 93.424,
+        "TCP_displacement_mm": [
+          -212.47431464897903,
+          0.016381642980150154,
+          4.240496842555785e-09
+        ],
+        "FK_interval_speed_peak_mm_s": 5.223323705776661,
+        "FK_interval_speed_p99_5_mm_s": 4.605818466881287,
+        "actual_joint_speed_peak_rad_s": 0.017026160770397668,
+        "actual_URDF_joint_velocity_ratio_peak": 0.017026160770397668,
+        "active_base_GT_drift_peak_mm": 0.357147955750243
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 0.7513920319059227,
+    "tracking_error_peak_mm": 0.008423874025054305,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/moving_stop_050/trial",
+    "motion_completed": false,
+    "error": "single-writer violation",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "prepare and arm required",
+      "leader": "prepare and arm required"
+    },
+    "active_rows": 0,
+    "active_final_base_commands_zero": false,
+    "contacts_continuous": false,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {},
+    "arms": {},
+    "transport_and_grasp_passed": false
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/moving_stop_050_retry/trial",
+    "motion_completed": false,
+    "error": "shared stop: requested stop",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "leader arm-only measured tracking/orientation"
+    },
+    "active_rows": 510,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.271081155079248,
+          18.638873071177454
+        ],
+        "right": [
+          20.13310813077675,
+          21.470694131718833
+        ]
+      },
+      "follower": {
+        "left": [
+          17.63898299031603,
+          17.70006951441595
+        ],
+        "right": [
+          20.59358760633864,
+          20.66845768609435
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 405,
+        "source_duration_s": 2.112000000000009,
+        "TCP_displacement_mm": [
+          16.60852386896794,
+          -2.521328347752181e-06,
+          0.020349655940110623
+        ],
+        "FK_interval_speed_peak_mm_s": 29.132635418419518,
+        "FK_interval_speed_p99_5_mm_s": 28.036253374409217,
+        "actual_joint_speed_peak_rad_s": 0.11408285362755563,
+        "actual_URDF_joint_velocity_ratio_peak": 0.11408285362755563,
+        "active_base_GT_drift_peak_mm": 0.134816242824338
+      },
+      "follower": {
+        "source_samples": 406,
+        "source_duration_s": 2.112000000000009,
+        "TCP_displacement_mm": [
+          -16.19472043234982,
+          -0.07467675957529268,
+          -0.01733293579031514
+        ],
+        "FK_interval_speed_peak_mm_s": 24.13796225690731,
+        "FK_interval_speed_p99_5_mm_s": 23.0695056008749,
+        "actual_joint_speed_peak_rad_s": 0.08701779957578476,
+        "actual_URDF_joint_velocity_ratio_peak": 0.08701779957578476,
+        "active_base_GT_drift_peak_mm": 0.11731825167296218
+      }
+    },
+    "filtered_increment_force_peak_N": 5.39726513987768,
+    "tracking_error_peak_mm": 0.4424301077821344,
+    "transport_and_grasp_passed": false
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/release_gui/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 1779,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          13.752543411964686,
+          18.45077050782586
+        ],
+        "right": [
+          16.653094803831156,
+          21.305189833391253
+        ]
+      },
+      "follower": {
+        "left": [
+          17.33448675245991,
+          17.5308433323296
+        ],
+        "right": [
+          20.284106928391246,
+          20.469068079675473
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1042,
+        "source_duration_s": 10.099999999999994,
+        "TCP_displacement_mm": [
+          212.99945036578788,
+          -1.6117967152939842e-05,
+          -2.388599285030324e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 54.86126456712413,
+        "FK_interval_speed_p99_5_mm_s": 52.840033204523586,
+        "actual_joint_speed_peak_rad_s": 0.3562512369439387,
+        "actual_URDF_joint_velocity_ratio_peak": 0.3562512369439387,
+        "active_base_GT_drift_peak_mm": 0.3199725761918204
+      },
+      "follower": {
+        "source_samples": 1043,
+        "source_duration_s": 10.099999999999994,
+        "TCP_displacement_mm": [
+          -213.47616615327354,
+          -0.3382445685584735,
+          -4.9604292673421924e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 54.590619246726206,
+        "FK_interval_speed_p99_5_mm_s": 52.7246791583532,
+        "actual_joint_speed_peak_rad_s": 0.19343071853027105,
+        "actual_URDF_joint_velocity_ratio_peak": 0.19343071853027105,
+        "active_base_GT_drift_peak_mm": 0.27764210921355476
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 4.1362965534948115,
+    "tracking_error_peak_mm": 0.4390969305471046,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_050/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "leader": "shared emergency stop",
+      "follower": "shared emergency stop"
+    },
+    "active_rows": 2534,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.652992709866155,
+          17.843852776946477
+        ],
+        "right": [
+          20.603035716898425,
+          20.795078019580195
+        ]
+      },
+      "follower": {
+        "left": [
+          17.41131294201309,
+          18.77989092186381
+        ],
+        "right": [
+          20.272942476654826,
+          21.633954875855384
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1967,
+        "source_duration_s": 10.112000000000009,
+        "TCP_displacement_mm": [
+          212.9996626181797,
+          -1.6119678247313885e-05,
+          -4.7990145080056834e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 50.002381092312206,
+        "FK_interval_speed_p99_5_mm_s": 49.9963832789468,
+        "actual_joint_speed_peak_rad_s": 0.32577394961890693,
+        "actual_URDF_joint_velocity_ratio_peak": 0.32577394961890693,
+        "active_base_GT_drift_peak_mm": 0.33145212952792147
+      },
+      "follower": {
+        "source_samples": 1993,
+        "source_duration_s": 10.116,
+        "TCP_displacement_mm": [
+          -211.35277585747897,
+          -0.051214599329266114,
+          -7.955635039635922e-07
+        ],
+        "FK_interval_speed_peak_mm_s": 55.519931587454444,
+        "FK_interval_speed_p99_5_mm_s": 54.15710905857123,
+        "actual_joint_speed_peak_rad_s": 0.19172932590254993,
+        "actual_URDF_joint_velocity_ratio_peak": 0.19172932590254993,
+        "active_base_GT_drift_peak_mm": 0.3121606259080665
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 2.924242851063524,
+    "tracking_error_peak_mm": 0.09561972046684528,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_0536/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 2391,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.306498635758786,
+          18.673597885027988
+        ],
+        "right": [
+          20.16280594136833,
+          21.51365485850069
+        ]
+      },
+      "follower": {
+        "left": [
+          17.561427698899642,
+          17.785981168087883
+        ],
+        "right": [
+          20.51333825274694,
+          20.73944487657264
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1849,
+        "source_duration_s": 9.572000000000003,
+        "TCP_displacement_mm": [
+          213.00045611116693,
+          -1.6119586608288924e-05,
+          -5.4601909771356816e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 53.602086897326366,
+        "FK_interval_speed_p99_5_mm_s": 53.59452631517228,
+        "actual_joint_speed_peak_rad_s": 0.34922793404997143,
+        "actual_URDF_joint_velocity_ratio_peak": 0.34922793404997143,
+        "active_base_GT_drift_peak_mm": 0.38758862597355226
+      },
+      "follower": {
+        "source_samples": 1857,
+        "source_duration_s": 9.572000000000003,
+        "TCP_displacement_mm": [
+          -210.93371306603365,
+          -0.09512883228591612,
+          -7.371135923861516e-06
+        ],
+        "FK_interval_speed_peak_mm_s": 60.10051719762138,
+        "FK_interval_speed_p99_5_mm_s": 57.822659036136955,
+        "actual_joint_speed_peak_rad_s": 0.20653423774850366,
+        "actual_URDF_joint_velocity_ratio_peak": 0.20653423774850366,
+        "active_base_GT_drift_peak_mm": 0.38267754995126313
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 4.411084126767972,
+    "tracking_error_peak_mm": 0.10266199606695346,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_gui/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 1781,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          16.129121596479536,
+          18.511890850248527
+        ],
+        "right": [
+          19.535017331792407,
+          21.36412180192061
+        ]
+      },
+      "follower": {
+        "left": [
+          15.97037590915103,
+          17.639276159901303
+        ],
+        "right": [
+          19.594124332023988,
+          20.59986118405211
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1023,
+        "source_duration_s": 9.548000000000002,
+        "TCP_displacement_mm": [
+          213.00013105914638,
+          -1.6119522682310268e-05,
+          -6.092788940037508e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 53.600124379408385,
+        "FK_interval_speed_p99_5_mm_s": 53.59441367424584,
+        "actual_joint_speed_peak_rad_s": 0.34925119906323066,
+        "actual_URDF_joint_velocity_ratio_peak": 0.34925119906323066,
+        "active_base_GT_drift_peak_mm": 0.4020788789178473
+      },
+      "follower": {
+        "source_samples": 1023,
+        "source_duration_s": 9.551999999999992,
+        "TCP_displacement_mm": [
+          -210.88776523637281,
+          -0.010851052573433922,
+          -3.7754784854016066e-06
+        ],
+        "FK_interval_speed_peak_mm_s": 57.14418049348721,
+        "FK_interval_speed_p99_5_mm_s": 54.25180719963463,
+        "actual_joint_speed_peak_rad_s": 0.19696052325911823,
+        "actual_URDF_joint_velocity_ratio_peak": 0.19696052325911823,
+        "active_base_GT_drift_peak_mm": 0.4020934885965408
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 4.190846944403856,
+    "tracking_error_peak_mm": 0.057932712870051244,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_stop/trial",
+    "motion_completed": false,
+    "error": "requested stop signal: SIGINT",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "leader": "shared emergency stop",
+      "follower": "shared emergency stop"
+    },
+    "active_rows": 1014,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.504914457209598,
+          17.61526496887641
+        ],
+        "right": [
+          20.456412598963386,
+          20.575135862574996
+        ]
+      },
+      "follower": {
+        "left": [
+          17.402010684300297,
+          18.762506274372548
+        ],
+        "right": [
+          20.26236653648116,
+          21.60587854341026
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 763,
+        "source_duration_s": 3.259999999999991,
+        "TCP_displacement_mm": [
+          75.52617780522353,
+          -8.844370009912656e-06,
+          -0.0007348655098882162
+        ],
+        "FK_interval_speed_peak_mm_s": 50.95034229851016,
+        "FK_interval_speed_p99_5_mm_s": 50.80097397781562,
+        "actual_joint_speed_peak_rad_s": 0.23855968959060805,
+        "actual_URDF_joint_velocity_ratio_peak": 0.23855968959060805,
+        "active_base_GT_drift_peak_mm": 0.2101078359122144
+      },
+      "follower": {
+        "source_samples": 767,
+        "source_duration_s": 3.259999999999991,
+        "TCP_displacement_mm": [
+          -74.41023661166074,
+          -0.025840628845262843,
+          0.003526304928391788
+        ],
+        "FK_interval_speed_peak_mm_s": 56.84414649416428,
+        "FK_interval_speed_p99_5_mm_s": 54.6386382465047,
+        "actual_joint_speed_peak_rad_s": 0.18576262053860637,
+        "actual_URDF_joint_velocity_ratio_peak": 0.18576262053860637,
+        "active_base_GT_drift_peak_mm": 0.16857698985834751
+      }
+    },
+    "filtered_increment_force_peak_N": 2.292392411584353,
+    "tracking_error_peak_mm": 0.08888249423041493,
+    "transport_and_grasp_passed": false
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_008/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 5812,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          15.758886519624795,
+          17.528260764737855
+        ],
+        "right": [
+          19.554141398695844,
+          20.47989212502675
+        ]
+      },
+      "follower": {
+        "left": [
+          16.31606462732111,
+          18.47420268988537
+        ],
+        "right": [
+          19.145765360045306,
+          21.342720166892015
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 5547,
+        "source_duration_s": 52.03599999999999,
+        "TCP_displacement_mm": [
+          212.99920380790655,
+          -1.6121522924788537e-05,
+          -1.090927337354941e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 8.000755522661397,
+        "FK_interval_speed_p99_5_mm_s": 7.999512637514822,
+        "actual_joint_speed_peak_rad_s": 0.05212317312901571,
+        "actual_URDF_joint_velocity_ratio_peak": 0.05212317312901571,
+        "active_base_GT_drift_peak_mm": 0.3315276741701662
+      },
+      "follower": {
+        "source_samples": 5544,
+        "source_duration_s": 52.03599999999999,
+        "TCP_displacement_mm": [
+          -211.48734381668643,
+          -0.03921555035835273,
+          -1.7248258377122738e-07
+        ],
+        "FK_interval_speed_peak_mm_s": 8.934375283406643,
+        "FK_interval_speed_p99_5_mm_s": 8.201167367487814,
+        "actual_joint_speed_peak_rad_s": 0.030648995115092344,
+        "actual_URDF_joint_velocity_ratio_peak": 0.030648995115092344,
+        "active_base_GT_drift_peak_mm": 0.3306574451268048
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 5.432733827661254,
+    "tracking_error_peak_mm": 0.01115105633425762,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_015/trial",
+    "motion_completed": false,
+    "error": "shared stop: leader: arm command violates model limits",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 1559,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.110806020345557,
+          18.43735675188308
+        ],
+        "right": [
+          19.968043807874984,
+          21.29799657035623
+        ]
+      },
+      "follower": {
+        "left": [
+          17.30263116511837,
+          17.41356204614237
+        ],
+        "right": [
+          20.252623751043426,
+          20.373783121230737
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1506,
+        "source_duration_s": 14.076000000000008,
+        "TCP_displacement_mm": [
+          116.28669930136375,
+          -1.1832591004261419e-05,
+          -8.68120716424059e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 15.00051962153691,
+        "FK_interval_speed_p99_5_mm_s": 14.999786382735367,
+        "actual_joint_speed_peak_rad_s": 0.08332638542954568,
+        "actual_URDF_joint_velocity_ratio_peak": 0.08332638542954568,
+        "active_base_GT_drift_peak_mm": 0.19459917067504498
+      },
+      "follower": {
+        "source_samples": 1506,
+        "source_duration_s": 14.076000000000008,
+        "TCP_displacement_mm": [
+          -115.17210064473899,
+          -1.7158809858137123e-09,
+          0.00025185429197716047
+        ],
+        "FK_interval_speed_peak_mm_s": 16.37421715956286,
+        "FK_interval_speed_p99_5_mm_s": 15.136846680869821,
+        "actual_joint_speed_peak_rad_s": 0.054983486070958945,
+        "actual_URDF_joint_velocity_ratio_peak": 0.054983486070958945,
+        "active_base_GT_drift_peak_mm": 0.18224638016626368
+      }
+    },
+    "strict_acceptance_passed": false,
+    "strict_pass_count": 66,
+    "strict_check_count": 71,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "non_force_band_checks_passed": false,
+    "filtered_increment_force_peak_N": 0.4394302090772482,
+    "tracking_error_peak_mm": 0.021951346665161117,
+    "transport_and_grasp_passed": false
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_015_repeat/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 3291,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          0.4025177827650996,
+          18.47055802850414
+        ],
+        "right": [
+          2.4191268238218346,
+          21.335749088566164
+        ]
+      },
+      "follower": {
+        "left": [
+          0.15006685559645982,
+          17.43522018167394
+        ],
+        "right": [
+          2.321953050435957,
+          20.385464610398422
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 3026,
+        "source_duration_s": 28.732,
+        "TCP_displacement_mm": [
+          212.99921455871151,
+          -1.6118030027066002e-05,
+          -9.101380760156985e-06
+        ],
+        "FK_interval_speed_peak_mm_s": 16.086421777661876,
+        "FK_interval_speed_p99_5_mm_s": 15.6142982813221,
+        "actual_joint_speed_peak_rad_s": 0.10846893188869133,
+        "actual_URDF_joint_velocity_ratio_peak": 0.10846893188869133,
+        "active_base_GT_drift_peak_mm": 0.11835816764608045
+      },
+      "follower": {
+        "source_samples": 3026,
+        "source_duration_s": 28.732,
+        "TCP_displacement_mm": [
+          -212.65565228056371,
+          -0.10559780834360938,
+          -1.235135571597823e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 16.572538932315425,
+        "FK_interval_speed_p99_5_mm_s": 16.03001030863963,
+        "actual_joint_speed_peak_rad_s": 0.05902219921256328,
+        "actual_URDF_joint_velocity_ratio_peak": 0.05902219921256328,
+        "active_base_GT_drift_peak_mm": 0.10819046860685437
+      }
+    },
+    "strict_acceptance_passed": false,
+    "strict_pass_count": 67,
+    "strict_check_count": 71,
+    "failed_checks": [
+      "native_force_band:leader/left",
+      "native_force_band:leader/right",
+      "native_force_band:follower/left",
+      "native_force_band:follower/right"
+    ],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 1.5871239245017743,
+    "tracking_error_peak_mm": 0.10400497496981596,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_015_retry/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "leader": "shared emergency stop",
+      "follower": "shared emergency stop"
+    },
+    "active_rows": 3460,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          0.3476044097118574,
+          18.490415171370344
+        ],
+        "right": [
+          2.4853254147334445,
+          21.327306528694873
+        ]
+      },
+      "follower": {
+        "left": [
+          0.09735949051405937,
+          17.42354094131472
+        ],
+        "right": [
+          2.3186284628279608,
+          20.37375529172348
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 3182,
+        "source_duration_s": 28.732,
+        "TCP_displacement_mm": [
+          212.9992413922121,
+          -1.611800732130049e-05,
+          -9.2714056432186e-06
+        ],
+        "FK_interval_speed_peak_mm_s": 16.05371673412738,
+        "FK_interval_speed_p99_5_mm_s": 15.642239526263486,
+        "actual_joint_speed_peak_rad_s": 0.107437188682226,
+        "actual_URDF_joint_velocity_ratio_peak": 0.107437188682226,
+        "active_base_GT_drift_peak_mm": 0.10270506227146067
+      },
+      "follower": {
+        "source_samples": 3182,
+        "source_duration_s": 28.736000000000004,
+        "TCP_displacement_mm": [
+          -212.81025278648713,
+          -0.03248442877580371,
+          -1.2038885666143528e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 16.555479478162233,
+        "FK_interval_speed_p99_5_mm_s": 16.053517465092774,
+        "actual_joint_speed_peak_rad_s": 0.05989690253408769,
+        "actual_URDF_joint_velocity_ratio_peak": 0.05989690253408769,
+        "active_base_GT_drift_peak_mm": 0.09249679272793661
+      }
+    },
+    "strict_acceptance_passed": false,
+    "strict_pass_count": 67,
+    "strict_check_count": 71,
+    "failed_checks": [
+      "native_force_band:leader/left",
+      "native_force_band:leader/right",
+      "native_force_band:follower/left",
+      "native_force_band:follower/right"
+    ],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 1.5213494102105394,
+    "tracking_error_peak_mm": 0.1077376275783052,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_025/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 2154,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          13.782614008045293,
+          18.488958133885937
+        ],
+        "right": [
+          16.690571723277117,
+          21.31697362749336
+        ]
+      },
+      "follower": {
+        "left": [
+          17.342127662876113,
+          17.532563547116688
+        ],
+        "right": [
+          20.293059857265924,
+          20.452799278231947
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1901,
+        "source_duration_s": 18.08,
+        "TCP_displacement_mm": [
+          212.99941272223117,
+          -1.6117972636547076e-05,
+          -1.6750430931189442e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 26.511461338081038,
+        "FK_interval_speed_p99_5_mm_s": 25.946398815124258,
+        "actual_joint_speed_peak_rad_s": 0.18255225843082215,
+        "actual_URDF_joint_velocity_ratio_peak": 0.18255225843082215,
+        "active_base_GT_drift_peak_mm": 0.25741676320611356
+      },
+      "follower": {
+        "source_samples": 1901,
+        "source_duration_s": 18.08,
+        "TCP_displacement_mm": [
+          -212.29822603068814,
+          -0.1291931808373859,
+          -1.2802077509199705e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 26.293040391638794,
+        "FK_interval_speed_p99_5_mm_s": 25.79743203228964,
+        "actual_joint_speed_peak_rad_s": 0.09255724242064829,
+        "actual_URDF_joint_velocity_ratio_peak": 0.09255724242064829,
+        "active_base_GT_drift_peak_mm": 0.24248144945338512
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 1.6261502686384937,
+    "tracking_error_peak_mm": 0.14100203813156087,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_035/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 1639,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          13.773626134017046,
+          18.47846842190996
+        ],
+        "right": [
+          16.678545265476576,
+          21.326742101726243
+        ]
+      },
+      "follower": {
+        "left": [
+          17.322610580893954,
+          17.550632090260017
+        ],
+        "right": [
+          20.2711858024596,
+          20.47086228792604
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1388,
+        "source_duration_s": 13.519999999999996,
+        "TCP_displacement_mm": [
+          212.99943846425816,
+          -1.611797287922498e-05,
+          -2.31646549719855e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 37.206272078048656,
+        "FK_interval_speed_p99_5_mm_s": 36.25376775535097,
+        "actual_joint_speed_peak_rad_s": 0.2555220047073667,
+        "actual_URDF_joint_velocity_ratio_peak": 0.2555220047073667,
+        "active_base_GT_drift_peak_mm": 0.3485348123563518
+      },
+      "follower": {
+        "source_samples": 1388,
+        "source_duration_s": 13.519999999999996,
+        "TCP_displacement_mm": [
+          -212.80639971210218,
+          -0.1841821540290786,
+          -1.2449731134900333e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 37.04035942001302,
+        "FK_interval_speed_p99_5_mm_s": 36.18888360262376,
+        "actual_joint_speed_peak_rad_s": 0.1290500649900922,
+        "actual_URDF_joint_velocity_ratio_peak": 0.1290500649900922,
+        "active_base_GT_drift_peak_mm": 0.3210114283134192
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 2.5386746833295346,
+    "tracking_error_peak_mm": 0.22964304047379508,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_050/trial",
+    "motion_completed": false,
+    "error": "shared stop: requested stop",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "leader": "shared emergency stop",
+      "follower": "shared emergency stop"
+    },
+    "active_rows": 572,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.362695937320588,
+          17.589489423405812
+        ],
+        "right": [
+          20.304874637544266,
+          20.54953953499182
+        ]
+      },
+      "follower": {
+        "left": [
+          17.22934551184012,
+          18.54877608406134
+        ],
+        "right": [
+          20.065517298757907,
+          21.41075534965862
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 520,
+        "source_duration_s": 4.808000000000007,
+        "TCP_displacement_mm": [
+          138.0229313647252,
+          -1.3211412576123684e-05,
+          0.015942228538734504
+        ],
+        "FK_interval_speed_peak_mm_s": 52.10228872815194,
+        "FK_interval_speed_p99_5_mm_s": 51.97686472054573,
+        "actual_joint_speed_peak_rad_s": 0.33784904563970375,
+        "actual_URDF_joint_velocity_ratio_peak": 0.33784904563970375,
+        "active_base_GT_drift_peak_mm": 0.48991719408660755
+      },
+      "follower": {
+        "source_samples": 520,
+        "source_duration_s": 4.804000000000002,
+        "TCP_displacement_mm": [
+          -135.43047100283633,
+          -0.17293870105711773,
+          -0.1358656260663782
+        ],
+        "FK_interval_speed_peak_mm_s": 53.3244594602037,
+        "FK_interval_speed_p99_5_mm_s": 51.8883953605184,
+        "actual_joint_speed_peak_rad_s": 0.18817706412154117,
+        "actual_URDF_joint_velocity_ratio_peak": 0.18817706412154117,
+        "active_base_GT_drift_peak_mm": 0.44903744737768275
+      }
+    },
+    "strict_acceptance_passed": false,
+    "strict_pass_count": 65,
+    "strict_check_count": 71,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_grasp_translation_residual_below_existing_2mm",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "non_force_band_checks_passed": false,
+    "filtered_increment_force_peak_N": 4.047964923851588,
+    "tracking_error_peak_mm": 0.32234123606521764,
+    "transport_and_grasp_passed": false
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_050_retry/trial",
+    "motion_completed": true,
+    "error": null,
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 1248,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          13.928070255551342,
+          17.526931228493332
+        ],
+        "right": [
+          16.77424013654669,
+          20.470528836674127
+        ]
+      },
+      "follower": {
+        "left": [
+          13.75764592075993,
+          18.464188823012325
+        ],
+        "right": [
+          16.65064253009798,
+          21.32522511073232
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 1018,
+        "source_duration_s": 10.096000000000004,
+        "TCP_displacement_mm": [
+          212.9993803559629,
+          -1.6117983960693816e-05,
+          -2.5161805972118145e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 52.912613678281765,
+        "FK_interval_speed_p99_5_mm_s": 51.48199872422015,
+        "actual_joint_speed_peak_rad_s": 0.3522187980611412,
+        "actual_URDF_joint_velocity_ratio_peak": 0.3522187980611412,
+        "active_base_GT_drift_peak_mm": 0.325979821587064
+      },
+      "follower": {
+        "source_samples": 1019,
+        "source_duration_s": 10.096000000000004,
+        "TCP_displacement_mm": [
+          -214.79671345828848,
+          -0.10300845792816332,
+          -4.677786846762899e-05
+        ],
+        "FK_interval_speed_peak_mm_s": 53.14887287579704,
+        "FK_interval_speed_p99_5_mm_s": 52.238053007221865,
+        "actual_joint_speed_peak_rad_s": 0.19049688918750457,
+        "actual_URDF_joint_velocity_ratio_peak": 0.19049688918750457,
+        "active_base_GT_drift_peak_mm": 0.28493869712411996
+      }
+    },
+    "strict_acceptance_passed": true,
+    "strict_pass_count": 71,
+    "strict_check_count": 71,
+    "failed_checks": [],
+    "non_force_band_checks_passed": true,
+    "filtered_increment_force_peak_N": 4.806019007703015,
+    "tracking_error_peak_mm": 0.4405704849449865,
+    "transport_and_grasp_passed": true
+  },
+  {
+    "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/speed_075/trial",
+    "motion_completed": false,
+    "error": "shared stop: leader: arm command violates model limits",
+    "safe_stop_verified": true,
+    "grasp_held_after_stop": true,
+    "endpoint_stop_reasons": {
+      "follower": "shared emergency stop",
+      "leader": "shared emergency stop"
+    },
+    "active_rows": 556,
+    "active_final_base_commands_zero": true,
+    "contacts_continuous": true,
+    "contacts": {
+      "leader": {
+        "left": true,
+        "right": true
+      },
+      "follower": {
+        "left": true,
+        "right": true
+      }
+    },
+    "normal_force_ranges_N": {
+      "leader": {
+        "left": [
+          17.330227668919676,
+          17.497857909954085
+        ],
+        "right": [
+          20.274569106268757,
+          20.452883797799405
+        ]
+      },
+      "follower": {
+        "left": [
+          17.218539814989196,
+          18.579552616760125
+        ],
+        "right": [
+          20.059809985543342,
+          21.42529785820999
+        ]
+      }
+    },
+    "arms": {
+      "leader": {
+        "source_samples": 505,
+        "source_duration_s": 4.6640000000000015,
+        "TCP_displacement_mm": [
+          146.4494321599084,
+          -1.3664674877857686e-05,
+          0.018059857319507877
+        ],
+        "FK_interval_speed_peak_mm_s": 56.74025253371942,
+        "FK_interval_speed_p99_5_mm_s": 55.95052030352254,
+        "actual_joint_speed_peak_rad_s": 0.35986857064234545,
+        "actual_URDF_joint_velocity_ratio_peak": 0.35986857064234545,
+        "active_base_GT_drift_peak_mm": 0.42749702907261516
+      },
+      "follower": {
+        "source_samples": 505,
+        "source_duration_s": 4.6640000000000015,
+        "TCP_displacement_mm": [
+          -144.80672715101505,
+          -0.17083643881375446,
+          -0.1456150813970991
+        ],
+        "FK_interval_speed_peak_mm_s": 59.647728976859355,
+        "FK_interval_speed_p99_5_mm_s": 58.10005302496387,
+        "actual_joint_speed_peak_rad_s": 0.2036052588767428,
+        "actual_URDF_joint_velocity_ratio_peak": 0.2036052588767428,
+        "active_base_GT_drift_peak_mm": 0.386643305481914
+      }
+    },
+    "strict_acceptance_passed": false,
+    "strict_pass_count": 66,
+    "strict_check_count": 71,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "non_force_band_checks_passed": false,
+    "filtered_increment_force_peak_N": 6.4214560164754015,
+    "tracking_error_peak_mm": 0.7585623767809082,
+    "transport_and_grasp_passed": false
+  }
+]

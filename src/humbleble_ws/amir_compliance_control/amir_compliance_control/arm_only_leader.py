@@ -17,6 +17,7 @@ from .admittance import rotation_error
 from .arm_translation import reference
 from .stroke_kinematics import solve_stroke_pose,stroke_pose_velocity,verify_stroke_branch
 from .arm_servo_response import validate_response
+from .arm_trajectory_bounds import trajectory_times
 
 
 class ArmOnlyLeader(TransportEndpoint):
@@ -24,7 +25,17 @@ class ArmOnlyLeader(TransportEndpoint):
         super().__init__(leader=True,node_name='leader_trajectory_node',base_trajectory=False,**kwargs)
         self.declare_parameter('arm_servo_response_file','')
         self.declare_parameter('arm_acceleration_m_s2',.0012)
+        self.declare_parameter('arm_joint_speed_rad_s',.03)
+        self.declare_parameter('arm_joint_acceleration_rad_s2',.15)
         self.declare_parameter('arm_hold_after_s',2.)
+        self.declare_parameter('arm_trajectory_start_delay_s',0.)
+        if not np.isfinite(self.p('arm_trajectory_start_delay_s')) or not 0<=self.p('arm_trajectory_start_delay_s')<=.1:
+            raise ValueError('bounded arm trajectory start delay required')
+        for key in ('arm_acceleration_m_s2','arm_joint_speed_rad_s','arm_joint_acceleration_rad_s2'):
+            if not np.isfinite(self.p(key)) or self.p(key)<=0:
+                raise ValueError('positive finite arm motion policy required: '+key)
+        if self.p('arm_joint_speed_rad_s')>float(np.min(self.model.velocity)):
+            raise ValueError('arm motion policy exceeds unchanged URDF velocity')
         path=Path(self.p('urdf_file'))
         cert=json.loads(Path(self.p('arm_servo_response_file')).read_text())
         self.tau=validate_response(cert,path.read_text(),path.parent)
@@ -122,19 +133,27 @@ class ArmOnlyLeader(TransportEndpoint):
             # at small velocities. Differentiate the same constrained path.
             qdot=stroke_pose_velocity(self.model,desired,v)
             knots=np.vstack((desired+self.tau*qdot,future+self.tau*qdot))
-            if np.max(abs(qdot))>.03 or np.any(knots<=self.model.lower+.01) or np.any(knots>=self.model.upper-.01):
+            joint_speed=self.p('arm_joint_speed_rad_s')
+            if np.max(abs(qdot))>joint_speed or np.any(knots<=self.model.lower+.01) or np.any(knots>=self.model.upper-.01):
                 raise ValueError('leader arm-only joint speed/position bound')
             if self.previous_stamp is not None:
                 dt=self.sim-self.previous_stamp
                 if dt==0:return np.zeros(3)
                 if not 0<dt<=.05:raise ValueError('leader arm-only dt abnormal')
-                if np.max(abs(knots-self.previous_knots))/dt>.03+1e-6:
+                if np.max(abs(knots-self.previous_knots))/dt>joint_speed+1e-6:
                     raise ValueError('leader arm-only trajectory knot rate')
-                if np.max(abs(qdot-self.previous_qdot))/dt>.15+1e-6:
+                if np.max(abs(qdot-self.previous_qdot))/dt>self.p('arm_joint_acceleration_rad_s2')+1e-6:
                     raise ValueError('leader arm-only joint acceleration experiment bound')
             msg=JointTrajectory(joint_names=list(self.model.names))
-            msg.header.stamp=Time(seconds=self.sim-.004).to_msg();msg.header.frame_id='leader/base_footprint'
-            for knot,seconds in zip(knots,(.004,.084)):
+            delay=self.p('arm_trajectory_start_delay_s')
+            # At higher speeds a compensated servo reference is not reachable
+            # in one 4ms tick. Give BOTH knots actual future times. Keep the
+            # unchanged gate's q_actual -> first-point URDF rate validation;
+            # do not backdate a larger duration while retaining a "now" knot.
+            header,first,end=trajectory_times(self.sim,.004,.08,delay)
+            msg.header.stamp=Time(seconds=header).to_msg()
+            msg.header.frame_id='leader/base_footprint'
+            for knot,seconds in zip(knots,(first,end)):
                 point=JointTrajectoryPoint(positions=knot.tolist())
                 point.time_from_start=Duration(sec=0,nanosec=round(seconds*1e9));msg.points.append(point)
             self.publish_command(self.arm_pub,msg)
@@ -149,6 +168,9 @@ class ArmOnlyLeader(TransportEndpoint):
                 'p_actual_m':actual.tolist(),'p_home_m':self.origin.tolist(),'q_actual_rad':q.tolist(),
                 'q_cmd_rad':knots[-1].tolist(),'qdot_rad_s':qdot.tolist(),'base_drift_xy_yaw':drift.tolist(),
                 'preflight_wall_s':self.preflight_wall_s,
+                'joint_speed_policy_rad_s':joint_speed,
+                'joint_acceleration_policy_rad_s2':self.p('arm_joint_acceleration_rad_s2'),
+                'trajectory_start_delay_s':delay,
                 'arm_reference_velocity_m_s':v,'sim_time':self.sim})))
         except (ValueError,np.linalg.LinAlgError) as exc:
             self.trip(str(exc))

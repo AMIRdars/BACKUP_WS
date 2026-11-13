@@ -20,6 +20,7 @@ def setup(context):
                          'profile_file':str(folder/(robot+'_safety.json')),
                          'coherent_sensor_history':coherent,
                          'simulation_source_watchdog':source_watchdog,
+                         'servo_streaming_response_file':LaunchConfiguration(robot+'_servo_response_file').perform(context),
                          'base_zero_only':both or arm_only and robot=='follower'}],
             remappings=[('rover_twist','interlock/base_request'),
                         ('arm_controller/joint_trajectory','interlock/arm_request')],additional_env={'OPENBLAS_NUM_THREADS':'1','OMP_NUM_THREADS':'1','MKL_NUM_THREADS':'1'},output='screen'),
@@ -37,6 +38,8 @@ def setup(context):
 
 def generate_launch_description():
     return LaunchDescription([DeclareLaunchArgument('run_directory'),
+        DeclareLaunchArgument('leader_servo_response_file',default_value=''),
+        DeclareLaunchArgument('follower_servo_response_file',default_value=''),
         DeclareLaunchArgument('coherent_sensor_history',default_value='false',choices=['false','true']),
         DeclareLaunchArgument('simulation_source_watchdog',default_value='false',choices=['false','true']),
         DeclareLaunchArgument('both_bases_zero',default_value='false',choices=['false','true']),

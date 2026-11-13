@@ -1,0 +1,86 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-11-13-23-09-06-805549-dars5070-Katana-15-HX-B14WGK-130586
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [leader_arm_only-1]: process started with pid [130612]
+[INFO] [follower_arm_only-2]: process started with pid [130614]
+[INFO] [wrench_preprocessor-3]: process started with pid [130616]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [wrench_preprocessor-3]: sending signal 'SIGINT' to process[wrench_preprocessor-3]
+[INFO] [follower_arm_only-2]: sending signal 'SIGINT' to process[follower_arm_only-2]
+[INFO] [leader_arm_only-1]: sending signal 'SIGINT' to process[leader_arm_only-1]
+[wrench_preprocessor-3] Traceback (most recent call last):
+[wrench_preprocessor-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/wrench_preprocessor.py", line 231, in main
+[wrench_preprocessor-3]     rclpy.spin(node)
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[wrench_preprocessor-3]     executor.spin_once()
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[wrench_preprocessor-3]     self._spin_once_impl(timeout_sec)
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[wrench_preprocessor-3]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[wrench_preprocessor-3]     return next(self._cb_iter)
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[wrench_preprocessor-3]     wait_set.wait(timeout_nsec)
+[wrench_preprocessor-3] KeyboardInterrupt
+[wrench_preprocessor-3] 
+[wrench_preprocessor-3] During handling of the above exception, another exception occurred:
+[wrench_preprocessor-3] 
+[wrench_preprocessor-3] Traceback (most recent call last):
+[wrench_preprocessor-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/wrench_preprocessor", line 33, in <module>
+[wrench_preprocessor-3]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'wrench_preprocessor')())
+[wrench_preprocessor-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/wrench_preprocessor.py", line 233, in main
+[wrench_preprocessor-3]     node.destroy_node()
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[wrench_preprocessor-3]     self.destroy_publisher(self._publishers[0])
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[wrench_preprocessor-3]     publisher.destroy()
+[wrench_preprocessor-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[wrench_preprocessor-3]     self.__publisher.destroy_when_not_in_use()
+[wrench_preprocessor-3] KeyboardInterrupt
+[leader_arm_only-1] Traceback (most recent call last):
+[leader_arm_only-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/arm_only_leader.py", line 195, in main
+[leader_arm_only-1]     try:rclpy.spin(node)
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[leader_arm_only-1]     executor.spin_once()
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[leader_arm_only-1]     self._spin_once_impl(timeout_sec)
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[leader_arm_only-1]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[leader_arm_only-1]     return next(self._cb_iter)
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[leader_arm_only-1]     wait_set.wait(timeout_nsec)
+[leader_arm_only-1] KeyboardInterrupt
+[leader_arm_only-1] 
+[leader_arm_only-1] During handling of the above exception, another exception occurred:
+[leader_arm_only-1] 
+[leader_arm_only-1] Traceback (most recent call last):
+[leader_arm_only-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/leader_arm_only", line 33, in <module>
+[leader_arm_only-1]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'leader_arm_only')())
+[leader_arm_only-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/arm_only_leader.py", line 198, in main
+[leader_arm_only-1]     node.destroy_node();rclpy.try_shutdown()
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[leader_arm_only-1]     self.destroy_publisher(self._publishers[0])
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[leader_arm_only-1]     publisher.destroy()
+[leader_arm_only-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[leader_arm_only-1]     self.__publisher.destroy_when_not_in_use()
+[leader_arm_only-1] KeyboardInterrupt
+[follower_arm_only-2] Traceback (most recent call last):
+[follower_arm_only-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/follower_arm_only", line 33, in <module>
+[follower_arm_only-2]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'follower_arm_only')())
+[follower_arm_only-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/strict_arm_only.py", line 408, in main
+[follower_arm_only-2]     rclpy.spin(node)
+[follower_arm_only-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[follower_arm_only-2]     executor.spin_once()
+[follower_arm_only-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[follower_arm_only-2]     self._spin_once_impl(timeout_sec)
+[follower_arm_only-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 765, in _spin_once_impl
+[follower_arm_only-2]     handler, entity, node = self.wait_for_ready_callbacks(timeout_sec=timeout_sec)
+[follower_arm_only-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 748, in wait_for_ready_callbacks
+[follower_arm_only-2]     return next(self._cb_iter)
+[follower_arm_only-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 645, in _wait_for_ready_callbacks
+[follower_arm_only-2]     wait_set.wait(timeout_nsec)
+[follower_arm_only-2] KeyboardInterrupt
+[ERROR] [follower_arm_only-2]: process has died [pid 130614, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/follower_arm_only --ros-args -r __ns:=/follower --params-file /tmp/launch_params_22wr43lc'].
+[ERROR] [leader_arm_only-1]: process has died [pid 130612, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/leader_arm_only --ros-args -r __ns:=/leader --params-file /tmp/launch_params_tptelq7b'].
+[ERROR] [wrench_preprocessor-3]: process has died [pid 130616, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/wrench_preprocessor --ros-args -r __ns:=/follower --params-file /tmp/launch_params_cnp9v9b4'].

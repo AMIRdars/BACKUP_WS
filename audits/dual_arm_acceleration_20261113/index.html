@@ -1,0 +1,12 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><title>高速アーム追従の検証</title>
+<style>body{font:17px sans-serif;max-width:1100px;margin:30px auto;padding:0 22px;background:#f4f7fa;color:#192b40;line-height:1.7}section{background:white;border:1px solid #dce4ef;padding:22px;margin:22px 0;border-radius:10px}img{max-width:100%}a{color:#1657a1}pre{background:#edf2f8;padding:18px;overflow:auto}</style>
+<h1>ベース停止・高速アーム追従</h1><p>既定ピーク要求 <b>3→53.6 mm/s（約17.9倍）</b>。移動213 mm。URDF変更なし。把持後の両台車指令ゼロ。</p>
+<section><h2>実測・把持検証</h2><p>最終GUIは71/71項目合格。Leader実測ピーク53.600 mm/s、Follower 57.144 mm/s。接触継続・停止後把持保持を確認し、移動中停止試験も合格しています。速度はシミュレーション時刻による値です。</p><p><a href="posture_current/index.html">実測アーム姿勢をスライダで確認</a> / <a href="REPORT.md">成功・失敗を含む報告</a> / <a href="release.json">検証数値JSON</a></p></section>
+<section><h2>速度・移動量・指反力</h2><img src="release_comparison.png"><p><a href="release_comparison.pdf">PDF</a> / <a href="measured_speed.csv">速度CSV</a> / <a href="servo_now_gui/trial/timeseries.csv">元時系列CSV</a></p></section>
+<section><h2>GUI確認</h2><img src="release_current_gui.png"><p>実停止・把持確認後に物理を一時停止した画面です。</p></section>
+<section><h2>起動</h2><pre>cd ~/ros2_humble_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+ros2 launch cooperative_transport_bringup compliance_round_trip.launch.py \
+  headless:=false gui_nvidia_offload:=true record_data:=true \
+  dual_arm_speed_m_s:=0.0536</pre><a href="moving_stop_evidence.json">移動中停止・把持保持</a> / <a href="changes.json">変更ファイル</a> / <a href="implementation.patch">差分</a> / <a href="urdf_unchanged.json">URDF不変確認</a></section></html>

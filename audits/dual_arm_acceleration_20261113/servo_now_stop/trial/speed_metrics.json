@@ -1,0 +1,79 @@
+{
+  "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_stop/trial",
+  "motion_completed": false,
+  "error": "requested stop signal: SIGINT",
+  "safe_stop_verified": true,
+  "grasp_held_after_stop": true,
+  "endpoint_stop_reasons": {
+    "leader": "shared emergency stop",
+    "follower": "shared emergency stop"
+  },
+  "active_rows": 1014,
+  "active_final_base_commands_zero": true,
+  "contacts_continuous": true,
+  "contacts": {
+    "leader": {
+      "left": true,
+      "right": true
+    },
+    "follower": {
+      "left": true,
+      "right": true
+    }
+  },
+  "normal_force_ranges_N": {
+    "leader": {
+      "left": [
+        17.504914457209598,
+        17.61526496887641
+      ],
+      "right": [
+        20.456412598963386,
+        20.575135862574996
+      ]
+    },
+    "follower": {
+      "left": [
+        17.402010684300297,
+        18.762506274372548
+      ],
+      "right": [
+        20.26236653648116,
+        21.60587854341026
+      ]
+    }
+  },
+  "arms": {
+    "leader": {
+      "source_samples": 763,
+      "source_duration_s": 3.259999999999991,
+      "TCP_displacement_mm": [
+        75.52617780522353,
+        -8.844370009912656e-06,
+        -0.0007348655098882162
+      ],
+      "FK_interval_speed_peak_mm_s": 50.95034229851016,
+      "FK_interval_speed_p99_5_mm_s": 50.80097397781562,
+      "actual_joint_speed_peak_rad_s": 0.23855968959060805,
+      "actual_URDF_joint_velocity_ratio_peak": 0.23855968959060805,
+      "active_base_GT_drift_peak_mm": 0.2101078359122144
+    },
+    "follower": {
+      "source_samples": 767,
+      "source_duration_s": 3.259999999999991,
+      "TCP_displacement_mm": [
+        -74.41023661166074,
+        -0.025840628845262843,
+        0.003526304928391788
+      ],
+      "FK_interval_speed_peak_mm_s": 56.84414649416428,
+      "FK_interval_speed_p99_5_mm_s": 54.6386382465047,
+      "actual_joint_speed_peak_rad_s": 0.18576262053860637,
+      "actual_URDF_joint_velocity_ratio_peak": 0.18576262053860637,
+      "active_base_GT_drift_peak_mm": 0.16857698985834751
+    }
+  },
+  "filtered_increment_force_peak_N": 2.292392411584353,
+  "tracking_error_peak_mm": 0.08888249423041493,
+  "transport_and_grasp_passed": false
+}

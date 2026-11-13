@@ -20,7 +20,7 @@ from .admittance import rotation_error
 from .transport import TransportEndpoint
 from .wrench import finite
 from .arm_servo_response import validate_response
-from .arm_trajectory_bounds import streaming_knots
+from .arm_trajectory_bounds import streaming_knots,trajectory_times
 
 
 class StrictArmOnly(ArmAdmittance):
@@ -42,6 +42,7 @@ class StrictArmOnly(ArmAdmittance):
                 'rotation_error_stop_rad': .01, 'base_drift_stop_m': .001,
                 'base_yaw_drift_stop_rad': .002, 'base_speed_stop': .001,
                 'arm_command_horizon_s': .04,
+                'arm_trajectory_start_delay_s': 0.,
                 'arm_command_reference': 'integrated',
                 'control_on_wrench': False,
                 'arm_servo_response_file': '',
@@ -77,6 +78,8 @@ class StrictArmOnly(ArmAdmittance):
                 raise ValueError('explicit positive AF experiment policy required: '+key)
         if not .02 <= self.p('arm_command_horizon_s') <= .1:
             raise ValueError('AF JTC horizon must be 20..100 ms')
+        if not np.isfinite(self.p('arm_trajectory_start_delay_s')) or not 0<=self.p('arm_trajectory_start_delay_s')<=.1:
+            raise ValueError('bounded AF trajectory start delay required')
         self.servo_compensation = np.zeros(5)
         self.servo_period = None
         if self.p('arm_command_reference')=='servo_trajectory' and not self.p('arm_servo_response_file'):
@@ -351,12 +354,14 @@ class StrictArmOnly(ArmAdmittance):
                         if np.any(start <= lower) or np.any(start >= upper):
                             raise ValueError('ARM_ONLY streaming start joint margin')
                         period=self.servo_period
-                        msg.header.stamp=Time(seconds=self.sim-period).to_msg()
+                        delay=self.p('arm_trajectory_start_delay_s')
+                        header,first_time,end_time=trajectory_times(self.sim,period,horizon,delay)
+                        msg.header.stamp=Time(seconds=header).to_msg()
                         # Positive duration is required by the unchanged gate;
                         # its absolute knot time is the current local clock.
                         first=JointTrajectoryPoint(positions=start.tolist())
-                        first.time_from_start=Duration(sec=int(period),nanosec=int(round(period%1*1e9)))
-                        point.time_from_start=Duration(sec=int(period+horizon),nanosec=int(round((period+horizon)%1*1e9)))
+                        first.time_from_start=Duration(sec=int(first_time),nanosec=int(round(first_time%1*1e9)))
+                        point.time_from_start=Duration(sec=int(end_time),nanosec=int(round(end_time%1*1e9)))
                         msg.points=[first,point]
                         self.q_start_request=start
                     self.publish_command(self.arm_pub, msg)
@@ -365,6 +370,7 @@ class StrictArmOnly(ArmAdmittance):
                         'arm_nullspace_pose_hold': self.p('arm_nullspace_pose_hold'),
                         'arm_command_reference': self.p('arm_command_reference'),
                         'arm_command_horizon_s': horizon,
+                        'arm_trajectory_start_delay_s':self.p('arm_trajectory_start_delay_s'),
                         'control_on_wrench': self.p('control_on_wrench'),
                         'servo_compensation_s': self.servo_compensation.tolist(),
                         'qdot_primary_xy_rad_s': primary_qdot.tolist(),

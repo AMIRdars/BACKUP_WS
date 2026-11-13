@@ -3,7 +3,7 @@ from pathlib import Path
 import xml.etree.ElementTree as ET
 import numpy as np
 from amir_compliance_control.wrench import LocalModel
-from amir_compliance_control.stroke_kinematics import solve_stroke_pose
+from amir_compliance_control.stroke_kinematics import solve_stroke_pose,stroke_pose_velocity
 from amir_native_arm_support import SCENE
 from amir_compliance_control.arm_translation import duration,reference
 
@@ -25,25 +25,27 @@ def common_reach(root, step=.001):
             'resolution_m':step,'arms':proof,'scope':'same initial grasp, horizontal translation, fixed orientation; not collision/load qualification'}
 
 
-def trajectory_rate_proof(root,distance,speed):
-    total=duration(distance,speed,.0012);times=np.linspace(0,total,501);proof={}
+def trajectory_rate_proof(root,distance,speed,acceleration=.0012):
+    total=duration(distance,speed,acceleration);times=np.linspace(0,total,501);proof={}
     for robot,sign in (('leader',1.),('follower',-1.)):
         path=Path(root)/SCENE/(robot+'.urdf');tree=ET.parse(path);model=LocalModel(path.read_text())
         q=np.array([float(tree.find(f"ros2_control/joint[@name='{n}']/state_interface[@name='position']/param").text) for n in model.names])
         home,sensor=model.frames(q);samples=[]
         for t in times:
-            x=reference(t,distance,speed,.0012)[0]
-            q=solve_stroke_pose(model,q,home+[sign*x,0,0],sensor[:3,:3]);samples.append(q.copy())
-        qdot=np.diff(samples,axis=0)/(total/500)
+            x,v,_=reference(t,distance,speed,acceleration)
+            q=solve_stroke_pose(model,q,home+[sign*x,0,0],sensor[:3,:3])
+            samples.append(stroke_pose_velocity(model,q,sign*v))
+        qdot=np.array(samples)
         proof[robot]={'peak_joint_speed_rad_s':float(np.max(abs(qdot))),
             'peak_joint_acceleration_rad_s2':float(np.max(abs(np.diff(qdot,axis=0)/(total/500))))}
     return {'duration_s':total,'arms':proof,
-            'peak_joint_speed_rad_s':max(p['peak_joint_speed_rad_s'] for p in proof.values())}
+            'peak_joint_speed_rad_s':max(p['peak_joint_speed_rad_s'] for p in proof.values()),
+            'peak_joint_acceleration_rad_s2':max(p['peak_joint_acceleration_rad_s2'] for p in proof.values())}
 
 
-def wait_for_arm_completion(wait,sim,completed,distance,speed):
+def wait_for_arm_completion(wait,sim,completed,distance,speed,acceleration=.0012):
     """Profile/arrival budget uses sim time; all existing wall heartbeats remain."""
-    budget=duration(distance,speed,.0012)+10.
+    budget=duration(distance,speed,acceleration)+10.
     started=sim[0]
     def ready():
         if completed():return True

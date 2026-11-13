@@ -21,12 +21,14 @@ def setup(context):
         raise ValueError('Phase 1 policy requires enable_base_assist=false and wrench_source_mode=sensor')
     native=policy.get('native_arm_stroke') is True
     dual=policy.get('dual_arm_only') is True
+    motion=policy.get('dual_arm_speed_policy',{
+        'tcp_acceleration_m_s2':.0012,'joint_speed_rad_s':.03,'joint_acceleration_rad_s2':.15})
     allowed_scopes={'simulation_micro_test_only_not_hardware_ratings'}
     if native:allowed_scopes.add('simulation_native_stroke_only_not_hardware_ratings')
     if policy.get('scope') not in allowed_scopes:
         raise ValueError('explicit simulation experiment envelope required')
     speed, distance = float(value('leader_speed')), float(value('leader_distance_limit'))
-    if not (math.isfinite(speed) and 0 < speed <= (.005 if native else .01)
+    if not (math.isfinite(speed) and 0 < speed <= (.2 if dual else .005 if native else .01)
             and math.isfinite(distance) and 0 < distance <= (.5 if native else .01)):
         raise ValueError('AF leader envelope: <=10 mm and <=0.01 m/s')
     distance_scale=float(policy.get('leader_distance_metres_per_raw_odom_metre',1.)) if native else 1.
@@ -40,7 +42,11 @@ def setup(context):
                      'straight_reference_acceleration_m_s2': float(policy.get('leader_reference_acceleration_m_s2', 0.))*distance_scale,
                      'goal_tolerance_m': float(policy.get('leader_goal_tolerance_m', .00001)),
                      'actuator_ack_required': True,
-                     **({'arm_acceleration_m_s2':.0012,'arm_hold_after_s':2.} if dual else {}),
+                     **({'arm_acceleration_m_s2':motion['tcp_acceleration_m_s2'],
+                         'arm_joint_speed_rad_s':motion['joint_speed_rad_s'],
+                         'arm_joint_acceleration_rad_s2':motion['joint_acceleration_rad_s2'],
+                         'arm_trajectory_start_delay_s':motion.get('trajectory_start_delay_s',0.),
+                         'arm_hold_after_s':2.} if dual else {}),
                      **({'arm_servo_response_file':policy['leader_servo_response_file'],
                          **({} if dual else {'base_distance_calibration_file':policy.get('leader_base_distance_calibration_file','')})} if native else {})}], additional_env=env, output='screen'),
         Node(package='amir_compliance_control', executable='follower_arm_only', namespace='follower',

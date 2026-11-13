@@ -1,0 +1,82 @@
+[INFO] [launch]: All log files can be found below /home/dars5070/.ros/log/2026-11-13-23-21-32-622464-dars5070-Katana-15-HX-B14WGK-143635
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [native_grasp_monitor-1]: process started with pid [143658]
+[INFO] [native_grasp_monitor-2]: process started with pid [143660]
+[INFO] [local_grip_maintenance-3]: process started with pid [143662]
+[INFO] [local_grip_maintenance-4]: process started with pid [143664]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [local_grip_maintenance-4]: sending signal 'SIGINT' to process[local_grip_maintenance-4]
+[INFO] [local_grip_maintenance-3]: sending signal 'SIGINT' to process[local_grip_maintenance-3]
+[INFO] [native_grasp_monitor-2]: sending signal 'SIGINT' to process[native_grasp_monitor-2]
+[INFO] [native_grasp_monitor-1]: sending signal 'SIGINT' to process[native_grasp_monitor-1]
+[local_grip_maintenance-3] Traceback (most recent call last):
+[local_grip_maintenance-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/grip_maintenance.py", line 240, in main
+[local_grip_maintenance-3]     rclpy.spin(node)
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/__init__.py", line 229, in spin
+[local_grip_maintenance-3]     executor.spin_once()
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 776, in spin_once
+[local_grip_maintenance-4] Traceback (most recent call last):
+[local_grip_maintenance-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/local_grip_maintenance", line 33, in <module>
+[local_grip_maintenance-4]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'local_grip_maintenance')())
+[local_grip_maintenance-4]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/grip_maintenance.py", line 244, in main
+[local_grip_maintenance-4]     node.destroy_node()
+[local_grip_maintenance-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[local_grip_maintenance-4]     self.destroy_subscription(self._subscriptions[0])
+[local_grip_maintenance-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[native_grasp_monitor-2] Traceback (most recent call last):
+[native_grasp_monitor-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/native_grasp_monitor", line 33, in <module>
+[native_grasp_monitor-2]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'native_grasp_monitor')())
+[native_grasp_monitor-2]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/native_grasp.py", line 289, in main
+[native_grasp_monitor-2]     node.destroy_node()
+[native_grasp_monitor-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[local_grip_maintenance-3]     self._spin_once_impl(timeout_sec)
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 773, in _spin_once_impl
+[local_grip_maintenance-3]     raise handler.exception()
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/task.py", line 254, in __call__
+[native_grasp_monitor-1] Traceback (most recent call last):
+[native_grasp_monitor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/native_grasp_monitor", line 33, in <module>
+[native_grasp_monitor-1]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'native_grasp_monitor')())
+[native_grasp_monitor-1]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/native_grasp.py", line 289, in main
+[local_grip_maintenance-4]     subscription.destroy()
+[local_grip_maintenance-4]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[local_grip_maintenance-4]     self.handle.destroy_when_not_in_use()
+[local_grip_maintenance-4] KeyboardInterrupt
+[native_grasp_monitor-2]     self.destroy_publisher(self._publishers[0])
+[native_grasp_monitor-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[native_grasp_monitor-2]     publisher.destroy()
+[native_grasp_monitor-2]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[native_grasp_monitor-2]     self.__publisher.destroy_when_not_in_use()
+[native_grasp_monitor-2] KeyboardInterrupt
+[local_grip_maintenance-3]     self._handler.send(None)
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 453, in handler
+[native_grasp_monitor-1]     node.destroy_node()
+[native_grasp_monitor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1685, in destroy_node
+[local_grip_maintenance-3]     arg = take_from_wait_list(entity)
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/executors.py", line 375, in _take_subscription
+[local_grip_maintenance-3]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[local_grip_maintenance-3] RuntimeError: Unable to convert call argument to Python object (compile in debug mode for details)
+[local_grip_maintenance-3] 
+[local_grip_maintenance-3] During handling of the above exception, another exception occurred:
+[local_grip_maintenance-3] 
+[local_grip_maintenance-3] Traceback (most recent call last):
+[local_grip_maintenance-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/local_grip_maintenance", line 33, in <module>
+[local_grip_maintenance-3]     sys.exit(load_entry_point('amir-compliance-control==0.1.0', 'console_scripts', 'local_grip_maintenance')())
+[local_grip_maintenance-3]   File "/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/python3.10/site-packages/amir_compliance_control/grip_maintenance.py", line 244, in main
+[local_grip_maintenance-3]     node.destroy_node()
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1687, in destroy_node
+[local_grip_maintenance-3]     self.destroy_subscription(self._subscriptions[0])
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1583, in destroy_subscription
+[native_grasp_monitor-1]     self.destroy_publisher(self._publishers[0])
+[native_grasp_monitor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/node.py", line 1565, in destroy_publisher
+[local_grip_maintenance-3]     subscription.destroy()
+[local_grip_maintenance-3]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/subscription.py", line 80, in destroy
+[local_grip_maintenance-3]     self.handle.destroy_when_not_in_use()
+[local_grip_maintenance-3] KeyboardInterrupt
+[native_grasp_monitor-1]     publisher.destroy()
+[native_grasp_monitor-1]   File "/opt/ros/humble/local/lib/python3.10/dist-packages/rclpy/publisher.py", line 99, in destroy
+[native_grasp_monitor-1]     self.__publisher.destroy_when_not_in_use()
+[native_grasp_monitor-1] KeyboardInterrupt
+[ERROR] [local_grip_maintenance-3]: process has died [pid 143662, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/local_grip_maintenance --ros-args -r __ns:=/leader --params-file /tmp/launch_params_sn6pqekz'].
+[ERROR] [native_grasp_monitor-1]: process has died [pid 143658, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/native_grasp_monitor --ros-args -r __ns:=/leader --params-file /tmp/launch_params_p1v6algk'].
+[ERROR] [native_grasp_monitor-2]: process has died [pid 143660, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/native_grasp_monitor --ros-args -r __ns:=/follower --params-file /tmp/launch_params_pnbxdzf9'].
+[ERROR] [local_grip_maintenance-4]: process has died [pid 143664, exit code -2, cmd '/home/dars5070/ros2_humble_ws/install/amir_compliance_control/lib/amir_compliance_control/local_grip_maintenance --ros-args -r __ns:=/follower --params-file /tmp/launch_params_uwndz07d'].

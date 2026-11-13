@@ -1,15 +1,21 @@
 # 固定追従
 
-ROS 2 Humble + Gazebo FortressによるAMIR740 2台の、**接近・把持後に両ベースを停止し、アームだけで協調追従する状態**のバックアップです。保存日: 2026-11-13。
+ROS 2 Humble + Gazebo FortressのAMIR740協調搬送。接近・摩擦把持後は両ベースの速度指令をゼロに保ち、リーダーアームの動きへフォロワーアームが自身のF/Tから追従します。ユーザーが動作確認した **53.6 mm/s版** のバックアップです。
 
-- 既定: 両台車速度指令ゼロ、リーダーアーム213mm、速度3mm/s。
-- 比較済み設定: 4mm/s。FK実測で約1.33倍、213mm移動と停止後把持保持を確認。
-- フォロワー: 自身のF/T → xyアドミッタンス → FK追従誤差 → 2×5 DLS → 5関節指令。リーダー目標や物体GTは追従入力に使用しません。
-- 開始前IK確認を非同期化し、安全信号の受信とゼロ指令を継続します。
-- URDF速度上限は変更していません。1m/sを実現した版ではありません。
+- 既定: アーム移動213 mm、ピーク要求53.6 mm/s（従来3 mm/sの約17.9倍）。URDF変更なし。
+- 最終GUI・headlessとも厳密評価71/71項目合格。接触継続・停止後把持保持、移動中停止を検証。
+- GUI実測速度ピークLeader 53.600 mm/s、Follower 57.144 mm/s。五次補間のため一定速ではありません。
+- 関連単体・回帰161件合格。F/T・実関節・接触・台車ドリフトの監視を維持。
 
-[復元・ビルド・起動・検証手順](固定追従/README.md)
+```bash
+cd ~/ros2_humble_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+ros2 launch cooperative_transport_bringup compliance_round_trip.launch.py \
+  headless:=false gui_nvidia_offload:=true record_data:=true \
+  dual_arm_speed_m_s:=0.0536
+```
 
-[速度比較と未解決事項](audits/dual_arm_speed_20261113/REPORT.md) / [速度グラフ](audits/dual_arm_speed_20261113/speed_comparison.png)
+[復元・ビルド・ログ展開手順](固定追従/README.md) / [検証報告・残課題](audits/dual_arm_acceleration_20261113/REPORT.md) / [速度・把持グラフ](audits/dual_arm_acceleration_20261113/release_comparison.png) / [姿勢ログ](audits/dual_arm_acceleration_20261113/posture_current/REPORT.md)
 
-単体・回帰45件合格。4mm/sの厳密評価は67/71項目合格で、指反力の下限条件は未達です。実測関節速度の瞬間的上振れも残課題です。動作完了と全評価項目合格は区別しています。
+HTMLの姿勢スライダはclone後にローカルで開いてください。元CSV/JSONLはgzip圧縮して保存しています。3〜4 mm/s版は過去コミットと比較ログに残しています。

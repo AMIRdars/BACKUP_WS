@@ -23,6 +23,8 @@ from std_srvs.srv import Trigger
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from .wrench import LocalModel, finite
 from .sensor_coherence import coherent_stamps,local_sensor_qos
+from .arm_servo_response import validate_response
+from .servo_streaming_gate import servo_reference_ratio
 
 
 LATCHED = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
@@ -42,6 +44,7 @@ class RobotSafetyGate(Node):
         self.declare_parameter('base_zero_only', False)
         self.declare_parameter('coherent_sensor_history', False)
         self.declare_parameter('simulation_source_watchdog',False)
+        self.declare_parameter('servo_streaming_response_file','')
         self.source_watchdog=self.get_parameter('simulation_source_watchdog').value
         self.coherent_history=self.get_parameter('coherent_sensor_history').value
         if not isinstance(self.coherent_history,bool):raise ValueError('boolean coherent_sensor_history required')
@@ -53,6 +56,16 @@ class RobotSafetyGate(Node):
             raise ValueError('single local namespace and use_sim_time=true required')
         xml = Path(self.p('urdf_file')).read_text()
         self.model = LocalModel(xml)
+        self.servo_tau=None;self.servo_period=None;self.servo_reference_ratio_peak=0.
+        if self.p('servo_streaming_response_file'):
+            if not self.base_zero_only or not self.source_watchdog:
+                raise ValueError('servo streaming requires explicit local zero-base simulation scope')
+            cert=json.loads(Path(self.p('servo_streaming_response_file')).read_text())
+            self.servo_tau=validate_response(cert,xml,Path(self.p('urdf_file')).parent)
+            if (np.any(self.servo_tau<=0) or cert.get('open_loop_control') is not True
+                    or hashlib.sha256(Path('/opt/ros/humble/lib/libgz_hardware_plugins.so').read_bytes()).hexdigest()!=cert['plugin_library_sha256']):
+                raise ValueError('five measured joint responses and matching simulation plugin required')
+            self.servo_period=1/float(cert['controller_update_rate_hz'])
         self.profile = json.loads(Path(self.p('profile_file')).read_text())
         if (self.profile.get('robot') != self.robot or self.profile.get('urdf_sha256') !=
                 hashlib.sha256(xml.encode()).hexdigest() or not self.profile.get('simulation_only')
@@ -285,15 +298,28 @@ class RobotSafetyGate(Node):
                     f'armed={self.armed_sim:.9f}, now={self.sim:.9f}')
             if tuple(msg.joint_names) != self.model.names or not msg.points or self.q is None:
                 raise ValueError('complete local arm trajectory required')
+            servo_now=False
+            tau=getattr(self,'servo_tau',None)
+            if tau is not None and len(msg.points)==2:
+                first=msg.points[0];last=msg.points[1]
+                t0=first.time_from_start.sec+first.time_from_start.nanosec*1e-9
+                t1=last.time_from_start.sec+last.time_from_start.nanosec*1e-9
+                servo_now=(abs(t0-self.servo_period)<1e-9 and abs(stamp(msg)+t0-self.sim)<=self.p('max_skew_s'))
+                if servo_now:
+                    good,reason=self.healthy()
+                    if not good:raise ValueError('servo command without fresh local state: '+reason)
+                    ratio=servo_reference_ratio(self.q,first.positions,last.positions,
+                        stamp(msg)+t0,stamp(msg)+t1,self.sim,tau,self.model.velocity)
+                    self.servo_reference_ratio_peak=max(self.servo_reference_ratio_peak,ratio)
             previous, previous_time = self.q, 0.
-            for point in msg.points:
+            for index,point in enumerate(msg.points):
                 if point.effort or point.accelerations or point.velocities:
                     raise ValueError('positions-only arm requests required by this gate')
                 q = finite(point.positions, (5,))
                 t = point.time_from_start.sec+point.time_from_start.nanosec*1e-9
                 if (t <= previous_time or np.any(q <= self.model.lower+self.margin)
                         or np.any(q >= self.model.upper-self.margin)
-                        or np.any(np.abs(q-previous)/(t-previous_time) > self.model.velocity)):
+                        or (not (servo_now and index==0) and np.any(np.abs(q-previous)/(t-previous_time) > self.model.velocity))):
                     raise ValueError('arm command violates model limits')
                 previous, previous_time = q, t
             if stamp(msg)+previous_time <= self.sim:
@@ -356,6 +382,8 @@ class RobotSafetyGate(Node):
             'active': active, 'fault': self.fault, 'reason': reason,
             'first_fault_context': self.fault_context,
             'tick_gap_wall_s': wall-self.last_tick_wall if self.last_tick_wall else 0.,
+            'servo_streaming_model_enabled':self.servo_tau is not None,
+            'servo_reference_URDF_velocity_ratio_peak':self.servo_reference_ratio_peak,
             'reaction_torque_Nm': self.torques, 'peak_reaction_torque_Nm': self.peak_torque.tolist(),
             'effort_limit_Nm': self.model.effort.tolist()})))
         self.last_tick_wall = wall

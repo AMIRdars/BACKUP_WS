@@ -1,0 +1,79 @@
+{
+  "case": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/moving_stop_050_retry/trial",
+  "motion_completed": false,
+  "error": "shared stop: requested stop",
+  "safe_stop_verified": true,
+  "grasp_held_after_stop": true,
+  "endpoint_stop_reasons": {
+    "follower": "shared emergency stop",
+    "leader": "leader arm-only measured tracking/orientation"
+  },
+  "active_rows": 510,
+  "active_final_base_commands_zero": true,
+  "contacts_continuous": true,
+  "contacts": {
+    "leader": {
+      "left": true,
+      "right": true
+    },
+    "follower": {
+      "left": true,
+      "right": true
+    }
+  },
+  "normal_force_ranges_N": {
+    "leader": {
+      "left": [
+        17.271081155079248,
+        18.638873071177454
+      ],
+      "right": [
+        20.13310813077675,
+        21.470694131718833
+      ]
+    },
+    "follower": {
+      "left": [
+        17.63898299031603,
+        17.70006951441595
+      ],
+      "right": [
+        20.59358760633864,
+        20.66845768609435
+      ]
+    }
+  },
+  "arms": {
+    "leader": {
+      "source_samples": 405,
+      "source_duration_s": 2.112000000000009,
+      "TCP_displacement_mm": [
+        16.60852386896794,
+        -2.521328347752181e-06,
+        0.020349655940110623
+      ],
+      "FK_interval_speed_peak_mm_s": 29.132635418419518,
+      "FK_interval_speed_p99_5_mm_s": 28.036253374409217,
+      "actual_joint_speed_peak_rad_s": 0.11408285362755563,
+      "actual_URDF_joint_velocity_ratio_peak": 0.11408285362755563,
+      "active_base_GT_drift_peak_mm": 0.134816242824338
+    },
+    "follower": {
+      "source_samples": 406,
+      "source_duration_s": 2.112000000000009,
+      "TCP_displacement_mm": [
+        -16.19472043234982,
+        -0.07467675957529268,
+        -0.01733293579031514
+      ],
+      "FK_interval_speed_peak_mm_s": 24.13796225690731,
+      "FK_interval_speed_p99_5_mm_s": 23.0695056008749,
+      "actual_joint_speed_peak_rad_s": 0.08701779957578476,
+      "actual_URDF_joint_velocity_ratio_peak": 0.08701779957578476,
+      "active_base_GT_drift_peak_mm": 0.11731825167296218
+    }
+  },
+  "filtered_increment_force_peak_N": 5.39726513987768,
+  "tracking_error_peak_mm": 0.4424301077821344,
+  "transport_and_grasp_passed": false
+}

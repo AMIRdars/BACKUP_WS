@@ -48,5 +48,5 @@ def test_public_launch_still_refuses_unqualified_one_metre_per_second(tmp_path):
     module,context=public_context()
     context.launch_configurations.update(workspace_directory=str(ROOT),dual_arm_speed_m_s='1.0',
         output_directory=str(tmp_path/'out'))
-    with pytest.raises(ValueError,match='0.005'):module['setup'](context)
+    with pytest.raises(ValueError,match='0.2'):module['setup'](context)
     assert not (tmp_path/'out').exists()

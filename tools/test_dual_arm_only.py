@@ -61,7 +61,9 @@ def test_original_command_selects_both_bases_stopped_not_one_metre_base_trip(tmp
     argv=[perform_substitutions(ctx,v) for v in process.cmd]
     assert '--dual-arm-only' in argv and '--follower-base-fixture' not in argv
     assert argv[argv.index('--distance')+1]=='0.213'
-    assert float(argv[argv.index('--speed')+1])==0.003
+    assert float(argv[argv.index('--speed')+1])==0.0536
+    assert float(argv[argv.index('--dual-arm-joint-speed')+1])==0.75
+    assert float(argv[argv.index('--dual-arm-acceleration')+1])==0.05
     assert argv[argv.index('--virtual-stiffness-n-m')+1]=='0'
 
 

@@ -1,0 +1,94 @@
+{
+  "scope": "simulation_native_stroke_only_not_hardware_ratings",
+  "force_source": "/home/dars5070/ros2_humble_ws/audits/whole_body_compliance_20261019/cp9_transport/metrology_02/calibration/calibration.json",
+  "leader_goal_tolerance_m": 1e-05,
+  "controller_parameters": {
+    "force_increment_stop_N": 50.0,
+    "torque_increment_stop_Nm": 15.0,
+    "enable_base_assist": false,
+    "wrench_source_mode": "sensor",
+    "virtual_mass": [
+      0.5,
+      0.5
+    ],
+    "virtual_damping": [
+      8.65,
+      8.65
+    ],
+    "virtual_stiffness": [
+      0.0,
+      0.0
+    ],
+    "arm_nullspace_pose_hold": true,
+    "arm_command_horizon_s": 0.08,
+    "control_on_wrench": true,
+    "simulation_source_watchdog": true,
+    "arm_servo_response_file": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_050/trial/follower_servo_response.json",
+    "arm_command_reference": "servo_trajectory",
+    "arm_displacement_stop_m": 0.26,
+    "displacement_limit_m": [
+      0.26,
+      0.012
+    ],
+    "force_deadband_N": 0.003,
+    "arm_trajectory_start_delay_s": 0.0,
+    "joint_request_speed_rad_s": 0.5,
+    "joint_request_acceleration_rad_s2": 0.5,
+    "velocity_limit_m_s": [
+      0.1,
+      0.01
+    ],
+    "acceleration_limit_m_s2": [
+      0.04,
+      0.02
+    ]
+  },
+  "leader_acceleration_m_s2": 0.01,
+  "leader_reference_acceleration_m_s2": 0.005,
+  "wrench_cutoff_hz": 8.0,
+  "audited_ft_rate_hz": 100.0,
+  "wrench_process_on_measurement": true,
+  "grip_safe_force_imbalance_hold": true,
+  "leader_arm_compensation": true,
+  "leader_servo_response_file": "/home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/servo_now_050/trial/leader_servo_response.json",
+  "native_arm_stroke": true,
+  "native_wrench_limits_source": "cooperative_transport_control/config/friction_transport.yaml",
+  "native_absolute_wrench_limits": {
+    "planar_force_stop": 50.0,
+    "vertical_force_stop": 100.0,
+    "torque_stop": 15.0,
+    "fault_duration": 0.1
+  },
+  "dual_arm_only": true,
+  "dual_arm_speed_policy": {
+    "joint_speed_rad_s": 0.5,
+    "joint_acceleration_rad_s2": 0.5,
+    "tcp_acceleration_m_s2": 0.02,
+    "URDF_velocity_rad_s": {
+      "leader": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ],
+      "follower": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        2.0
+      ]
+    },
+    "follower_acceleration_limit_m_s2": [
+      0.04,
+      0.02
+    ],
+    "scope": "explicit Gazebo exploration; contact and tracking must be measured separately",
+    "requested_speed_m_s": 0.05,
+    "selected_speed_m_s": 0.05,
+    "actual_profile_peak_speed_m_s": 0.05,
+    "trajectory_start_delay_s": 0.0,
+    "servo_streaming_model_enabled": true
+  }
+}

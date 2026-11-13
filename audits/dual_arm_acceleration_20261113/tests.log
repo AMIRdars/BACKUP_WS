@@ -1,0 +1,29 @@
+...................FF..............................                      [100%]
+=================================== FAILURES ===================================
+__________ test_nonzero_base_command_rejected_for_each_robot[leader] ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-dars5070/pytest-0/test_nonzero_base_command_reje0')
+robot = 'leader'
+
+    @pytest.mark.parametrize('robot',['leader','follower'])
+    def test_nonzero_base_command_rejected_for_each_robot(tmp_path,robot):
+>       from test_cp7_safety import GuardRig
+E       ModuleNotFoundError: No module named 'test_cp7_safety'
+
+tools/test_dual_arm_only.py:70: ModuleNotFoundError
+_________ test_nonzero_base_command_rejected_for_each_robot[follower] __________
+
+tmp_path = PosixPath('/tmp/pytest-of-dars5070/pytest-0/test_nonzero_base_command_reje1')
+robot = 'follower'
+
+    @pytest.mark.parametrize('robot',['leader','follower'])
+    def test_nonzero_base_command_rejected_for_each_robot(tmp_path,robot):
+>       from test_cp7_safety import GuardRig
+E       ModuleNotFoundError: No module named 'test_cp7_safety'
+
+tools/test_dual_arm_only.py:70: ModuleNotFoundError
+- generated xml file: /home/dars5070/ros2_humble_ws/audits/dual_arm_acceleration_20261113/tests.xml -
+=========================== short test summary info ============================
+FAILED tools/test_dual_arm_only.py::test_nonzero_base_command_rejected_for_each_robot[leader]
+FAILED tools/test_dual_arm_only.py::test_nonzero_base_command_rejected_for_each_robot[follower]
+2 failed, 49 passed in 19.17s

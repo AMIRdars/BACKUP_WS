@@ -1,0 +1,118 @@
+[
+  {
+    "stage": "speed_008",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": true,
+    "failed_checks": [],
+    "error": null
+  },
+  {
+    "stage": "speed_015",
+    "motion_passed": false,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": false,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "error": "shared stop: leader: arm command violates model limits"
+  },
+  {
+    "stage": "speed_015_retry",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": false,
+    "failed_checks": [
+      "native_force_band:leader/left",
+      "native_force_band:leader/right",
+      "native_force_band:follower/left",
+      "native_force_band:follower/right"
+    ],
+    "error": null
+  },
+  {
+    "stage": "speed_015_repeat",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": false,
+    "failed_checks": [
+      "native_force_band:leader/left",
+      "native_force_band:leader/right",
+      "native_force_band:follower/left",
+      "native_force_band:follower/right"
+    ],
+    "error": null,
+    "transport_integrity_passed": true
+  },
+  {
+    "stage": "speed_025",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": true,
+    "failed_checks": [],
+    "error": null,
+    "transport_integrity_passed": true
+  },
+  {
+    "stage": "speed_035",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": true,
+    "failed_checks": [],
+    "error": null,
+    "transport_integrity_passed": true
+  },
+  {
+    "stage": "speed_050",
+    "motion_passed": false,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": false,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_grasp_translation_residual_below_existing_2mm",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "error": "shared stop: requested stop",
+    "transport_integrity_passed": false
+  },
+  {
+    "stage": "speed_050_retry",
+    "motion_passed": true,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": true,
+    "failed_checks": [],
+    "error": null,
+    "transport_integrity_passed": true
+  },
+  {
+    "stage": "speed_075",
+    "motion_passed": false,
+    "grasp_held_after_stop": true,
+    "safe_stop_verified": true,
+    "strict_passed": false,
+    "failed_checks": [
+      "result_passed",
+      "base_cmd_all_zero",
+      "leader_actual_arm_translation_matches_requested",
+      "follower_actual_arm_translation_matches_requested",
+      "leader_goal_reached"
+    ],
+    "error": "shared stop: leader: arm command violates model limits",
+    "transport_integrity_passed": false
+  }
+]
